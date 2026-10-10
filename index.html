@@ -163,6 +163,31 @@
   .g-body h3{margin:0;font-size:15px;font-family:'Amiri',serif;}
   .g-body p{margin:8px 0 0;font-size:12.5px;color:var(--muted-foreground);line-height:1.6;}
   .gallery-note{text-align:center;font-size:12.5px;color:var(--muted-foreground);margin-top:26px;}
+  .gallery-lab-head{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:end;margin-top:38px;padding:26px;border:1px solid color-mix(in srgb,var(--primary) 18%,var(--border));border-radius:26px;background:linear-gradient(135deg,color-mix(in srgb,var(--primary) 9%,transparent),color-mix(in srgb,var(--card) 84%,transparent));overflow:hidden;position:relative;}
+  .gallery-lab-head:after{content:'H₂O · CO₂ · NaCl · Δ';position:absolute;inset:auto 18px 10px auto;font:700 12px/1 monospace;letter-spacing:2px;color:color-mix(in srgb,var(--primary) 26%,transparent);direction:ltr;}
+  .gallery-lab-kicker{display:inline-flex;align-items:center;gap:7px;color:var(--accent);font-size:12px;font-weight:700;}
+  .gallery-lab-head h3{margin:10px 0 7px;font:700 24px 'Amiri',serif;}
+  .gallery-lab-head p{margin:0;color:var(--muted-foreground);font-size:13px;line-height:1.8;max-width:520px;}
+  .gallery-readout{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;direction:rtl;}
+  .gallery-readout span{display:flex;flex-direction:column;gap:3px;min-width:86px;padding:12px 10px;border:1px solid var(--border);border-radius:16px;background:color-mix(in srgb,var(--card) 78%,transparent);text-align:center;}
+  .gallery-readout b{font:700 22px 'Amiri',serif;color:var(--primary);}
+  .gallery-readout small{font-size:10.5px;color:var(--muted-foreground);}
+  .gallery-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:24px;}
+  .gallery-tools input{flex:1;min-width:190px;border:1px solid var(--border);border-radius:999px;padding:11px 16px;background:var(--card);color:var(--foreground);font:inherit;font-size:13px;}
+  .gallery-filter{border:1px solid var(--border);border-radius:999px;padding:9px 14px;background:var(--card);color:var(--muted-foreground);cursor:pointer;font:600 12px inherit;transition:transform .2s ease,background .2s ease,color .2s ease,border-color .2s ease;}
+  .gallery-filter:hover{transform:translateY(-2px);border-color:var(--primary);color:var(--primary);}
+  .gallery-filter.active{background:var(--primary);border-color:var(--primary);color:var(--primary-foreground);}
+  .g-card{position:relative;transition:transform .3s cubic-bezier(.22,.8,.24,1),box-shadow .3s ease,border-color .3s ease;animation:cardReveal .58s cubic-bezier(.22,.8,.24,1) both;}
+  .g-card:before{content:'';position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--primary),var(--gold),var(--reaction));transform:scaleX(.2);transform-origin:right;transition:transform .3s ease;z-index:1;}
+  .g-card:hover{transform:translateY(-7px) rotate(.2deg);box-shadow:0 18px 36px -22px color-mix(in srgb,var(--primary) 55%,transparent);}
+  .g-card:hover:before{transform:scaleX(1);}
+  .g-thumb{position:relative;overflow:hidden;transition:color .3s ease,background .3s ease;}
+  .g-thumb:after{content:'✦';position:absolute;font-size:80px;opacity:.07;left:14%;top:8%;animation:orbit 8s linear infinite;}
+  .g-card:hover .g-thumb{background:color-mix(in srgb,var(--primary) 12%,var(--secondary));color:var(--primary);}
+  .g-open{transition:gap .25s ease;}
+  .g-card:hover .g-open{gap:10px;}
+  @keyframes orbit{to{transform:rotate(360deg) translateX(8px) rotate(-360deg)}}
+  @media (max-width:700px){.gallery-lab-head{grid-template-columns:1fr}.gallery-readout{justify-content:flex-start}.gallery-tools input{flex-basis:100%}}
 
   /* contact */
   section#contact{border-top:1px solid var(--border);background:var(--card);}
@@ -429,6 +454,16 @@ const labs = siteData.labs || {};
 
 const ic = (name, extra) => `<i data-lucide="${name}" ${extra||''}></i>`;
 
+function filterGallery(kind, button){
+  document.querySelectorAll('[data-gallery-card]').forEach(card=>{card.hidden=kind!=='all'&&card.dataset.galleryKind!==kind;});
+  document.querySelectorAll('.gallery-filter').forEach(b=>b.classList.toggle('active',b===button || b.dataset.galleryFilter===kind));
+}
+function searchGallery(value){
+  const q=String(value||'').trim().toLowerCase();
+  document.querySelectorAll('[data-gallery-card]').forEach(card=>{card.hidden=!!q&&!card.textContent.toLowerCase().includes(q);});
+  document.querySelectorAll('.gallery-filter').forEach(b=>b.classList.remove('active'));
+}
+
 function renderHome(){
   const statsHtml = [
     {icon:'briefcase-business',value:(siteData.highlights||[])[0]?.value||'15+',label:'سنوات الخبرة'},
@@ -453,19 +488,22 @@ function renderHome(){
       <span class="sec-more">عرض التفاصيل ${ic('arrow-left')}</span>
     </a>`).join('');
 
-  const galleryHtml = (siteData.galleryItems||[]).map(g=>{
+  const galleryHtml = (siteData.galleryItems||[]).map((g,index)=>{
     const count = g.evidence ? g.evidence.length : 0;
+    const kind = g.link ? 'interactive' : g.id ? 'visual' : 'experiment';
+    const label = kind==='interactive' ? 'مختبر تفاعلي' : kind==='visual' ? 'معرض بصري' : 'تجربة كيميائية';
     const hint = g.link
       ? `<span class="g-open">${ic('play')} افتح المختبر التفاعلي</span>`
       : g.id
         ? `<span class="g-open">${ic('images')} ${count ? `عرض الصور (${count})` : 'استعراض المعرض'}</span>`
-        : '';
+        : `<span class="g-open">${ic('flask-conical')} استكشاف التجربة</span>`;
     const inner = `
-      <div class="g-thumb">${ic(g.icon)}</div>
+      <div class="g-thumb">${ic(g.icon)}<span class="g-type">${label}</span></div>
       <div class="g-body"><h3>${g.title}</h3><p>${g.caption}</p>${hint}</div>`;
-    if(g.link) return `<a class="g-card g-clickable" href="#lab-${g.link}">${inner}</a>`;
-    if(g.id) return `<a class="g-card g-clickable" href="#gp-${g.id}">${inner}</a>`;
-    return `<div class="g-card">${inner}</div>`;
+    const attrs=`data-gallery-card data-gallery-kind="${kind}" style="--item-index:${index}"`;
+    if(g.link) return `<a class="g-card g-clickable" ${attrs} href="#lab-${g.link}">${inner}</a>`;
+    if(g.id) return `<a class="g-card g-clickable" ${attrs} href="#gp-${g.id}">${inner}</a>`;
+    return `<div class="g-card" ${attrs}>${inner}</div>`;
   }).join('');
 
   const contactHtml = (siteData.contactChannels||[]).map(c=>`
@@ -524,10 +562,22 @@ function renderHome(){
   <section id="gallery" class="lab-pattern">
     <div class="sec-inner">
       <div class="sec-head">
-        <h2 class="font-display">معرض التجارب</h2>
-        <p>لمحات من الأنشطة العملية داخل مختبر الكيمياء</p>
+        <h2 class="font-display">معرض التجارب الكيميائي</h2>
+        <p>مختبر رقمي تفاعلي لاستكشاف التجارب والنماذج والمحاكاة التعليمية</p>
+      </div>
+      <div class="gallery-lab-head">
+        <div><span class="gallery-lab-kicker">${ic('atom')} CHEMISTRY EXPERIENCE LAB</span><h3>اكتشف التفاعل قبل أن يبدأ</h3><p>تنقّل بين التجارب البصرية والمختبرات التفاعلية والنماذج الجزيئية. كل بطاقة تقودك إلى تجربة أو مادة موثقة.</p></div>
+        <div class="gallery-readout"><span><b>06</b><small>محطات تجريبية</small></span><span><b>02</b><small>مختبران تفاعليان</small></span><span><b>${cloudRows.length}</b><small>شاهد سحابي</small></span></div>
+      </div>
+      <div class="gallery-tools">
+        <input type="search" oninput="searchGallery(this.value)" placeholder="ابحث عن تجربة أو مفهوم كيميائي…" aria-label="البحث في معرض التجارب">
+        <button class="gallery-filter active" data-gallery-filter="all" onclick="filterGallery('all',this)">الكل</button>
+        <button class="gallery-filter" data-gallery-filter="experiment" onclick="filterGallery('experiment',this)">${ic('flask-conical')} تجارب</button>
+        <button class="gallery-filter" data-gallery-filter="interactive" onclick="filterGallery('interactive',this)">${ic('sparkles')} تفاعلي</button>
+        <button class="gallery-filter" data-gallery-filter="visual" onclick="filterGallery('visual',this)">${ic('images')} صور</button>
       </div>
       <div class="gallery-grid">${galleryHtml}</div>
+      <p class="gallery-note">اختر محطة، جرّب المحاكاة، أو افتح الشواهد المرفوعة من مركز الملفات السحابي.</p>
     </div>
   </section>
 
@@ -625,6 +675,7 @@ function renderSub(s, i){
       </div>
     </div>
     <div class="examples" style="margin-bottom:34px;">${exHtml}</div>
+    ${cloudEvidenceHtml(s, sub)}
 
     <div class="page-nav">
       <span>${prevSub?`<a href="#b-${s.id}-${i-1}">◂ ${prevSub.title}</a>`:`<a href="#d-${s.id}">◂ رجوع للقسم</a>`}</span>
