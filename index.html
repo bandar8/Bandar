@@ -274,7 +274,22 @@
   .gp-item .evidence-slot.filled img{width:100%;height:100%;object-fit:cover;}
   .gp-item .evidence-slot.upload{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;}
   .gp-empty{font-size:13.5px;color:var(--muted-foreground);margin:0 0 20px;}
+</style><style>
+:root{--primary:#0d5964;--primary-foreground:#fff;--secondary:#e7f4f2;--muted:#eef4f3;--muted-foreground:#557176;--border:#d4e4e3;--card:#fffdf9;--foreground:#12343b;--gold:#d39a48;--hero-deep:#092d3b;--hero-mid:#0d5964}
+body{background:#f7faf8;color:var(--foreground)}
+.site-head{background:rgba(9,45,59,.94)!important;border-bottom-color:#256875!important;box-shadow:0 8px 30px #06232d26}
+.site-head a,.site-head button{color:#e8f6f2!important}.site-head .brand-mark{background:#d39a48!important;color:#092d3b!important}
+.hero-modern{position:relative;overflow:hidden;background:linear-gradient(120deg,#072936 0%,#0b4655 48%,#107b7c 100%);color:#fff;min-height:570px;display:flex;align-items:center;border-radius:0 0 42px 42px;box-shadow:0 22px 60px #092d3b33}
+.hero-modern:after{content:'';position:absolute;inset:0;opacity:.16;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:24px 24px;mask-image:linear-gradient(90deg,#000,transparent 75%)}
+.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.15fr .85fr;gap:50px;align-items:center;max-width:1180px;margin:auto;padding:80px 28px}
+.hero-copy{max-width:680px}.hero-kicker{display:inline-flex;padding:8px 14px;border:1px solid #b5e4dc55;border-radius:999px;background:#ffffff12;color:#d5f3ed;font-size:13px}.hero-modern .hero-title{font-size:clamp(3rem,7vw,6.8rem);line-height:.98;letter-spacing:-.04em;margin:24px 0 14px;color:#fff}.hero-modern .hero-name-pill{display:inline-block;background:#d39a48;color:#092d3b;border-radius:10px;padding:8px 18px;font-weight:800;margin:0}.hero-modern .hero-lede{max-width:620px;color:#d8eee9;font-size:1.08rem;line-height:2;margin:24px 0}.hero-modern .hero-ctas{display:flex;flex-wrap:wrap;gap:10px}.hero-modern .btn{border-radius:12px;min-height:45px}.hero-modern .btn.solid{background:#d39a48;color:#092d3b;border-color:#d39a48}.hero-modern .btn.ghost{color:#fff;border-color:#bce8df77;background:#ffffff0d}.hero-modern .btn.quiet{color:#d8eee9;border-color:transparent;background:transparent}.hero-trust{display:flex;flex-wrap:wrap;gap:18px;color:#b9ddd7;font-size:12px;margin-top:28px}.hero-trust span{display:inline-flex;align-items:center;gap:6px}.hero-trust svg{width:15px}
+.hero-visual{min-height:370px;position:relative;display:grid;place-items:center}.hero-orb{position:absolute;border-radius:50%;filter:blur(1px);opacity:.45}.orb-one{width:290px;height:290px;background:#d39a4840;top:-20px;right:2%}.orb-two{width:180px;height:180px;background:#64d6c444;bottom:0;left:6%}.hero-visual-ring{position:absolute;border:1px solid #a6e4da55;border-radius:50%;transform:rotate(25deg)}.ring-a{width:310px;height:190px}.ring-b{width:220px;height:340px;transform:rotate(-32deg)}.hero-molecule{width:220px;height:220px;border-radius:50%;display:grid;place-items:center;position:relative;background:radial-gradient(circle at 35% 30%,#f5d79d,#c27d31 65%,#7d4a20);box-shadow:0 0 0 14px #ffffff12,0 20px 70px #001a224d}.molecule-core svg{width:74px;height:74px;color:#fff}.hero-molecule i{position:absolute;width:18px;height:18px;border-radius:50%;background:#72d9ce;box-shadow:0 0 0 7px #72d9ce24}.hero-molecule i:nth-of-type(1){top:22px;left:56px}.hero-molecule i:nth-of-type(2){right:28px;bottom:58px}.hero-molecule i:nth-of-type(3){left:34px;bottom:36px}.hero-molecule b{position:absolute;bottom:20px;right:25px;font-size:11px;letter-spacing:.16em;color:#fff}.hero-molecule em{font-style:normal;color:#092d3b}.hero-float{position:absolute;display:flex;align-items:center;gap:8px;padding:11px 13px;border:1px solid #ffffff2e;background:#ffffff16;backdrop-filter:blur(10px);border-radius:14px;color:#fff;font-size:11px;line-height:1.4;box-shadow:0 12px 30px #001a2226}.hero-float svg{color:#d39a48;width:22px}.hero-float strong{font-size:13px}.float-top{top:12%;right:0}.float-bottom{bottom:10%;left:0}
+.stats{background:#f7faf8;padding:0 24px;margin-top:-28px;position:relative;z-index:4}.stats-grid{max-width:1100px;margin:auto;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.stat-card{background:#fffdf9;border:1px solid var(--border);border-radius:18px;box-shadow:0 14px 32px #143b4314;padding:20px;text-align:center}.stat-icon{color:var(--primary)}.stat-val{color:#0d5964;font-size:2rem;font-weight:800}.stat-lbl{color:#668084;font-size:12px}.stat-cloud .stat-val{color:#d18431}
+.sec-head h2,.font-display{color:#123e48}.sec-card{border-color:#d4e4e3!important;background:#fffdf9!important;border-radius:18px!important}.sec-card:hover{border-color:#62b8ac!important;box-shadow:0 20px 40px #0d59641c!important}.btn.solid{background:#0d5964;border-color:#0d5964}.btn.ghost{color:#0d5964;border-color:#83b8b2}
+@media(max-width:800px){.hero-grid{grid-template-columns:1fr;padding:60px 22px 90px}.hero-copy{text-align:center;margin:auto}.hero-modern .hero-ctas,.hero-trust{justify-content:center}.hero-visual{min-height:280px;transform:scale(.82);margin-top:-25px}.stats-grid{grid-template-columns:repeat(2,1fr);margin-top:0}.hero-modern .hero-title{font-size:clamp(3rem,15vw,5rem)}}
+@media(max-width:480px){.hero-modern{min-height:690px}.hero-modern .hero-lede{font-size:.95rem}.hero-modern .hero-ctas .btn{width:100%;justify-content:center}.hero-visual{transform:scale(.7);margin-top:-55px}.stats{padding:0 14px}.stats-grid{gap:9px}.stat-card{padding:14px 8px}.stat-val{font-size:1.55rem}}
 </style>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 .cloud-btn{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--line,#d8e4df);background:var(--paper,#fff);color:var(--ink,#183b35);border-radius:999px;padding:.55rem .8rem;cursor:pointer;font:inherit}
@@ -382,10 +397,15 @@ const labs = siteData.labs || {};
 const ic = (name, extra) => `<i data-lucide="${name}" ${extra||''}></i>`;
 
 function renderHome(){
-  const statsHtml = highlights.map(h=>`
-    <div class="stat-card">
+  const statsHtml = [
+    {icon:'briefcase-business',value:highlights[0]?.value||'15+',label:'سنوات الخبرة'},
+    {icon:'folder-check',value:'—',label:'شاهد مرفوع',id:'cloudEvidenceStat'},
+    {icon:'flask-conical',value:highlights[1]?.value||'50+',label:'تجربة مختبرية'},
+    {icon:'sparkles',value:highlights[3]?.value||'8',label:'مبادرة علمية'}
+  ].map(h=>`
+    <div class="stat-card${h.id?' stat-cloud':''}">
       <div class="stat-icon">${ic(h.icon)}</div>
-      <div class="stat-val">${h.value}</div>
+      <div class="stat-val"${h.id?` id="${h.id}"`:''}>${h.value}</div>
       <div class="stat-lbl">${h.label}</div>
     </div>`).join('');
 
@@ -424,16 +444,26 @@ function renderHome(){
     </div>`).join('');
 
   return `
-  <section id="top">
-    <span class="side-deco right">${ic('microscope')}</span>
-    <span class="side-deco left">${ic('flask-conical')}${ic('atom')}</span>
-    <div class="hero-inner">
-      <h1 class="hero-title font-display">ملف الأداء الوظيفي</h1>
-      <p class="hero-name-pill">${teacher.name}</p>
-      <p class="hero-lede">شواهد وممارسات مهنية توثق رحلة العطاء في تدريس الكيمياء، من التخطيط والتجربة المختبرية إلى التقويم وتحسين نتائج المتعلمين.</p>
-      <div class="hero-ctas">
-        <a class="btn solid" href="#sections" onclick="return goHome('sections')">تصفّح الأقسام ${ic('arrow-left')}</a>
-        <a class="btn ghost" href="#contact" onclick="return goHome('contact')">تواصل معي</a>
+  <section id="top" class="hero-modern">
+    <div class="hero-orb orb-one"></div><div class="hero-orb orb-two"></div>
+    <div class="hero-inner hero-grid">
+      <div class="hero-copy">
+        <span class="hero-kicker">ملف مهني تفاعلي · كيمياء وتعليم</span>
+        <h1 class="hero-title font-display">ملف الأداء الوظيفي</h1>
+        <p class="hero-name-pill">${teacher.name}</p>
+        <p class="hero-lede">رحلة مهنية موثقة تجمع بين التخطيط، التجربة المختبرية، الابتكار في التدريس، وتحسين نتائج المتعلمين.</p>
+        <div class="hero-ctas">
+          <a class="btn solid" href="#sections" onclick="return goHome('sections')">استعراض الأقسام ${ic('arrow-left')}</a>
+          <a class="btn ghost" href="#gallery" onclick="return goHome('gallery')">مشاهدة الشواهد ${ic('images')}</a>
+          <a class="btn quiet" href="#intro" onclick="window.print();return false;">تحميل الملف التعريفي ${ic('download')}</a>
+        </div>
+        <div class="hero-trust"><span>${ic('badge-check')} توثيق منظم</span><span>${ic('shield-check')} عرض آمن</span><span>${ic('sparkles')} تجربة تعليمية</span></div>
+      </div>
+      <div class="hero-visual" aria-label="هوية ملف الكيمياء">
+        <div class="hero-visual-ring ring-a"></div><div class="hero-visual-ring ring-b"></div>
+        <div class="hero-molecule"><span class="molecule-core">${ic('atom')}</span><i></i><i></i><i></i><b>CHEM<br><em>EDU</em></b></div>
+        <div class="hero-float float-top">${ic('flask-conical')}<span>مختبر<br><strong>تفاعلي</strong></span></div>
+        <div class="hero-float float-bottom">${ic('file-check-2')}<span>شواهد<br><strong>موثقة</strong></span></div>
       </div>
     </div>
   </section>
@@ -486,6 +516,7 @@ function renderHome(){
 }
 
 let cloudRows = [];
+function updateCloudEvidenceStat(){const el=document.getElementById('cloudEvidenceStat');if(el)el.textContent=String(cloudRows.length);}
 const cloudEsc = x => String(x ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 const cloudFmt = bytes => {const n=Number(bytes)||0;return n<1024?`${n} B`:n<1048576?`${(n/1024).toFixed(1)} KB`:`${(n/1048576).toFixed(1)} MB`;};
 function cloudRowsFor(s, sub){return cloudRows.filter(r=>r.section_id===s.id && r.branch_title===sub.title);}
@@ -921,6 +952,7 @@ document.getElementById('mobileNav').addEventListener('change', (e)=>{
     const {data:rows,error}=await sb.from('site_files').select('*').order('created_at',{ascending:false});
     if(error){statusEl.textContent='تعذر تحميل الملفات الآن.';return;}
     cloudRows=rows||[];
+    updateCloudEvidenceStat();
     statusEl.textContent=`${rows.length} ملف محفوظ سحابيًا`;
     if(location.hash.startsWith('#d-')||location.hash.startsWith('#b-')) route();
     filesEl.innerHTML=rows.length?rows.map(r=>`<article class="cloud-file"><button class="cloud-delete" data-delete="${r.id}" hidden>حذف</button><span class="eyebrow">${esc(r.section_title)}</span><h3>${esc(r.title)}</h3><p>${esc(r.branch_title||'ملف عام')} · ${esc(r.file_type)} · ${fmt(r.file_size)}</p><a href="${esc(r.file_url)}" target="_blank" rel="noopener">فتح الملف ↗</a></article>`).join(''):'<p class="cloud-empty">لا توجد ملفات مرفوعة بعد.</p>';
