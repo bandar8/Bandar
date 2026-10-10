@@ -431,7 +431,7 @@ function renderHome(){
     const hint = g.link
       ? `<span class="g-open">${ic('play')} افتح المختبر التفاعلي</span>`
       : g.id
-        ? `<span class="g-open">${ic('images')} ${count ? `عرض الصور (${count})` : 'إضافة صور'}</span>`
+        ? `<span class="g-open">${ic('images')} ${count ? `عرض الصور (${count})` : 'استعراض المعرض'}</span>`
         : '';
     const inner = `
       <div class="g-thumb">${ic(g.icon)}</div>
@@ -547,7 +547,6 @@ function renderDetail(s){
         <span class="sub-body">
           <h3>${sub.title}</h3>
           <p>${sub.text}</p>
-          ${cloudRowsFor(s,sub).length?`<span class="cloud-count">${cloudRowsFor(s,sub).length} شاهد مرفوع</span>`:''}
         </span>
         <span class="sub-arrow">${ic('arrow-left')}</span>
       </a>`).join('');
@@ -580,38 +579,6 @@ function renderSub(s, i){
   const prevSub = i>0 ? s.subs[i-1] : null;
   const nextSub = i<s.subs.length-1 ? s.subs[i+1] : null;
   const exHtml = sub.ex.map(e=>`<span class="ex-chip">${e}</span>`).join('');
-  const list = sub.evidence || [];
-
-  const filled = list.map((ev,k)=>{
-    const inner = ev.type==='image'
-      ? `<a class="evidence-slot filled" href="${ev.src}" target="_blank" rel="noopener">
-          <img src="${ev.src}" alt="${ev.label}">
-          <div class="lbl">${ic('image')} ${ev.label}</div>
-        </a>`
-      : `<a class="evidence-slot filled file" href="${ev.src}" download="${ev.filename||'شاهد.pdf'}">
-          ${ic('file-text')}
-          <div class="lbl">${ev.label}</div>
-          <div class="dl">${ic('download')} تحميل الملف</div>
-        </a>`;
-    const removeBtn = '';
-    return `<div class="evidence-wrap">${inner}${removeBtn}</div>`;
-  });
-
-  const emptyCount = Math.max(0, 3 - filled.length);
-  const empties = Array.from({length: emptyCount}).map((_,n)=>{
-    if(editMode){
-      return `<label class="evidence-slot upload" data-sid="${s.id}" data-si="${i}">
-        <input type="file" accept="image/*,application/pdf" data-upload style="display:none">
-        ${ic('upload')}
-        <div class="lbl">إضافة شاهد ${filled.length+n+1}</div>
-      </label>`;
-    }
-    return `<div class="evidence-slot">
-      ${ic('image-plus')}
-      <div class="lbl">شاهد ${filled.length+n+1}</div>
-    </div>`;
-  });
-  const slots = [...filled, ...empties].join('');
 
   return `
   <div class="detail-inner">
@@ -631,13 +598,6 @@ function renderSub(s, i){
       </div>
     </div>
     <div class="examples" style="margin-bottom:34px;">${exHtml}</div>
-
-    <div class="evidence-block">
-      <h3 class="font-display evidence-title">${ic('paperclip')} الشواهد</h3>
-      <p class="evidence-hint">أضف هنا الشواهد الخاصة بهذا المؤشر لاحقًا (صور، مستندات، أو روابط).</p>
-      <div class="evidence-slots">${slots}</div>
-      ${cloudEvidenceHtml(s,sub)}
-    </div>
 
     <div class="page-nav">
       <span>${prevSub?`<a href="#b-${s.id}-${i-1}">◂ ${prevSub.title}</a>`:`<a href="#d-${s.id}">◂ رجوع للقسم</a>`}</span>
@@ -664,7 +624,7 @@ function renderGalleryPhotos(item){
     </label>` : '';
 
   const emptyState = (list.length===0)
-    ? `<p class="gp-empty">ما فيه صور مضافة بعد.</p>` : '';
+    ? `<p class="gp-empty">لا توجد صور منشورة حاليًا.</p>` : '';
 
   return `
   <div class="detail-inner">
