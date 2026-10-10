@@ -346,11 +346,11 @@
   <div class="cloud-status" id="cloudStatus">جارٍ تحميل الملفات…</div>
   <div class="cloud-admin" id="cloudAdmin">
     <div id="cloudSignedOut">
-      <h3>الرفع متاح لك فقط</h3>
-      <p>أرسل رابط دخول إلى بريدك الإلكتروني، ثم ارجع للموقع لرفع الملفات بأمان.</p>
+      <h3>دخول الإدارة</h3>
+      <p>أدخل رمز الإدارة للوصول إلى رفع الملفات وحذفها.</p>
       <div class="cloud-login-row">
-        <input id="cloudEmail" type="email" inputmode="email" placeholder="بريدك الإلكتروني" autocomplete="email">
-        <button class="btn solid" id="cloudLogin" type="button">إرسال رابط الدخول</button>
+        <input id="cloudCode" type="password" inputmode="numeric" placeholder="رمز الإدارة" autocomplete="current-password" maxlength="12">
+        <button class="btn solid" id="cloudLogin" type="button">دخول</button>
       </div>
       <p class="cloud-hint" id="cloudLoginHint"></p>
     </div>
@@ -912,7 +912,7 @@ document.getElementById('mobileNav').addEventListener('change', (e)=>{
   async function refreshAuth(){const {data:{session}}=await sb.auth.getSession();signedOut.hidden=!!session;signedIn.hidden=!session;renderDeleteButtons();}
   document.getElementById('cloudBtn').addEventListener('click',()=>{panel.hidden=!panel.hidden;if(!panel.hidden){panel.scrollIntoView({behavior:'smooth',block:'start'});loadFiles();refreshAuth();}});
   document.getElementById('cloudClose').addEventListener('click',()=>panel.hidden=true);
-  document.getElementById('cloudLogin').addEventListener('click',async()=>{const email=document.getElementById('cloudEmail').value.trim(),hint=document.getElementById('cloudLoginHint');if(!email){hint.textContent='اكتب بريدك الإلكتروني أولًا.';return;}const {error}=await sb.auth.signInWithOtp({email,options:{emailRedirectTo:location.href}});hint.textContent=error?`تعذر الإرسال: ${error.message}`:'تم إرسال رابط الدخول إلى بريدك. افتحه ثم ارجع إلى هذا الموقع.';});
+  document.getElementById('cloudLogin').addEventListener('click',async()=>{const code=document.getElementById('cloudCode').value.trim(),hint=document.getElementById('cloudLoginHint');if(!code){hint.textContent='اكتب رمز الإدارة أولًا.';return;}hint.textContent='جارٍ التحقق…';const {error}=await sb.auth.signInWithPassword({email:'bander33349@gmail.com',password:code});hint.textContent=error?'الرمز غير صحيح أو تعذر التحقق.':'تم تسجيل الدخول بنجاح.';});
   document.getElementById('cloudLogout').addEventListener('click',()=>sb.auth.signOut());
   document.getElementById('cloudUploadForm').addEventListener('submit',async e=>{e.preventDefault();const hint=document.getElementById('cloudUploadHint'),file=document.getElementById('cloudFile').files[0],section=data.sections.find(x=>x.id===sectionSelect.value);if(!file||!section)return;if(file.size>50*1024*1024){hint.textContent='الفيديو أو الملف أكبر من 50 ميغابايت.';return;}hint.textContent='جارٍ الرفع…';const safe=file.name.toLowerCase().replace(/[^a-z0-9._-]+/gi,'-'),path=`${section.id}/${Date.now()}-${safe}`;const up=await sb.storage.from('site-files').upload(path,file,{upsert:false,contentType:file.type});if(up.error){hint.textContent=`تعذر الرفع: ${up.error.message}`;return;}const url=`${SUPABASE_URL}/storage/v1/object/public/site-files/${path}`;const {error}=await sb.from('site_files').insert({section_id:section.id,section_title:section.title,branch_title:document.getElementById('cloudBranch').value.trim()||null,title:document.getElementById('cloudTitle').value.trim(),file_path:path,file_url:url,file_type:file.type,file_size:file.size});if(error){await sb.storage.from('site-files').remove([path]);hint.textContent=`تعذر حفظ بيانات الملف: ${error.message}`;return;}e.target.reset();hint.textContent='تم رفع الملف وحفظه بنجاح.';loadFiles();});
   filesEl.addEventListener('click',async e=>{const b=e.target.closest('[data-delete]');if(!b)return;const {data:r}=await sb.from('site_files').select('file_path').eq('id',b.dataset.delete).single();if(r?.file_path)await sb.storage.from('site-files').remove([r.file_path]);await sb.from('site_files').delete().eq('id',b.dataset.delete);loadFiles();});
