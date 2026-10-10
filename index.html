@@ -411,7 +411,7 @@ body{background:#f7faf8;color:var(--foreground)}
 <script>
 const ORIGINAL_HTML = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
 const ORIGINAL_DATA_TEXT = document.getElementById('siteData').textContent;
-const siteData = JSON.parse(ORIGINAL_DATA_TEXT);
+var siteData = JSON.parse(ORIGINAL_DATA_TEXT);
 var { teacher, highlights, galleryItems, contactChannels, sections } = siteData;
 const labs = siteData.labs || {};
 
