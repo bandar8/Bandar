@@ -420,10 +420,10 @@ const ic = (name, extra) => `<i data-lucide="${name}" ${extra||''}></i>`;
 
 function renderHome(){
   const statsHtml = [
-    {icon:'briefcase-business',value:highlights[0]?.value||'15+',label:'سنوات الخبرة'},
+    {icon:'briefcase-business',value:(siteData.highlights||[])[0]?.value||'15+',label:'سنوات الخبرة'},
     {icon:'folder-check',value:'—',label:'شاهد مرفوع',id:'cloudEvidenceStat'},
-    {icon:'flask-conical',value:highlights[1]?.value||'50+',label:'تجربة مختبرية'},
-    {icon:'sparkles',value:highlights[3]?.value||'8',label:'مبادرة علمية'}
+    {icon:'flask-conical',value:(siteData.highlights||[])[1]?.value||'50+',label:'تجربة مختبرية'},
+    {icon:'sparkles',value:(siteData.highlights||[])[3]?.value||'8',label:'مبادرة علمية'}
   ].map(h=>`
     <div class="stat-card${h.id?' stat-cloud':''}">
       <div class="stat-icon">${ic(h.icon)}</div>
@@ -431,7 +431,7 @@ function renderHome(){
       <div class="stat-lbl">${h.label}</div>
     </div>`).join('');
 
-  const cardsHtml = sections.map(s=>`
+  const cardsHtml = (siteData.sections||[]).map(s=>`
     <a class="sec-card" href="#d-${s.id}">
       <div class="sec-top">
         <span class="sec-icon">${ic(s.icon)}</span>
@@ -442,7 +442,7 @@ function renderHome(){
       <span class="sec-more">عرض التفاصيل ${ic('arrow-left')}</span>
     </a>`).join('');
 
-  const galleryHtml = galleryItems.map(g=>{
+  const galleryHtml = (siteData.galleryItems||[]).map(g=>{
     const count = g.evidence ? g.evidence.length : 0;
     const hint = g.link
       ? `<span class="g-open">${ic('play')} افتح المختبر التفاعلي</span>`
@@ -457,7 +457,7 @@ function renderHome(){
     return `<div class="g-card">${inner}</div>`;
   }).join('');
 
-  const contactHtml = contactChannels.map(c=>`
+  const contactHtml = (siteData.contactChannels||[]).map(c=>`
     <div class="c-card">
       <div class="c-icon">${ic(c.icon)}</div>
       <h3>${c.label}</h3>
