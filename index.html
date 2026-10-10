@@ -278,7 +278,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 .cloud-btn{display:inline-flex;align-items:center;gap:.4rem;border:1px solid var(--line,#d8e4df);background:var(--paper,#fff);color:var(--ink,#183b35);border-radius:999px;padding:.55rem .8rem;cursor:pointer;font:inherit}
-.cloud-btn svg{width:16px;height:16px}.cloud-panel{max-width:1100px;margin:1rem auto 3rem;padding:1.25rem;border:1px solid #d9e7e0;border-radius:24px;background:linear-gradient(135deg,#f5fbf8,#fffaf1);box-shadow:0 16px 50px #173b2914}.cloud-panel[hidden]{display:none}.cloud-head{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start}.cloud-head h2{margin:.25rem 0;font-size:clamp(1.5rem,3vw,2.2rem)}.cloud-head p,.cloud-admin p{color:#60776e}.cloud-close{border:0;background:transparent;font-size:2rem;cursor:pointer;color:#547067}.cloud-status{margin:1rem 0;padding:.75rem 1rem;border-radius:12px;background:#e9f5ef;color:#245c48}.cloud-admin{padding:1rem;border:1px solid #dfeae5;border-radius:18px;background:#ffffffcc}.cloud-admin h3{margin-top:0}.cloud-login-row,.cloud-user-row{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}.cloud-login-row input,.cloud-upload input,.cloud-upload select{border:1px solid #cbdcd5;border-radius:10px;padding:.7rem .8rem;background:#fff;font:inherit;min-width:220px}.cloud-upload{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;align-items:end}.cloud-upload label{display:grid;gap:.35rem;color:#36584e}.cloud-upload button,.cloud-upload p{grid-column:span 2}.cloud-hint{font-size:.9rem;margin:.25rem 0;color:#668077}.cloud-files{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1.2rem}.cloud-file{border:1px solid #dce8e2;border-radius:16px;padding:1rem;background:#fff}.cloud-file h3{margin:.2rem 0 .4rem;font-size:1.05rem}.cloud-file p{margin:.2rem 0;color:#667f75;font-size:.9rem}.cloud-file a{display:inline-block;margin-top:.65rem;color:#14795b;font-weight:700}.cloud-delete{float:left;border:0;background:#fff0ed;color:#a34335;border-radius:8px;padding:.35rem .5rem;cursor:pointer}.cloud-empty{color:#6c8279;padding:1rem 0}@media(max-width:700px){.cloud-upload{grid-template-columns:1fr}.cloud-upload button,.cloud-upload p{grid-column:span 1}.cloud-btn span{display:none}}
+.cloud-btn svg{width:16px;height:16px}.cloud-panel{max-width:1100px;margin:1rem auto 3rem;padding:1.25rem;border:1px solid #d9e7e0;border-radius:24px;background:linear-gradient(135deg,#f5fbf8,#fffaf1);box-shadow:0 16px 50px #173b2914}.cloud-panel[hidden]{display:none}.cloud-head{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start}.cloud-head h2{margin:.25rem 0;font-size:clamp(1.5rem,3vw,2.2rem)}.cloud-head p,.cloud-admin p{color:#60776e}.cloud-close{border:0;background:transparent;font-size:2rem;cursor:pointer;color:#547067}.cloud-status{margin:1rem 0;padding:.75rem 1rem;border-radius:12px;background:#e9f5ef;color:#245c48}.cloud-admin{padding:1rem;border:1px solid #dfeae5;border-radius:18px;background:#ffffffcc}.cloud-admin h3{margin-top:0}.cloud-login-row,.cloud-user-row{display:flex;gap:.75rem;align-items:center;flex-wrap:wrap}.cloud-login-row input,.cloud-upload input,.cloud-upload select{border:1px solid #cbdcd5;border-radius:10px;padding:.7rem .8rem;background:#fff;font:inherit;min-width:220px}.cloud-upload{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem;align-items:end}.cloud-upload label{display:grid;gap:.35rem;color:#36584e}.cloud-upload button,.cloud-upload p{grid-column:span 2}.cloud-hint{font-size:.9rem;margin:.25rem 0;color:#668077}.cloud-files{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1.2rem}.cloud-file{border:1px solid #dce8e2;border-radius:16px;padding:1rem;background:#fff}.cloud-file h3{margin:.2rem 0 .4rem;font-size:1.05rem}.cloud-file p{margin:.2rem 0;color:#667f75;font-size:.9rem}.cloud-file a{display:inline-block;margin-top:.65rem;color:#14795b;font-weight:700}.cloud-delete{float:left;border:0;background:#fff0ed;color:#a34335;border-radius:8px;padding:.35rem .5rem;cursor:pointer}.cloud-empty{color:#6c8279;padding:1rem 0}
+  .cloud-evidence{margin-top:24px;padding:18px;border:1px solid #dce8e2;border-radius:18px;background:linear-gradient(135deg,#f7fcf9,#fffdf7)}.cloud-evidence h4{margin:0 0 12px;font-size:1rem;color:#245c48}.cloud-evidence-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}.cloud-evidence-link{display:flex;align-items:center;gap:10px;padding:12px;border:1px solid #dce8e2;border-radius:12px;background:#fff;text-decoration:none;color:inherit}.cloud-evidence-link:hover{border-color:#76b89d;box-shadow:0 8px 18px #173b2912}.cloud-evidence-link i{color:#14795b;flex:0 0 auto}.cloud-evidence-link strong{display:block;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cloud-evidence-link small{display:block;color:#668077;margin-top:3px}.cloud-count{display:inline-flex;margin-top:8px;padding:3px 8px;border-radius:999px;background:#e9f5ef;color:#14795b;font-size:.75rem;font-weight:700}@media(max-width:700px){.cloud-upload{grid-template-columns:1fr}.cloud-upload button,.cloud-upload p{grid-column:span 1}.cloud-btn span{display:none}}
 </style>
 </head>
 <body>
@@ -484,6 +485,9 @@ function renderHome(){
   `;
 }
 
+let cloudRows = [];
+function cloudRowsFor(s, sub){return cloudRows.filter(r=>r.section_id===s.id && r.branch_title===sub.title);}
+function cloudEvidenceHtml(s, sub){const rows=cloudRowsFor(s,sub);if(!rows.length)return '';return `<div class="cloud-evidence"><h4>${ic('cloud')} الشواهد المرفوعة لهذا المؤشر</h4><div class="cloud-evidence-list">${rows.map(r=>`<a class="cloud-evidence-link" href="${esc(r.file_url)}" target="_blank" rel="noopener">${ic('file-text')}<span><strong>${esc(r.title||r.file_path||'شاهد')}</strong><small>${esc(r.file_type||'ملف')} · ${fmt(r.file_size||0)} · فتح الشاهد ↗</small></span></a>`).join('')}</div></div>`;}
 function renderDetail(s){
   const subsHtml = s.flat
     ? s.subs.map(sub=>`
@@ -498,6 +502,7 @@ function renderDetail(s){
         <span class="sub-body">
           <h3>${sub.title}</h3>
           <p>${sub.text}</p>
+          ${cloudRowsFor(s,sub).length?`<span class="cloud-count">${cloudRowsFor(s,sub).length} شاهد مرفوع</span>`:''}
         </span>
         <span class="sub-arrow">${ic('arrow-left')}</span>
       </a>`).join('');
@@ -586,6 +591,7 @@ function renderSub(s, i){
       <h3 class="font-display evidence-title">${ic('paperclip')} الشواهد</h3>
       <p class="evidence-hint">أضف هنا الشواهد الخاصة بهذا المؤشر لاحقًا (صور، مستندات، أو روابط).</p>
       <div class="evidence-slots">${slots}</div>
+      ${cloudEvidenceHtml(s,sub)}
     </div>
 
     <div class="page-nav">
@@ -906,7 +912,9 @@ document.getElementById('mobileNav').addEventListener('change', (e)=>{
   async function loadFiles(){
     const {data:rows,error}=await sb.from('site_files').select('*').order('created_at',{ascending:false});
     if(error){statusEl.textContent='تعذر تحميل الملفات الآن.';return;}
+    cloudRows=rows||[];
     statusEl.textContent=`${rows.length} ملف محفوظ سحابيًا`;
+    if(location.hash.startsWith('#d-')||location.hash.startsWith('#b-')) route();
     filesEl.innerHTML=rows.length?rows.map(r=>`<article class="cloud-file"><button class="cloud-delete" data-delete="${r.id}" hidden>حذف</button><span class="eyebrow">${esc(r.section_title)}</span><h3>${esc(r.title)}</h3><p>${esc(r.branch_title||'ملف عام')} · ${esc(r.file_type)} · ${fmt(r.file_size)}</p><a href="${esc(r.file_url)}" target="_blank" rel="noopener">فتح الملف ↗</a></article>`).join(''):'<p class="cloud-empty">لا توجد ملفات مرفوعة بعد.</p>';
     renderDeleteButtons();
   }
