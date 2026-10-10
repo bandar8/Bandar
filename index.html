@@ -241,6 +241,33 @@
   .lab-frame-box{max-width:640px;margin:0 auto;border:1px solid var(--border);border-radius:22px;overflow:hidden;background:var(--card);box-shadow:0 14px 30px -18px rgba(0,0,0,.25);}
   iframe.lab-frame{display:block;width:100%;height:calc(100dvh - 210px);min-height:520px;border:0;}
 
+  /* advanced route transitions */
+  #content{view-transition-name:portfolio-content;isolation:isolate;}
+  #content.route-enter{animation:routeEnter .62s cubic-bezier(.22,.8,.24,1) both;}
+  #content.route-enter .detail-inner,
+  #content.route-enter .lab-wrap,
+  #content.route-enter .sec-inner,
+  #content.route-enter .contact-inner{animation:contentLift .7s cubic-bezier(.22,.8,.24,1) .04s both;}
+  #content.route-enter .crumbs{animation:fadeSlide .5s ease .08s both;}
+  #content.route-enter .d-head{animation:fadeSlide .62s cubic-bezier(.22,.8,.24,1) .13s both;}
+  #content.route-enter .sub-list > *,
+  #content.route-enter .sub-flat-list > *,
+  #content.route-enter .gallery-grid > *,
+  #content.route-enter .cards-grid > *{animation:cardReveal .58s cubic-bezier(.22,.8,.24,1) both;animation-delay:calc(.16s + (var(--item-index, 0) * .055s));}
+  #content.route-enter .page-nav{animation:fadeSlide .5s ease .3s both;}
+  .sub-card,.g-card,.sec-card{will-change:transform,opacity;}
+  ::view-transition-old(portfolio-content){animation:routeOut .22s ease both;}
+  ::view-transition-new(portfolio-content){animation:routeEnter .58s cubic-bezier(.22,.8,.24,1) both;}
+  @keyframes routeEnter{from{opacity:0;transform:translateY(14px) scale(.992);filter:blur(5px)}to{opacity:1;transform:none;filter:none}}
+  @keyframes routeOut{from{opacity:1;transform:none}to{opacity:0;transform:translateY(-8px) scale(.998)}}
+  @keyframes contentLift{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+  @keyframes fadeSlide{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  @keyframes cardReveal{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){
+    #content.route-enter,#content.route-enter .detail-inner,#content.route-enter .lab-wrap,#content.route-enter .sec-inner,#content.route-enter .contact-inner,#content.route-enter .crumbs,#content.route-enter .d-head,#content.route-enter .sub-list > *,#content.route-enter .sub-flat-list > *,#content.route-enter .gallery-grid > *,#content.route-enter .cards-grid > *,#content.route-enter .page-nav{animation:none!important;opacity:1!important;transform:none!important;filter:none!important;}
+    ::view-transition-old(portfolio-content),::view-transition-new(portfolio-content){animation:none!important;}
+  }
+
   /* edit mode: lock button, pin modal, banner, upload affordances */
   .lock-btn{margin-inline-start:10px;flex-shrink:0;width:38px;height:38px;border-radius:999px;border:1px solid var(--border);background:var(--card);color:var(--muted-foreground);display:flex;align-items:center;justify-content:center;font-size:15px;}
   .lock-btn.on{background:var(--primary);color:var(--primary-foreground);border-color:var(--primary);}
@@ -664,32 +691,43 @@ function renderLab(key){
 function route(){
   const hash = location.hash || "#top";
   const content = document.getElementById('content');
-  if(hash.startsWith("#lab-")){
-    const key = hash.slice(5);
-    content.innerHTML = renderLab(key);
-    const frame = document.getElementById('labFrame');
-    if(frame && labs[key]) frame.srcdoc = labs[key];
-  } else if(hash.startsWith("#gp-")){
-    const item = galleryItems.find(g=>g.id===hash.slice(4));
-    content.innerHTML = item ? renderGalleryPhotos(item) : renderHome();
-  } else if(hash.startsWith("#b-")){
-    const rest = hash.slice(3);
-    const li = rest.lastIndexOf('-');
-    const s = sections.find(x=>x.id===rest.slice(0,li));
-    const i = parseInt(rest.slice(li+1),10);
-    content.innerHTML = (s && s.subs[i]) ? renderSub(s,i) : renderHome();
-  } else if(hash.startsWith("#d-")){
-    const s = sections.find(x=>x.id===hash.slice(3));
-    content.innerHTML = s ? renderDetail(s) : renderHome();
-  } else {
-    content.innerHTML = renderHome();
-    if(["#intro","#sections","#gallery","#contact"].includes(hash)){
-      setTimeout(()=>document.getElementById(hash.slice(1))?.scrollIntoView({behavior:"smooth"}), 30);
+  const render = ()=>{
+    if(hash.startsWith("#lab-")){
+      const key = hash.slice(5);
+      content.innerHTML = renderLab(key);
+      const frame = document.getElementById('labFrame');
+      if(frame && labs[key]) frame.srcdoc = labs[key];
+    } else if(hash.startsWith("#gp-")){
+      const item = galleryItems.find(g=>g.id===hash.slice(4));
+      content.innerHTML = item ? renderGalleryPhotos(item) : renderHome();
+    } else if(hash.startsWith("#b-")){
+      const rest = hash.slice(3);
+      const li = rest.lastIndexOf('-');
+      const s = sections.find(x=>x.id===rest.slice(0,li));
+      const i = parseInt(rest.slice(li+1),10);
+      content.innerHTML = (s && s.subs[i]) ? renderSub(s,i) : renderHome();
+    } else if(hash.startsWith("#d-")){
+      const s = sections.find(x=>x.id===hash.slice(3));
+      content.innerHTML = s ? renderDetail(s) : renderHome();
+    } else {
+      content.innerHTML = renderHome();
+      if(["#intro","#sections","#gallery","#contact"].includes(hash)){
+        setTimeout(()=>document.getElementById(hash.slice(1))?.scrollIntoView({behavior:"smooth",block:"start"}), 30);
+      }
     }
+    content.querySelectorAll('.sub-card,.sub-flat,.g-card,.sec-card').forEach((el,i)=>el.style.setProperty('--item-index',i));
+    content.classList.remove('route-enter');
+    void content.offsetWidth;
+    content.classList.add('route-enter');
+    if(window.lucide) lucide.createIcons();
+    const mn = document.getElementById('mobileNav');
+    if(mn && !hash.startsWith("#d-") && !hash.startsWith("#b-") && !hash.startsWith("#lab-") && !hash.startsWith("#gp-")){ mn.value = hash==="#top"||hash===""?"top":hash.slice(1); }
+  };
+  if(document.startViewTransition && !window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    document.startViewTransition(render);
+  } else {
+    render();
   }
-  if(window.lucide) lucide.createIcons();
-  const mn = document.getElementById('mobileNav');
-  if(mn && !hash.startsWith("#d-") && !hash.startsWith("#b-") && !hash.startsWith("#lab-") && !hash.startsWith("#gp-")){ mn.value = hash==="#top"||hash===""?"top":hash.slice(1); }
 }
 
 function goHome(scrollId){
