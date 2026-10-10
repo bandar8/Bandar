@@ -897,12 +897,12 @@ document.getElementById('mobileNav').addEventListener('change', (e)=>{
   const panel=document.getElementById('cloudPanel'), filesEl=document.getElementById('cloudFiles'), statusEl=document.getElementById('cloudStatus');
   const signedOut=document.getElementById('cloudSignedOut'), signedIn=document.getElementById('cloudSignedIn');
   const data=JSON.parse(document.getElementById('siteData').textContent);
+  const fmt=n=>{if(!n)return '';const u=['B','KB','MB','GB'];let i=0,v=n;while(v>=1024&&i<u.length-1){v/=1024;i++;}return `${v.toFixed(v>=10||i===0?0:1)} ${u[i]}`};
+  const esc=x=>String(x||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
   const sectionSelect=document.getElementById('cloudSection'), branchSelect=document.getElementById('cloudBranch');
   data.sections.forEach(x=>{const o=document.createElement('option');o.value=x.id;o.textContent=x.title;sectionSelect.appendChild(o);});
   function refreshBranches(){const section=data.sections.find(x=>x.id===sectionSelect.value);branchSelect.innerHTML='<option value="">اختر الفرع أو المؤشر</option>'+(section?.subs||[]).map(x=>`<option value="${esc(x.title)}">${esc(x.title)}</option>`).join('');}
   sectionSelect.addEventListener('change',refreshBranches);refreshBranches();
-  const fmt=n=>{if(!n)return '';const u=['B','KB','MB','GB'];let i=0,v=n;while(v>=1024&&i<u.length-1){v/=1024;i++;}return `${v.toFixed(v>=10||i===0?0:1)} ${u[i]}`};
-  const esc=x=>String(x||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
   async function loadFiles(){
     const {data:rows,error}=await sb.from('site_files').select('*').order('created_at',{ascending:false});
     if(error){statusEl.textContent='تعذر تحميل الملفات الآن.';return;}
