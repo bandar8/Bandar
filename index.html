@@ -487,8 +487,9 @@ function renderHome(){
 
 let cloudRows = [];
 const cloudEsc = x => String(x ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+const cloudFmt = bytes => {const n=Number(bytes)||0;return n<1024?`${n} B`:n<1048576?`${(n/1024).toFixed(1)} KB`:`${(n/1048576).toFixed(1)} MB`;};
 function cloudRowsFor(s, sub){return cloudRows.filter(r=>r.section_id===s.id && r.branch_title===sub.title);}
-function cloudEvidenceHtml(s, sub){const rows=cloudRowsFor(s,sub);if(!rows.length)return '';return `<div class="cloud-evidence"><h4>${ic('cloud')} الشواهد المرفوعة لهذا المؤشر</h4><div class="cloud-evidence-list">${rows.map(r=>`<a class="cloud-evidence-link" href="${cloudEsc(r.file_url)}" target="_blank" rel="noopener">${ic('file-text')}<span><strong>${cloudEsc(r.title||r.file_path||'شاهد')}</strong><small>${cloudEsc(r.file_type||'ملف')} · ${fmt(r.file_size||0)} · فتح الشاهد ↗</small></span></a>`).join('')}</div></div>`;}
+function cloudEvidenceHtml(s, sub){const rows=cloudRowsFor(s,sub);if(!rows.length)return '';return `<div class="cloud-evidence"><h4>${ic('cloud')} الشواهد المرفوعة لهذا المؤشر</h4><div class="cloud-evidence-list">${rows.map(r=>`<a class="cloud-evidence-link" href="${cloudEsc(r.file_url)}" target="_blank" rel="noopener">${ic('file-text')}<span><strong>${cloudEsc(r.title||r.file_path||'شاهد')}</strong><small>${cloudEsc(r.file_type||'ملف')} · ${cloudFmt(r.file_size||0)} · فتح الشاهد ↗</small></span></a>`).join('')}</div></div>`;}
 function renderDetail(s){
   const subsHtml = s.flat
     ? s.subs.map(sub=>`
