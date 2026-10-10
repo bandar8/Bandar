@@ -413,7 +413,7 @@ body{background:#f7faf8;color:var(--foreground)}
 const ORIGINAL_HTML = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
 const ORIGINAL_DATA_TEXT = document.getElementById('siteData').textContent;
 const siteData = JSON.parse(ORIGINAL_DATA_TEXT);
-const { teacher, highlights, galleryItems, contactChannels, sections } = siteData;
+var { teacher, highlights, galleryItems, contactChannels, sections } = siteData;
 const labs = siteData.labs || {};
 
 const ic = (name, extra) => `<i data-lucide="${name}" ${extra||''}></i>`;
@@ -949,7 +949,7 @@ async function exportSite(){
 
 window.addEventListener('hashchange', route);
 updateLockUI();
-route();
+try{route();}catch(e){setTimeout(()=>{try{route();}catch(_e){}},80);}
 
 document.getElementById('mobileNav').addEventListener('change', (e)=>{
   const v = e.target.value;
@@ -976,7 +976,7 @@ document.getElementById('mobileNav').addEventListener('change', (e)=>{
     cloudRows=rows||[];
     updateCloudEvidenceStat();
     statusEl.textContent=`${rows.length} ملف محفوظ سحابيًا`;
-    if(location.hash.startsWith('#d-')||location.hash.startsWith('#b-')) route();
+    if(location.hash.startsWith('#d-')||location.hash.startsWith('#b-')){try{route();}catch(e){setTimeout(()=>{try{route();}catch(_e){}},80);}}
     filesEl.innerHTML=rows.length?rows.map(r=>`<article class="cloud-file"><button class="cloud-delete" data-delete="${r.id}" hidden>حذف</button><span class="eyebrow">${esc(r.section_title)}</span><h3>${esc(r.title)}</h3><p>${esc(r.branch_title||'ملف عام')} · ${esc(r.file_type)} · ${fmt(r.file_size)}</p><a href="${esc(r.file_url)}" target="_blank" rel="noopener">فتح الملف ↗</a></article>`).join(''):'<p class="cloud-empty">لا توجد ملفات مرفوعة بعد.</p>';
     renderDeleteButtons();
   }
