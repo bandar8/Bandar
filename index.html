@@ -162,6 +162,7 @@
   .g-body{padding:18px 18px 19px;}
   .g-body h3{margin:0;font-size:14px;font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:600;line-height:1.55;}
   .g-body p{margin:6px 0 0;font-size:11.5px;color:var(--muted-foreground);line-height:1.65;}
+  .g-card[data-gallery-link="acid-ph"] .g-body h3,.g-card[data-gallery-link="reaction-types"] .g-body h3{font-size:12.5px;line-height:1.45;}
   .gallery-note{text-align:center;font-size:12.5px;color:var(--muted-foreground);margin-top:26px;}
   .gallery-lab-head{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:end;margin-top:38px;padding:26px;border:1px solid color-mix(in srgb,var(--primary) 18%,var(--border));border-radius:26px;background:linear-gradient(135deg,color-mix(in srgb,var(--primary) 9%,transparent),color-mix(in srgb,var(--card) 84%,transparent));overflow:hidden;position:relative;}
   .gallery-lab-head:after{content:'H₂O · CO₂ · NaCl · Δ';position:absolute;inset:auto 18px 10px auto;font:700 12px/1 monospace;letter-spacing:2px;color:color-mix(in srgb,var(--primary) 26%,transparent);direction:ltr;}
@@ -468,7 +469,7 @@ function renderHome(){
     const inner = `
       <div class="g-thumb">${ic(g.icon)}<span class="g-type">${label}</span></div>
       <div class="g-body"><h3>${g.title}</h3><p>${g.caption}</p>${hint}</div>`;
-    const attrs=`data-gallery-card data-gallery-kind="${kind}" style="--item-index:${index}"`;
+    const attrs=`data-gallery-card data-gallery-kind="${kind}" data-gallery-link="${g.link||''}" style="--item-index:${index}"`;
     if(g.link) return `<a class="g-card g-clickable" ${attrs} href="#lab-${g.link}">${inner}</a>`;
     if(g.id) return `<a class="g-card g-clickable" ${attrs} href="#gp-${g.id}">${inner}</a>`;
     return `<div class="g-card" ${attrs}>${inner}</div>`;
