@@ -434,7 +434,7 @@ function searchGallery(value){
 function renderHome(){
   const statsHtml = [
     {icon:'briefcase-business',value:(siteData.highlights||[])[0]?.value||'15+',label:'سنوات الخبرة'},
-    {icon:'folder-check',value:'—',label:'شاهد مرفوع',id:'cloudEvidenceStat'},
+    {icon:'folder-check',value:'0',label:'شاهد مرفوع',id:'cloudEvidenceStat'},
     {icon:'flask-conical',value:(siteData.highlights||[])[1]?.value||'50+',label:'تجربة مختبرية'},
     {icon:'sparkles',value:(siteData.highlights||[])[3]?.value||'8',label:'مبادرة علمية'}
   ].map(h=>`
@@ -937,9 +937,15 @@ document.getElementById('mobileNav').addEventListener('change', (e)=>{
     const q=cloudSearchText.toLowerCase();let rows=cloudRows.filter(r=>(cloudType==='all'||kindOf(r)===cloudType)&&(cloudSection==='all'||r.section_id===cloudSection)&&(!q||`${r.title||''} ${r.section_title||''} ${r.branch_title||''}`.toLowerCase().includes(q)));if(cloudSort==='oldest')rows.sort((a,b)=>String(a.created_at).localeCompare(String(b.created_at)));if(cloudSort==='largest')rows.sort((a,b)=>(b.file_size||0)-(a.file_size||0));
     filesEl.innerHTML=rows.length?rows.map(r=>{const k=kindOf(r),preview=k==='image'?`<img src="${esc(r.file_url)}" alt="${esc(r.title||'شاهد')}" loading="lazy">`:k==='video'?`<video src="${esc(r.file_url)}" muted preload="metadata"></video>`:`<span>${k==='pdf'?'▤':'▧'}</span>`;return `<article class="cloud-file"><div class="cloud-file-preview">${preview}</div><span class="eyebrow">${esc(r.section_title)}</span><h3>${esc(r.title||'شاهد')}</h3><p>${esc(r.branch_title||'ملف عام')} · ${esc(r.file_type||'ملف')} · ${fmt(r.file_size)}</p><div class="cloud-file-actions"><a href="${esc(r.file_url)}" target="_blank" rel="noopener">فتح</a><a href="${esc(r.file_url)}" download>تنزيل</a><button class="cloud-delete" data-delete="${esc(r.id)}" type="button">حذف</button></div></article>`}).join(''):'<div class="admin-empty">لا توجد نتائج مطابقة.</div>';
   }
+  async function loadPublicFiles(){
+    const {data:rows,error}=await sb.from('site_files').select('id,section_id,section_title,branch_title,title,file_path,file_url,file_type,file_size,created_at').order('created_at',{ascending:false});
+    if(error)return;
+    cloudRows=rows||[];updateCloudEvidenceStat();
+    if(location.hash.startsWith('#d-')||location.hash.startsWith('#b-')){try{route();}catch(e){setTimeout(()=>{try{route();}catch(_e){}},80);}}
+  }
   async function loadFiles(){
     const {data:{session}}=await sb.auth.getSession();
-    if(!session){cloudRows=[];filesEl.innerHTML='';document.getElementById('cloudOverview').hidden=true;document.getElementById('cloudLibraryTools').hidden=true;statusEl.textContent='سجّل الدخول للوصول إلى مساحة الإدارة.';return;}
+    if(!session){filesEl.innerHTML='';document.getElementById('cloudOverview').hidden=true;document.getElementById('cloudLibraryTools').hidden=true;statusEl.textContent='سجّل الدخول للوصول إلى مساحة الإدارة.';return;}
     const {data:rows,error}=await sb.from('site_files').select('*').order('created_at',{ascending:false});
     if(error){statusEl.textContent='تعذر تحميل الملفات الآن.';return;}
     cloudRows=rows||[];updateCloudEvidenceStat();statusEl.textContent=`${rows.length} ملف محفوظ سحابيًا`;
@@ -960,6 +966,7 @@ document.getElementById('mobileNav').addEventListener('change', (e)=>{
   document.getElementById('adminGuideToggle').addEventListener('click',()=>{const f=document.getElementById('adminGuideFrame');if(f.hidden){f.src='site-care-guide.html?embedded=1&v='+Date.now();f.hidden=false;}else f.hidden=true;});
   sb.auth.onAuthStateChange(()=>refreshAuth());
   refreshAuth();
+  loadPublicFiles();
 })();
 </script>
 </body></html>
