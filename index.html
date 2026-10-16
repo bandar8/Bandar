@@ -956,7 +956,7 @@ document.getElementById('mobileNav').addEventListener('change', (e)=>{
   document.getElementById('cloudTypeFilter').addEventListener('change',e=>{cloudType=e.target.value;renderCloudDashboard();});
   document.getElementById('cloudSectionFilter').addEventListener('change',e=>{cloudSection=e.target.value;renderCloudDashboard();});document.getElementById('cloudSortFilter').addEventListener('change',e=>{cloudSort=e.target.value;renderCloudDashboard();});document.querySelectorAll('[data-admin-tab]').forEach(b=>b.addEventListener('click',()=>selectAdminPane(b.dataset.adminTab)));
   function renderDeleteButtons(){sb.auth.getSession().then(({data:{session}})=>filesEl.querySelectorAll('[data-delete]').forEach(b=>b.hidden=!session));}
-  async function refreshAuth(){const {data:{session}}=await sb.auth.getSession();signedOut.hidden=!!session;signedIn.hidden=!session;if(session){sessionStorage.setItem('siteCareUnlocked','1');loadFiles();}else{sessionStorage.removeItem('siteCareUnlocked');cloudRows=[];filesEl.innerHTML='';document.getElementById('cloudOverview').hidden=true;document.getElementById('cloudLibraryTools').hidden=true;statusEl.textContent='سجّل الدخول للوصول إلى مساحة الإدارة.';}renderDeleteButtons();}
+  async function refreshAuth(){const {data:{session}}=await sb.auth.getSession();signedOut.hidden=!!session;signedIn.hidden=!session;if(session){sessionStorage.setItem('siteCareUnlocked','1');loadFiles();}else{sessionStorage.removeItem('siteCareUnlocked');filesEl.innerHTML='';document.getElementById('cloudOverview').hidden=true;document.getElementById('cloudLibraryTools').hidden=true;statusEl.textContent='سجّل الدخول للوصول إلى مساحة الإدارة.';}renderDeleteButtons();}
   document.getElementById('cloudBtn').addEventListener('click',()=>{panel.hidden=!panel.hidden;if(!panel.hidden){panel.scrollIntoView({behavior:'smooth',block:'start'});refreshAuth();}});
   document.getElementById('cloudClose').addEventListener('click',()=>panel.hidden=true);
   document.getElementById('cloudLogin').addEventListener('click',async()=>{const code=document.getElementById('cloudCode').value.trim(),hint=document.getElementById('cloudLoginHint');if(!code){hint.textContent='اكتب رمز الإدارة أولًا.';return;}hint.textContent='جارٍ التحقق…';const {error}=await sb.auth.signInWithPassword({email:'bander33349@gmail.com',password:code});hint.textContent=error?'الرمز غير صحيح أو تعذر التحقق.':'تم تسجيل الدخول بنجاح.';if(!error){sessionStorage.setItem('siteCareUnlocked','1');loadFiles();}});
@@ -965,8 +965,8 @@ document.getElementById('mobileNav').addEventListener('change', (e)=>{
   filesEl.addEventListener('click',async e=>{const b=e.target.closest('[data-delete]');if(!b)return;if(!confirm('هل تريد حذف هذا الشاهد نهائيًا؟'))return;const {data:r}=await sb.from('site_files').select('file_path').eq('id',b.dataset.delete).single();if(r?.file_path)await sb.storage.from('site-files').remove([r.file_path]);await sb.from('site_files').delete().eq('id',b.dataset.delete);loadFiles();});
   document.getElementById('adminGuideToggle').addEventListener('click',()=>{const f=document.getElementById('adminGuideFrame');if(f.hidden){f.src='site-care-guide.html?embedded=1&v='+Date.now();f.hidden=false;}else f.hidden=true;});
   sb.auth.onAuthStateChange(()=>refreshAuth());
-  refreshAuth();
-  loadPublicFiles();
+  const schedulePublicFiles=()=>{const run=()=>loadPublicFiles();if('requestIdleCallback' in window)requestIdleCallback(run,{timeout:1800});else setTimeout(run,700);};
+  if(document.readyState==='complete')schedulePublicFiles();else addEventListener('load',schedulePublicFiles,{once:true});
 })();
 </script>
 </body></html>
