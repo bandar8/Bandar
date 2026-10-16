@@ -458,9 +458,9 @@ function renderHome(){
   const galleryHtml = (siteData.galleryItems||[]).map((g,index)=>{
     const count = g.evidence ? g.evidence.length : 0;
     const kind = g.link ? 'interactive' : g.id ? 'visual' : 'experiment';
-    const label = kind==='interactive' ? 'مختبر تفاعلي' : kind==='visual' ? 'معرض بصري' : 'تجربة كيميائية';
+    const label = kind==='interactive' ? g.title : kind==='visual' ? 'معرض بصري' : 'تجربة كيميائية';
     const hint = g.link
-      ? `<span class="g-open">${ic('play')} افتح المختبر التفاعلي</span>`
+      ? `<span class="g-open">${ic('play')} افتح ${g.title}</span>`
       : g.id
         ? `<span class="g-open">${ic('images')} ${count ? `عرض الصور (${count})` : 'استعراض المعرض'}</span>`
         : `<span class="g-open">${ic('flask-conical')} استكشاف التجربة</span>`;
