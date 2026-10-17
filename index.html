@@ -204,6 +204,8 @@
   .c-icon{display:flex;height:44px;width:44px;margin:0 auto;align-items:center;justify-content:center;border-radius:999px;background:var(--primary);color:var(--primary-foreground);font-size:18px;}
   .c-card h3{margin:14px 0 0;font-size:15.5px;font-family:'Amiri',serif;}
   .c-card .val{margin:8px 0 0;color:var(--muted-foreground);direction:ltr;font-size:14px;}
+  .c-card .val a{color:inherit;text-decoration:underline;text-decoration-color:color-mix(in srgb, var(--accent) 70%, transparent);text-underline-offset:3px;}
+  .c-card .val a:hover{color:var(--primary);}
   .c-card .hint{margin:4px 0 0;font-size:11.5px;color:var(--muted-foreground);}
   .thanks{margin-top:36px;display:flex;align-items:center;justify-content:center;gap:10px;font-size:13.5px;color:var(--muted-foreground);}
   .thanks svg{color:var(--accent);}
@@ -465,13 +467,17 @@ function renderHome(){
     return `<div class="g-card" ${attrs}>${inner}</div>`;
   }).join('');
 
-  const contactHtml = (siteData.contactChannels||[]).map(c=>`
+  const contactHtml = (siteData.contactChannels||[]).map(c=>{
+    const value = c.icon==='mail'
+      ? `<a href="mailto:${c.value}" aria-label="إرسال بريد إلى ${c.value}">${c.value}</a>`
+      : c.value;
+    return `
     <div class="c-card">
       <div class="c-icon">${ic(c.icon)}</div>
       <h3>${c.label}</h3>
-      <div class="val">${c.value}</div>
+      <div class="val">${value}</div>
       <div class="hint">${c.hint}</div>
-    </div>`).join('');
+    </div>`;}).join('');
 
   return `
   <section id="top" class="hero-modern">
@@ -484,6 +490,7 @@ function renderHome(){
         <p class="hero-lede">رحلة مهنية موثقة تجمع بين التخطيط، التجربة المختبرية، الابتكار في التدريس، وتحسين نتائج المتعلمين.</p>
         <div class="hero-ctas">
           <a class="btn solid" href="#sections" onclick="return goHome('sections')">استعراض الأقسام ${ic('arrow-left')}</a>
+          <a class="btn ghost" href="#gallery" onclick="return goHome('gallery')">استكشف التجارب ${ic('flask-conical')}</a>
         </div>
         <div class="hero-trust"><span>${ic('badge-check')} توثيق منظم</span><span>${ic('shield-check')} عرض آمن</span><span>${ic('sparkles')} تجربة تعليمية</span></div>
       </div>
