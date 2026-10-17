@@ -426,7 +426,7 @@ function searchGallery(value){
 function renderHome(){
   const statsHtml = [
     {icon:'briefcase-business',value:(siteData.highlights||[])[0]?.value||'15+',label:'سنوات الخبرة'},
-    {icon:'folder-check',value:'0',label:'شاهد مرفوع',id:'cloudEvidenceStat'},
+    {icon:'folder-check',value:'—',label:'شواهد سحابية',id:'cloudEvidenceStat'},
     {icon:'flask-conical',value:(siteData.highlights||[])[1]?.value||'50+',label:'تجربة مختبرية'},
     {icon:'sparkles',value:(siteData.highlights||[])[3]?.value||'8',label:'مبادرة علمية'}
   ].map(h=>`
@@ -556,7 +556,8 @@ function renderHome(){
 }
 
 let cloudRows = [];
-function updateCloudEvidenceStat(){const el=document.getElementById('cloudEvidenceStat');if(el)el.textContent=String(cloudRows.length);}
+let cloudEvidenceTotal = null;
+function updateCloudEvidenceStat(){const el=document.getElementById('cloudEvidenceStat');if(el)el.textContent=cloudEvidenceTotal===null?'—':String(cloudEvidenceTotal);}
 const cloudEsc = x => String(x ?? '').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
 const cloudFmt = bytes => {const n=Number(bytes)||0;return n<1024?`${n} B`:n<1048576?`${(n/1024).toFixed(1)} KB`:`${(n/1048576).toFixed(1)} MB`;};
 function cloudRowsFor(s, sub){return cloudRows.filter(r=>r.section_id===s.id && r.branch_title===sub.title);}
@@ -909,9 +910,10 @@ document.getElementById('mobileNav').addEventListener('change', (e)=>{
   const SUPABASE_KEY='sb_publishable_9L2LiL1Fep3TCYC5_kFEvw_UkVoUo45';
   const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
   async function loadPublicFiles(){
-    const {data:rows,error}=await sb.from('site_files').select('id,section_id,section_title,branch_title,title,file_path,file_url,file_type,file_size,created_at').order('created_at',{ascending:false});
-    if(error)return;
+    const {data:rows,error,count}=await sb.from('site_files').select('id,section_id,section_title,branch_title,title,file_path,file_url,file_type,file_size,created_at',{count:'exact'}).order('created_at',{ascending:false});
+    if(error){cloudEvidenceTotal=null;if(typeof updateCloudEvidenceStat==='function')updateCloudEvidenceStat();return;}
     cloudRows=rows||[];
+    cloudEvidenceTotal=Number.isFinite(count)?count:cloudRows.length;
     if(typeof updateCloudEvidenceStat==='function')updateCloudEvidenceStat();
     if(location.hash.startsWith('#d-')||location.hash.startsWith('#b-')){try{route();}catch(e){setTimeout(()=>{try{route();}catch(_e){}},80);}}
   }
