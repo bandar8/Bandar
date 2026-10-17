@@ -291,8 +291,8 @@
   .sub-card,.g-card,.sec-card{will-change:transform,opacity;}
   ::view-transition-old(portfolio-content){animation:routeOut .22s ease both;}
   ::view-transition-new(portfolio-content){animation:routeEnter .58s cubic-bezier(.22,.8,.24,1) both;}
-  @keyframes routeEnter{from{opacity:0;transform:translateY(14px) scale(.992);filter:blur(5px)}to{opacity:1;transform:none;filter:none}}
-  @keyframes routeOut{from{opacity:1;transform:none}to{opacity:0;transform:translateY(-8px) scale(.998)}}
+  @keyframes routeEnter{from{opacity:0}to{opacity:1}}
+  @keyframes routeOut{from{opacity:1}to{opacity:0}}
   @keyframes contentLift{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
   @keyframes fadeSlide{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
   @keyframes cardReveal{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
