@@ -159,7 +159,10 @@
   .g-clickable{transition:transform .18s ease, border-color .18s ease;cursor:pointer;}
   .g-clickable:hover{transform:translateY(-3px);border-color:color-mix(in srgb, var(--primary) 40%, var(--border));}
   .g-open{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:11px;font-weight:600;line-height:1.5;color:var(--primary);}
-  .g-thumb{display:flex;height:130px;align-items:center;justify-content:center;background:color-mix(in srgb, var(--secondary) 55%, transparent);color:var(--primary);font-size:44px;}
+  .g-thumb{display:flex;height:130px;align-items:center;justify-content:center;gap:12px;padding:14px 18px;background:color-mix(in srgb, var(--secondary) 55%, transparent);color:var(--primary);font-size:44px;}
+  .g-thumb svg{width:42px;height:42px;flex:0 0 42px;}
+  .g-thumb .g-type{display:block;max-width:78%;font-size:clamp(17px,2.2vw,23px);font-weight:500;line-height:1.3;text-align:center;text-wrap:balance;overflow-wrap:anywhere;}
+  @media (max-width:600px){.g-thumb{height:124px;padding-inline:14px;gap:10px}.g-thumb svg{width:36px;height:36px;flex-basis:36px}.g-thumb .g-type{font-size:clamp(16px,5vw,21px);max-width:80%;}}
   .g-body{padding:18px 18px 19px;}
   .g-body h3{margin:0;font-size:14px;font-family:'IBM Plex Sans Arabic',sans-serif;font-weight:600;line-height:1.55;}
   .g-body p{margin:6px 0 0;font-size:11.5px;color:var(--muted-foreground);line-height:1.65;}
