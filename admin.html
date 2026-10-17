@@ -463,8 +463,15 @@ body{background:#f7faf8;color:var(--foreground)}
     if(revealed) return;
     revealed=true;
     var loader=document.getElementById('siteLoader');
-    if(loader) loader.classList.add('done');
-    if(document.body) document.body.classList.remove('site-booting');
+    if(!loader){
+      if(document.body) document.body.classList.remove('site-booting');
+      return;
+    }
+    loader.classList.add('done');
+    var delay=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 850;
+    window.setTimeout(function(){
+      if(document.body) document.body.classList.remove('site-booting');
+    },delay);
   }
   window.setTimeout(reveal,2400);
   window.addEventListener('load',function(){ window.setTimeout(reveal,600); },false);
