@@ -918,4 +918,15 @@ document.getElementById('mobileNav').addEventListener('change', (e)=>{
   const run=()=>loadPublicFiles();
   if(document.readyState==='complete')setTimeout(run,700);else addEventListener('load',()=>setTimeout(run,700),{once:true});
 })();
-</script><script id="site-loader-script">window.addEventListener('load',()=>setTimeout(()=>document.getElementById('siteLoader')?.classList.add('done');document.body.classList.remove('site-booting'),2400));setTimeout(()=>document.getElementById('siteLoader')?.classList.add('done');document.body.classList.remove('site-booting'),7000);</script></body></html>
+</script><script id="site-loader-script">(function(){
+  var revealed=false;
+  function reveal(){
+    if(revealed) return;
+    revealed=true;
+    var loader=document.getElementById('siteLoader');
+    if(loader) loader.classList.add('done');
+    if(document.body) document.body.classList.remove('site-booting');
+  }
+  window.setTimeout(reveal,2400);
+  window.addEventListener('load',function(){ window.setTimeout(reveal,600); },false);
+})();</script></body></html>
