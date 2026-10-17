@@ -469,6 +469,11 @@ body{background:#f7faf8;color:var(--foreground)}
 <style id="dark-evidence-palette">
 /* توحيد منطقة الشواهد داخل صفحات الفروع مع ألوان معرض التجارب في الوضع الداكن */
 @media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]) body,
+  :root:not([data-theme="light"]) #content{
+    background:var(--background)!important;
+    color:var(--foreground)!important;
+  }
   :root:not([data-theme="light"]) .cloud-evidence{
     background:linear-gradient(145deg,var(--secondary),var(--card))!important;
     border-color:var(--border)!important;
@@ -504,6 +509,12 @@ body{background:#f7faf8;color:var(--foreground)}
   :root:not([data-theme="light"]) .cloud-evidence-open,
   :root:not([data-theme="light"]) .cloud-count{color:var(--primary)!important}
   :root:not([data-theme="light"]) .cloud-empty{color:var(--muted-foreground)!important}
+}
+ :root[data-theme="dark"] html,
+:root[data-theme="dark"] body,
+:root[data-theme="dark"] #content{
+  background:var(--background)!important;
+  color:var(--foreground)!important;
 }
 :root[data-theme="dark"] .cloud-evidence{
   background:linear-gradient(145deg,var(--secondary),var(--card))!important;
