@@ -882,23 +882,23 @@ function route(){
       content.innerHTML = renderLab(key);
       const frame = document.getElementById('labFrame');
       if(frame && labs[key]){
+        const fitLabFrame = () => {
+          const doc = frame.contentDocument;
+          if(!doc) return;
+          const height = Math.max(doc.documentElement?.scrollHeight || 0, doc.body?.scrollHeight || 0, 520);
+          frame.style.height = Math.min(height + 8, 16000) + 'px';
+        };
+        frame.addEventListener('load', () => {
+          fitLabFrame();
+          if(window.ResizeObserver && frame.contentDocument?.documentElement){
+            const observer = new ResizeObserver(fitLabFrame);
+            observer.observe(frame.contentDocument.documentElement);
+            frame._labResizeObserver = observer;
+          }
+        }, {once:true});
         frame.srcdoc = labs[key];
-        if(key === 'acid-ph'){
-          const fitAcidLab = () => {
-            const doc = frame.contentDocument;
-            if(!doc) return;
-            const height = Math.max(doc.documentElement?.scrollHeight || 0, doc.body?.scrollHeight || 0, 520);
-            frame.style.height = Math.min(height + 8, 16000) + 'px';
-          };
-          frame.addEventListener('load', () => {
-            fitAcidLab();
-            if(window.ResizeObserver && frame.contentDocument?.documentElement){
-              const observer = new ResizeObserver(fitAcidLab);
-              observer.observe(frame.contentDocument.documentElement);
-              frame._acidLabResizeObserver = observer;
-            }
-          }, {once:true});
-        }
+        setTimeout(fitLabFrame, 80);
+        setTimeout(fitLabFrame, 500);
       }
     } else if(hash.startsWith("#gp-")){
       const item = galleryItems.find(g=>g.id===hash.slice(4));
