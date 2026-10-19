@@ -874,7 +874,7 @@ function renderLab(key){
 }
 
 function route(){
-  const hash = location.hash || "#top";
+  const hash = (location.hash || "#top").split("?")[0];
   const content = document.getElementById('content');
   const render = ()=>{
     if(hash.startsWith("#lab-")){
