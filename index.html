@@ -631,7 +631,10 @@ function renderHome(){
       <div class="g-thumb">${ic(g.icon)}<span class="g-type">${label}</span></div>
       <div class="g-body"><h3>${g.title}</h3><p>${g.caption}</p>${hint}</div>`;
     const attrs=`data-gallery-card data-gallery-kind="${kind}" data-gallery-link="${g.link||''}" style="--item-index:${index}"`;
-    if(g.link) return `<a class="g-card g-clickable" ${attrs} href="#lab-${g.link}">${inner}</a>`;
+    if(g.link){
+      const labHref = ['daily-molecules','molecular'].includes(g.link) ? `labs/${g.link}.html` : `#lab-${g.link}`;
+      return `<a class="g-card g-clickable" ${attrs} href="${labHref}">${inner}</a>`;
+    }
     if(g.id) return `<a class="g-card g-clickable" ${attrs} href="#gp-${g.id}">${inner}</a>`;
     return `<div class="g-card" ${attrs}>${inner}</div>`;
   }).join('');
