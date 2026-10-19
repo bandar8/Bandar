@@ -1,0 +1,787 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style id="portfolio-return-style">.portfolio-return{position:fixed;z-index:9999;top:14px;inset-inline-start:14px;display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border:1px solid rgba(20,121,91,.25);border-radius:999px;background:rgba(255,255,255,.92);box-shadow:0 6px 20px rgba(23,59,53,.12);color:#14795b;text-decoration:none;font:600 14px/1.2 Tahoma,Arial,sans-serif;backdrop-filter:blur(8px)}.portfolio-return:hover{background:#14795b;color:#fff}@media(max-width:600px){.portfolio-return{top:8px;inset-inline-start:8px;padding:7px 10px;font-size:12px}}</style></head><body><a class="portfolio-return" href="../#gallery" aria-label="العودة إلى معرض التجارب">← العودة إلى المعرض</a>
+<title>تصنيف التفاعلات الكيميائية</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Reem+Kufi:wght@500;700&display=swap">
+<style>
+/* Layout: one right-aligned reading column (Arabic, RTL). A lab-bench stage with dotted graph-paper ground sits between each reaction type's explanation and its worked equations. */
+:root{
+  --bg:#F1F5F3; --panel:#FFFFFF; --ink:#12262B; --ink-2:#4B6168; --line:#D3DEDB;
+  --accent:#0B7A86; --on-accent:#FFFFFF; --ok:#1E8A58; --bad:#C23B2E;
+  --t-form:#2467C9; --t-dec:#C2561A; --t-single:#7A45BF; --t-double:#14846A; --t-comb:#C2332D;
+  --el-a:#2F7FC8; --el-b:#E0902F; --el-c:#8559C4; --el-d:#2E9E78;
+  --el-carbon:#4E5F65; --el-h:#E3ECEC; --el-h-ink:#12262B; --el-o:#D4463F;
+  --f-display:"Reem Kufi","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E181B; --panel:#162327; --ink:#E4EEEE; --ink-2:#9BB1B5; --line:#2A3C41;
+    --accent:#4FC3CF; --on-accent:#06282C; --ok:#4CC48E; --bad:#F07E70;
+    --t-form:#6AA2F5; --t-dec:#F0925A; --t-single:#B28BEA; --t-double:#4CC7A2; --t-comb:#F47C74;
+    --el-a:#4A93D8; --el-b:#E9A24A; --el-c:#9B72D6; --el-d:#3DB88C;
+    --el-carbon:#6B7E85; --el-h:#DCE6E8; --el-h-ink:#12262B; --el-o:#E65A52;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E181B; --panel:#162327; --ink:#E4EEEE; --ink-2:#9BB1B5; --line:#2A3C41;
+  --accent:#4FC3CF; --on-accent:#06282C; --ok:#4CC48E; --bad:#F07E70;
+  --t-form:#6AA2F5; --t-dec:#F0925A; --t-single:#B28BEA; --t-double:#4CC7A2; --t-comb:#F47C74;
+  --el-a:#4A93D8; --el-b:#E9A24A; --el-c:#9B72D6; --el-d:#3DB88C;
+  --el-carbon:#6B7E85; --el-h:#DCE6E8; --el-h-ink:#12262B; --el-o:#E65A52;
+  color-scheme:dark;
+}
+body{background:var(--bg);color:var(--ink);font:400 16px/1.85 var(--f-body);padding-inline:16px;padding-block:20px 56px}
+#app{max-width:820px;margin-inline:auto;display:flex;flex-direction:column;gap:26px}
+#app *{box-sizing:border-box}
+h1,h2,h3,h4{font-family:var(--f-display);font-weight:700;line-height:1.35;margin:0;text-wrap:balance}
+p{margin:0}
+sub{font-size:.72em;line-height:0}
+.f,.eq{unicode-bidi:isolate;font-family:var(--f-mono);white-space:nowrap}
+.f{font-size:.92em}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* header */
+.eyebrow{font-size:.85rem;letter-spacing:.04em;color:var(--accent);font-weight:600}
+h1{font-size:clamp(1.55rem,5.2vw,2.45rem);line-height:1.28;margin-block:4px 10px}
+.lead{color:var(--ink-2);max-width:62ch;font-size:clamp(.92rem,2.5vw,1rem);line-height:1.72}
+@media(max-width:520px){h1{font-size:clamp(1.35rem,5.8vw,2rem);line-height:1.3}.lead{font-size:.9rem;line-height:1.68}}
+.goals{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+.goals h2{font-size:1.05rem;margin-bottom:6px}
+.goals ul{margin:0;padding:0 20px 0 0;display:flex;flex-direction:column;gap:2px}
+.goals li{max-width:62ch}
+
+/* section scaffolding */
+.sec>h2{font-size:1.5rem;margin-bottom:6px}
+.sec>.hint{color:var(--ink-2);margin-bottom:16px;max-width:62ch}
+
+/* step nav + pager */
+.nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:8px 6px;border-bottom:1px solid var(--line)}
+.nav ol{list-style:none;margin:0;padding:0 0 4px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.nav li{flex:none}
+.st{--c:var(--accent);font:500 .92rem/1.4 var(--f-body);color:var(--ink-2);background:var(--panel);border:1.5px solid var(--line);border-radius:8px;padding:7px 12px;cursor:pointer;white-space:nowrap}
+.st:hover{border-color:var(--c);color:var(--ink)}
+.st[aria-current="step"]{background:color-mix(in srgb,var(--c) 16%,var(--panel));border-color:var(--c);color:var(--ink);font-weight:600}
+.st.seen::before{content:"\2713\00a0";color:var(--ok)}
+.pager{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding-top:16px}
+.pager .btn{min-width:6.5em}
+.pager .btn:disabled{opacity:.4;cursor:default}
+.pos{font-size:.88rem;color:var(--ink-2);text-align:center}
+#intro .goals{margin-top:0;border-top:0;padding-top:0}
+#typeCount{margin-bottom:2px}
+
+/* activity blocks (inside single replacement) */
+.act{display:flex;flex-direction:column;gap:14px;border-top:1px solid var(--line);padding-top:18px}
+.act h4{color:var(--c);font-size:1.15rem}
+.rules{margin:0;padding:0 20px 0 0;display:flex;flex-direction:column;gap:2px}
+.forms{display:flex;flex-wrap:wrap;gap:6px 22px;align-items:baseline}
+.forms span.k{font-size:.88rem;color:var(--ink-2)}
+.s-row{display:flex;flex-wrap:wrap;gap:14px 22px;align-items:flex-start}
+.s-grp{display:flex;flex-direction:column;gap:6px}
+.s-items{display:flex;flex-wrap:wrap;gap:8px}
+.sc{display:flex;flex-direction:column;align-items:center;gap:3px}
+.cn{font-size:.74rem;color:var(--ink-2);line-height:1.35;text-align:center;max-width:6.5em}
+.cn b{color:var(--ink);font-weight:600}
+.s-cap{font-size:.8rem;color:var(--ink-2);border-top:2px solid var(--line);padding-top:4px;max-width:30em}
+.s-cap.on{border-top-color:var(--t-single)}
+.s-arrow{display:flex;align-items:center;gap:10px;font-size:.82rem;color:var(--ink-2)}
+.s-arrow i{flex:1;height:2px;background:var(--ink-2);position:relative;opacity:.6}
+.s-arrow i::after{content:"";position:absolute;left:-1px;top:-4px;border-top:5px solid transparent;border-bottom:5px solid transparent;border-right:8px solid var(--ink-2)}
+.chip sub{font-size:.7em}
+
+/* vertical series */
+.pair{display:grid;grid-template-columns:minmax(0,230px) minmax(0,1fr);gap:22px;align-items:start}
+@media (max-width:560px){.pair{grid-template-columns:minmax(0,1fr)}}
+.rcol{display:flex;flex-direction:column;gap:12px;min-width:0}
+.vwrap{display:flex;gap:10px;align-items:stretch;background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px 12px 12px 14px;min-width:0}
+.vrail{width:2px;background:var(--ink-2);opacity:.55;position:relative;margin:6px 6px 14px 4px;flex:none}
+.vrail::after{content:"";position:absolute;bottom:-9px;left:-4px;border-left:5px solid transparent;border-right:5px solid transparent;border-top:9px solid var(--ink-2)}
+.vlist{display:flex;flex-direction:column;gap:4px;flex:1;min-width:0}
+.vr{display:flex;align-items:center;gap:10px}
+.vr .chip{min-width:3.2em;flex:none}
+.vn{font-size:.9rem;color:var(--ink-2);min-width:0}
+.vn b{color:var(--ink);font-weight:600}
+.vcap{font-size:.8rem;color:var(--ink-2);border-top:2px solid var(--line);margin-top:6px;padding-top:4px}
+.vcap.on{border-top-color:var(--t-single)}
+.vend{font-size:.82rem;font-weight:600;color:var(--ink)}
+
+/* panel */
+.panel{--c:var(--t-form);background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 16px;display:flex;flex-direction:column;gap:14px}
+.p-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 18px}
+.p-head h3{font-size:1.4rem;color:var(--c)}
+.gen{font-family:var(--f-mono);font-size:clamp(1.15rem,4.6vw,1.55rem);font-weight:500;color:var(--ink);white-space:nowrap;direction:ltr}
+.stage{background-color:color-mix(in srgb,var(--c) 5%,var(--panel));background-image:radial-gradient(var(--line) 1px,transparent 1.3px);background-size:16px 16px;border:1px solid var(--line);border-radius:8px;padding:6px}
+.stage svg{display:block;width:100%;max-width:520px;height:auto;margin-inline:auto}
+.ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px}
+.btn{font:600 .95rem/1.4 var(--f-body);background:var(--accent);color:var(--on-accent);border:0;border-radius:8px;padding:9px 18px;cursor:pointer}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
+input[type=range]{flex:1 1 140px;min-width:0;accent-color:var(--c)}
+.status{font-size:.88rem;color:var(--ink-2);min-width:6.5em;text-align:end}
+.legend{font-size:.88rem;color:var(--ink-2)}
+h4{font-size:1.05rem}
+.exs{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.exs li{display:flex;flex-direction:column;gap:2px;padding-block:8px;border-top:1px solid var(--line)}
+.exs li:first-child{border-top:0}
+.eq-line{overflow-x:auto;direction:ltr;text-align:left;font-family:var(--f-mono);font-size:clamp(.98rem,4.1vw,1.2rem)}
+.eq-line .eq{white-space:nowrap}
+.note{color:var(--ink-2);font-size:.92rem}
+.clue{background:color-mix(in srgb,var(--c) 9%,var(--panel));border-radius:8px;padding:10px 14px}
+.clue strong{color:var(--c)}
+.extra{font-size:.92rem;color:var(--ink-2)}
+
+/* activity series */
+.series{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}
+.chip{font-family:var(--f-mono);font-weight:500;font-size:.95rem;min-width:2.6em;text-align:center;padding:3px 8px;border:1.5px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink-2)}
+.chip.h{font-style:italic}
+.chip.is-metal{border-color:var(--t-single);background:color-mix(in srgb,var(--t-single) 18%,var(--panel));color:var(--ink)}
+.chip.is-ion{border-color:var(--t-dec);background:color-mix(in srgb,var(--t-dec) 18%,var(--panel));color:var(--ink)}
+.series-cap{display:flex;justify-content:space-between;gap:12px;font-size:.82rem;color:var(--ink-2);margin-bottom:16px}
+.pick{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-bottom:14px}
+.pick label{display:block;font-size:.88rem;color:var(--ink-2);margin-bottom:2px}
+select{width:100%;font:400 1rem/1.5 var(--f-body);color:var(--ink);background:var(--panel);border:1.5px solid var(--line);border-radius:8px;padding:8px 10px}
+.result{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.result .verdict{font-family:var(--f-display);font-weight:700;font-size:1.15rem}
+.result.yes .verdict{color:var(--ok)}
+.result.no .verdict{color:var(--bad)}
+.tag{align-self:flex-start;font-size:.78rem;font-weight:600;color:var(--t-single);border:1px solid var(--t-single);border-radius:5px;padding:0 8px}
+.series-note{font-size:.88rem;color:var(--ink-2);margin-top:10px}
+
+/* quiz */
+.quiz{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px 16px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.q-top{display:flex;justify-content:space-between;gap:12px;font-size:.9rem;color:var(--ink-2)}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.q-eq{overflow-x:auto;direction:ltr;text-align:center;padding-block:14px;font-family:var(--f-mono);font-size:clamp(1.05rem,4.6vw,1.45rem);border-block:1px dashed var(--line)}
+.ans{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.ans button{--c:var(--accent);font:500 .98rem/1.4 var(--f-body);color:var(--ink);background:var(--panel);border:1.5px solid var(--c);border-radius:8px;padding:10px 12px;cursor:pointer;text-align:center}
+.ans button:hover:not(:disabled){background:color-mix(in srgb,var(--c) 14%,var(--panel))}
+.ans button:disabled{cursor:default}
+.ans button.right{background:color-mix(in srgb,var(--ok) 20%,var(--panel));border-color:var(--ok);border-width:2.5px;font-weight:600}
+.ans button.wrong{background:color-mix(in srgb,var(--bad) 18%,var(--panel));border-color:var(--bad);border-style:dashed;border-width:2.5px}
+.ans button:disabled:not(.right):not(.wrong){opacity:.55}
+.fb{padding:10px 14px;border-radius:8px;background:color-mix(in srgb,var(--accent) 9%,var(--panel))}
+.fb b.ok{color:var(--ok)} .fb b.bad{color:var(--bad)}
+.q-end{display:flex;flex-direction:column;gap:12px}
+.score{font-family:var(--f-display);font-size:2.2rem;font-weight:700;direction:ltr;text-align:right}
+.miss{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.miss li{display:flex;flex-direction:column;gap:0;padding-block:6px;border-top:1px solid var(--line)}
+
+/* summary */
+.steps{margin:0 0 20px;padding:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:8px;max-width:64ch}
+.steps li{counter-increment:s;display:grid;grid-template-columns:2rem 1fr;gap:10px;align-items:start}
+.steps li::before{content:counter(s);font-family:var(--f-display);font-weight:700;color:var(--on-accent);background:var(--accent);border-radius:50%;width:1.7rem;height:1.7rem;display:grid;place-items:center;font-size:.95rem;margin-top:.1rem}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.93rem}
+th,td{padding:10px 12px;text-align:start;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--f-display);font-size:.95rem;background:color-mix(in srgb,var(--accent) 8%,var(--panel))}
+tr:last-child td{border-bottom:0}
+td .dot{display:inline-block;width:.7em;height:.7em;border-radius:50%;background:var(--c);margin-inline-end:6px}
+td.ltr{direction:ltr;text-align:left;font-family:var(--f-mono);white-space:nowrap}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}}
+</style>
+
+<div id="app" dir="rtl" lang="ar">
+
+<header>
+  <div class="eyebrow">كيمياء 1 · درس تفاعلي</div>
+  <h1>تصنيف التفاعلات الكيميائية</h1>
+  <p class="lead">تتحول المواد في التفاعل الكيميائي إلى مواد جديدة، وتُصنَّف التفاعلات إلى خمسة أنواع بحسب ما يحدث للمواد المتفاعلة. شاهد كل نوع وهو يحدث، ثم تدرّب على التصنيف.</p>
+</header>
+
+<nav class="nav" id="nav" aria-label="خطوات الدرس"><ol id="navList"></ol></nav>
+
+<section class="sec step" id="intro">
+  <div class="goals">
+    <h2>بنهاية الدرس ستكون قادرًا على أن:</h2>
+    <ul>
+      <li>تصنّف التفاعل الكيميائي إلى أحد الأنواع الخمسة.</li>
+      <li>تكتب الصيغة العامة لكل نوع وتتعرّف على مؤشراته في المعادلة.</li>
+      <li>تستخدم سلسلة النشاط الكيميائي للتنبؤ بحدوث تفاعل الإحلال الأحادي.</li>
+    </ul>
+  </div>
+  <p class="hint" style="margin-top:14px">ينقسم الدرس إلى خطوات: خمسة أنواع من التفاعلات، ثم اختبار، ثم ملخص. وتجد سلسلة النشاط وسلسلة الهالوجينات داخل خطوة «الإحلال الأحادي». استخدم زر «التالي» في أسفل الصفحة للانتقال، أو اختر أي خطوة من الشريط العلوي.</p>
+</section>
+
+<section class="sec step" id="types" hidden>
+  <div class="eyebrow" id="typeCount"></div>
+  <p class="hint">شغّل التفاعل أو حرّك المنزلق لتتابع انفصال الروابط وتكوّنها.</p>
+  <div class="panel" id="panel">
+    <div class="p-head"><h3 id="tName"></h3><div class="gen" id="tGeneral"></div></div>
+    <p id="tDef"></p>
+    <div class="stage"><svg id="svg" viewBox="0 0 320 150" role="img" aria-label="نموذج جسيمي للتفاعل"></svg></div>
+    <div class="ctrl">
+      <button class="btn" id="play" type="button">شغّل التفاعل</button>
+      <input id="scrub" type="range" min="0" max="100" value="0" dir="ltr" aria-label="تقدّم التفاعل من المتفاعلات إلى النواتج">
+      <span class="status" id="status">المتفاعلات</span>
+    </div>
+    <p class="legend" id="legend"></p>
+    <h4>أمثلة موزونة</h4>
+    <ul class="exs" id="tEx"></ul>
+    <div class="clue"><strong>كيف أتعرّفه؟</strong> <span id="tClue"></span></div>
+    <p class="extra" id="tExtra" hidden></p>
+
+    <div class="act" id="actBlock" hidden>
+      <h4>أولًا: سلسلة النشاط الكيميائي للفلزات</h4>
+      <p>سلسلة النشاط ترتّب العناصر من الأكثر نشاطًا إلى الأقل نشاطًا. يحل الفلز الأنشط محل الفلز الأقل نشاطًا منه في محلول مركبه.</p>
+      <ol class="rules">
+        <li>يحل الفلز محل فلز أقل نشاطًا منه في محلول مركبه.</li>
+        <li>الفلز الذي يسبق الهيدروجين <span class="f">H</span> في السلسلة يحل محله في الحمض ويحرر غاز <span class="f">H<sub>2</sub></span>.</li>
+        <li>الفلز الذي يلي الهيدروجين لا يحل محله في الحمض.</li>
+      </ol>
+      <div class="forms"><span class="k">الصيغة العامة للفلزات:</span><span class="eq" dir="ltr">A + BX → AX + B</span></div>
+      <div class="pair">
+        <div class="vwrap" id="series" aria-label="سلسلة النشاط الكيميائي للفلزات"></div>
+        <div class="rcol">
+          <p class="legend">اختر فلزًا ومحلولًا لتتنبأ بالنتيجة. يظهر الفلز الحر في السلسلة باللون البنفسجي، والفلز الموجود في المركب باللون البرتقالي.</p>
+          <div class="pick">
+            <div><label for="metal">الفلز (عنصر حر)</label><select id="metal"></select></div>
+            <div><label for="sol">المحلول (مركب)</label><select id="sol"></select></div>
+          </div>
+          <div class="result" id="result" aria-live="polite"></div>
+          <p class="series-note">الفلزات التي تتفاعل مع الماء نفسه مثل <span class="f">Li</span> و <span class="f">K</span> و <span class="f">Ba</span> و <span class="f">Ca</span> و <span class="f">Na</span> لا تُستعمل في هذا النشاط. التنبؤ هنا وفق سلسلة النشاط فقط.</p>
+        </div>
+      </div>
+
+      <h4 style="margin-top:10px">ثانيًا: سلسلة نشاط الهالوجينات</h4>
+      <p>الهالوجينات عناصر المجموعة 17. يقل نشاطها من الأعلى إلى الأسفل في المجموعة. يحل الهالوجين الأنشط محل الهالوجين الأقل نشاطًا في ملحه.</p>
+      <div class="forms"><span class="k">الصيغة العامة للهالوجينات:</span><span class="eq" dir="ltr">Y + BX → BY + X</span></div>
+      <div class="pair">
+        <div class="vwrap" id="hseries" aria-label="سلسلة نشاط الهالوجينات"></div>
+        <div class="rcol">
+          <div class="pick">
+            <div><label for="hal">الهالوجين (عنصر حر)</label><select id="hal"></select></div>
+            <div><label for="salt">ملح الهاليد (محلول)</label><select id="salt"></select></div>
+          </div>
+          <div class="result" id="hresult" aria-live="polite"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec step" id="quizsec" hidden>
+  <h2>اختبر نفسك</h2>
+  <p class="hint">عشرة أسئلة عشوائية. صنّف كل معادلة، ثم اقرأ التفسير.</p>
+  <div class="quiz" id="quiz">
+    <div id="qMain" style="display:contents">
+      <div class="q-top"><span id="qNum"></span><span id="qScore"></span></div>
+      <div class="bar" aria-hidden="true"><i id="qBar"></i></div>
+      <div class="q-eq" id="qEq"></div>
+      <div class="ans" id="qAns" role="group" aria-label="نوع التفاعل"></div>
+      <div class="fb" id="qFb" aria-live="polite" hidden></div>
+      <div><button class="btn" id="qNext" type="button" hidden>السؤال التالي</button></div>
+    </div>
+    <div class="q-end" id="qEnd" hidden>
+      <h3>النتيجة</h3>
+      <div class="score" id="qFinal"></div>
+      <p id="qMsg"></p>
+      <div id="qMissWrap" hidden><h4>راجع هذه المعادلات</h4><ul class="miss" id="qMiss"></ul></div>
+      <div><button class="btn" id="qAgain" type="button">أعد الاختبار</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec step" id="summary" hidden>
+  <h2>ملخص الدرس</h2>
+  <p class="hint">اسأل نفسك هذه الأسئلة بالترتيب عند تصنيف أي معادلة موزونة.</p>
+  <ol class="steps">
+    <li><span>هل يتفاعل <span class="f">O<sub>2</sub></span> مع مادة وتنطلق حرارة وضوء، وتظهر النواتج <span class="f">CO<sub>2</sub></span> و <span class="f">H<sub>2</sub>O</span>؟ فهو <b>احتراق</b>.</span></li>
+    <li><span>هل يوجد متفاعل واحد فقط؟ فهو <b>تحلل</b>.</span></li>
+    <li><span>هل يوجد ناتج واحد فقط؟ فهو <b>تكوين</b>.</span></li>
+    <li><span>هل يتفاعل عنصر حر مع مركب فينتج عنصر حر ومركب جديد؟ فهو <b>إحلال أحادي</b>.</span></li>
+    <li><span>هل يتفاعل مركبان فينتج مركبان بتبادل الأيونات؟ فهو <b>إحلال مزدوج</b>.</span></li>
+  </ol>
+  <div class="tbl"><table id="sumTbl">
+    <thead><tr><th>النوع</th><th>الصيغة العامة</th><th>مؤشر التعرّف</th><th>مثال</th></tr></thead>
+    <tbody></tbody>
+  </table></div>
+</section>
+
+<div class="pager">
+  <button class="btn ghost" id="prev" type="button">السابق</button>
+  <span class="pos" id="pos" aria-live="polite"></span>
+  <button class="btn" id="next" type="button">التالي</button>
+</div>
+
+</div>
+
+<script>
+/*DATA*/
+const sub = s => s.replace(/([A-Za-z\)])(\d+)/g, '$1<sub>$2</sub>');
+const eq = s => '<span class="eq" dir="ltr">' + sub(s) + '</span>';
+const f = s => '<span class="f" dir="ltr">' + sub(s) + '</span>';
+
+const GEN_LEG = 'A و B و C و D رموز عامة لعناصر، والخط بين ذرتين يمثّل رابطة.';
+
+const TYPES = [
+  { id:'form', c:'--t-form', tab:'التكوين', name:'تفاعل التكوين (الاتحاد)', general:'A + B → AB',
+    def:'تفاعل تتحد فيه مادتان أو أكثر (عناصر أو مركبات) لتكوّن مادة جديدة واحدة.',
+    clue:'ناتج واحد فقط مهما كان عدد المتفاعلات، ويكون مركبًا أكبر من كل متفاعل.',
+    label:'نموذج جسيمي: ذرتان منفصلتان تتحدان برابطة', legend:GEN_LEG,
+    examples:[
+      ['2Mg + O2 → 2MgO', 'عنصر + عنصر → مركب. يشتعل المغنيسيوم بضوء أبيض ساطع.'],
+      ['N2 + 3H2 → 2NH3', 'عنصران يكوّنان الأمونيا.'],
+      ['CaO + H2O → Ca(OH)2', 'مركب + مركب → مركب. أكسيد الكالسيوم مع الماء.'],
+      ['SO3 + H2O → H2SO4', 'أكسيد لافلز مع الماء يكوّن حمضًا.']
+    ],
+    scene:{ atoms:[
+      {l:'A',c:'--el-a',from:[60,75],to:[135,75]},
+      {l:'B',c:'--el-b',from:[260,75],to:[185,75]}],
+      bonds:[{a:0,b:1,w:'after'}] } },
+
+  { id:'dec', c:'--t-dec', tab:'التحلل', name:'تفاعل التحلل', general:'AB → A + B',
+    def:'تفاعل ينفصل فيه مركب واحد إلى مادتين أو أكثر أبسط منه (عناصر أو مركبات)، وغالبًا يلزمه تسخين أو تيار كهربائي أو ضوء.',
+    clue:'متفاعل واحد فقط، وله ناتجان أو أكثر.',
+    label:'نموذج جسيمي: جزيء ثنائي تنكسر رابطته فتنفصل ذرتاه', legend:GEN_LEG,
+    examples:[
+      ['2H2O → 2H2 + O2', 'التحليل الكهربائي للماء.'],
+      ['CaCO3 → CaO + CO2', 'تسخين كربونات الكالسيوم (الحجر الجيري).'],
+      ['2KClO3 → 2KCl + 3O2', 'يتحلل بالتسخين، ويُسرّعه ' + f('MnO2') + ' عاملًا حفازًا.'],
+      ['2H2O2 → 2H2O + O2', 'تحلل فوق أكسيد الهيدروجين إلى ماء وأكسجين.']
+    ],
+    scene:{ atoms:[
+      {l:'A',c:'--el-a',from:[135,75],to:[60,75]},
+      {l:'B',c:'--el-b',from:[185,75],to:[260,75]}],
+      bonds:[{a:0,b:1,w:'before'}] } },
+
+  { id:'single', c:'--t-single', tab:'الإحلال الأحادي', name:'تفاعل الإحلال الأحادي', general:'A + BC → AC + B',
+    def:'تفاعل يحل فيه عنصر محل عنصر آخر في مركب. يحدث إذا كان العنصر الحر أنشط من العنصر الذي سيحل محله.',
+    clue:'عنصر حر ومركب على جهة المتفاعلات، وعنصر حر ومركب جديد على جهة النواتج.',
+    label:'نموذج جسيمي: ذرة حرة تطرد ذرة من مركب وتأخذ مكانها', legend:GEN_LEG + ' A هنا أنشط من B.',
+    examples:[
+      ['Zn + 2HCl → ZnCl2 + H2', 'فلز يحل محل الهيدروجين في الحمض.'],
+      ['Fe + CuSO4 → FeSO4 + Cu', 'الحديد أنشط من النحاس فيحل محله.'],
+      ['Cu + 2AgNO3 → Cu(NO3)2 + 2Ag', 'النحاس أنشط من الفضة فتترسب الفضة.'],
+      ['Cl2 + 2KBr → 2KCl + Br2', 'لافلز (الكلور) يحل محل لافلز أقل نشاطًا (البروم).']
+    ],
+    scene:{ atoms:[
+      {l:'A',c:'--el-a',from:[50,75],to:[165,75]},
+      {l:'B',c:'--el-b',from:[165,75],to:[290,40],via:[165,10]},
+      {l:'C',c:'--el-c',from:[215,75],to:[215,75]}],
+      bonds:[{a:1,b:2,w:'before'},{a:0,b:2,w:'after'}] } },
+
+  { id:'double', c:'--t-double', tab:'الإحلال المزدوج', name:'تفاعل الإحلال المزدوج', general:'AB + CD → AD + CB',
+    def:'تفاعل يتبادل فيه مركبان أيوناتهما في المحلول فينتج مركبان جديدان. يحدث عادةً عند تكوّن راسب أو غاز أو ماء.',
+    clue:'مركبان في كل جهة، وتتبادل الأيونات الموجبة مواقعها. ابحث عن راسب ↓ أو غاز ↑ أو ماء.',
+    label:'نموذج جسيمي: مركبان يتبادلان الذرتين السفليتين', legend:GEN_LEG + ' A و C أيونان موجبان، و B و D أيونان سالبان.',
+    examples:[
+      ['AgNO3 + NaCl → AgCl↓ + NaNO3', 'يتكوّن راسب أبيض من كلوريد الفضة.'],
+      ['BaCl2 + Na2SO4 → BaSO4↓ + 2NaCl', 'راسب أبيض من كبريتات الباريوم.'],
+      ['NaOH + HCl → NaCl + H2O', 'حمض + قاعدة (تعادل)، وينتج ملح وماء.'],
+      ['Na2CO3 + 2HCl → 2NaCl + H2O + CO2↑', 'يتصاعد غاز ثاني أكسيد الكربون.']
+    ],
+    scene:{ atoms:[
+      {l:'A',c:'--el-a',from:[130,45],to:[130,45]},
+      {l:'B',c:'--el-b',from:[210,45],to:[210,105],via:[255,75]},
+      {l:'C',c:'--el-c',from:[130,105],to:[130,105]},
+      {l:'D',c:'--el-d',from:[210,105],to:[210,45],via:[165,75]}],
+      bonds:[{a:0,b:1,w:'before'},{a:2,b:3,w:'before'},{a:0,b:3,w:'after'},{a:2,b:1,w:'after'}] } },
+
+  { id:'comb', c:'--t-comb', tab:'الاحتراق', name:'تفاعل الاحتراق', general:'CxHy + O2 → CO2 + H2O',
+    def:'تفاعل مادة مع الأكسجين تنطلق فيه طاقة على شكل حرارة وضوء. احتراق الهيدروكربونات احتراقًا تامًّا ينتج ثاني أكسيد الكربون والماء.',
+    clue:'الأكسجين ' + f('O2') + ' متفاعل، وتنطلق حرارة وضوء. في الهيدروكربونات تكون النواتج ' + f('CO2') + ' و ' + f('H2O') + '.',
+    label:'نموذج جسيمي: احتراق الميثان مع جزيئين من الأكسجين', legend:'C كربون، H هيدروجين، O أكسجين. المثال المعروض هو الميثان ' + f('CH4') + '.',
+    examples:[
+      ['CH4 + 2O2 → CO2 + 2H2O', 'الميثان، المكوّن الرئيس للغاز الطبيعي.'],
+      ['C3H8 + 5O2 → 3CO2 + 4H2O', 'البروبان في أسطوانات الغاز.'],
+      ['2C8H18 + 25O2 → 16CO2 + 18H2O', 'الأوكتان، من مكونات البنزين.'],
+      ['C2H5OH + 3O2 → 2CO2 + 3H2O', 'الإيثانول.']
+    ],
+    extra:'بعض التفاعلات تنتمي إلى نوعين في وقت واحد. فاحتراق المغنيسيوم ' + f('2Mg + O2 → 2MgO') + ' احتراق وتكوين معًا.',
+    scene:{ atoms:[
+      {l:'C',c:'--el-carbon',from:[60,75],to:[105,75]},
+      {l:'H',c:'--el-h',t:'--el-h-ink',r:11,from:[30,45],to:[208,25]},
+      {l:'H',c:'--el-h',t:'--el-h-ink',r:11,from:[90,45],to:[262,25]},
+      {l:'H',c:'--el-h',t:'--el-h-ink',r:11,from:[30,105],to:[208,135]},
+      {l:'H',c:'--el-h',t:'--el-h-ink',r:11,from:[90,105],to:[262,135]},
+      {l:'O',c:'--el-o',from:[190,35],to:[55,75]},
+      {l:'O',c:'--el-o',from:[230,35],to:[155,75]},
+      {l:'O',c:'--el-o',from:[190,115],to:[235,45]},
+      {l:'O',c:'--el-o',from:[230,115],to:[235,115]}],
+      bonds:[{a:0,b:1,w:'before'},{a:0,b:2,w:'before'},{a:0,b:3,w:'before'},{a:0,b:4,w:'before'},
+             {a:5,b:6,w:'before'},{a:7,b:8,w:'before'},
+             {a:5,b:0,w:'after'},{a:0,b:6,w:'after'},
+             {a:7,b:1,w:'after'},{a:7,b:2,w:'after'},{a:8,b:3,w:'after'},{a:8,b:4,w:'after'}] } }
+];
+
+const MET = [['Li','ليثيوم'],['Rb','روبيديوم'],['K','بوتاسيوم'],['Ba','باريوم'],['Sr','سترونشيوم'],['Ca','كالسيوم'],['Na','صوديوم'],['Mg','مغنيسيوم'],['Al','ألومنيوم'],['Mn','منجنيز'],['Zn','خارصين'],['Cr','كروم'],['Fe','حديد'],['Cd','كادميوم'],['Co','كوبالت'],['Ni','نيكل'],['Sn','قصدير'],['Pb','رصاص'],['H','هيدروجين'],['Cu','نحاس'],['Hg','زئبق'],['Ag','فضة'],['Pt','بلاتين'],['Au','ذهب']];
+const ORDER = MET.map(m => m[0]);
+const HAL = [['F','فلور','غاز أصفر شاحب'],['Cl','كلور','غاز أخضر مصفر'],['Br','بروم','سائل أحمر مائل للبني'],['I','يود','صلب بنفسجي داكن']];
+const HSALT = {F:'فلوريد', Cl:'كلوريد', Br:'بروميد', I:'يوديد'};
+const HOBS = {'Cl|Br':'يتحول المحلول إلى اللون البرتقالي المحمر لتحرر البروم.', 'Cl|I':'يتحول المحلول إلى اللون البني لتحرر اليود.', 'Br|I':'يتحول المحلول إلى اللون البني لتحرر اليود.'};
+const MN = Object.fromEntries(MET);
+const CH = {Li:1,Rb:1,K:1,Ba:2,Sr:2,Ca:2,Na:1,Mg:2,Al:3,Mn:2,Zn:2,Fe:2,Cd:2,Co:2,Ni:2,Sn:2,Pb:2,Cu:2,Hg:2,Ag:1,Pt:2,Au:3};
+const WATER = ['Li','Rb','K','Ba','Sr','Ca','Na'];
+const SOLS = [
+  {id:'HCl',   N:'H',  c:1, an:{f:'Cl',k:1},  txt:'HCl — حمض الهيدروكلوريك'},
+  {id:'MgCl2', N:'Mg', c:2, an:{f:'Cl',k:1},  txt:'MgCl₂ — كلوريد المغنيسيوم'},
+  {id:'AlCl3', N:'Al', c:3, an:{f:'Cl',k:1},  txt:'AlCl₃ — كلوريد الألومنيوم'},
+  {id:'ZnSO4', N:'Zn', c:2, an:{f:'SO4',k:2,poly:1}, txt:'ZnSO₄ — كبريتات الخارصين'},
+  {id:'FeSO4', N:'Fe', c:2, an:{f:'SO4',k:2,poly:1}, txt:'FeSO₄ — كبريتات الحديد II'},
+  {id:'NiSO4', N:'Ni', c:2, an:{f:'SO4',k:2,poly:1}, txt:'NiSO₄ — كبريتات النيكل II'},
+  {id:'PbNO3', N:'Pb', c:2, an:{f:'NO3',k:1,poly:1}, txt:'Pb(NO₃)₂ — نترات الرصاص II'},
+  {id:'CuSO4', N:'Cu', c:2, an:{f:'SO4',k:2,poly:1}, txt:'CuSO₄ — كبريتات النحاس II'},
+  {id:'AgNO3', N:'Ag', c:1, an:{f:'NO3',k:1,poly:1}, txt:'AgNO₃ — نترات الفضة'}
+];
+const gcd = (a, b) => b ? gcd(b, a % b) : a;
+const lcm = (a, b) => a / gcd(a, b) * b;
+function comp(cat, c, an) {
+  const g = gcd(c, an.k), x = an.k / g, y = c / g;
+  const a = (an.poly && y > 1) ? '(' + an.f + ')' : an.f;
+  return cat + (x > 1 ? x : '') + a + (y > 1 ? y : '');
+}
+function rxn(M, m, S) {
+  const N = S.N, c = S.c, an = S.an, L = lcm(m, c);
+  const xN = an.k / gcd(c, an.k), xM = an.k / gcd(m, an.k), free = N === 'H' ? 2 : 1;
+  const v = [L / m, L / c / xN, L / m / xM, L / c / free];
+  let k = 1;
+  while (k < 13 && !v.every(q => Math.abs(q * k - Math.round(q * k)) < 1e-9)) k++;
+  let co = v.map(q => Math.round(q * k));
+  const g = co.reduce(gcd);
+  co = co.map(q => q / g);
+  const t = (n, f) => (n > 1 ? n : '') + f;
+  return t(co[0], M) + ' + ' + t(co[1], comp(N, c, an)) + ' → ' + t(co[2], comp(M, m, an)) + ' + ' + t(co[3], N === 'H' ? 'H2' : N);
+}
+function obs(S) {
+  if (S.N === 'H') return 'تتصاعد فقاعات غاز الهيدروجين.';
+  if (S.N === 'Cu') return 'يترسب نحاس بني محمر ويخفت اللون الأزرق للمحلول.';
+  if (S.N === 'Ag') return 'تترسب فضة لامعة.';
+  return 'يترسب فلز ' + MN[S.N] + ' على سطح الفلز.';
+}
+
+const QUIZ = [
+  {e:'2Na + Cl2 → 2NaCl', a:'form', why:'عنصران اتحدا وأنتجا مركبًا واحدًا هو كلوريد الصوديوم.'},
+  {e:'2H2O2 → 2H2O + O2', a:'dec', why:'متفاعل واحد تفكك إلى مادتين أبسط.'},
+  {e:'Zn + 2HCl → ZnCl2 + H2', a:'single', why:'عنصر حر (Zn) حل محل الهيدروجين في المركب HCl.'},
+  {e:'AgNO3 + NaCl → AgCl↓ + NaNO3', a:'double', why:'تبادل المركبان أيوناتهما الموجبة، وتكوّن راسب AgCl.'},
+  {e:'CH4 + 2O2 → CO2 + 2H2O', a:'comb', why:'هيدروكربون يتفاعل مع O₂ وينتج CO₂ و H₂O مع انطلاق طاقة.'},
+  {e:'CaCO3 → CaO + CO2', a:'dec', why:'متفاعل واحد (يتحلل بالتسخين) وناتجان.'},
+  {e:'Fe + CuSO4 → FeSO4 + Cu', a:'single', why:'الحديد الحر أنشط من النحاس فحل محله في المركب.'},
+  {e:'NaOH + HCl → NaCl + H2O', a:'double', why:'تبادل الأيونات بين قاعدة وحمض (تعادل)، وينتج ماء.'},
+  {e:'N2 + 3H2 → 2NH3', a:'form', why:'عنصران ينتجان مركبًا واحدًا هو الأمونيا.'},
+  {e:'C3H8 + 5O2 → 3CO2 + 4H2O', a:'comb', why:'احتراق تام لهيدروكربون (البروبان) ينتج CO₂ و H₂O.'},
+  {e:'Cl2 + 2KBr → 2KCl + Br2', a:'single', why:'الكلور أنشط من البروم فحل محله، فتحرر البروم عنصرًا حرًّا.'},
+  {e:'BaCl2 + Na2SO4 → BaSO4↓ + 2NaCl', a:'double', why:'مركبان يتبادلان الأيونات وينتج راسب BaSO₄.'},
+  {e:'CaO + H2O → Ca(OH)2', a:'form', why:'مركبان اتحدا وأنتجا مركبًا واحدًا هو هيدروكسيد الكالسيوم.'},
+  {e:'2KClO3 → 2KCl + 3O2', a:'dec', why:'متفاعل واحد تفكك إلى مركب وعنصر.'}
+];
+/*END*/
+
+const $ = s => document.querySelector(s);
+const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const NS = 'http://www.w3.org/2000/svg';
+const TYPE_BY_ID = Object.fromEntries(TYPES.map(t => [t.id, t]));
+
+/* ---------- tabs + stage ---------- */
+let cur = 0, t = 0, raf = 0, timer = 0, nodes = null;
+const panel = $('#panel'), svg = $('#svg'), playBtn = $('#play'), scrub = $('#scrub'), statusEl = $('#status');
+
+
+function el(name, attrs) {
+  const n = document.createElementNS(NS, name);
+  for (const k in attrs) n.setAttribute(k, attrs[k]);
+  return n;
+}
+
+function buildScene(sc) {
+  svg.textContent = '';
+  const bondNodes = sc.bonds.map(b => {
+    const ln = el('line', { 'stroke-width': 4, 'stroke-linecap': 'round' });
+    ln.style.stroke = 'var(--ink-2)';
+    svg.appendChild(ln);
+    return ln;
+  });
+  const atomNodes = sc.atoms.map(a => {
+    const r = a.r || 16;
+    const g = el('g', {});
+    const c = el('circle', { r: r });
+    c.style.fill = 'var(' + a.c + ')';
+    c.style.stroke = 'var(--panel)';
+    c.setAttribute('stroke-width', 2);
+    const tx = el('text', { 'text-anchor': 'middle', 'dominant-baseline': 'central', 'font-weight': 700, 'font-size': r > 12 ? 14 : 11, 'font-family': 'IBM Plex Mono, monospace' });
+    tx.style.fill = 'var(' + (a.t || '') + ')';
+    if (!a.t) tx.style.fill = '#fff';
+    tx.textContent = a.l;
+    g.appendChild(c); g.appendChild(tx);
+    svg.appendChild(g);
+    return { g: g };
+  });
+  nodes = { sc: sc, bonds: bondNodes, atoms: atomNodes };
+}
+
+const ease = k => k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+const clamp = k => Math.max(0, Math.min(1, k));
+function pos(a, e) {
+  if (a.via) {
+    const u = 1 - e;
+    return [u * u * a.from[0] + 2 * u * e * a.via[0] + e * e * a.to[0],
+            u * u * a.from[1] + 2 * u * e * a.via[1] + e * e * a.to[1]];
+  }
+  return [a.from[0] + (a.to[0] - a.from[0]) * e, a.from[1] + (a.to[1] - a.from[1]) * e];
+}
+
+function render() {
+  if (!nodes) return;
+  const e = ease(t), P = nodes.sc.atoms.map(a => pos(a, e));
+  nodes.atoms.forEach((n, i) => n.g.setAttribute('transform', 'translate(' + P[i][0].toFixed(1) + ' ' + P[i][1].toFixed(1) + ')'));
+  nodes.sc.bonds.forEach((b, i) => {
+    const ln = nodes.bonds[i];
+    ln.setAttribute('x1', P[b.a][0]); ln.setAttribute('y1', P[b.a][1]);
+    ln.setAttribute('x2', P[b.b][0]); ln.setAttribute('y2', P[b.b][1]);
+    ln.setAttribute('opacity', b.w === 'before' ? clamp(1 - e / .4) : clamp((e - .6) / .4));
+  });
+  statusEl.textContent = t < .02 ? 'المتفاعلات' : t > .98 ? 'النواتج' : 'يحدث التفاعل';
+  playBtn.textContent = t > .98 ? 'أعد التشغيل' : 'شغّل التفاعل';
+}
+
+function setT(v) { t = v; scrub.value = Math.round(v * 100); render(); }
+
+function play() {
+  cancelAnimationFrame(raf); clearTimeout(timer);
+  if (t > .98) t = 0;
+  if (reduced) { setT(1); return; }
+  const from = t, dur = 2800 * (1 - from) + 200, t0 = performance.now();
+  (function step(now) {
+    const k = Math.min(1, (now - t0) / dur);
+    setT(from + (1 - from) * k);
+    if (k < 1) raf = requestAnimationFrame(step);
+  })(t0);
+}
+
+playBtn.addEventListener('click', play);
+scrub.addEventListener('input', () => { cancelAnimationFrame(raf); clearTimeout(timer); setT(scrub.value / 100); });
+
+function select(i) {
+  cancelAnimationFrame(raf); clearTimeout(timer);
+  cur = i;
+  const T = TYPES[i];
+  panel.style.setProperty('--c', 'var(' + T.c + ')');
+  $('#tName').textContent = T.name;
+  $('#tGeneral').innerHTML = eq(T.general.replace('CxHy', 'C_xH_y')).replace('C_xH_y', 'C<sub>x</sub>H<sub>y</sub>');
+  $('#tDef').textContent = T.def;
+  $('#tClue').innerHTML = T.clue;
+  $('#legend').innerHTML = T.legend;
+  svg.setAttribute('aria-label', T.label);
+  $('#tEx').innerHTML = T.examples.map(x => '<li><div class="eq-line">' + eq(x[0]) + '</div><div class="note">' + x[1] + '</div></li>').join('');
+  const ex = $('#tExtra');
+  if (T.extra) { ex.innerHTML = T.extra; ex.hidden = false; } else ex.hidden = true;
+  $('#actBlock').hidden = T.id !== 'single';
+  buildScene(T.scene);
+  setT(0);
+  if (!reduced) timer = setTimeout(play, 450);
+}
+
+/* ---------- activity series ---------- */
+const seriesEl = $('#series'), metalSel = $('#metal'), solSel = $('#sol'), resEl = $('#result');
+const vRow = (sym, nameHtml, attr, label) => '<div class="vr"><span class="chip" ' + attr + '="' + sym + '">' + (label || sym) + '</span><span class="vn">' + nameHtml + '</span></div>';
+const iH = ORDER.indexOf('H');
+seriesEl.innerHTML = '<div class="vrail" aria-hidden="true"></div><div class="vlist">' +
+  '<div class="vend">الأكثر نشاطًا</div>' +
+  '<div class="vcap on">تسبق الهيدروجين: تحل محله في الأحماض</div>' +
+  MET.slice(0, iH).map(m => vRow(m[0], m[1], 'data-s')).join('') +
+  '<div class="vcap">الهيدروجين (للمقارنة)</div>' + vRow('H', MN.H, 'data-s') +
+  '<div class="vcap">بعد الهيدروجين: لا تحل محله</div>' +
+  MET.slice(iH + 1).map(m => vRow(m[0], m[1], 'data-s')).join('') +
+  '<div class="vend">الأقل نشاطًا</div></div>';
+MET.filter(m => CH[m[0]]).forEach(m => metalSel.add(new Option(m[0] + ' — ' + m[1], m[0])));
+SOLS.forEach(x => solSel.add(new Option(x.txt, x.id)));
+metalSel.value = 'Zn'; solSel.value = 'CuSO4';
+
+function predict() {
+  const m = metalSel.value, S = SOLS.find(x => x.id === solSel.value), ion = S.N;
+  seriesEl.querySelectorAll('.chip').forEach(c => {
+    c.classList.toggle('is-metal', c.dataset.s === m);
+    c.classList.toggle('is-ion', c.dataset.s === ion && ion !== m);
+  });
+  const im = ORDER.indexOf(m), ii = ORDER.indexOf(ion);
+  let h, yes = false;
+  if (WATER.includes(m)) {
+    h = '<div class="verdict">لا يُستعمل في هذا النشاط</div><p>' + f(m) + ' شديد النشاط ويتفاعل مع الماء نفسه، فلا يصلح لمحلول مائي.</p>';
+  } else if (m === ion) {
+    h = '<div class="verdict">لا يحدث تفاعل</div><p>' + f(m) + ' هو نفسه الفلز الموجود في المحلول، فلا يوجد ما يمكن إحلاله.</p>';
+  } else if (im < ii) {
+    yes = true;
+    h = '<div class="verdict">يحدث التفاعل</div><span class="tag">إحلال أحادي</span>' +
+        '<div class="eq-line">' + eq(rxn(m, CH[m], S)) + '</div>' +
+        '<p>' + MN[m] + ' (' + f(m) + ') أنشط من ' + MN[ion] + ' (' + f(ion) + ')، لذلك يحل محله في المركب.</p>' +
+        '<p class="note">المشاهدة: ' + obs(S) + '</p>';
+  } else {
+    h = '<div class="verdict">لا يحدث تفاعل</div><p>' + MN[m] + ' (' + f(m) + ') أقل نشاطًا من ' + MN[ion] + ' (' + f(ion) + ')، فلا يستطيع أن يحل محله.</p>';
+  }
+  resEl.className = 'result ' + (yes ? 'yes' : 'no');
+  resEl.innerHTML = h;
+}
+metalSel.addEventListener('change', predict);
+solSel.addEventListener('change', predict);
+
+/* halogens */
+const hSeries = $('#hseries'), halSel = $('#hal'), saltSel = $('#salt'), hRes = $('#hresult');
+hSeries.innerHTML = '<div class="vrail" aria-hidden="true"></div><div class="vlist"><div class="vend">الأكثر نشاطًا</div>' +
+  HAL.map(h => vRow(h[0], '<b>' + h[1] + '</b> — ' + h[2], 'data-h', h[0] + '<sub>2</sub>')).join('') +
+  '<div class="vend">الأقل نشاطًا</div></div>';
+HAL.forEach(h => { halSel.add(new Option(h[0] + '₂ — ' + h[1], h[0])); saltSel.add(new Option('K' + h[0] + ' — ' + HSALT[h[0]] + ' البوتاسيوم', h[0])); });
+halSel.value = 'Cl'; saltSel.value = 'Br';
+
+function hpredict() {
+  const h = halSel.value, x = saltSel.value;
+  const ih = HAL.findIndex(a => a[0] === h), ix = HAL.findIndex(a => a[0] === x);
+  hSeries.querySelectorAll('.chip').forEach(c => {
+    c.classList.toggle('is-metal', c.dataset.h === h);
+    c.classList.toggle('is-ion', c.dataset.h === x && x !== h);
+  });
+  const nm = a => HAL[a][1];
+  let out;
+  if (h === x) {
+    out = '<div class="verdict">لا يحدث تفاعل</div><p>الهالوجين الحر هو نفسه الهالوجين في الملح، فلا يوجد ما يمكن إحلاله.</p>';
+    hRes.className = 'result no';
+  } else if (ih < ix) {
+    const e = h + '2 + 2K' + x + ' → 2K' + h + ' + ' + x + '2';
+    out = '<div class="verdict">يحدث التفاعل</div><span class="tag">إحلال أحادي</span><div class="eq-line">' + eq(e) + '</div>' +
+      '<p>' + nm(ih) + ' (' + f(h + '2') + ') أنشط من ' + nm(ix) + ' (' + f(x + '2') + ')، لذلك يحل محله في الملح.</p>' +
+      (HOBS[h + '|' + x] ? '<p class="note">المشاهدة: ' + HOBS[h + '|' + x] + '</p>' : '') +
+      (h === 'F' ? '<p class="note">الفلور شديد النشاط ويتفاعل مع الماء نفسه، لذلك يقتصر الاستنتاج هنا على ترتيب النشاط.</p>' : '');
+    hRes.className = 'result yes';
+  } else {
+    out = '<div class="verdict">لا يحدث تفاعل</div><p>' + nm(ih) + ' (' + f(h + '2') + ') أقل نشاطًا من ' + nm(ix) + ' (' + f(x + '2') + ')، فلا يستطيع أن يحل محله.</p>';
+    hRes.className = 'result no';
+  }
+  hRes.innerHTML = out;
+}
+halSel.addEventListener('change', hpredict);
+saltSel.addEventListener('change', hpredict);
+
+/* ---------- quiz ---------- */
+let qs = [], qi = 0, score = 0, missed = [], locked = false;
+const ansEl = $('#qAns'), fb = $('#qFb'), nextBtn = $('#qNext');
+TYPES.forEach(T => {
+  const b = document.createElement('button');
+  b.type = 'button'; b.dataset.id = T.id; b.textContent = T.tab;
+  b.style.setProperty('--c', 'var(' + T.c + ')');
+  b.addEventListener('click', () => answer(T.id));
+  ansEl.appendChild(b);
+});
+
+function shuffle(a) { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+
+function startQuiz() {
+  qs = shuffle(QUIZ.slice()).slice(0, 10); qi = 0; score = 0; missed = [];
+  $('#qEnd').hidden = true; $('#qMain').style.display = 'contents';
+  showQ();
+}
+
+function showQ() {
+  locked = false;
+  const q = qs[qi];
+  $('#qNum').textContent = 'السؤال ' + (qi + 1) + ' من ' + qs.length;
+  $('#qScore').textContent = 'الصحيح: ' + score;
+  $('#qBar').style.width = (qi / qs.length * 100) + '%';
+  $('#qEq').innerHTML = eq(q.e);
+  [...ansEl.children].forEach(b => { b.disabled = false; b.className = ''; });
+  fb.hidden = true; nextBtn.hidden = true;
+}
+
+function answer(id) {
+  if (locked) return;
+  locked = true;
+  const q = qs[qi], ok = id === q.a;
+  if (ok) score++; else missed.push(q);
+  [...ansEl.children].forEach(b => {
+    b.disabled = true;
+    if (b.dataset.id === q.a) b.className = 'right';
+    else if (b.dataset.id === id) b.className = 'wrong';
+  });
+  fb.innerHTML = ok
+    ? '<b class="ok">إجابة صحيحة.</b> ' + q.why
+    : '<b class="bad">إجابة غير صحيحة.</b> النوع الصحيح: <b>' + TYPE_BY_ID[q.a].tab + '</b>. ' + q.why;
+  fb.hidden = false;
+  $('#qScore').textContent = 'الصحيح: ' + score;
+  nextBtn.textContent = qi === qs.length - 1 ? 'عرض النتيجة' : 'السؤال التالي';
+  nextBtn.hidden = false;
+  nextBtn.focus();
+}
+
+nextBtn.addEventListener('click', () => {
+  if (qi < qs.length - 1) { qi++; showQ(); } else endQuiz();
+});
+
+function endQuiz() {
+  $('#qBar').style.width = '100%';
+  $('#qMain').style.display = 'none';
+  $('#qEnd').hidden = false;
+  $('#qFinal').textContent = score + ' / ' + qs.length;
+  $('#qMsg').textContent = score >= 9 ? 'ممتاز. تصنّف التفاعلات بدقة.' :
+    score >= 7 ? 'جيد جدًّا. راجع المعادلات القليلة التي أخطأت فيها.' :
+    score >= 5 ? 'جيد. عُد إلى مؤشرات التعرّف في الأنواع التي أخطأت فيها.' :
+    'راجع الأنواع الخمسة وخطوات التصنيف في ملخص الدرس، ثم أعد المحاولة.';
+  const w = $('#qMissWrap');
+  w.hidden = missed.length === 0;
+  $('#qMiss').innerHTML = missed.map(q => '<li><div class="eq-line">' + eq(q.e) + '</div><div class="note">النوع: ' + TYPE_BY_ID[q.a].tab + '. ' + q.why + '</div></li>').join('');
+  $('#qAgain').focus();
+}
+$('#qAgain').addEventListener('click', startQuiz);
+
+/* ---------- summary table ---------- */
+const SUM = [
+  ['form', 'ناتج واحد فقط', 'N2 + 3H2 → 2NH3'],
+  ['dec', 'متفاعل واحد فقط', 'CaCO3 → CaO + CO2'],
+  ['single', 'عنصر حر في كل جهة من المعادلة', 'Zn + 2HCl → ZnCl2 + H2'],
+  ['double', 'مركبان يتبادلان الأيونات، مع راسب أو غاز أو ماء', 'AgNO3 + NaCl → AgCl↓ + NaNO3'],
+  ['comb', 'الأكسجين متفاعل مع انطلاق حرارة وضوء', 'CH4 + 2O2 → CO2 + 2H2O']
+];
+$('#sumTbl tbody').innerHTML = SUM.map(r => {
+  const T = TYPE_BY_ID[r[0]];
+  const g = T.general.replace('CxHy', 'C<sub>x</sub>H<sub>y</sub>');
+  return '<tr style="--c:var(' + T.c + ')"><td><span class="dot"></span><b>' + T.tab + '</b></td>' +
+    '<td class="ltr">' + sub(g).replace('C_xH_y', 'CxHy') + '</td><td>' + r[1] + '</td><td class="ltr">' + eq(r[2]) + '</td></tr>';
+}).join('');
+
+/* ---------- steps ---------- */
+const STEPS = [{k:'intro', label:'المقدمة', c:'--accent'}]
+  .concat(TYPES.map((T, i) => ({k:'type', i:i, label:T.tab, c:T.c})))
+  .concat([{k:'quiz', label:'اختبر نفسك', c:'--accent'}, {k:'summary', label:'الملخص', c:'--accent'}]);
+const SEC = {intro:'#intro', type:'#types', quiz:'#quizsec', summary:'#summary'};
+const navOl = $('#navList'), prevBtn = $('#prev'), nextStep = $('#next'), posEl = $('#pos');
+let step = 0;
+const seen = new Set();
+
+STEPS.forEach((S, n) => {
+  const li = document.createElement('li'), b = document.createElement('button');
+  b.type = 'button'; b.className = 'st'; b.textContent = S.label;
+  b.style.setProperty('--c', 'var(' + S.c + ')');
+  b.addEventListener('click', () => go(n));
+  li.appendChild(b); navOl.appendChild(li);
+});
+
+function go(n, initial) {
+  if (!initial) seen.add(step);
+  step = Math.max(0, Math.min(STEPS.length - 1, n));
+  const S = STEPS[step];
+  Object.keys(SEC).forEach(k => { $(SEC[k]).hidden = k !== S.k; });
+  if (S.k === 'type') {
+    $('#typeCount').textContent = 'النوع ' + (S.i + 1) + ' من ' + TYPES.length;
+    select(S.i);
+  } else { cancelAnimationFrame(raf); clearTimeout(timer); }
+  [...navOl.querySelectorAll('.st')].forEach((b, j) => {
+    if (j === step) b.setAttribute('aria-current', 'step'); else b.removeAttribute('aria-current');
+    b.classList.toggle('seen', seen.has(j) && j !== step);
+  });
+  prevBtn.disabled = step === 0;
+  nextStep.textContent = step === STEPS.length - 1 ? 'ابدأ من جديد' : 'التالي';
+  posEl.textContent = 'الخطوة ' + (step + 1) + ' من ' + STEPS.length;
+  if (!initial) {
+    navOl.children[step].firstChild.scrollIntoView({inline: 'center', block: 'nearest'});
+    window.scrollTo(0, 0);
+  }
+}
+prevBtn.addEventListener('click', () => go(step - 1));
+nextStep.addEventListener('click', () => go(step === STEPS.length - 1 ? 0 : step + 1));
+
+/* ---------- init ---------- */
+predict();
+hpredict();
+startQuiz();
+go(0, true);
+</script>
+
+</body></html>

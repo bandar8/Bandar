@@ -1,0 +1,471 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مختبر التوزيع الإلكتروني</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EEF2F7;--panel:#FFFFFF;--ink:#14213D;--muted:#5A6782;--line:#D5DCE8;
+  --s:#E5484D;--p:#0E9F86;--d:#4F63E8;--f:#D4860B;--gold:#F2B705;--gold-soft:#FFF4CC;
+  --s-soft:#FCE4E4;--p-soft:#D8F3EC;--d-soft:#E2E6FC;--f-soft:#FBEBCF;
+  --good:#12A150;--bad:#D93A3A;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1626;--panel:#172136;--ink:#E7EDF8;--muted:#9AA8C4;--line:#2A3757;
+    --s-soft:#3A1E26;--p-soft:#123430;--d-soft:#1E2550;--f-soft:#3A2A10;--gold-soft:#3A3212;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1626;--panel:#172136;--ink:#E7EDF8;--muted:#9AA8C4;--line:#2A3757;
+  --s-soft:#3A1E26;--p-soft:#123430;--d-soft:#1E2550;--f-soft:#3A2A10;--gold-soft:#3A3212;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"IBM Plex Sans Arabic",Tahoma,"Segoe UI",sans-serif;line-height:1.6}
+.wrap{max-width:1180px;margin:0 auto;padding:18px 14px 40px}
+.ltr{direction:ltr;unicode-bidi:isolate}
+button{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:14px}
+h1{margin:0;font-size:clamp(1.5rem,3.4vw,2.3rem);line-height:1.2;font-weight:700;letter-spacing:-.01em}
+@media(max-width:520px){h1,header.app h1,.hero h1{font-size:clamp(1.35rem,5.8vw,2rem)!important;line-height:1.3!important}p.lead,.hero .sub,header.app .sub{font-size:.92rem!important;line-height:1.7!important}}
+.sub-h{margin:4px 0 0;color:var(--muted);font-size:.95rem}
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.btn{border:1px solid var(--line);background:var(--panel);border-radius:10px;padding:7px 14px;cursor:pointer;font-weight:500}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+.search{border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:10px;padding:7px 12px;font:inherit;width:170px}
+input[type=range]{accent-color:var(--ink);width:180px}
+
+.ptable{overflow-x:auto;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:12px}
+.grid{direction:ltr;display:grid;grid-template-columns:repeat(18,minmax(28px,1fr));grid-template-rows:repeat(7,auto) 10px repeat(2,auto);gap:3px;min-width:580px}
+.el{aspect-ratio:1/1;border:1px solid;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;padding:0;line-height:1.05;transition:transform .15s}
+.el .z{font-size:.52rem;opacity:.75}
+.el .sy{font-weight:700;font-size:clamp(.7rem,1.3vw,.95rem)}
+.el:hover{transform:scale(1.12);position:relative;z-index:2}
+.bs{background:var(--s-soft);border-color:var(--s)}
+.bp{background:var(--p-soft);border-color:var(--p)}
+.bd{background:var(--d-soft);border-color:var(--d)}
+.bf{background:var(--f-soft);border-color:var(--f)}
+.el.sel{color:#fff;transform:scale(1.15);position:relative;z-index:3;box-shadow:0 0 0 3px var(--gold)}
+.el.sel.bs{background:var(--s)}.el.sel.bp{background:var(--p)}.el.sel.bd{background:var(--d)}.el.sel.bf{background:var(--f)}
+.flabel{grid-column:1/4;display:flex;align-items:center;justify-content:center;font-size:.72rem;color:var(--muted);direction:rtl}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-size:.85rem;color:var(--muted)}
+.legend span::before{content:"";display:inline-block;width:12px;height:12px;border-radius:3px;margin-left:6px;vertical-align:-1px;background:var(--c)}
+
+.stage{display:grid;grid-template-columns:1.1fr .9fr;gap:14px;margin-top:14px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px}
+.panel h2{margin:0 0 10px;font-size:1.05rem;font-weight:700;display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.span2{grid-column:1/-1}
+@media (max-width:860px){.stage{grid-template-columns:1fr}}
+
+.hero{display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center}
+.tile{width:132px;height:150px;border-radius:14px;border:3px solid;display:flex;flex-direction:column;justify-content:space-between;padding:10px 12px;direction:ltr}
+.tile .tz{font-weight:700;font-size:1.1rem}
+.tile .tsym{font-size:3.6rem;font-weight:700;line-height:1;text-align:center}
+.tile .tname{text-align:center;direction:rtl;font-size:.95rem}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 14px;font-size:.92rem}
+.facts div{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding-bottom:3px}
+.facts b{font-weight:700}
+.valbox{grid-column:1/-1;display:flex;align-items:center;gap:14px;background:var(--gold-soft);border:1.5px solid var(--gold);border-radius:12px;padding:10px 14px}
+.vnum{font-size:2.6rem;font-weight:700;line-height:1}
+.vdots{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.vdots i{width:12px;height:12px;border-radius:50%;background:var(--gold);box-shadow:0 0 0 2px rgba(0,0,0,.08)}
+.note{margin:4px 0 0;font-size:.84rem;color:var(--muted)}
+@media (max-width:480px){.hero{grid-template-columns:1fr}.tile{margin:auto}}
+
+.cfg{display:flex;flex-wrap:wrap;gap:6px;font-size:1.3rem;font-weight:500;align-items:center}
+.ss{padding:1px 8px;border-radius:7px;border:1.5px solid transparent}
+.ss.bs{background:var(--s-soft)}.ss.bp{background:var(--p-soft)}.ss.bd{background:var(--d-soft)}.ss.bf{background:var(--f-soft)}
+.ss.val{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-soft)}
+.ss sup{font-size:.62em;font-weight:700}
+.core{padding:1px 8px;border-radius:7px;background:var(--ink);color:var(--panel);font-weight:700}
+.row-l{font-size:.85rem;color:var(--muted);margin:14px 0 4px}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:9px;overflow:hidden;font-size:.8rem;font-weight:500}
+.seg button{border:0;background:transparent;padding:4px 10px;cursor:pointer}
+.seg button.on{background:var(--ink);color:var(--panel)}
+.exc{margin-top:12px;border:1.5px dashed var(--d);border-radius:12px;padding:10px 12px;font-size:.9rem;display:none}
+.exc.show{display:block}
+.exc .cfg{font-size:1rem}
+
+.orbs{display:flex;flex-wrap:wrap;gap:14px 16px;align-items:flex-end;min-height:60px}
+.sub{display:flex;flex-direction:column;align-items:center;gap:3px}
+.boxes{display:flex}
+.box{width:30px;height:36px;border:1.6px solid var(--ink);border-left-width:0;display:flex;align-items:center;justify-content:center;font-size:1.15rem;font-style:normal;font-weight:700}
+.box:first-child{border-left-width:1.6px}
+.box i{font-style:normal;line-height:1}
+.sub.bs .box i{color:var(--s)}.sub.bp .box i{color:var(--p)}.sub.bd .box i{color:var(--d)}.sub.bf .box i{color:var(--f)}
+.sub.val .box{border-color:var(--gold);background:var(--gold-soft)}
+.sub .lbl{font-size:.85rem;font-weight:700}
+.corebox{height:36px;display:flex;align-items:center;padding:0 10px;border-radius:8px;background:var(--ink);color:var(--panel);font-weight:700}
+.pop{display:inline-block;animation:pop .45s ease-out}
+@keyframes pop{0%{transform:translateY(-14px) scale(1.6);opacity:0}100%{transform:none;opacity:1}}
+.rules{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.rules span{font-size:.8rem;border:1px solid var(--line);border-radius:20px;padding:3px 10px;color:var(--muted)}
+.rules b{color:var(--ink)}
+.counter{font-size:.9rem;font-weight:700;color:var(--d);min-height:1.4em}
+
+.bohrwrap svg,.aufwrap svg,.lewiswrap svg{width:100%;height:auto;display:block}
+.bohrwrap{max-width:360px;margin:auto}
+.orbit{transform-box:fill-box;transform-origin:center;animation:spin linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.shells{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:8px;direction:ltr}
+.shells span{border:1px solid var(--line);border-radius:8px;padding:1px 9px;font-size:.85rem}
+.shells span.out{border-color:var(--gold);background:var(--gold-soft);font-weight:700}
+.aufwrap{max-width:320px;margin:auto}
+.cellp rect{animation:pulse .6s ease-out}
+@keyframes pulse{0%{stroke-width:5}100%{stroke-width:1.5}}
+.lewiswrap{max-width:220px;margin:auto}
+.muted{color:var(--muted);font-size:.9rem}
+
+.quiz .qhead{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;align-items:center}
+.score{display:flex;gap:12px;font-size:.9rem}
+.score b{font-size:1.1rem}
+.qtext{font-size:1.15rem;font-weight:700;margin:10px 0}
+.opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (max-width:520px){.opts{grid-template-columns:1fr}}
+.opt{border:1.5px solid var(--line);background:var(--bg);border-radius:12px;padding:10px;cursor:pointer;font-size:1.05rem;text-align:center}
+.opt:hover:not(:disabled){border-color:var(--ink)}
+.opt.right{border-color:var(--good);background:color-mix(in srgb,var(--good) 18%,transparent)}
+.opt.wrong{border-color:var(--bad);background:color-mix(in srgb,var(--bad) 15%,transparent)}
+.opt .cfg{font-size:1rem;justify-content:center}
+.fb{margin-top:10px;min-height:1.6em;font-size:.95rem}
+.qbtns{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:50;overflow:hidden}
+#confetti i{position:absolute;width:9px;height:14px;border-radius:2px;animation:fall 1.2s ease-out forwards}
+@keyframes fall{to{transform:translate(var(--dx),var(--dy)) rotate(540deg);opacity:0}}
+@media (prefers-reduced-motion:reduce){.orbit,.pop,.cellp rect,#confetti i{animation:none!important}.el,.el:hover{transition:none}}
+</style>
+<style id="portfolio-return-style">.portfolio-return{position:fixed;z-index:9999;top:14px;inset-inline-start:14px;display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border:1px solid rgba(20,121,91,.25);border-radius:999px;background:rgba(255,255,255,.92);box-shadow:0 6px 20px rgba(23,59,53,.12);color:#14795b;text-decoration:none;font:600 14px/1.2 Tahoma,Arial,sans-serif;backdrop-filter:blur(8px)}.portfolio-return:hover{background:#14795b;color:#fff}@media(max-width:600px){.portfolio-return{top:8px;inset-inline-start:8px;padding:7px 10px;font-size:12px}}</style></head>
+<body><a class="portfolio-return" href="../#gallery" aria-label="العودة إلى معرض التجارب">← العودة إلى المعرض</a>
+<div id="confetti"></div>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>مختبر التوزيع الإلكتروني</h1>
+      <p class="sub-h">اختر أي عنصر من الجدول، ثم شاهد كيف تستقر إلكتروناته في المستويات</p>
+    </div>
+    <div class="controls">
+      <button class="btn" id="prev" aria-label="العنصر السابق">‹ السابق</button>
+      <input type="range" id="slider" min="1" max="118" value="26" dir="ltr" aria-label="العدد الذري">
+      <button class="btn" id="next" aria-label="العنصر التالي">التالي ›</button>
+      <input class="search" id="search" placeholder="ابحث: Fe أو حديد أو 26" aria-label="بحث عن عنصر">
+    </div>
+  </header>
+
+  <section class="ptable" aria-label="الجدول الدوري">
+    <div class="grid" id="grid"></div>
+    <div class="legend">
+      <span style="--c:var(--s)">الفئة s</span>
+      <span style="--c:var(--p)">الفئة p</span>
+      <span style="--c:var(--d)">الفئة d (الانتقالية)</span>
+      <span style="--c:var(--f)">الفئة f (الانتقالية الداخلية)</span>
+      <span style="--c:var(--gold)">إلكترونات التكافؤ</span>
+    </div>
+  </section>
+
+  <div class="stage">
+    <section class="panel">
+      <div class="hero" id="hero"></div>
+    </section>
+
+    <section class="panel">
+      <h2>نموذج بور (المستويات الرئيسية)</h2>
+      <div class="bohrwrap" id="bohr"></div>
+      <div class="shells" id="shells"></div>
+    </section>
+
+    <section class="panel span2">
+      <h2>الترميز الإلكتروني
+        <span class="seg" id="orderSeg"><button data-v="fill" class="on">ترتيب الملء</button><button data-v="shell">حسب المستويات</button></span>
+      </h2>
+      <div class="row-l">التوزيع الكامل</div>
+      <div class="cfg ltr" id="cfgFull"></div>
+      <div class="row-l">ترميز الغاز النبيل (المختصر)</div>
+      <div class="cfg ltr" id="cfgNoble"></div>
+      <div class="exc" id="exc"></div>
+    </section>
+
+    <section class="panel span2">
+      <h2>التمثيل بالمربعات (رسم الأوربيتالات)
+        <span style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+          <span class="seg" id="orbSeg"><button data-v="full">كامل</button><button data-v="core">مختصر</button></span>
+          <button class="btn primary" id="play">▶ شاهد الملء خطوة بخطوة</button>
+        </span>
+      </h2>
+      <div class="counter" id="counter"></div>
+      <div class="orbs ltr" id="orbs"></div>
+      <div class="rules">
+        <span><b>مبدأ أوفباو:</b> تُملأ المستويات الأقل طاقة أولاً</span>
+        <span><b>مبدأ باولي:</b> إلكترونان على الأكثر في الأوربيتال بغزلين متعاكسين</span>
+        <span><b>قاعدة هوند:</b> إلكترونات منفردة في الأوربيتالات المتساوية قبل الازدواج</span>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>مخطط أوفباو (اتبع الأسهم القطرية)</h2>
+      <div class="aufwrap" id="auf"></div>
+    </section>
+
+    <section class="panel">
+      <h2>تمثيل لويس النقطي</h2>
+      <div class="lewiswrap" id="lewis"></div>
+    </section>
+
+    <section class="panel span2 quiz">
+      <div class="qhead">
+        <h2 style="margin:0">تحدَّ نفسك</h2>
+        <div class="score"><span>النقاط: <b id="sc">0</b>/<b id="tot">0</b></span><span>السلسلة: <b id="stk">0</b> 🔥</span></div>
+      </div>
+      <div class="qtext" id="qtext"></div>
+      <div class="opts" id="opts"></div>
+      <div class="fb" id="fb"></div>
+      <div class="qbtns">
+        <button class="btn primary" id="nextQ">سؤال جديد</button>
+        <button class="btn" id="openQ">افتح العنصر في المختبر</button>
+      </div>
+    </section>
+  </div>
+</div>
+
+<script>
+const SYM="H He Li Be B C N O F Ne Na Mg Al Si P S Cl Ar K Ca Sc Ti V Cr Mn Fe Co Ni Cu Zn Ga Ge As Se Br Kr Rb Sr Y Zr Nb Mo Tc Ru Rh Pd Ag Cd In Sn Sb Te I Xe Cs Ba La Ce Pr Nd Pm Sm Eu Gd Tb Dy Ho Er Tm Yb Lu Hf Ta W Re Os Ir Pt Au Hg Tl Pb Bi Po At Rn Fr Ra Ac Th Pa U Np Pu Am Cm Bk Cf Es Fm Md No Lr Rf Db Sg Bh Hs Mt Ds Rg Cn Nh Fl Mc Lv Ts Og".split(" ");
+const NAMES=("هيدروجين|هيليوم|ليثيوم|بيريليوم|بورون|كربون|نيتروجين|أكسجين|فلور|نيون|"+
+"صوديوم|مغنيسيوم|ألومنيوم|سيليكون|فوسفور|كبريت|كلور|أرجون|بوتاسيوم|كالسيوم|"+
+"سكانديوم|تيتانيوم|فاناديوم|كروم|منجنيز|حديد|كوبلت|نيكل|نحاس|خارصين|"+
+"جاليوم|جرمانيوم|زرنيخ|سيلينيوم|بروم|كريبتون|روبيديوم|سترونشيوم|إتريوم|زركونيوم|"+
+"نيوبيوم|موليبدنوم|تكنيشيوم|روثينيوم|روديوم|بلاديوم|فضة|كادميوم|إنديوم|قصدير|"+
+"أنتيمون|تيلوريوم|يود|زينون|سيزيوم|باريوم|لانثانوم|سيريوم|براسيوديميوم|نيوديميوم|"+
+"بروميثيوم|ساماريوم|يوروبيوم|جادولينيوم|تيربيوم|ديسبروسيوم|هولميوم|إربيوم|ثوليوم|إتربيوم|"+
+"لوتيشيوم|هافنيوم|تنتالوم|تنجستن|رينيوم|أوزميوم|إريديوم|بلاتين|ذهب|زئبق|"+
+"ثاليوم|رصاص|بزموت|بولونيوم|أستاتين|رادون|فرانسيوم|راديوم|أكتينيوم|ثوريوم|"+
+"بروتكتينيوم|يورانيوم|نبتونيوم|بلوتونيوم|أمريسيوم|كوريوم|بركيليوم|كاليفورنيوم|أينشتاينيوم|فيرميوم|"+
+"مندليفيوم|نوبليوم|لورنسيوم|رذرفورديوم|دوبنيوم|سيبورجيوم|بوريوم|هاسيوم|مايتنريوم|دارمشتاتيوم|"+
+"رونتجينيوم|كوبرنيسيوم|نيهونيوم|فليروفيوم|موسكوفيوم|ليفرموريوم|تينيسين|أوجانيسون").split("|");
+
+const ORDER=[[1,0],[2,0],[2,1],[3,0],[3,1],[4,0],[3,2],[4,1],[5,0],[4,2],[5,1],[6,0],[4,3],[5,2],[6,1],[7,0],[5,3],[6,2],[7,1]];
+const LL="spdf",CAP=[2,6,10,14];
+const KEYS=ORDER.map(([n,l])=>n+LL[l]);
+const EXC={24:{"4s":1,"3d":5},29:{"4s":1,"3d":10},41:{"5s":1,"4d":4},42:{"5s":1,"4d":5},44:{"5s":1,"4d":7},45:{"5s":1,"4d":8},46:{"5s":0,"4d":10},47:{"5s":1,"4d":10},
+57:{"4f":0,"5d":1},58:{"4f":1,"5d":1},64:{"4f":7,"5d":1},78:{"6s":1,"5d":9},79:{"6s":1,"5d":10},
+89:{"5f":0,"6d":1},90:{"5f":0,"6d":2},91:{"5f":2,"6d":1},92:{"5f":3,"6d":1},93:{"5f":4,"6d":1},96:{"5f":7,"6d":1},103:{"6d":0,"7p":1}};
+const CORES=[[86,"Rn"],[54,"Xe"],[36,"Kr"],[18,"Ar"],[10,"Ne"],[2,"He"]];
+const SHELL="KLMNOPQ";
+
+function aufbauMap(Z){const m={};let r=Z,last=null;for(const [n,l] of ORDER){if(r<=0)break;const c=Math.min(CAP[l],r);m[n+LL[l]]=c;r-=c;last=n+LL[l];}return {m,last};}
+function actualMap(Z){const a={...aufbauMap(Z).m};if(EXC[Z])Object.assign(a,EXC[Z]);return a;}
+function listOf(map,byShell){const a=ORDER.map(([n,l])=>({n,l,k:n+LL[l],c:map[n+LL[l]]||0})).filter(x=>x.c>0);if(byShell)a.sort((x,y)=>x.n-y.n||x.l-y.l);return a;}
+function coreOf(Z){for(const [cz,s] of CORES)if(cz<Z)return {cz,s};return null;}
+function subtractCore(map,cz){const cm=aufbauMap(cz).m,r={};for(const k in map){const v=map[k]-(cm[k]||0);if(v>0)r[k]=v;}return r;}
+
+function pos(Z){
+  if(Z===1)return {period:1,group:1};if(Z===2)return {period:1,group:18};
+  if(Z<=10)return {period:2,group:Z<=4?Z-2:Z+8};
+  if(Z<=18)return {period:3,group:Z<=12?Z-10:Z};
+  if(Z<=36)return {period:4,group:Z-18};
+  if(Z<=54)return {period:5,group:Z-36};
+  if(Z<=86){if(Z<=56)return {period:6,group:Z-54};if(Z<=70)return {period:6,group:null,frow:0,fcol:Z-57};return {period:6,group:Z-68};}
+  if(Z<=88)return {period:7,group:Z-86};if(Z<=102)return {period:7,group:null,frow:1,fcol:Z-89};return {period:7,group:Z-100};
+}
+function info(Z){
+  const p=pos(Z),{last}=aufbauMap(Z),block=last.slice(-1),P=p.period;
+  const vk=block==="s"?[P+"s"]:block==="p"?[P+"s",P+"p"]:block==="d"?[P+"s",(P-1)+"d"]:[P+"s"];
+  const map=actualMap(Z);const val=vk.reduce((a,k)=>a+(map[k]||0),0);
+  return {Z,sym:SYM[Z-1],name:NAMES[Z-1],...p,block,vk,val,map,last,exc:!!EXC[Z]};
+}
+const BLK={s:"bs",p:"bp",d:"bd",f:"bf"};
+
+function ssHTML(list,vk){return list.map(x=>`<span class="ss ${BLK[LL[x.l]]}${vk&&vk.includes(x.k)?" val":""}">${x.k}<sup>${x.c}</sup></span>`).join("");}
+function nobleHTML(Z,map,byShell,vk){const c=coreOf(Z);return (c?`<span class="core">[${c.s}]</span>`:"")+ssHTML(listOf(c?subtractCore(map,c.cz):map,byShell),vk);}
+
+function orbHTML(map,o){
+  let h="",m=map;
+  if(o.core){h+=`<div class="sub"><div class="corebox">[${o.core.s}]</div><span class="lbl">اللب</span></div>`;m=subtractCore(map,o.core.cz);}
+  for(const x of listOf(m,false)){
+    const n=2*x.l+1;let newIdx=-1,newDn=false;
+    if(o.newKey===x.k){if(x.c<=n)newIdx=x.c-1;else{newIdx=x.c-n-1;newDn=true;}}
+    let b="";for(let i=0;i<n;i++){const up=x.c>i,dn=x.c>n+i;
+      b+=`<span class="box">${up?`<i class="${newIdx===i&&!newDn?"pop":""}">↑</i>`:""}${dn?`<i class="${newIdx===i&&newDn?"pop":""}">↓</i>`:""}</span>`;}
+    h+=`<div class="sub ${BLK[LL[x.l]]}${o.vk&&o.vk.includes(x.k)?" val":""}"><div class="boxes">${b}</div><span class="lbl">${x.k}</span></div>`;
+  }
+  return h;
+}
+
+function bohrSVG(map,I){
+  const sh={};for(const k in map){const n=+k[0];sh[n]=(sh[n]||0)+map[k];}
+  const ns=Object.keys(sh).map(Number).filter(n=>sh[n]>0),maxN=Math.max(1,...ns),outer=Math.max(...ns);
+  const step=Math.min(36,118/maxN);let g="";
+  for(const n of ns){
+    const r=26+n*step,c=sh[n],er=c>18?2.6:c>8?3.5:4.6,isOut=I&&n===outer;
+    let e="";for(let i=0;i<c;i++){const a=2*Math.PI*i/c-Math.PI/2;e+=`<circle cx="${(r*Math.cos(a)).toFixed(1)}" cy="${(r*Math.sin(a)).toFixed(1)}" r="${er}" style="fill:${isOut?"var(--gold)":"var(--d)"};stroke:var(--panel);stroke-width:1"/>`;}
+    g+=`<g class="orbit" style="animation-duration:${8+n*5}s;animation-direction:${n%2?"normal":"reverse"}"><circle r="${r}" style="fill:none;stroke:${isOut?"var(--gold)":"var(--line)"};stroke-width:${isOut?2:1.3}" ${isOut?'stroke-dasharray="5 4"':""}/>${e}</g>`;
+  }
+  const Z=I?I.Z:Object.values(map).reduce((a,b)=>a+b,0);
+  return `<svg viewBox="-160 -160 320 320" role="img" aria-label="نموذج بور">${g}<circle r="22" style="fill:var(--s)"/><text y="-2" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:14px">${I?I.sym:""}</text><text y="13" text-anchor="middle" style="fill:#fff;font-size:10px" direction="ltr">${I?"+"+I.Z:Z+" e⁻"}</text></svg>`;
+}
+function shellsHTML(map,I){
+  const sh={};for(const k in map){const n=+k[0];sh[n]=(sh[n]||0)+map[k];}
+  const ns=Object.keys(sh).map(Number).filter(n=>sh[n]>0),outer=Math.max(...ns);
+  return ns.map(n=>`<span class="${I&&n===outer?"out":""}">${SHELL[n-1]} (n=${n}): ${sh[n]}</span>`).join("");
+}
+
+function aufbauSVG(map,newKey){
+  const cx=l=>34+l*66,cy=n=>22+(n-1)*38;let lines="",cells="";const gr={};
+  ORDER.forEach(([n,l])=>{(gr[n+l]=gr[n+l]||[]).push([n,l]);});
+  let ux=-66,uy=38;const len=Math.hypot(ux,uy);ux/=len;uy/=len;
+  for(const s in gr){const g=gr[s],[n1,l1]=g[0],[n2,l2]=g[g.length-1];
+    lines+=`<line x1="${cx(l1)-ux*30}" y1="${cy(n1)-uy*30}" x2="${cx(l2)+ux*28}" y2="${cy(n2)+uy*28}" style="stroke:var(--muted);stroke-width:1.6;opacity:.55" marker-end="url(#ah)"/>`;}
+  for(const [n,l] of ORDER){const k=n+LL[l],c=map[k]||0,fr=c/CAP[l],col=`var(--${LL[l]})`;
+    cells+=`<g class="${k===newKey?"cellp":""}"><rect x="${cx(l)-23}" y="${cy(n)-13}" width="46" height="26" rx="7" style="fill:${col};fill-opacity:${c?0.2+0.8*fr:0.06};stroke:${col};stroke-width:1.5"/><text x="${cx(l)}" y="${cy(n)+5}" text-anchor="middle" style="font-size:13px;font-weight:700;fill:${fr>0.55?"#fff":"var(--ink)"}">${k}${c?`<tspan dy="-6" style="font-size:9px">${c}</tspan>`:""}</text></g>`;}
+  return `<svg viewBox="0 0 262 280" direction="ltr" role="img" aria-label="مخطط أوفباو"><defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" style="fill:var(--muted)"/></marker></defs>${lines}${cells}</svg>`;
+}
+
+function lewisHTML(I){
+  if(I.block!=="s"&&I.block!=="p")return `<p class="muted">يُستخدم تمثيل لويس النقطي عادةً لعناصر المجموعات الرئيسية (الفئتين s و p). ${I.name} من الفئة ${I.block}، لذا يُكتفى بتوزيعه الإلكتروني.</p>`;
+  const sides=[0,0,0,0];if(I.Z===2)sides[0]=2;else for(let i=0;i<I.val;i++)sides[i%4]++;
+  const cx=90,cy=75,w=I.sym.length>1?38:26;let d="";
+  const P=[[cx,cy-36,1,0],[cx+w,cy,0,1],[cx,cy+36,1,0],[cx-w,cy,0,1]];
+  sides.forEach((c,i)=>{const [x,y,hx,hy]=P[i];const offs=c===1?[0]:c===2?[-7,7]:[];offs.forEach(o=>{d+=`<circle cx="${x+hx*o}" cy="${y+hy*o}" r="5" style="fill:var(--gold);stroke:var(--ink);stroke-width:1"/>`;});});
+  return `<svg viewBox="0 0 180 150"><text x="${cx}" y="${cy+15}" text-anchor="middle" style="font-size:44px;font-weight:700;fill:var(--ink)">${I.sym}</text>${d}</svg><p class="muted" style="text-align:center">${I.val} ${I.val===1?"إلكترون تكافؤ":"إلكترونات تكافؤ"} حول رمز العنصر</p>`;
+}
+
+function excMsg(Z){
+  if(Z===24||Z===42)return "المستوى الفرعي d نصف الممتلئ (d⁵) أكثر استقراراً، فينتقل إلكترون من s إلى d.";
+  if(Z===29||Z===47||Z===79)return "المستوى الفرعي d الممتلئ (d¹⁰) أكثر استقراراً، فينتقل إلكترون من s إلى d.";
+  if(Z===46)return "ينتقل إلكترونا 5s إلى 4d ليصبح ممتلئاً تماماً (4d¹⁰).";
+  return "التوزيع الفعلي مُقاس تجريبياً ويختلف عن المتوقع بسبب تقارب طاقات المستويات الفرعية.";
+}
+
+const $=id=>document.getElementById(id);
+let Z=26,orderMode="fill",orbMode=null,timer=null;
+
+// build table
+(function(){const g=$("grid");let h="";
+  for(let z=1;z<=118;z++){const p=pos(z),b=aufbauMap(z).last.slice(-1);
+    const st=p.frow!==undefined?`grid-row:${9+p.frow};grid-column:${4+p.fcol}`:`grid-row:${p.period};grid-column:${p.group}`;
+    h+=`<button class="el ${BLK[b]}" data-z="${z}" style="${st}" title="${NAMES[z-1]}" aria-label="${NAMES[z-1]} ${z}"><span class="z">${z}</span><span class="sy">${SYM[z-1]}</span></button>`;}
+  h+=`<div class="flabel" style="grid-row:9">اللانثانيدات</div><div class="flabel" style="grid-row:10">الأكتينيدات</div>`;
+  g.innerHTML=h;g.addEventListener("click",e=>{const b=e.target.closest(".el");if(b)select(+b.dataset.z);});
+})();
+
+function select(z){stop();Z=Math.max(1,Math.min(118,z));render();}
+function stop(){if(timer){clearInterval(timer);timer=null;}$("play").textContent="▶ شاهد الملء خطوة بخطوة";$("counter").textContent="";}
+
+function render(){
+  const I=info(Z),byShell=orderMode==="shell";
+  document.querySelectorAll(".el").forEach(b=>b.classList.toggle("sel",+b.dataset.z===Z));
+  $("slider").value=Z;
+  const grp=I.group?I.group:(I.frow===0?"اللانثانيدات":"الأكتينيدات");
+  const note=I.block==="d"?"في العناصر الانتقالية تُعد إلكترونات ns و (n−1)d إلكترونات تكافؤ."
+    :I.block==="f"?"المستوى الخارجي فيه إلكترونان، وحالة التأكسد الشائعة لهذه العناصر +3."
+    :`إلكترونات المستوى الخارجي n = ${I.period}.`;
+  $("hero").innerHTML=`
+    <div class="tile" style="border-color:var(--${I.block});background:var(--${I.block}-soft)"><span class="tz">${I.Z}</span><span class="tsym">${I.sym}</span><span class="tname">${I.name}</span></div>
+    <div class="facts">
+      <div><span>العدد الذري</span><b>${I.Z}</b></div>
+      <div><span>عدد الإلكترونات</span><b>${I.Z}</b></div>
+      <div><span>الدورة</span><b>${I.period}</b></div>
+      <div><span>المجموعة</span><b>${grp}</b></div>
+      <div><span>الفئة</span><b class="ltr">${I.block}</b></div>
+      <div><span>آخر مستوى فرعي</span><b class="ltr">${I.last}</b></div>
+    </div>
+    <div class="valbox">
+      <div class="vnum">${I.val}</div>
+      <div><b>${I.block==="f"?"إلكترونات المستوى الخارجي":"إلكترونات التكافؤ"}</b>
+        <div class="vdots">${"<i></i>".repeat(I.val)}</div>
+        <p class="note">${note}</p></div>
+    </div>`;
+  $("cfgFull").innerHTML=ssHTML(listOf(I.map,byShell),I.vk);
+  $("cfgNoble").innerHTML=nobleHTML(Z,I.map,byShell,I.vk);
+  const ex=$("exc");
+  if(I.exc){ex.innerHTML=`<b>حالة شاذة ⚡</b> ${excMsg(Z)}<div class="row-l">المتوقع حسب مبدأ أوفباو</div><div class="cfg ltr">${nobleHTML(Z,aufbauMap(Z).m,byShell)}</div><div class="row-l">التوزيع الفعلي</div><div class="cfg ltr">${nobleHTML(Z,I.map,byShell,I.vk)}</div>`;ex.classList.add("show");}
+  else if(Z>=104){ex.innerHTML="<b>ملاحظة:</b> العناصر فائقة الثقل قصيرة العمر جداً، وتوزيعها الإلكتروني متوقَّع نظرياً.";ex.classList.add("show");}
+  else ex.classList.remove("show");
+  const mode=orbMode||(Z>18?"core":"full");
+  document.querySelectorAll("#orbSeg button").forEach(b=>b.classList.toggle("on",b.dataset.v===mode));
+  $("orbs").innerHTML=orbHTML(I.map,{core:mode==="core"?coreOf(Z):null,vk:I.vk});
+  $("bohr").innerHTML=bohrSVG(I.map,I);$("shells").innerHTML=shellsHTML(I.map,I);
+  $("auf").innerHTML=aufbauSVG(I.map,null);
+  $("lewis").innerHTML=lewisHTML(I);
+}
+
+function renderStep(map,newKey,k,isExc){
+  $("cfgFull").innerHTML=ssHTML(listOf(map,false),null);
+  $("orbs").innerHTML=orbHTML(map,{core:null,vk:null,newKey});
+  $("bohr").innerHTML=bohrSVG(map,null);$("shells").innerHTML=shellsHTML(map,null);
+  $("auf").innerHTML=aufbauSVG(map,newKey);
+  $("counter").textContent=isExc?"⚡ إعادة ترتيب: "+excMsg(Z):`الإلكترون ${k} من ${Z} يدخل المستوى ${newKey}`;
+}
+function play(){
+  if(timer){stop();render();return;}
+  const steps=[];for(let k=1;k<=Z;k++){const a=aufbauMap(k);steps.push({m:a.m,nk:a.last,k});}
+  if(EXC[Z])steps.push({m:actualMap(Z),nk:null,k:Z,exc:true});
+  const dt=Math.max(45,Math.min(450,4500/Z));let i=0;
+  $("play").textContent="■ إيقاف";$("orbs").scrollIntoView({behavior:"smooth",block:"center"});
+  timer=setInterval(()=>{const s=steps[i++];renderStep(s.m,s.nk,s.k,s.exc);
+    if(i>=steps.length){clearInterval(timer);timer=null;setTimeout(()=>{if(!timer){const msg=$("counter").textContent;render();$("play").textContent="▶ شاهد الملء خطوة بخطوة";$("counter").textContent=EXC[Z]?msg:`اكتمل التوزيع: ${Z} إلكتروناً ✓`;}},s.exc?1600:dt+200);}
+  },dt);
+}
+
+$("play").onclick=play;
+$("prev").onclick=()=>select(Z-1);$("next").onclick=()=>select(Z+1);
+$("slider").oninput=e=>select(+e.target.value);
+document.querySelectorAll("#orderSeg button").forEach(b=>b.onclick=()=>{orderMode=b.dataset.v;document.querySelectorAll("#orderSeg button").forEach(x=>x.classList.toggle("on",x===b));stop();render();});
+document.querySelectorAll("#orbSeg button").forEach(b=>b.onclick=()=>{orbMode=b.dataset.v;stop();render();});
+const norm=s=>s.trim().replace(/[أإآ]/g,"ا").replace(/ة/g,"ه").replace(/^ال/,"");
+$("search").addEventListener("keydown",e=>{if(e.key!=="Enter")return;const q=e.target.value.trim();if(!q)return;
+  let z=+q;if(!z){z=SYM.findIndex(s=>s.toLowerCase()===q.toLowerCase())+1;}
+  if(!z){const nq=norm(q);z=NAMES.findIndex(n=>norm(n)===nq)+1||NAMES.findIndex(n=>norm(n).startsWith(nq))+1;}
+  if(z>=1&&z<=118){select(z);e.target.value="";}else{e.target.value="";e.target.placeholder="لم يُعثر عليه، جرّب رمزاً مثل Na";}});
+document.addEventListener("keydown",e=>{if(e.target.tagName==="INPUT")return;if(e.key==="ArrowRight")select(Z+1);if(e.key==="ArrowLeft")select(Z-1);});
+
+// quiz
+let score=0,total=0,streak=0,Q=null;
+const rint=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+function newQ(){
+  const t=rint(0,2);let z,I,q,opts,ans,why;
+  if(t===0){do{z=rint(1,86);I=info(z);}while(I.block!=="s"&&I.block!=="p");
+    const s=new Set([I.val]);while(s.size<4)s.add(rint(1,8));opts=shuffle([...s]).map(v=>({h:String(v),ok:v===I.val}));
+    q=`كم عدد إلكترونات التكافؤ في ذرة ${I.name} (${I.sym})؟`;why=`<div class="cfg ltr" style="font-size:1rem">${nobleHTML(z,I.map,false,I.vk)}</div>المستوى الخارجي n = ${I.period} يحتوي ${I.val}.`;}
+  else if(t===1){do{z=rint(3,86);}while(EXC[z]);I=info(z);
+    const idx=KEYS.indexOf(I.last),s=new Set([I.last]);while(s.size<4)s.add(KEYS[Math.max(0,Math.min(15,idx+rint(-3,3)))]);
+    opts=shuffle([...s]).map(v=>({h:`<span class="ltr">${v}</span>`,ok:v===I.last}));
+    q=`ما آخر مستوى فرعي يُملأ في ذرة ${I.name} (${I.sym})؟`;why=`<div class="cfg ltr" style="font-size:1rem">${ssHTML(listOf(I.map,false),[I.last])}</div>`;}
+  else{do{z=rint(5,54);}while(EXC[z]||EXC[z+1]||EXC[z-1]);I=info(z);
+    const cands=[z,z-1,z+1,z-2,z+2].filter(x=>x>=1&&x<=118&&!EXC[x]);const seen=new Set(),o=[];
+    for(const c of cands){const h=nobleHTML(c,actualMap(c),false);if(!seen.has(h)){seen.add(h);o.push({h:`<div class="cfg ltr">${h}</div>`,ok:c===z});}if(o.length===4)break;}
+    opts=shuffle(o);q=`أي مما يلي هو ترميز الغاز النبيل لذرة ${I.name} (Z = ${z})؟`;why=`التوزيع الصحيح لعدد ${z} إلكتروناً.`;}
+  Q={z,why};$("qtext").textContent=q;$("fb").innerHTML="";
+  $("opts").innerHTML=opts.map((o,i)=>`<button class="opt" data-ok="${o.ok}">${o.h}</button>`).join("");
+  document.querySelectorAll(".opt").forEach(b=>b.onclick=()=>answer(b));
+}
+function answer(b){
+  const ok=b.dataset.ok==="true";total++;
+  document.querySelectorAll(".opt").forEach(x=>{x.disabled=true;if(x.dataset.ok==="true")x.classList.add("right");});
+  if(ok){score++;streak++;const r=b.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,streak%5===0?60:26);
+    $("fb").innerHTML=`<b style="color:var(--good)">${streak%5===0?"سلسلة رائعة! "+streak+" إجابات متتالية 🏆":"إجابة صحيحة ✓"}</b> ${Q.why}`;}
+  else{streak=0;b.classList.add("wrong");$("fb").innerHTML=`<b style="color:var(--bad)">ليست صحيحة.</b> ${Q.why}`;}
+  $("sc").textContent=score;$("tot").textContent=total;$("stk").textContent=streak;
+}
+function burst(x,y,n){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches)return;
+  const box=$("confetti"),cols=["var(--s)","var(--p)","var(--d)","var(--f)","var(--gold)"];
+  for(let i=0;i<n;i++){const e=document.createElement("i");e.style.left=x+"px";e.style.top=y+"px";e.style.background=cols[i%5];
+    e.style.setProperty("--dx",(Math.random()*320-160)+"px");e.style.setProperty("--dy",(Math.random()*260-200)+"px");box.appendChild(e);setTimeout(()=>e.remove(),1300);}
+}
+$("nextQ").onclick=newQ;
+$("openQ").onclick=()=>{if(Q){select(Q.z);window.scrollTo({top:0,behavior:"smooth"});}};
+
+render();newQ();
+</script>
+</body>
+</html>

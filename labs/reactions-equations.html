@@ -1,0 +1,616 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style id="portfolio-return-style">.portfolio-return{position:fixed;z-index:9999;top:14px;inset-inline-start:14px;display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border:1px solid rgba(20,121,91,.25);border-radius:999px;background:rgba(255,255,255,.92);box-shadow:0 6px 20px rgba(23,59,53,.12);color:#14795b;text-decoration:none;font:600 14px/1.2 Tahoma,Arial,sans-serif;backdrop-filter:blur(8px)}.portfolio-return:hover{background:#14795b;color:#fff}@media(max-width:600px){.portfolio-return{top:8px;inset-inline-start:8px;padding:7px 10px;font-size:12px}}</style></head><body><a class="portfolio-return" href="../#gallery" aria-label="العودة إلى معرض التجارب">← العودة إلى المعرض</a>
+<title>التفاعلات والمعادلات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Reem+Kufi:wght@500;600;700&display=swap">
+<style>
+/* Layout: lab notebook — one reading column, numbered lesson stations, a sticky station rail on top */
+:root{
+  --bg:#F1F5F7; --surface:#FFFFFF; --sunk:#E7EDF1; --ink:#13222C; --muted:#56666F; --line:#D3DCE2;
+  --accent:#0B7A75; --accent-ink:#FFFFFF; --accent-soft:#DCF0EE; --spark:#C98A0C; --spark-soft:#FBF0D6;
+  --good:#1E8A4C; --good-soft:#DFF3E7; --bad:#BE3D36; --bad-soft:#FBE4E2;
+  --glass:#C9D6DD; --liq:#D7EAF3; --liq-blue:#3B82C4; --ppt:#E8C21E; --fire:#F59E0B;
+  --el-H:#F4F6F8; --el-O:#E0463C; --el-Cl:#3FAE5A; --el-Fe:#B8642B; --el-Na:#8B5CF6; --el-Cu:#D17A3A; --el-C:#3A3F44; --el-Al:#8FA6B8; --el-K:#7C4DCC;
+  --f-display:"Reem Kufi","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans Arabic","Segoe UI",Tahoma,system-ui,sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0D151A; --surface:#14212A; --sunk:#0F1A20; --ink:#E5EDF1; --muted:#95A6AF; --line:#25363F;
+  --accent:#3EC2B8; --accent-ink:#06211F; --accent-soft:#11302D; --spark:#F0C04A; --spark-soft:#2E2610;
+  --good:#52C985; --good-soft:#12301F; --bad:#F27B72; --bad-soft:#3A1816;
+  --glass:#3A4D58; --liq:#1C3644; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0D151A; --surface:#14212A; --sunk:#0F1A20; --ink:#E5EDF1; --muted:#95A6AF; --line:#25363F;
+  --accent:#3EC2B8; --accent-ink:#06211F; --accent-soft:#11302D; --spark:#F0C04A; --spark-soft:#2E2610;
+  --good:#52C985; --good-soft:#12301F; --bad:#F27B72; --bad-soft:#3A1816;
+  --glass:#3A4D58; --liq:#1C3644; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.75;direction:rtl}
+.wrap{max-width:900px;margin:0 auto;padding-inline:16px;padding-block:0 120px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.3;margin:0}
+p{margin:0}
+.f{direction:ltr;unicode-bidi:isolate;display:inline-block;font-weight:600;white-space:nowrap}
+.f sub{font-size:.7em}
+button{font-family:inherit;font-size:inherit;color:inherit;cursor:pointer}
+button:focus-visible,.tok:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.eyebrow{font-size:.78rem;letter-spacing:.04em;color:var(--accent);font-weight:700}
+
+/* header */
+header.hero{padding-block:18px 14px;display:grid;gap:10px;border-bottom:1px solid var(--line)}
+.crumbs{display:flex;flex-wrap:wrap;gap:6px 10px;font-size:.85rem;color:var(--muted)}
+.crumbs b{color:var(--ink);font-weight:600}
+.hero h1{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:700}
+@media(max-width:520px){h1,header.app h1,.hero h1{font-size:clamp(1.35rem,5.8vw,2rem)!important;line-height:1.3!important}p.lead,.hero .sub,header.app .sub{font-size:.92rem!important;line-height:1.7!important}}
+.hero h1 span{color:var(--accent)}
+.idea{border-inline-start:4px solid var(--spark);background:var(--spark-soft);padding:12px 16px;border-radius:0 var(--r) var(--r) 0;font-weight:500}
+.idea b{color:var(--spark);font-family:var(--f-display)}
+.hero-eq{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:16px;display:grid;gap:8px;justify-items:center}
+.hero-eq .big{font-size:clamp(1.3rem,5vw,2rem)}
+.hero-eq small{color:var(--muted)}
+
+/* progress + pager */
+.prog{display:grid;gap:8px;padding-block:4px 0}
+.prog-meta{display:flex;justify-content:space-between;gap:12px;font-size:.9rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.prog-meta b{color:var(--ink);font-weight:600}
+.prog-bar{height:6px;background:var(--sunk);border-radius:6px;overflow:hidden}
+.prog-bar i{display:block;height:100%;width:12.5%;background:var(--accent);transition:width .35s ease}
+.pager{position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--surface);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px))}
+.pager-in{max-width:900px;margin:0 auto;display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center}
+.pager .btn{min-width:84px}
+.pager .btn:disabled{opacity:.4;cursor:default}
+.pager-in{display:flex;justify-content:space-between}
+.topics{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:var(--bg);margin-inline:-16px;padding:8px 16px;border-bottom:1px solid var(--line);display:flex;gap:6px;overflow-x:auto;scrollbar-width:none}
+.topics::-webkit-scrollbar{display:none}
+.topics button{flex:none;display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:5px 12px 5px 6px;font-size:.88rem;white-space:nowrap}
+.topics button i{font-style:normal;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:var(--sunk);font-size:.75rem;font-weight:700;color:var(--ink)}
+.topics button.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+.topics button.on i{background:var(--accent-ink);color:var(--accent)}
+
+section.st{padding-block:22px 8px;display:grid;gap:18px;animation:pagein .3s ease}
+@keyframes pagein{from{opacity:.35;transform:translateY(8px)}to{opacity:1;transform:none}}
+.st-head{display:flex;gap:12px;align-items:baseline}
+.st-num{font-family:var(--f-display);font-size:1rem;color:var(--accent-ink);background:var(--accent);min-width:2.2em;text-align:center;border-radius:8px;padding:2px 6px;direction:ltr}
+.st-head h2{font-size:clamp(1.4rem,4.4vw,1.9rem)}
+.lead{color:var(--muted);max-width:65ch}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+
+/* objectives */
+.obj{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px}
+.obj ul{margin:0;padding-inline-start:20px;display:grid;gap:6px}
+.vocab{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--sunk);border-radius:999px;padding:4px 12px;font-size:.92rem}
+.chip.rev{border-style:dashed}
+.defs{display:grid;gap:10px}
+.def{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;align-items:start}
+.def dt{font-weight:700;color:var(--accent)}
+.def dd{margin:0}
+
+/* evidence */
+.ev-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:640px){.ev-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ev{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px;display:grid;gap:8px;text-align:center}
+.ev h3{font-size:1.02rem}
+.ev p{font-size:.86rem;color:var(--muted);line-height:1.6}
+.ev button{border:1px solid var(--accent);background:transparent;color:var(--accent);border-radius:999px;padding:4px 12px;font-size:.85rem;font-weight:600;justify-self:center}
+.ev button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.stage{height:120px;position:relative;display:flex;align-items:flex-end;justify-content:center}
+.beaker{width:78px;height:96px;border:3px solid var(--glass);border-top:none;border-radius:0 0 14px 14px;position:relative;overflow:hidden}
+.beaker::before{content:"";position:absolute;top:0;left:-7px;width:10px;height:3px;background:var(--glass)}
+.liquid{position:absolute;inset:auto 0 0 0;height:62%;background:var(--liq);transition:background 1.6s ease}
+.bub{position:absolute;bottom:4px;width:8px;height:8px;border-radius:50%;border:2px solid var(--muted);opacity:0}
+.run .bub{animation:rise 1.6s ease-in infinite}
+.bub:nth-child(2){left:18px;animation-delay:.2s!important}.bub:nth-child(3){left:38px;animation-delay:.7s!important}.bub:nth-child(4){left:54px;animation-delay:1.1s!important}.bub:nth-child(5){left:28px;animation-delay:.45s!important}
+@keyframes rise{0%{opacity:0;transform:translateY(0)}15%{opacity:1}100%{opacity:0;transform:translateY(-62px)}}
+.pp{position:absolute;top:2px;width:6px;height:6px;border-radius:2px;background:var(--ppt);opacity:0}
+.run .pp{animation:fall 2s ease-in forwards}
+@keyframes fall{0%{opacity:0;transform:translateY(0)}10%{opacity:1}100%{opacity:1;transform:translateY(var(--d,48px))}}
+.ev-color.run .liquid{background:var(--liq-blue)}
+.thermo{position:absolute;right:calc(50% - 64px);bottom:6px;width:12px;height:100px;border:2px solid var(--glass);border-radius:8px;overflow:hidden;background:var(--surface)}
+.thermo i{position:absolute;bottom:0;left:0;right:0;height:22%;background:var(--bad);transition:height 1.8s ease}
+.ev-temp.run .thermo i{height:88%}
+.ev-temp.run .liquid{background:var(--bad-soft)}
+.glow{position:absolute;bottom:58px;left:50%;width:30px;height:30px;margin-left:-15px;border-radius:50%;background:var(--fire);opacity:0;filter:blur(2px);transform:scale(.3)}
+.ev-light.run .glow{animation:flash 1.4s ease-out infinite}
+@keyframes flash{0%{opacity:0;transform:scale(.3)}30%{opacity:1;transform:scale(1.7);box-shadow:0 0 30px 14px var(--fire)}100%{opacity:0;transform:scale(2.2)}}
+.ribbon{position:absolute;bottom:0;left:50%;width:4px;height:52px;margin-left:-2px;background:var(--el-Al);border-radius:2px}
+.wave{position:absolute;bottom:70px;font-size:20px;color:var(--muted);opacity:0}
+.ev-odor.run .wave{animation:waft 2.2s ease-out infinite}
+.wave:nth-of-type(2){left:calc(50% - 22px)}.wave:nth-of-type(3){left:calc(50% + 6px);animation-delay:.7s!important}.wave:nth-of-type(4){left:calc(50% - 6px);animation-delay:1.3s!important}
+@keyframes waft{0%{opacity:0;transform:translateY(10px)}30%{opacity:1}100%{opacity:0;transform:translateY(-34px) rotate(8deg)}}
+
+/* sort game */
+.sort{display:grid;gap:8px}
+.srow{display:grid;grid-template-columns:1fr auto;gap:8px 12px;align-items:center;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--surface)}
+.srow .opts{display:flex;gap:6px}
+.srow button{border:1px solid var(--line);background:var(--sunk);border-radius:8px;padding:4px 10px;font-size:.86rem}
+.srow.ok{border-color:var(--good);background:var(--good-soft)}
+.srow.no{border-color:var(--bad);background:var(--bad-soft)}
+.srow .why{grid-column:1/-1;font-size:.86rem;color:var(--muted)}
+@media (max-width:520px){.srow{grid-template-columns:1fr}}
+
+/* representation */
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tabs button{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 14px;font-size:.92rem}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.rep{display:grid;gap:10px;justify-items:center;text-align:center;padding:22px 12px}
+.rep .big{font-size:clamp(1.15rem,4.6vw,1.75rem);font-weight:600;line-height:1.7}
+.rep .note{color:var(--muted);font-size:.92rem;max-width:56ch}
+.anat{display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:6px 4px;direction:ltr;font-size:clamp(1.05rem,4.6vw,2rem);font-weight:700;padding-block:10px}
+.grp{display:inline-flex;align-items:baseline;gap:1px;white-space:nowrap}
+.tok{border:2px solid transparent;border-radius:8px;padding:1px 3px;background:none;font-weight:700;line-height:1.3}
+section.st>*,.panel>*{min-width:0}
+.tok:hover{border-color:var(--line)}
+.tok.sel{border-color:var(--accent);background:var(--accent-soft)}
+.tok.k-coef{color:var(--spark)}.tok.k-state{color:var(--muted);font-size:.62em;padding-inline:1px}.tok.k-arrow,.tok.k-plus{color:var(--accent)}
+.anat-out{min-height:3.6em;background:var(--sunk);border-radius:10px;padding:10px 14px}
+.anat-out b{color:var(--accent)}
+.tblwrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:440px;font-size:.95rem}
+th,td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:start}
+th{font-size:.82rem;color:var(--muted);font-weight:600;letter-spacing:.02em}
+td.sym{font-weight:700;color:var(--accent);direction:ltr;text-align:center;width:70px}
+.sub-demo{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.sub-demo .panel{text-align:center;display:grid;gap:6px}
+.sub-demo .panel .f{font-size:1.6rem}
+.mol{display:inline-flex;gap:2px;align-items:center;justify-content:center}
+.atom{width:22px;height:22px;border-radius:50%;display:inline-grid;place-items:center;font-size:9px;font-weight:700;direction:ltr;color:#fff;border:1px solid rgba(0,0,0,.2);flex:none}
+.atom.H{background:var(--el-H);color:#333}.atom.O{background:var(--el-O)}.atom.Cl{background:var(--el-Cl)}.atom.Fe{background:var(--el-Fe)}.atom.Na{background:var(--el-Na)}.atom.Cu{background:var(--el-Cu)}.atom.C{background:var(--el-C)}.atom.Al{background:var(--el-Al);color:#13222C}.atom.K{background:var(--el-K)}
+
+/* balancer */
+.eq-pick{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px}
+.eq-pick button{flex:none;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:6px 10px;font-size:.9rem;white-space:nowrap}
+.eq-pick button.on{border-color:var(--accent);background:var(--accent-soft)}
+.eq-pick button .done{color:var(--good);margin-inline-start:4px}
+.bal{display:grid;gap:14px}
+.eqline{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-end;gap:6px 8px;direction:ltr;padding:14px 6px;background:var(--sunk);border-radius:12px}
+.sp{display:grid;justify-items:center;gap:4px}
+.step{display:flex;align-items:center;border:1px solid var(--line);border-radius:999px;background:var(--surface);overflow:hidden}
+.step button{width:30px;height:30px;border:none;background:none;font-size:1.1rem;font-weight:700;color:var(--accent)}
+.step button:disabled{color:var(--line);cursor:default}
+.step output{min-width:24px;text-align:center;font-weight:700;color:var(--spark);font-size:1.1rem;font-variant-numeric:tabular-nums}
+.sp .f{font-size:1.25rem}
+.sp .f small{font-size:.65em;color:var(--muted);font-weight:500}
+.op{font-size:1.4rem;color:var(--accent);font-weight:700;padding-bottom:2px}
+.sides{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.side{border:1px dashed var(--line);border-radius:12px;padding:10px;min-height:96px;display:grid;align-content:start;gap:8px}
+.side h3{font-size:.9rem;font-family:var(--f-body);color:var(--muted);font-weight:600}
+.mols{display:flex;flex-wrap:wrap;gap:8px;direction:ltr;justify-content:center}
+.mols .mol{padding:3px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+.mols .atom{width:18px;height:18px;font-size:8px}
+.count td{text-align:center;font-variant-numeric:tabular-nums}
+.count td:first-child{font-weight:700;direction:ltr}
+.mark{font-weight:700}
+.mark.y{color:var(--good)}.mark.n{color:var(--bad)}
+.verdict{padding:12px 16px;border-radius:10px;font-weight:600;border:1px solid var(--line);background:var(--sunk)}
+.verdict.good{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+.verdict.warn{background:var(--spark-soft);border-color:var(--spark);color:var(--spark)}
+.actions{display:flex;flex-wrap:wrap;gap:8px}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:8px 14px;font-weight:600;font-size:.92rem}
+.btn.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.steps-ol{margin:0;padding-inline-start:22px;display:grid;gap:6px}
+.steps-ol li::marker{color:var(--accent);font-weight:700}
+.two{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:14px;align-items:start}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+.warnbox{border-inline-start:4px solid var(--bad);background:var(--bad-soft);padding:10px 14px;border-radius:0 10px 10px 0;font-size:.95rem}
+
+/* quiz */
+.quiz{display:grid;gap:14px}
+.qbar{height:6px;background:var(--sunk);border-radius:6px;overflow:hidden}
+.qbar i{display:block;height:100%;background:var(--accent);transition:width .4s}
+.qmeta{display:flex;justify-content:space-between;color:var(--muted);font-size:.88rem;font-variant-numeric:tabular-nums}
+.qtext{font-size:1.15rem;font-weight:600}
+.qopts{display:grid;gap:8px}
+.qopts button{text-align:start;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 14px;display:flex;gap:10px;align-items:center}
+.qopts button .let{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--sunk);font-size:.85rem;font-weight:700}
+.qopts button.ok{border-color:var(--good);background:var(--good-soft)}
+.qopts button.no{border-color:var(--bad);background:var(--bad-soft)}
+.qopts button:disabled{cursor:default}
+.qexp{background:var(--sunk);border-radius:10px;padding:10px 14px;font-size:.95rem}
+.score{text-align:center;display:grid;gap:10px;justify-items:center;padding:20px}
+.score .n{font-family:var(--f-display);font-size:3rem;color:var(--accent);direction:ltr;font-variant-numeric:tabular-nums}
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+}
+html{scroll-behavior:smooth}
+</style>
+
+<div class="wrap">
+  <header class="hero" id="top">
+    <div class="crumbs"><span>كيمياء 1</span><span>·</span><span>الفصل الأول: التفاعلات الكيميائية</span><span>·</span><b>الدرس 1-1</b></div>
+    <h1>التفاعلات <span>والمعادلات</span></h1>
+    <div class="prog">
+      <div class="prog-meta"><span id="pgName"><b>الأهداف والمفردات</b></span><span id="pgNum">المحطة 1 من 8</span></div>
+      <div class="prog-bar"><i id="pgBar"></i></div>
+    </div>
+  </header>
+  <nav class="topics" id="dots" aria-label="مواضيع الدرس"></nav>
+
+  <!-- 1 -->
+  <section class="st" id="s1" data-name="الأهداف والمفردات">
+    <div class="st-head"><span class="st-num">1</span><h2>الأهداف والمفردات</h2></div>
+    <p class="idea"><b>الفكرة الرئيسة</b> — تُمثَّل التفاعلات الكيميائية بمعادلات كيميائية موزونة.</p>
+    <div class="hero-eq">
+      <span class="big"><span class="f">2Fe(s) + 3Cl<sub>2</sub>(g) → 2FeCl<sub>3</sub>(s)</span></span>
+      <small>حديد + كلور ← كلوريد الحديد III</small>
+    </div>
+    <div class="obj">
+      <div class="panel">
+        <p class="eyebrow">الأهداف</p>
+        <ul>
+          <li>تتعرّف الأدلة على حدوث التغيّر الكيميائي.</li>
+          <li>تمثّل التفاعلات الكيميائية بالمعادلات.</li>
+          <li>توازن المعادلات الكيميائية.</li>
+        </ul>
+      </div>
+      <div class="panel" style="display:grid;gap:10px">
+        <p class="eyebrow">مراجعة المفردات</p>
+        <div class="vocab"><span class="chip rev">التغيّر الكيميائي</span></div>
+        <p class="eyebrow">المفردات الجديدة</p>
+        <div class="vocab">
+          <span class="chip">التفاعل الكيميائي</span><span class="chip">المواد المتفاعلة</span>
+          <span class="chip">المواد الناتجة</span><span class="chip">المعادلة الكيميائية</span><span class="chip">المعامل</span>
+        </div>
+      </div>
+    </div>
+    <dl class="panel defs">
+      <div class="def"><dt>التفاعل الكيميائي</dt><dd>عملية يُعاد فيها ترتيب ذرات مادة أو أكثر لتكوين مواد مختلفة.</dd></div>
+      <div class="def"><dt>المواد المتفاعلة</dt><dd>المواد التي يبدأ بها التفاعل، وتُكتب على يسار السهم (في بداية المعادلة).</dd></div>
+      <div class="def"><dt>المواد الناتجة</dt><dd>المواد التي تتكوّن خلال التفاعل، وتُكتب بعد السهم.</dd></div>
+      <div class="def"><dt>المعادلة الكيميائية</dt><dd>عبارة تستخدم الصيغ الكيميائية لتبيّن هويّة المواد المتفاعلة والناتجة وكمياتها النسبية.</dd></div>
+      <div class="def"><dt>المعامل</dt><dd>العدد المكتوب أمام المادة في المعادلة، ويبيّن أقل عدد من الجسيمات (ذرات أو جزيئات أو وحدات صيغة) يدخل في التفاعل.</dd></div>
+    </dl>
+  </section>
+
+  <!-- 2 -->
+  <section class="st" id="s2" data-name="أدلة التفاعل">
+    <div class="st-head"><span class="st-num">2</span><h2>الأدلة على حدوث التفاعل الكيميائي</h2></div>
+    <p class="lead">لا نرى الذرات وهي تُعاد ترتيبها، لكن نستدل على حدوث التفاعل بتغيّرات نلاحظها. اضغط «أجرِ التجربة» في كل بطاقة.</p>
+    <div class="ev-grid" id="evGrid">
+      <div class="ev ev-temp"><div class="stage"><div class="beaker"><div class="liquid"></div></div><div class="thermo"><i></i></div></div><h3>تغيّر درجة الحرارة</h3><p>تحرّر طاقة حرارية أو امتصاصها، مثل احتراق الخشب.</p><button type="button" aria-pressed="false">أجرِ التجربة</button></div>
+      <div class="ev ev-color"><div class="stage"><div class="beaker"><div class="liquid"></div></div></div><h3>تغيّر اللون</h3><p>يتغيّر لون المادة أو المحلول، مثل تحوّل لون محلول عند إضافة فلز إليه.</p><button type="button" aria-pressed="false">أجرِ التجربة</button></div>
+      <div class="ev ev-gas"><div class="stage"><div class="beaker"><div class="liquid"></div><span class="bub" style="left:10px"></span><span class="bub"></span><span class="bub"></span><span class="bub"></span><span class="bub"></span></div></div><h3>تصاعد غاز</h3><p>ظهور فقاعات عند خلط مادتين، مثل القرص الفوّار في الماء.</p><button type="button" aria-pressed="false">أجرِ التجربة</button></div>
+      <div class="ev ev-ppt"><div class="stage"><div class="beaker" id="pptBeaker"><div class="liquid"></div></div></div><h3>تكوّن راسب</h3><p>مادة صلبة غير ذائبة تتكوّن عند خلط محلولين مائيين.</p><button type="button" aria-pressed="false">أجرِ التجربة</button></div>
+      <div class="ev ev-light"><div class="stage"><div class="glow"></div><div class="ribbon"></div></div><h3>انبعاث ضوء</h3><p>إطلاق ضوء أو صوت، مثل احتراق شريط المغنيسيوم بضوء ساطع.</p><button type="button" aria-pressed="false">أجرِ التجربة</button></div>
+      <div class="ev ev-odor"><div class="stage"><span class="wave">~</span><span class="wave">~</span><span class="wave">~</span><div class="beaker"><div class="liquid"></div></div></div><h3>انبعاث رائحة</h3><p>ظهور رائحة جديدة، مثل رائحة البيض الفاسد.</p><button type="button" aria-pressed="false">أجرِ التجربة</button></div>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="st" id="s3" data-name="نشاط التصنيف">
+    <div class="st-head"><span class="st-num">3</span><h2>تغيّر كيميائي أم فيزيائي؟</h2></div>
+    <p class="lead">صنّف كل مشاهدة، ثم اقرأ التعليل. التغيّر الكيميائي تتكوّن فيه مادة جديدة.</p>
+    <div class="panel" style="display:grid;gap:12px">
+      <div class="sort" id="sort"></div>
+      <p id="sortScore" class="lead" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="st" id="s4" data-name="صور المعادلة">
+    <div class="st-head"><span class="st-num">4</span><h2>تمثيل التفاعلات الكيميائية</h2></div>
+    <p class="lead">يُكتب التفاعل الواحد بثلاث صور تزداد دقّة. تنقّل بينها لتفاعل الحديد مع الكلور.</p>
+    <div class="panel" style="display:grid;gap:8px">
+      <div class="tabs" role="tablist" id="repTabs">
+        <button role="tab" aria-selected="true" data-i="0">المعادلة اللفظية</button>
+        <button role="tab" aria-selected="false" data-i="1">المعادلة الرمزية (الهيكلية)</button>
+        <button role="tab" aria-selected="false" data-i="2">المعادلة الموزونة</button>
+      </div>
+      <div class="rep" id="rep" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="st" id="s5" data-name="تشريح المعادلة">
+    <div class="st-head"><span class="st-num">5</span><h2>تشريح المعادلة والرموز</h2></div>
+    <div class="panel" style="display:grid;gap:10px">
+      <div><p class="eyebrow">تشريح المعادلة</p><h3 style="font-size:1.15rem">اضغط أي جزء لتعرف معناه</h3></div>
+      <div class="anat" id="anat"></div>
+      <div class="anat-out" id="anatOut" aria-live="polite">اختر جزءاً من المعادلة.</div>
+    </div>
+
+    <div class="panel">
+      <p class="eyebrow" style="margin-bottom:8px">الرموز المستخدمة في المعادلات الكيميائية</p>
+      <div class="tblwrap"><table>
+        <thead><tr><th>الرمز</th><th>الغرض منه</th></tr></thead>
+        <tbody>
+          <tr><td class="sym">+</td><td>يفصل بين مادتين متفاعلتين أو بين مادتين ناتجتين.</td></tr>
+          <tr><td class="sym">→</td><td>يفصل المواد المتفاعلة عن المواد الناتجة، ويُقرأ «يُنتِج».</td></tr>
+          <tr><td class="sym">(s)</td><td>يحدّد الحالة الصلبة.</td></tr>
+          <tr><td class="sym">(l)</td><td>يحدّد الحالة السائلة.</td></tr>
+          <tr><td class="sym">(g)</td><td>يحدّد الحالة الغازية.</td></tr>
+          <tr><td class="sym">(aq)</td><td>يحدّد محلولاً مائياً (مادة مذابة في الماء).</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="st" id="s6" data-name="قواعد الوزن">
+    <div class="st-head"><span class="st-num">6</span><h2>وزن المعادلات الكيميائية</h2></div>
+    <p class="lead">وفق <b>قانون حفظ الكتلة</b> لا تُستحدث الذرات ولا تفنى في التفاعل، فيجب أن يتساوى عدد ذرات كل عنصر في طرفي المعادلة. نوازن بتغيير <b>المعاملات</b> فقط.</p>
+
+    <div class="sub-demo">
+      <div class="panel"><span class="f">H<sub>2</sub>O</span><span class="mol"><span class="atom H">H</span><span class="atom O">O</span><span class="atom H">H</span></span><span>الماء</span></div>
+      <div class="panel"><span class="f">H<sub>2</sub>O<sub>2</sub></span><span class="mol"><span class="atom H">H</span><span class="atom O">O</span><span class="atom O">O</span><span class="atom H">H</span></span><span>فوق أكسيد الهيدروجين</span></div>
+    </div>
+    <p class="warnbox">تغيير الرقم السفلي يغيّر هويّة المادة نفسها. لذلك لا تغيّر الأرقام السفلية أبداً عند وزن المعادلة.</p>
+
+    <div class="panel" style="display:grid;gap:10px">
+      <p class="eyebrow">خطوات وزن المعادلات</p>
+      <ol class="steps-ol">
+        <li>اكتب المعادلة الرمزية (الهيكلية) للتفاعل.</li>
+        <li>احسب عدد ذرات كل عنصر في المواد المتفاعلة.</li>
+        <li>احسب عدد ذرات كل عنصر في المواد الناتجة.</li>
+        <li>غيّر المعاملات لتجعل عدد ذرات كل عنصر متساوياً في الطرفين.</li>
+        <li>اكتب المعاملات في أبسط نسبة ممكنة.</li>
+        <li>تحقّق من عملك.</li>
+      </ol>
+      <p class="lead" style="font-size:.92rem">المجموعات الأيونية متعددة الذرات التي تظهر دون تغيير في الطرفين، مثل <span class="f">OH</span>، يمكن عدّها وحدة واحدة.</p>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="st" id="s7" data-name="مختبر الوزن">
+    <div class="st-head"><span class="st-num">7</span><h2>مختبر وزن المعادلات</h2></div>
+    <p class="lead">اختر معادلة، ثم غيّر المعاملات بالزرّين + و − حتى يتساوى عدد ذرات كل عنصر في الطرفين.</p>
+      <div class="panel bal">
+        <div><p class="eyebrow">مختبر الوزن</p><h3 style="font-size:1.15rem">عدّل المعاملات حتى تتوازن الذرات</h3></div>
+        <div class="eq-pick" id="eqPick"></div>
+        <div class="eqline" id="eqLine"></div>
+        <div class="sides">
+          <div class="side"><h3>المواد المتفاعلة</h3><div class="mols" id="molsL"></div></div>
+          <div class="side"><h3>المواد الناتجة</h3><div class="mols" id="molsR"></div></div>
+        </div>
+        <div class="tblwrap"><table class="count" style="min-width:300px">
+          <thead><tr><th style="text-align:center">العنصر</th><th style="text-align:center">في المتفاعلات</th><th style="text-align:center">في النواتج</th><th style="text-align:center">الحالة</th></tr></thead>
+          <tbody id="countBody"></tbody>
+        </table></div>
+        <div class="verdict" id="verdict" aria-live="polite"></div>
+        <div class="actions">
+          <button class="btn" id="hintBtn" type="button">تلميح</button>
+          <button class="btn" id="resetBtn" type="button">إعادة</button>
+          <button class="btn" id="solveBtn" type="button">أظهر الحل</button>
+          <button class="btn pri" id="nextBtn" type="button">المعادلة التالية</button>
+        </div>
+      </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="st" id="s8" data-name="التقويم">
+    <div class="st-head"><span class="st-num">8</span><h2>التقويم</h2></div>
+    <div class="panel quiz" id="quiz"></div>
+  </section>
+
+</div>
+
+<nav class="pager" aria-label="التنقل بين المحطات">
+  <div class="pager-in">
+    <button class="btn" id="prevBtn" type="button">السابق</button>
+    <button class="btn pri" id="nextPage" type="button">التالي</button>
+  </div>
+</nav>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s);
+const fmt=f=>f.replace(/(\d+)/g,'<sub>$1</sub>');
+const F=(f,st)=>`<span class="f">${fmt(f)}${st?`<small>(${st})</small>`:''}</span>`;
+
+/* ---- evidence ---- */
+const ppt=$('#pptBeaker');
+for(let i=0;i<14;i++){const p=document.createElement('span');p.className='pp';p.style.left=(6+Math.random()*60)+'px';p.style.setProperty('--d',(78+Math.random()*10)+'px');p.style.animationDelay=(Math.random()*1.2)+'s';ppt.appendChild(p);}
+document.querySelectorAll('#evGrid .ev').forEach(card=>{
+  const b=card.querySelector('button');
+  b.addEventListener('click',()=>{
+    const on=card.classList.toggle('run');
+    b.setAttribute('aria-pressed',on);b.textContent=on?'أوقف':'أجرِ التجربة';
+  });
+});
+
+/* ---- sort ---- */
+const sortItems=[
+  ['صدأ مسمار من الحديد','c','تتكوّن مادة جديدة (أكسيد الحديد) بلون مختلف.'],
+  ['انصهار قطعة شمع','p','يتغيّر الشكل والحالة فقط، والمادة هي نفسها.'],
+  ['فوران قرص فوّار في الماء','c','تصاعد غاز دليل على تكوّن مادة جديدة.'],
+  ['تبخّر الماء من كأس','p','يتحوّل الماء من سائل إلى غاز دون أن تتغيّر هويّته.'],
+  ['قلي بيضة','c','يتغيّر اللون والقوام ولا يمكن إرجاعها، فقد تكوّنت مواد جديدة.'],
+  ['تقطيع ورقة إلى أجزاء','p','تغيّر في الحجم والشكل فقط.']
+];
+const sortEl=$('#sort');let sortDone=0,sortRight=0;
+sortItems.forEach(([t,a,why],i)=>{
+  const r=document.createElement('div');r.className='srow';
+  r.innerHTML=`<span>${t}</span><div class="opts"><button type="button" data-v="c">كيميائي</button><button type="button" data-v="p">فيزيائي</button></div>`;
+  r.querySelectorAll('button').forEach(btn=>btn.addEventListener('click',()=>{
+    if(r.dataset.done)return;r.dataset.done=1;sortDone++;
+    const ok=btn.dataset.v===a; if(ok)sortRight++;
+    r.classList.add(ok?'ok':'no');
+    r.querySelectorAll('button').forEach(x=>x.disabled=true);
+    const w=document.createElement('span');w.className='why';w.textContent=(ok?'صحيح. ':'الإجابة: '+(a==='c'?'تغيّر كيميائي. ':'تغيّر فيزيائي. '))+why;r.appendChild(w);
+    if(sortDone===sortItems.length)$('#sortScore').textContent=`نتيجتك: ${sortRight} من ${sortItems.length}`;
+  }));
+  sortEl.appendChild(r);
+});
+
+/* ---- representation tabs ---- */
+const reps=[
+  {big:'حديد (صلب) + كلور (غاز) ← كلوريد الحديد III (صلب)',note:'تستخدم الكلمات لتسمية المواد المتفاعلة والناتجة. تُقرأ: الحديد في الحالة الصلبة والكلور في الحالة الغازية يتفاعلان فيُنتِجان كلوريد الحديد III في الحالة الصلبة.',ltr:false},
+  {big:'Fe(s) + Cl<sub>2</sub>(g) → FeCl<sub>3</sub>(s)',note:'تستخدم الصيغ الكيميائية بدلاً من الكلمات لتحديد المواد وحالاتها، لكنها لا تبيّن الكميات النسبية. لاحظ: ذرتا كلور في المتفاعلات مقابل ثلاث في النواتج، فهي غير موزونة.',ltr:true},
+  {big:'2Fe(s) + 3Cl<sub>2</sub>(g) → 2FeCl<sub>3</sub>(s)',note:'المعاملات 2 و 3 و 2 تجعل عدد الذرات متساوياً: 2 ذرة حديد و 6 ذرات كلور في كل طرف. وهذه أبسط نسبة ممكنة.',ltr:true}
+];
+const tabs=document.querySelectorAll('#repTabs button');
+function showRep(i){
+  tabs.forEach(t=>t.setAttribute('aria-selected',t.dataset.i==i));
+  const r=reps[i];
+  $('#rep').innerHTML=`<div class="big">${r.ltr?`<span class="f">${r.big}</span>`:r.big}</div><p class="note">${r.note}</p>`;
+}
+tabs.forEach(t=>t.addEventListener('click',()=>showRep(+t.dataset.i)));showRep(0);
+
+/* ---- anatomy ---- */
+const anat=[
+  ['2','coef','<b>معامل</b> الحديد: يدخل التفاعل ذرتا حديد.'],
+  ['Fe','f','<b>مادة متفاعلة</b>: الحديد، عنصر فلزي.'],
+  ['(s)','state','<b>(s)</b>: الحديد في الحالة الصلبة.'],
+  ['+','plus','<b>+</b> يفصل بين مادتين متفاعلتين.'],
+  ['3','coef','<b>معامل</b> الكلور: ثلاثة جزيئات كلور، أي 6 ذرات كلور.'],
+  ['Cl2','f','<b>مادة متفاعلة</b>: الكلور جزيء ثنائي الذرة. الرقم السفلي 2 جزء من الصيغة ولا يُغيَّر.'],
+  ['(g)','state','<b>(g)</b>: الكلور في الحالة الغازية.'],
+  ['→','arrow','<b>السهم</b> يفصل المواد المتفاعلة عن الناتجة ويُقرأ «يُنتِج».'],
+  ['2','coef','<b>معامل</b> الناتج: وحدتا صيغة من كلوريد الحديد III.'],
+  ['FeCl3','f','<b>مادة ناتجة</b>: كلوريد الحديد III، وكل وحدة صيغة فيها ذرة حديد وثلاث ذرات كلور.'],
+  ['(s)','state','<b>(s)</b>: الناتج في الحالة الصلبة.']
+];
+const anatEl=$('#anat');
+/* each substance stays together with its coefficient and state: [2 Fe (s)] + [3 Cl2 (g)] → [2 FeCl3 (s)] */
+[[0,1,2],[3],[4,5,6],[7],[8,9,10]].forEach(ids=>{
+  const g=document.createElement('span');g.className='grp';
+  ids.forEach(i=>{const [t,k,d]=anat[i];
+    const b=document.createElement('button');b.type='button';b.className='tok k-'+k;b.innerHTML=k==='f'?fmt(t):t;
+    b.addEventListener('click',()=>{anatEl.querySelectorAll('.tok').forEach(x=>x.classList.remove('sel'));b.classList.add('sel');$('#anatOut').innerHTML=d;});
+    g.appendChild(b);});
+  anatEl.appendChild(g);
+});
+
+/* ---- balancer ---- */
+function parse(f){let i=0;
+  const num=()=>{let s='';while(i<f.length&&/\d/.test(f[i]))s+=f[i++];return s?+s:1};
+  const group=()=>{const c={};while(i<f.length){const ch=f[i];
+    if(ch==='('){i++;const inner=group();i++;const n=num();for(const k in inner)c[k]=(c[k]||0)+inner[k]*n;}
+    else if(ch===')')return c;
+    else{let el=f[i++];while(i<f.length&&/[a-z]/.test(f[i]))el+=f[i++];const n=num();c[el]=(c[el]||0)+n;}
+  }return c};
+  return group();}
+function atomsSeq(f){const out=[];let i=0;
+  const num=()=>{let s='';while(i<f.length&&/\d/.test(f[i]))s+=f[i++];return s?+s:1};
+  const group=()=>{const seq=[];while(i<f.length){const ch=f[i];
+    if(ch==='('){i++;const inner=group();i++;const n=num();for(let k=0;k<n;k++)seq.push(...inner);}
+    else if(ch===')')return seq;
+    else{let el=f[i++];while(i<f.length&&/[a-z]/.test(f[i]))el+=f[i++];const n=num();for(let k=0;k<n;k++)seq.push(el);}
+  }return seq};
+  return group();}
+const EQS=[
+  {L:[['H2','g'],['Cl2','g']],R:[['HCl','g']],sol:[1,1,2],name:'هيدروجين + كلور'},
+  {L:[['Fe','s'],['Cl2','g']],R:[['FeCl3','s']],sol:[2,3,2],name:'حديد + كلور'},
+  {L:[['H2','g'],['O2','g']],R:[['H2O','l']],sol:[2,1,2],name:'تكوين الماء'},
+  {L:[['NaOH','aq'],['CuCl2','aq']],R:[['Cu(OH)2','s'],['NaCl','aq']],sol:[2,1,1,2],name:'هيدروكسيد الصوديوم + كلوريد النحاس II'},
+  {L:[['CH4','g'],['O2','g']],R:[['CO2','g'],['H2O','g']],sol:[1,2,1,2],name:'احتراق الميثان'},
+  {L:[['Al','s'],['O2','g']],R:[['Al2O3','s']],sol:[4,3,2],name:'ألومنيوم + أكسجين'},
+  {L:[['KClO3','s']],R:[['KCl','s'],['O2','g']],sol:[2,2,3],name:'تحلّل كلورات البوتاسيوم'}
+];
+let cur=0,co=[],solved=new Set();
+const gcd=(a,b)=>b?gcd(b,a%b):a;
+function species(){const e=EQS[cur];return [...e.L.map(s=>({f:s[0],st:s[1],side:'L'})),...e.R.map(s=>({f:s[0],st:s[1],side:'R'}))]}
+function renderPick(){
+  $('#eqPick').innerHTML=EQS.map((e,i)=>`<button type="button" class="${i===cur?'on':''}" data-i="${i}">${i+1}. ${e.name}${solved.has(i)?'<span class="done">✓</span>':''}</button>`).join('');
+  $('#eqPick').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>load(+b.dataset.i)));
+}
+function load(i){cur=i;co=species().map(()=>1);renderPick();renderLine();update();
+  const on=$('#eqPick .on');if(on)on.scrollIntoView({block:'nearest',inline:'nearest'});}
+function renderLine(){
+  const sp=species();let h='';
+  sp.forEach((s,k)=>{
+    if(k>0){h+=`<span class="op">${sp[k-1].side!==s.side?'→':'+'}</span>`;}
+    h+=`<div class="sp"><div class="step"><button type="button" aria-label="زيادة المعامل" data-k="${k}" data-d="1">+</button><output id="c${k}">1</output><button type="button" aria-label="إنقاص المعامل" data-k="${k}" data-d="-1">−</button></div>${F(s.f,s.st)}</div>`;
+  });
+  $('#eqLine').innerHTML=h;
+  $('#eqLine').querySelectorAll('.step button').forEach(b=>b.addEventListener('click',()=>{
+    const k=+b.dataset.k;co[k]=Math.max(1,Math.min(9,co[k]+ +b.dataset.d));update();}));
+}
+function totals(){const sp=species();const L={},R={},order=[];
+  sp.forEach((s,k)=>{const c=parse(s.f);for(const el in c){if(!order.includes(el))order.push(el);const t=s.side==='L'?L:R;t[el]=(t[el]||0)+c[el]*co[k];}});
+  return {L,R,order};}
+function molHTML(f){return `<span class="mol" title="${f}">${atomsSeq(f).map(a=>`<span class="atom ${a}">${a}</span>`).join('')}</span>`}
+function update(){
+  const sp=species();
+  sp.forEach((s,k)=>{$('#c'+k).textContent=co[k];
+    const bs=$('#eqLine').querySelectorAll(`.step button[data-k="${k}"]`);bs[0].disabled=co[k]>=9;bs[1].disabled=co[k]<=1;});
+  let l='',r='';sp.forEach((s,k)=>{const m=molHTML(s.f).repeat(co[k]);if(s.side==='L')l+=m;else r+=m;});
+  $('#molsL').innerHTML=l;$('#molsR').innerHTML=r;
+  const {L,R,order}=totals();let all=true;
+  $('#countBody').innerHTML=order.map(el=>{const ok=L[el]===R[el];if(!ok)all=false;
+    return `<tr><td>${el}</td><td>${L[el]||0}</td><td>${R[el]||0}</td><td><span class="mark ${ok?'y':'n'}">${ok?'متساوٍ ✓':'غير متساوٍ ✗'}</span></td></tr>`}).join('');
+  const g=co.reduce(gcd);const v=$('#verdict');
+  if(all&&g===1){v.className='verdict good';v.textContent='أحسنت! المعادلة موزونة، والمعاملات في أبسط نسبة.';solved.add(cur);renderPickMarks();}
+  else if(all){v.className='verdict warn';v.textContent=`الذرات متوازنة، لكن المعاملات ليست في أبسط نسبة. اقسمها جميعاً على ${g}.`;}
+  else{v.className='verdict';v.textContent='المعادلة غير موزونة بعد. وازن عنصراً واحداً في كل مرة.';}
+}
+function renderPickMarks(){$('#eqPick').querySelectorAll('button').forEach(b=>{const i=+b.dataset.i;if(solved.has(i)&&!b.querySelector('.done'))b.insertAdjacentHTML('beforeend','<span class="done">✓</span>')})}
+$('#hintBtn').addEventListener('click',()=>{
+  const {L,R,order}=totals();const el=order.find(e=>L[e]!==R[e]);const v=$('#verdict');
+  if(!el){const g=co.reduce(gcd);v.className='verdict '+(g===1?'good':'warn');v.textContent=g===1?'المعادلة موزونة بالفعل.':`اقسم جميع المعاملات على ${g}.`;return;}
+  v.className='verdict warn';
+  v.innerHTML=`ابدأ بالعنصر <span class="f">${el}</span>: عدد ذراته ${L[el]} في المتفاعلات و ${R[el]} في النواتج. غيّر معامل المادة التي تحتويه في الطرف الأقل.`;
+});
+$('#resetBtn').addEventListener('click',()=>{co=co.map(()=>1);update();});
+$('#solveBtn').addEventListener('click',()=>{co=EQS[cur].sol.slice();update();});
+$('#nextBtn').addEventListener('click',()=>load((cur+1)%EQS.length));
+load(0);
+
+/* ---- quiz ---- */
+const Q=[
+  {q:'أيّ مما يلي لا يُعدّ دليلاً على حدوث تفاعل كيميائي؟',o:['تكوّن راسب عند خلط محلولين','تصاعد فقاعات غاز عند خلط مادتين','انصهار مكعب جليد','تغيّر لون محلول'],a:2,e:'الانصهار تغيّر فيزيائي في الحالة فقط، ولا تتكوّن مادة جديدة.'},
+  {q:'يدلّ الرمز <span class="f">(aq)</span> في المعادلة الكيميائية على:',o:['مادة صلبة','محلول مائي','مادة سائلة نقية','غاز'],a:1,e:'(aq) تعني أن المادة مذابة في الماء.'},
+  {q:'عند وزن المعادلة الكيميائية يُسمح بتغيير:',o:['الأرقام السفلية في الصيغ','المعاملات فقط','رموز العناصر','حالات المواد'],a:1,e:'تغيير الأرقام السفلية يغيّر هويّة المادة، لذا نغيّر المعاملات فقط.'},
+  {q:'تُبنى عملية وزن المعادلات الكيميائية على:',o:['قانون حفظ الكتلة','قانون النسب المتضاعفة','قانون بويل','الجدول الدوري'],a:0,e:'الذرات لا تُستحدث ولا تفنى، فيتساوى عددها في الطرفين.'},
+  {q:'ما المعاملات الصحيحة لوزن المعادلة: <span class="f">__Fe + __Cl<sub>2</sub> → __FeCl<sub>3</sub></span>؟',o:['1 ، 3 ، 1','2 ، 3 ، 2','3 ، 2 ، 3','2 ، 6 ، 2'],a:1,e:'2 ذرة Fe و 6 ذرات Cl في كل طرف.'},
+  {q:'في المعادلة <span class="f">2NaOH + CuCl<sub>2</sub> → Cu(OH)<sub>2</sub> + 2NaCl</span> عدد ذرات الأكسجين في النواتج:',o:['1','2','4','3'],a:1,e:'وحدة واحدة من Cu(OH)₂ تحتوي مجموعتي OH، أي ذرتي أكسجين.'},
+  {q:'المعادلة التي تستخدم الصيغ الكيميائية لتحديد المواد المتفاعلة والناتجة دون بيان كمياتها النسبية تُسمّى:',o:['المعادلة اللفظية','المعادلة الموزونة','المعادلة الرمزية (الهيكلية)','المعادلة الأيونية'],a:2,e:'المعادلة الرمزية تبيّن الصيغ والحالات فقط، ولا تتضمّن معاملات الوزن.'},
+  {q:'وزن طالب معادلة فحصل على المعاملات 4 ، 2 ، 4. الصورة الصحيحة لكتابتها:',o:['4 ، 2 ، 4','2 ، 1 ، 2','8 ، 4 ، 8','1 ، 2 ، 1'],a:1,e:'تُكتب المعاملات في أبسط نسبة ممكنة، فنقسم على 2.'},
+  {q:'المواد التي يبدأ بها التفاعل الكيميائي تُسمّى:',o:['المواد الناتجة','المواد المتفاعلة','المعاملات','العوامل الحفّازة'],a:1,e:'المواد المتفاعلة تُكتب قبل السهم.'},
+  {q:'ما مجموع المعاملات في المعادلة الموزونة: <span class="f">__H<sub>2</sub> + __O<sub>2</sub> → __H<sub>2</sub>O</span>؟',o:['3','4','5','6'],a:2,e:'2H₂ + O₂ → 2H₂O، والمجموع 2 + 1 + 2 = 5.'}
+];
+let qi=0,qs=0;const quiz=$('#quiz');const L='أبجد';
+function renderQ(){
+  if(qi>=Q.length){
+    const pct=Math.round(qs/Q.length*100);
+    const msg=pct>=90?'ممتاز! أتقنت الدرس.':pct>=70?'جيد جداً. راجع الأسئلة التي أخطأت فيها.':'راجع محطتي «تمثيل التفاعل» و«وزن المعادلات» ثم أعد المحاولة.';
+    quiz.innerHTML=`<div class="score"><p class="eyebrow">النتيجة النهائية</p><div class="n">${qs} / ${Q.length}</div><p>${msg}</p><button class="btn pri" type="button" id="qAgain">أعد التقويم</button></div>`;
+    $('#qAgain').addEventListener('click',()=>{qi=0;qs=0;renderQ();});return;}
+  const q=Q[qi];
+  quiz.innerHTML=`<div class="qmeta"><span>السؤال ${qi+1} من ${Q.length}</span><span>الدرجة: ${qs}</span></div>
+  <div class="qbar"><i style="width:${qi/Q.length*100}%"></i></div>
+  <p class="qtext">${q.q}</p>
+  <div class="qopts">${q.o.map((o,k)=>`<button type="button" data-k="${k}"><span class="let">${L[k]}</span><span>${o}</span></button>`).join('')}</div>
+  <div id="qfoot"></div>`;
+  quiz.querySelectorAll('.qopts button').forEach(b=>b.addEventListener('click',()=>{
+    const k=+b.dataset.k,ok=k===q.a;if(ok)qs++;
+    quiz.querySelectorAll('.qopts button').forEach(x=>{x.disabled=true;if(+x.dataset.k===q.a)x.classList.add('ok');});
+    if(!ok)b.classList.add('no');
+    $('#qfoot').innerHTML=`<div class="qexp"><b>${ok?'إجابة صحيحة.':'إجابة غير صحيحة.'}</b> ${q.e}</div><div class="actions" style="margin-top:10px"><button class="btn pri" type="button" id="qNext">${qi+1<Q.length?'السؤال التالي':'عرض النتيجة'}</button></div>`;
+    $('#qNext').addEventListener('click',()=>{qi++;renderQ();});
+    quiz.querySelector('.qmeta span:last-child').textContent='الدرجة: '+qs;
+  }));
+}
+renderQ();
+
+/* ---- pager: one station at a time ---- */
+const pages=[...document.querySelectorAll('section.st')];
+const dots=$('#dots');let pg=0;
+pages.forEach((p,i)=>{const d=document.createElement('button');d.type='button';
+  d.innerHTML='<i>'+(i+1)+'</i>'+p.dataset.name;d.addEventListener('click',()=>go(i));dots.appendChild(d);});
+function go(i,first){
+  pg=Math.max(0,Math.min(pages.length-1,i));
+  pages.forEach((p,k)=>p.hidden=k!==pg);
+  [...dots.children].forEach((d,k)=>{d.classList.toggle('on',k===pg);if(k===pg)d.setAttribute('aria-current','step');else d.removeAttribute('aria-current');});
+  const on=dots.children[pg];dots.scrollTo({left:on.offsetLeft-(dots.clientWidth-on.offsetWidth)/2,behavior:first?'auto':'smooth'});
+  $('#pgName').innerHTML='<b>'+pages[pg].dataset.name+'</b>';
+  $('#pgNum').textContent='المحطة '+(pg+1)+' من '+pages.length;
+  $('#pgBar').style.width=((pg+1)/pages.length*100)+'%';
+  $('#prevBtn').disabled=pg===0;
+  $('#nextPage').textContent=pg===pages.length-1?'إلى البداية':'التالي';
+  if(!first)window.scrollTo({top:0,behavior:'smooth'});
+}
+$('#prevBtn').addEventListener('click',()=>go(pg-1));
+$('#nextPage').addEventListener('click',()=>go(pg===pages.length-1?0:pg+1));
+document.addEventListener('keydown',e=>{if(e.target.closest&&e.target.closest('input,textarea'))return;
+  if(e.key==='ArrowLeft')go(pg+1);else if(e.key==='ArrowRight')go(pg-1);});
+const hm=(location.hash||'').match(/^#s(\d+)$/);
+go(hm?+hm[1]-1:0,true);
+})();
+</script>
+
+</body></html>

@@ -1,0 +1,1112 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style id="portfolio-return-style">.portfolio-return{position:fixed;z-index:9999;top:14px;inset-inline-start:14px;display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border:1px solid rgba(20,121,91,.25);border-radius:999px;background:rgba(255,255,255,.92);box-shadow:0 6px 20px rgba(23,59,53,.12);color:#14795b;text-decoration:none;font:600 14px/1.2 Tahoma,Arial,sans-serif;backdrop-filter:blur(8px)}.portfolio-return:hover{background:#14795b;color:#fff}@media(max-width:600px){.portfolio-return{top:8px;inset-inline-start:8px;padding:7px 10px;font-size:12px}}</style></head><body><a class="portfolio-return" href="../#gallery" aria-label="العودة إلى معرض التجارب">← العودة إلى المعرض</a>
+<title>مختبر قوة الأحماض والرقم الهيدروجيني</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Lalezar&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+:root{
+  --bg:#F3F0EB; --surface:#FFFFFF; --surface2:#ECE7DF; --ink:#221C17; --muted:#6B6158; --line:#DDD4C8; --dot:#D9D1C5;
+  --teal:#1F7A74; --teal-soft:#DCEFEC; --copper:#B8621B; --copper-soft:#F8E6D3;
+  --good:#15803D; --good-soft:#DCF3E3; --bad:#B42318; --bad-soft:#FBE4E2;
+  --acid:#D0443A; --acid-soft:#FBE3DF; --base:#2F63B8; --base-soft:#DFE8F8; --neut:#3E9A5C;
+  --glow:#FFC83D;
+  --display:"Lalezar","IBM Plex Sans Arabic",Tahoma,sans-serif;
+  --body:"IBM Plex Sans Arabic",Tahoma,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1A1714; --surface:#24201C; --surface2:#2E2924; --ink:#F1EBE3; --muted:#B3A89B; --line:#3E372F; --dot:#332D27;
+  --teal:#4FC1B8; --teal-soft:#1D3533; --copper:#E8954A; --copper-soft:#3B2A1B;
+  --good:#4ADE80; --good-soft:#12321F; --bad:#F87171; --bad-soft:#3A1717;
+  --acid:#F2766B; --acid-soft:#3C1F1C; --base:#7FA8F0; --base-soft:#1B2740; --neut:#6FCB8E; color-scheme:dark;}}
+:root[data-theme="dark"]{
+  --bg:#1A1714; --surface:#24201C; --surface2:#2E2924; --ink:#F1EBE3; --muted:#B3A89B; --line:#3E372F; --dot:#332D27;
+  --teal:#4FC1B8; --teal-soft:#1D3533; --copper:#E8954A; --copper-soft:#3B2A1B;
+  --good:#4ADE80; --good-soft:#12321F; --bad:#F87171; --bad-soft:#3A1717;
+  --acid:#F2766B; --acid-soft:#3C1F1C; --base:#7FA8F0; --base-soft:#1B2740; --neut:#6FCB8E; color-scheme:dark;}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+#tug text{direction:ltr;unicode-bidi:plaintext}
+body{background:var(--bg);background-image:radial-gradient(var(--dot) 1.2px,transparent 1.3px);background-size:22px 22px;color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.75;direction:rtl}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:20px;padding-block:0 110px}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;line-height:1.3;margin:0}
+h2{font-size:clamp(28px,5vw,40px);font-weight:400}
+h3{font-size:21px;font-family:var(--body);font-weight:700}
+p{margin:0;max-width:68ch}
+.f{font-family:var(--mono);direction:ltr;unicode-bidi:isolate;font-weight:600;white-space:nowrap}
+sub{font-size:.7em} sup{font-size:.65em}
+button,select,input{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--copper);outline-offset:2px}
+
+header.app{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;padding-block:22px 12px}
+header.app h1{font-size:clamp(28px,5vw,42px);font-weight:400}
+@media(max-width:520px){h1,header.app h1,.hero h1{font-size:clamp(1.35rem,5.8vw,2rem)!important;line-height:1.3!important}p.lead,.hero .sub,header.app .sub{font-size:.92rem!important;line-height:1.7!important}}
+header.app .sub{color:var(--muted);font-size:16px}
+.stars{flex:none;display:flex;align-items:center;gap:6px;background:var(--copper);color:#fff;border-radius:999px;padding:6px 16px;font-family:var(--mono);font-weight:600;font-size:20px}
+.stars svg{width:20px;height:20px;fill:#FFD66B}
+.stars.bump{animation:bump .4s ease}
+@keyframes bump{50%{transform:scale(1.2)}}
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);display:flex;gap:10px;overflow-x:auto;padding-block:10px;scrollbar-width:none;border-bottom:2px solid var(--ink)}
+.tabs button{flex:none;border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:14px;padding:8px 16px;font-weight:600;font-size:16px}
+.tabs button b{font-family:var(--mono);margin-inline-end:6px}
+.tabs button.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.tabs button.done:not(.on){border-color:var(--teal)}
+.prog{height:5px;background:var(--surface2);border-radius:99px;margin-top:6px;overflow:hidden}
+.prog div{height:100%;background:var(--copper);border-radius:99px;transition:width .3s}
+.bottom{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--bg);border-top:2px solid var(--ink);padding:12px 16px calc(12px + env(safe-area-inset-bottom,0px))}
+.bottom .in{max-width:1040px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.bottom .btn{padding:10px 26px;font-size:18px;border-radius:16px;border-color:var(--ink)}
+.bottom .count{direction:ltr;unicode-bidi:isolate;font-family:var(--mono);color:var(--muted);font-size:18px}
+.btn:disabled{opacity:.4;cursor:default}
+
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:28px;align-items:center;padding-block:30px 10px}
+.eyebrow{font-size:13px;letter-spacing:.06em;color:var(--copper);font-weight:700}
+.hero p{color:var(--muted);font-size:18px}
+.idea{margin-top:18px;background:var(--teal-soft);border-radius:14px;padding:14px 18px;font-weight:600}
+.idea b{color:var(--teal)}
+.bottles{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.bottle{border:2px solid var(--ink);border-radius:18px;background:var(--surface);padding:14px;display:flex;flex-direction:column;gap:6px;align-items:center;text-align:center}
+.bottle svg{width:70px;height:110px}
+.bottle .nm{font-weight:700}
+.bottle .sm{font-size:14px;color:var(--muted);line-height:1.5}
+
+section.sec{padding-block:26px 8px}
+.sechead{display:flex;align-items:baseline;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+.num{font-family:var(--mono);color:var(--copper);font-weight:600;font-size:15px;border:1.5px solid var(--copper);border-radius:6px;padding:0 8px}
+.lead{color:var(--muted);margin-bottom:18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+.act{background:var(--surface);border:2px solid var(--ink);border-radius:24px;padding:20px;margin-top:18px}
+.act .tag{display:block;font-family:var(--display);font-size:clamp(22px,4vw,26px);color:var(--ink);margin-bottom:6px;line-height:1.4}
+.act .tag::before{content:"🧪 "}
+.life{background:var(--copper-soft);border:2px solid var(--copper);border-radius:20px;padding:16px 20px;margin-top:18px}
+.life .lt{font-family:var(--display);font-size:22px;color:var(--copper);display:block;margin-bottom:4px}
+.def{background:var(--surface);border:2px solid var(--ink);border-inline-start-width:8px;border-radius:20px;padding:16px 20px;margin-bottom:16px;font-size:18px}
+.def b{font-family:var(--display);font-weight:400;font-size:20px}
+.formula{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;background:var(--surface2);border-radius:14px;padding:12px 18px}
+.formula .f{font-size:22px}
+.stack{display:flex;flex-direction:column;gap:12px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:8px 14px;font-weight:600}
+.btn:hover{border-color:var(--teal)}
+.btn.pri{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.toggle .btn.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.btn.ok{background:var(--good-soft);border-color:var(--good);color:var(--good)}
+.btn.no{background:var(--bad-soft);border-color:var(--bad);color:var(--bad)}
+.callout{background:var(--surface2);border-radius:14px;padding:12px 18px;font-weight:600;margin-top:14px}
+.callout b{color:var(--copper)}
+.fb{min-height:1.6em;font-weight:600}
+.fb.ok{color:var(--good)} .fb.no{color:var(--bad)}
+.small{font-size:14px;color:var(--muted)}
+.table-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}
+th,td{border-bottom:1px solid var(--line);padding:9px 12px;text-align:start}
+th{font-weight:700;border-bottom:2px solid var(--ink)}
+.goals{margin:0;padding-inline-start:20px}
+footer{margin-top:40px;color:var(--muted);font-size:14px;border-top:1px solid var(--line);padding-top:16px}
+.ac{color:var(--acid)} .bc{color:var(--base)}
+
+/* predictions */
+.order{display:flex;flex-wrap:wrap;gap:8px}
+.order .btn{display:flex;gap:6px;align-items:center}
+.order .btn .k{font-family:var(--mono);background:var(--ink);color:var(--bg);border-radius:50%;width:24px;height:24px;display:inline-flex;align-items:center;justify-content:center;font-size:13px}
+
+/* conductivity */
+.cond{display:grid;grid-template-columns:150px 1fr;gap:18px;align-items:center}
+.bulb{width:150px;height:190px;max-width:100%}
+.beaker{position:relative;width:100%;max-width:360px;aspect-ratio:1;border-radius:50%;border:3px solid var(--ink);background:var(--base-soft);overflow:hidden;margin:0 auto}
+.p{position:absolute;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:600;font-size:10px;color:#fff;border-radius:50%;transition:left .6s,top .6s}
+.p.mol{min-width:34px;padding:0 6px;height:24px;border-radius:12px;background:var(--muted)}
+.p.h3o{width:28px;height:28px;background:var(--acid)}
+.p.an{width:28px;height:28px;background:var(--teal)}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:14px;color:var(--muted);margin-top:10px}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:middle;margin-inline-end:4px}
+.meterbox{margin-top:10px}
+.bar{height:14px;background:var(--surface2);border-radius:99px;overflow:hidden;direction:ltr}
+.bar div{height:100%;background:var(--glow);transition:width .5s}
+
+/* sorter */
+.sortq{display:flex;flex-wrap:wrap;gap:8px}
+.bins{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.bin{border:2px dashed var(--line);border-radius:14px;padding:10px;min-height:90px}
+.bin h4{margin:0 0 6px;font-size:16px}
+.bin .items{display:flex;flex-direction:column;gap:4px}
+.chip{background:var(--surface2);border-radius:8px;padding:4px 10px;font-size:15px}
+
+/* tug of war */
+.tug{width:100%;max-width:640px;margin:10px auto 0;display:block}
+.eqbox{direction:ltr;text-align:center;font-family:var(--mono);font-weight:600;font-size:clamp(16px,3vw,22px);margin-top:10px}
+.lbls{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;direction:ltr;margin-top:6px;text-align:center;font-size:13px}
+.lbls span{border-radius:8px;padding:2px 4px}
+.l-a{background:var(--acid-soft);color:var(--acid)} .l-b{background:var(--base-soft);color:var(--base)}
+
+/* role labeler */
+.roles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;direction:ltr}
+.roles .cell{display:flex;flex-direction:column;gap:6px;align-items:center;background:var(--surface2);border-radius:12px;padding:10px 6px}
+.roles select{width:100%;direction:rtl;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);padding:4px;font-size:14px}
+.roles select.ok{border-color:var(--good)} .roles select.no{border-color:var(--bad)}
+
+/* K builder */
+.kb{display:flex;flex-direction:column;gap:12px}
+.fraction{display:inline-flex;flex-direction:column;align-items:center;direction:ltr;font-family:var(--mono);font-weight:600;font-size:20px;min-width:160px}
+.fraction .num2,.fraction .den{min-height:34px;padding:2px 10px;display:flex;gap:4px;align-items:center}
+.fraction .ln{width:100%;height:2px;background:var(--ink)}
+.slot{color:var(--muted);font-size:14px;font-family:var(--body);font-weight:500}
+.spec .btn{font-family:var(--mono)}
+.spec .btn.st-n{background:var(--acid-soft);border-color:var(--acid)}
+.spec .btn.st-d{background:var(--base-soft);border-color:var(--base)}
+
+/* Ka ladder */
+.ladder{display:flex;flex-direction:column;gap:6px;direction:ltr}
+.lrow{display:grid;grid-template-columns:120px 1fr 90px;gap:10px;align-items:center;font-size:14px}
+.lrow .nm{text-align:right;direction:rtl}
+.lrow .track{height:18px;background:var(--surface2);border-radius:6px;position:relative}
+.lrow .fill{position:absolute;left:0;top:0;bottom:0;background:var(--acid);border-radius:6px;opacity:.85}
+.lrow .v{font-family:var(--mono);font-weight:600}
+.axis{display:grid;grid-template-columns:120px 1fr 90px;gap:10px;font-family:var(--mono);font-size:12px;color:var(--muted)}
+.axis .ticks{display:flex;justify-content:space-between}
+
+input[type=range]{width:100%;accent-color:var(--teal)}
+
+/* seesaw */
+.seesaw{width:100%;max-width:560px;display:block;margin:0 auto}
+#beamG{transition:transform .4s}
+.readout{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:10px}
+.readout div{background:var(--surface2);border-radius:12px;padding:8px 10px;text-align:center}
+.readout .f{font-size:18px}
+.statepill{display:inline-block;border-radius:999px;padding:2px 14px;font-weight:700}
+.statepill.a{background:var(--acid-soft);color:var(--acid)} .statepill.b{background:var(--base-soft);color:var(--base)} .statepill.n{background:var(--good-soft);color:var(--good)}
+
+/* pH scale */
+.phwrap{overflow-x:auto}
+.phscale{position:relative;min-width:640px;height:250px;direction:ltr}
+.phbar{position:absolute;left:0;right:0;top:110px;height:30px;border-radius:8px;background:linear-gradient(90deg,#D0443A,#E0873A 20%,#E3C23E 38%,#3E9A5C 50%,#3E8FB0 64%,#2F63B8 80%,#4B3A9C)}
+.phtick{position:absolute;top:142px;transform:translateX(-50%);font-family:var(--mono);font-size:13px;color:var(--muted)}
+.phitem{position:absolute;transform:translateX(-50%);border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:2px 8px;font-size:13px;white-space:nowrap;font-weight:600}
+.phitem.on{border-color:var(--ink);background:var(--ink);color:var(--bg)}
+.phitem::after{content:"";position:absolute;left:50%;width:2px;background:var(--line)}
+.phitem.up::after{top:100%;height:var(--h)} .phitem.dn::after{bottom:100%;height:var(--h)}
+.phmark{position:absolute;top:100px;width:4px;height:50px;background:var(--ink);transform:translateX(-50%);border-radius:2px;transition:left .4s}
+.info{background:var(--surface2);border-radius:12px;padding:14px;min-height:110px}
+
+/* calculator */
+.calc{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.inrow{display:flex;gap:8px;align-items:center;flex-wrap:wrap;direction:ltr;justify-content:flex-end}
+.inrow input{width:90px;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);padding:6px 8px;font-family:var(--mono);font-weight:600;text-align:center}
+.inrow select{border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);padding:6px 8px}
+.res{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.res div{background:var(--surface2);border-radius:10px;padding:8px 12px}
+.res .k{font-size:13px;color:var(--muted);display:block}
+.res .f{font-size:19px}
+.numline{position:relative;height:74px;direction:ltr;margin-top:14px}
+.numline .ln{position:absolute;left:0;right:0;top:34px;height:8px;border-radius:4px;background:linear-gradient(90deg,var(--acid),var(--neut) 50%,var(--base))}
+.numline .t{position:absolute;top:46px;transform:translateX(-50%);font-family:var(--mono);font-size:12px;color:var(--muted)}
+.numline .mk{position:absolute;top:0;transform:translateX(-50%);font-family:var(--mono);font-weight:600;font-size:13px;background:var(--ink);color:var(--bg);border-radius:6px;padding:1px 6px;transition:left .4s}
+.numline .mk::after{content:"";position:absolute;left:50%;top:100%;width:2px;height:12px;background:var(--ink)}
+
+/* practice + quiz */
+.prob{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.prob .q{font-weight:600;margin-bottom:10px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.opts .btn{text-align:start}
+.prob details{margin-top:8px}
+.prob summary{cursor:pointer;color:var(--teal);font-weight:600;font-size:15px}
+.sol{background:var(--surface2);border-radius:10px;padding:10px 14px;margin-top:8px;font-size:15px}
+.qz{display:flex;flex-direction:column;gap:14px}
+.qitem{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px}
+.score{font-family:var(--display);font-size:28px}
+.meter{height:10px;background:var(--surface2);border-radius:99px;overflow:hidden;margin-top:6px}
+.meter div{height:100%;background:var(--teal);width:0;transition:width .4s}
+
+
+/* theories */
+.pchain{display:flex;flex-wrap:wrap;gap:6px;align-items:center;justify-content:center;direction:ltr;margin-top:14px;min-height:56px}
+.pchain .sp{font-family:var(--mono);font-weight:600;font-size:20px;border:2px solid var(--line);border-radius:12px;padding:4px 12px;background:var(--surface)}
+.pchain .sp.cur{border-color:var(--ink);background:var(--acid-soft)}
+.pchain .sp.end{background:var(--base-soft);border-color:var(--base)}
+.pchain .ar{font-family:var(--mono);font-size:13px;color:var(--muted);display:flex;flex-direction:column;align-items:center;line-height:1.1}
+.pchain .amph{display:block;font-family:var(--body);font-size:11px;color:var(--copper);text-align:center}
+.tagk{font-size:12px;border-radius:999px;padding:0 8px;background:var(--surface2);color:var(--ink);margin-inline-start:6px}
+.toggle .btn.on .tagk{background:var(--bg);color:var(--ink)}
+
+.tabs .grp{flex:none;align-self:center;font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.04em;padding-inline:4px 0;border-inline-start:2px solid var(--line);padding-inline-start:10px}
+.tabs button.th{border-color:var(--copper)}
+.tabs button.th.on{background:var(--copper);border-color:var(--copper);color:#fff}
+.sci{display:flex;gap:16px;align-items:center;margin-bottom:18px}
+.sci .mono{flex:none;width:68px;height:68px;border-radius:50%;background:var(--ink);color:var(--bg);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-weight:600;font-size:22px}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.cgrid .q{font-size:20px}
+.nh3{display:flex;gap:4px;direction:ltr;font-family:var(--mono);font-weight:600;font-size:34px}
+.nh3 span{border-radius:8px;padding:0 6px;transition:background .3s}
+.nh3.scan span{background:var(--surface2);outline:2px dashed var(--bad)}
+.xfer2{width:100%;max-width:640px;display:block;margin:10px auto 0}
+.xfer2 text{direction:ltr;unicode-bidi:plaintext}
+table.who td,table.who th{text-align:center}
+table.who td:first-child{text-align:start}
+table.who input{width:20px;height:20px;accent-color:var(--teal)}
+
+
+/* measuring */
+.strip{display:flex;flex-direction:column;align-items:center;gap:4px}
+.meterdev{display:flex;flex-direction:column;align-items:center;gap:6px}
+.meterdev .scr{background:#1E2A22;color:#7CF29A;font-family:var(--mono);font-weight:600;font-size:30px;border-radius:12px;padding:10px 16px;border:4px solid var(--ink);min-width:120px;text-align:center;direction:ltr}
+.chart{display:grid;grid-template-columns:repeat(15,1fr);gap:4px;direction:ltr}
+.cc2{aspect-ratio:1;border:2px solid transparent;border-radius:6px;color:#fff;font-family:var(--mono);font-weight:600;font-size:clamp(11px,2vw,15px);padding:0;text-shadow:0 1px 2px rgba(0,0,0,.5)}
+.cc2.pick{border-color:var(--ink);outline:3px solid var(--ink);outline-offset:1px}
+
+@media (max-width:760px){
+  .hero,.grid2,.calc{grid-template-columns:1fr}
+  .opts{grid-template-columns:1fr}
+  .cond{grid-template-columns:1fr;justify-items:center}
+  .roles{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .lrow,.axis{grid-template-columns:90px 1fr 76px}
+  .readout{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){.stars.bump{animation:none}.p,#beamG,.phmark,.numline .mk{transition:none}}
+
+/* compact layout for the five practice questions in the water-ionization station */
+#p21{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#p21 .prob{padding:10px;border-radius:10px}
+#p21 .prob .q{margin-bottom:6px;font-size:14px;line-height:1.55}
+#p21 .opts{gap:6px;margin-top:6px}
+#p21 .opts .btn{padding:6px 8px;font-size:13px;line-height:1.4}
+#p21 .sol{padding:8px 10px;font-size:13px;line-height:1.55}
+@media(max-width:760px){
+  #p21{grid-template-columns:1fr;gap:8px}
+  #p21 .prob{padding:9px}
+  #p21 .opts{grid-template-columns:1fr 1fr}
+  #p21 .opts .btn{font-size:12px;padding:6px}
+}
+</style>
+
+<div class="wrap">
+<header class="app">
+  <div><h1>قوة الأحماض والقواعد والرقم الهيدروجيني</h1><div class="sub">الفصل 2: الأحماض والقواعد · الدرسان 2-2 و 2-3</div></div>
+  <div class="stars" id="stars" aria-live="polite"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.9 7.5.7-5.7 5 1.7 7.4L12 18.3 5.5 22l1.7-7.4-5.7-5L9 8.9z"/></svg><span id="starN">0</span></div>
+</header>
+<div class="tabs" id="tabs" role="tablist"><button role="tab" data-i="0"><b>1</b>تمهيد</button><button role="tab" data-i="1"><b>2</b>قوي أم ضعيف؟</button><button role="tab" data-i="2"><b>3</b>معركة H<sup>+</sup></button><button role="tab" data-i="3"><b>4</b>ثابت تأين الحمض</button><button role="tab" data-i="4"><b>5</b>قوة القواعد</button><button role="tab" data-i="5"><b>6</b>ثابت تأين الماء</button><button role="tab" data-i="6"><b>7</b>pH و pOH</button><button role="tab" data-i="7"><b>8</b>احسب بنفسك</button><button role="tab" data-i="8"><b>9</b>من pH إلى التركيز</button><button role="tab" data-i="9"><b>10</b>المولارية و pH</button><button role="tab" data-i="10"><b>11</b>قياس pH</button><button role="tab" data-i="11"><b>12</b>الاختبار</button></div>
+<div class="prog"><div id="progBar"></div></div>
+
+<!-- 0 INTRO: life link -->
+<div class="step" data-step="0">
+<header class="hero">
+  <div>
+    <div class="eyebrow">تمهيد · الربط مع الحياة</div>
+    <h2 style="margin-block:6px 12px">حمضان في بيتك… واحد نأكله وواحد نحذره</h2>
+    <p>في معدتك الآن <b>حمض الهيدروكلوريك HCl</b>، وهو الحمض نفسه الموجود في منظفات إزالة الترسبات، وفي مطبخك <b>الخل</b> وهو محلول <b>حمض الإيثانويك CH<sub>3</sub>COOH</b>. كلاهما حمض، فلماذا نسكب الخل على السلطة ونلبس القفازات عند استعمال المنظف؟</p>
+    <div class="idea"><b>الفكرة الرئيسة:</b> الأحماض والقواعد القوية تتأين كليًّا في المحاليل المائية المخففة، والضعيفة تتأين جزئيًّا. ويعبّر كل من pH و pOH عن تراكيز أيونات الهيدروجين والهيدروكسيد.</div>
+  </div>
+  <div class="bottles" aria-hidden="true">
+    <div class="bottle">
+      <svg viewBox="0 0 70 110"><rect x="26" y="2" width="18" height="14" rx="3" style="fill:var(--acid)"/><path d="M22 16h26v10l10 12v64a6 6 0 0 1-6 6H18a6 6 0 0 1-6-6V38l10-12z" style="fill:var(--surface2);stroke:var(--ink);stroke-width:2.5"/><rect x="16" y="54" width="38" height="30" rx="4" style="fill:var(--acid-soft);stroke:var(--acid);stroke-width:2"/><text x="35" y="74" text-anchor="middle" style="fill:var(--acid);font:700 12px var(--mono)">HCl</text></svg>
+      <span class="nm">منظف الترسبات</span><span class="sm">وحمض المعدة<br>HCl</span>
+    </div>
+    <div class="bottle">
+      <svg viewBox="0 0 70 110"><rect x="28" y="2" width="14" height="16" rx="3" style="fill:var(--copper)"/><path d="M26 18h18v14c10 6 14 12 14 20v50a6 6 0 0 1-6 6H18a6 6 0 0 1-6-6V52c0-8 4-14 14-20z" style="fill:var(--copper-soft);stroke:var(--ink);stroke-width:2.5"/><rect x="16" y="60" width="38" height="26" rx="4" style="fill:var(--surface);stroke:var(--copper);stroke-width:2"/><text x="35" y="78" text-anchor="middle" style="fill:var(--copper);font:700 13px var(--body)">خل</text></svg>
+      <span class="nm">خل المطبخ</span><span class="sm">حمض الإيثانويك<br>CH<sub>3</sub>COOH</span>
+    </div>
+  </div>
+</header>
+<section class="sec">
+  <div class="grid2">
+    <div class="act" style="margin-top:0">
+      <span class="tag">توقّع قبل أن تتعلم (1)</span>
+      <p style="font-weight:600">وضعنا الحمضين بالتركيز نفسه <span class="f">0.10 M</span> في جهاز يقيس التوصيل الكهربائي. أي المصباحين سيضيء أكثر؟</p>
+      <div class="row" style="margin-top:12px" id="pred1">
+        <button class="btn" data-v="hcl">محلول HCl</button><button class="btn" data-v="vin">محلول الخل</button><button class="btn" data-v="eq">متساويان</button>
+      </div>
+      <p class="fb" id="pred1Fb" style="margin-top:8px"></p>
+    </div>
+    <div class="act" style="margin-top:0">
+      <span class="tag">توقّع قبل أن تتعلم (2)</span>
+      <p style="font-weight:600">اضغط على المواد بالترتيب من <span class="ac">الأكثر حمضية</span> إلى <span class="bc">الأكثر قاعدية</span>:</p>
+      <div class="order" id="pred2" style="margin-top:12px"></div>
+      <div class="row" style="margin-top:10px"><button class="btn" id="pred2Reset">أعد الترتيب</button></div>
+      <p class="fb" id="pred2Fb" style="margin-top:8px"></p>
+    </div>
+  </div>
+  <div class="panel stack" style="margin-top:18px">
+    <h3>ستتعلم في هذا الدرس أن</h3>
+    <ul class="goals">
+      <li>تربط بين قوة الحمض أو القاعدة وقيمة ثابت التأين.</li>
+      <li>تقارن بين تراكيز الأيونات في محاليل الأحماض والقواعد القوية والضعيفة.</li>
+      <li>تشرح معنى المصطلحات pH و pOH، وتربط بينهما وبين ثابت التأين للماء.</li>
+      <li>تحسب قيمة pH و pOH للمحاليل المائية.</li>
+    </ul>
+    <p class="small">مراجعة: <b>مبدأ لوتشاتلييه</b> ينص على أنه إذا وقع ضغط على نظام في حالة اتزان فإن النظام يتجه في الاتجاه الذي يقلل من ذلك الضغط.</p>
+  </div>
+</section>
+</div>
+
+<!-- 1 STRONG vs WEAK -->
+<div class="step" data-step="1" hidden>
+<section class="sec">
+  <div class="sechead"><span class="num">01</span><h2>قوي أم ضعيف؟ اسأل المصباح</h2></div>
+  <p class="lead">المحلول الذي فيه أيونات أكثر يوصل الكهرباء بصورة أفضل، فيضيء المصباح أكثر. اختر محلولًا تركيزه <span class="f">0.10 M</span> وانظر داخله.</p>
+  <div class="act" style="margin-top:0">
+    <span class="tag">جهاز الموصلية</span>
+    <div class="row toggle" id="solBtns"></div>
+    <div class="cond" style="margin-top:16px">
+      <svg class="bulb" viewBox="0 0 150 190" aria-hidden="true">
+        <circle id="halo" cx="75" cy="70" r="70" style="fill:var(--glow)" opacity="0"/>
+        <path d="M75 12a50 50 0 0 0-28 91c6 5 9 11 9 18v8h38v-8c0-7 3-13 9-18a50 50 0 0 0-28-91z" id="glass" style="fill:var(--surface2);stroke:var(--ink);stroke-width:3"/>
+        <path d="M62 128V96l13-14 13 14v32" style="fill:none;stroke:var(--ink);stroke-width:2.5"/>
+        <rect x="54" y="130" width="42" height="10" rx="3" style="fill:var(--muted)"/><rect x="56" y="142" width="38" height="10" rx="3" style="fill:var(--muted)"/><rect x="60" y="154" width="30" height="10" rx="3" style="fill:var(--muted)"/>
+        <path d="M75 164v20" style="stroke:var(--ink);stroke-width:3"/>
+      </svg>
+      <div>
+        <div class="beaker" id="beaker"></div>
+        <div class="legend"><span><i style="background:var(--muted)"></i>جزيء حمض غير متأين</span><span><i style="background:var(--acid)"></i>أيون هيدرونيوم <span class="f">H<sub>3</sub>O<sup>+</sup></span></span><span><i style="background:var(--teal)"></i>الأيون السالب</span></div>
+      </div>
+    </div>
+    <div class="meterbox"><div class="row" style="justify-content:space-between"><b id="solName"></b><span class="f" id="solPct"></span></div><div class="bar"><div id="solBar"></div></div></div>
+    <p class="status fb" id="solFb" style="margin-top:10px"></p>
+    <p class="small" id="solNote"></p>
+  </div>
+  <div class="grid2" style="margin-top:18px">
+    <div class="def" style="margin:0"><b>الحمض القوي:</b> الحمض الذي يتأين كليًّا في المحلول المائي. ينتج أكبر عدد من الأيونات، لذا فهو موصل جيد للكهرباء. معادلته بسهم واحد: <span class="f">HCl + H<sub>2</sub>O → H<sub>3</sub>O<sup>+</sup> + Cl<sup>−</sup></span></div>
+    <div class="def" style="margin:0"><b>الحمض الضعيف:</b> الحمض الذي يتأين جزئيًّا فقط في المحلول المائي المخفف. ينتج أيونات أقل فلا يوصل الكهرباء جيدًا. معادلته بسهمي اتزان: <span class="f">HF ⇌ H<sup>+</sup> + F<sup>−</sup></span></div>
+  </div>
+  <div class="act">
+    <span class="tag">صنّف أحماض الجدول 2-3</span>
+    <p class="small">اضغط على الحمض ثم على «قوي» أو «ضعيف». لاحظ نوع السهم في معادلة كل منهما.</p>
+    <div class="sortq" id="sortQ" style="margin-top:10px"></div>
+    <div class="row" style="margin-top:10px"><button class="btn" id="toStrong" style="border-color:var(--acid)">قوي (يتأين كليًّا) →</button><button class="btn" id="toWeak" style="border-color:var(--teal)">ضعيف (يتأين جزئيًّا) ⇌</button></div>
+    <p class="fb" id="sortFb" style="margin-top:6px"></p>
+    <div class="bins"><div class="bin"><h4 class="ac">أحماض قوية</h4><div class="items" id="binS"></div></div><div class="bin"><h4 style="color:var(--teal)">أحماض ضعيفة</h4><div class="items" id="binW"></div></div></div>
+  </div>
+</section>
+</div>
+
+<!-- 2 TUG OF WAR -->
+<div class="step" data-step="2" hidden>
+<section class="sec">
+  <div class="sechead"><span class="num">02</span><h2>معركة جذب أيون الهيدروجين</h2></div>
+  <p class="lead">تفسّر نظرية برونستد–لوري قوة الحمض: في المحلول قاعدتان تتنافسان على أيون <span class="f">H<sup>+</sup></span>، الماء في التفاعل الأمامي، والقاعدة المرافقة في التفاعل العكسي. القاعدة الأقوى تفوز.</p>
+  <div class="act" style="margin-top:0">
+    <span class="tag">من يجذب H<sup>+</sup> أقوى؟</span>
+    <div class="row toggle" id="tugBtns"><button class="btn on" data-m="s">حمض قوي HX (مثل HCl)</button><button class="btn" data-m="w">حمض ضعيف HY (مثل حمض الإيثانويك)</button></div>
+    <svg class="tug" id="tug" viewBox="0 0 640 170" aria-hidden="true"></svg>
+    <div class="eqbox" id="tugEq"></div>
+    <div class="lbls" id="tugL"></div>
+    <p class="status fb" id="tugFb" style="margin-top:12px"></p>
+    <div class="row"><button class="btn pri" id="tugGo">ابدأ المعركة</button></div>
+  </div>
+  <div class="callout">القاعدة: كلما كان الحمض <b>أقوى</b> كانت قاعدته المرافقة <b>أضعف</b>، والعكس صحيح.</div>
+  <div class="act">
+    <span class="tag">حدّد الأزواج المترافقة (سؤال 18)</span>
+    <p class="small">اختر دور كل مادة، ثم اضغط «تحقق».</p>
+    <div class="stack" id="roleQ" style="margin-top:10px"></div>
+  </div>
+  <div class="act">
+    <span class="tag">ماذا قرأت؟</span>
+    <div class="stack" id="bQ"></div>
+  </div>
+</section>
+</div>
+
+<!-- 3 Ka -->
+<div class="step" data-step="3" hidden>
+<section class="sec">
+  <div class="sechead"><span class="num">03</span><h2>ثابت تأين الحمض <span class="f">K<sub>a</sub></span></h2></div>
+  <p class="lead">نظرية برونستد–لوري تفسّر القوة، لكنها لا تعطينا رقمًا. ثابت الاتزان يعطي قياسًا كميًّا لدرجة تأين الحمض الضعيف.</p>
+  <div class="def"><b>ثابت تأين الحمض <span class="f">K<sub>a</sub></span>:</b> قيمة ثابت الاتزان لتأين الحمض الضعيف. تركيز الماء ثابت في المحاليل المخففة، لذا يُدمج مع <span class="f">K<sub>eq</sub></span>: <span class="f">K<sub>eq</sub>[H<sub>2</sub>O] = K<sub>a</sub></span>. وقيم <span class="f">K<sub>a</sub></span> للأحماض الأضعف أصغر.</div>
+  <div class="formula"><span>مثال: حمض الهيدروسيانيك</span><span class="f">K<sub>a</sub> = [H<sub>3</sub>O<sup>+</sup>][CN<sup>−</sup>] / [HCN] = 6.2 × 10<sup>−10</sup></span></div>
+  <div class="act">
+    <span class="tag">ابنِ تعبير الثابت</span>
+    <p class="small">اختر الحمض، ثم اضغط على كل مادة لتنقلها: مرة إلى البسط، ومرتين إلى المقام، وثلاثًا لإبعادها. تذكّر أن الماء السائل لا يظهر في التعبير.</p>
+    <div class="row toggle" id="kaPick" style="margin-top:10px"></div>
+    <div class="kb" id="kaB" style="margin-top:12px"></div>
+  </div>
+  <div class="act">
+    <span class="tag">سلّم القوة (الجدول 2-4)</span>
+    <p class="small">المقياس لوغاريتمي: كل خطوة تعني قيمة أكبر 10 مرات. الحمض ذو <span class="f">K<sub>a</sub></span> الأكبر يعطي أيونات أكثر فيوصل الكهرباء أفضل.</p>
+    <div class="ladder" id="ladder" style="margin-top:12px"></div>
+    <div class="axis" style="margin-top:4px"><span></span><div class="ticks"><span>10<sup>−20</sup></span><span>10<sup>−15</sup></span><span>10<sup>−10</sup></span><span>10<sup>−5</sup></span><span>1</span></div><span></span></div>
+    <div class="prob" style="margin-top:14px"><div class="q">سؤال 20: رتّب الأحماض السبعة تصاعديًّا حسب توصيلها للكهرباء.</div><details><summary>الإجابة</summary><div class="sol"><span class="f">HS<sup>−</sup> &lt; HCO<sub>3</sub><sup>−</sup> &lt; HCN &lt; H<sub>2</sub>S &lt; H<sub>2</sub>CO<sub>3</sub> &lt; CH<sub>3</sub>COOH &lt; HF</span></div></details></div>
+  </div>
+  <div class="act">
+    <span class="tag">تجربة: ماذا يحدث عند التخفيف؟</span>
+    <p>غيّر تركيز حمض الإيثانويك <span class="f">(K<sub>a</sub> = 1.8 × 10<sup>−5</sup>)</span> وراقب نسبة التأين المئوية.</p>
+    <label for="dil" class="small" style="display:block;margin-top:10px">التركيز: <b class="f" id="dilC"></b></label>
+    <input type="range" id="dil" min="0" max="100" value="100">
+    <div class="res" style="margin-top:10px"><div><span class="k">نسبة التأين</span><span class="f" id="dilP"></span></div><div><span class="k">تركيز <span class="f">H<sub>3</sub>O<sup>+</sup></span></span><span class="f" id="dilH"></span></div></div>
+    <p class="small" style="margin-top:8px">قيم الكتاب التقريبية: <span class="f">6.0 M</span> ← 0.1%، <span class="f">1.0 M</span> ← 0.4%، <span class="f">0.1 M</span> ← 1.3%.</p>
+    <p class="callout" style="margin-top:10px">عند التخفيف يميل الاتزان نحو تكوين أيونات أكثر (مبدأ لوتشاتلييه)، فتزداد نسبة التأين. ولأن تركيز <span class="f">H<sub>3</sub>O<sup>+</sup></span> نفسه يقل كثيرًا، <b>نغسل الحمض المنسكب على الجلد بكمية كبيرة من الماء.</b></p>
+  </div>
+  <div class="life">
+    <span class="lt">واقع الكيمياء في الحياة: نواة الخوخ</span>
+    <p>سيانيد الهيدروجين <span class="f">HCN</span> غاز سام يوجد في عوادم المركبات ودخان التبغ. وتحتوي نوى الكرز والخوخ على مادة تتحول إلى حمض الهيدروسيانيك في الجهاز الهضمي إذا أُكلت النواة، لكن لب الثمرة آمن. لاحظ أن <span class="f">K<sub>a</sub></span> له صغير جدًا، فهو حمض <b>ضعيف</b> لكنه <b>سام</b>: قوة الحمض لا تعني خطورته.</p>
+  </div>
+  <div class="sechead" style="margin-top:28px"><h3>مسائل تدريبية</h3></div>
+  <div class="stack" id="p11"></div>
+</section>
+</div>
+
+<!-- 4 BASES -->
+<div class="step" data-step="4" hidden>
+<section class="sec">
+  <div class="sechead"><span class="num">04</span><h2>قوة القواعد</h2></div>
+  <p class="lead">تطلق القواعد أيونات <span class="f">OH<sup>−</sup></span>، ويعتمد توصيلها للكهرباء على مقدار ما تنتجه من هذه الأيونات.</p>
+  <div class="grid2">
+    <div class="def" style="margin:0"><b>القاعدة القوية:</b> تتفكك كليًّا منتجة أيونات فلزية وأيونات هيدروكسيد، مثل هيدروكسيدات الفلزات: <span class="f">NaOH → Na<sup>+</sup> + OH<sup>−</sup></span></div>
+    <div class="def" style="margin:0"><b>القاعدة الضعيفة:</b> تتأين جزئيًّا فقط في المحاليل المائية المخففة، مثل ميثيل أمين: <span class="f">CH<sub>3</sub>NH<sub>2</sub> + H<sub>2</sub>O ⇌ CH<sub>3</sub>NH<sub>3</sub><sup>+</sup> + OH<sup>−</sup></span></div>
+  </div>
+  <div class="grid2" style="margin-top:18px">
+    <div class="panel">
+      <h3 style="margin-bottom:8px">الجدول 2-5: قواعد قوية</h3>
+      <div class="table-wrap"><table><tbody>
+        <tr><td class="f">NaOH → Na<sup>+</sup> + OH<sup>−</sup></td></tr><tr><td class="f">KOH → K<sup>+</sup> + OH<sup>−</sup></td></tr><tr><td class="f">RbOH → Rb<sup>+</sup> + OH<sup>−</sup></td></tr><tr><td class="f">CsOH → Cs<sup>+</sup> + OH<sup>−</sup></td></tr><tr><td class="f">Ca(OH)<sub>2</sub> → Ca<sup>2+</sup> + 2OH<sup>−</sup></td></tr><tr><td class="f">Ba(OH)<sub>2</sub> → Ba<sup>2+</sup> + 2OH<sup>−</sup></td></tr>
+      </tbody></table></div>
+      <p class="small" style="margin-top:8px">هيدروكسيد الكالسيوم قليل الذوبان <span class="f">(K<sub>sp</sub> = 6.5 × 10<sup>−6</sup>)</span>، ومع ذلك فهو قاعدة قوية لأن كل ما يذوب منه يتفكك كليًّا. قلة الذوبان لا تعني الضعف.</p>
+    </div>
+    <div class="panel">
+      <h3 style="margin-bottom:8px">الجدول 2-6: ثوابت تأين قواعد ضعيفة</h3>
+      <p class="small">كلما صغرت قيمة <span class="f">K<sub>b</sub></span> كانت القاعدة أضعف.</p>
+      <div class="ladder" id="kbLadder" style="margin-top:10px"></div>
+    </div>
+  </div>
+  <div class="def" style="margin-top:18px"><b>ثابت تأين القاعدة <span class="f">K<sub>b</sub></span>:</b> قيمة ثابت الاتزان لتأين القاعدة الضعيفة. مثال: <span class="f">K<sub>b</sub> = [CH<sub>3</sub>NH<sub>3</sub><sup>+</sup>][OH<sup>−</sup>] / [CH<sub>3</sub>NH<sub>2</sub>]</span></div>
+  <div class="act">
+    <span class="tag">ابنِ تعبير <span class="f">K<sub>b</sub></span> (سؤال 14)</span>
+    <p class="small">الطريقة نفسها: مرة للبسط، ومرتان للمقام، وثلاث للإبعاد.</p>
+    <div class="row toggle" id="kbPick" style="margin-top:10px"></div>
+    <div class="kb" id="kbB" style="margin-top:12px"></div>
+  </div>
+  <div class="life">
+    <span class="lt">في خزانة التنظيف</span>
+    <p>منظف الأفران يحتوي على هيدروكسيد الصوديوم (قاعدة قوية)، ومنظف الأمونيا المنزلي يحتوي على الأمونيا <span class="f">NH<sub>3</sub></span> (قاعدة ضعيفة، <span class="f">K<sub>b</sub> = 2.5 × 10<sup>−5</sup></span>). لذلك يحتاج منظف الأفران إلى قفازات وحذر أكبر.</p>
+  </div>
+  <div class="act">
+    <span class="tag">ماذا قرأت؟</span>
+    <div class="stack" id="baseQ"></div>
+  </div>
+</section>
+</div>
+
+<!-- 5 Kw -->
+<div class="step" data-step="5" hidden>
+<section class="sec">
+  <div class="sechead"><span class="num">05</span><h2>ثابت التأين للماء <span class="f">K<sub>w</sub></span></h2></div>
+  <p class="lead"><b>الربط مع الحياة:</b> في لعبة السيسو (التوازن) عندما يرتفع أحد الطرفين يهبط الآخر. تراكيز أيونات <span class="f">H<sup>+</sup></span> و<span class="f">OH<sup>−</sup></span> في المحاليل المائية تسلك السلوك نفسه.</p>
+  <div class="grid2">
+    <div class="def" style="margin:0"><b>التأين الذاتي للماء:</b> يسلك جزيء ماء سلوك الحمض والآخر سلوك القاعدة، فتنتج أعداد متساوية من الأيونات: <span class="f">H<sub>2</sub>O ⇌ H<sup>+</sup> + OH<sup>−</sup></span></div>
+    <div class="def" style="margin:0"><b>ثابت تأين الماء:</b> <span class="f">K<sub>w</sub> = [H<sup>+</sup>][OH<sup>−</sup>] = 1.0 × 10<sup>−14</sup></span> عند <span class="f">298 K</span>. في الماء النقي <span class="f">[H<sup>+</sup>] = [OH<sup>−</sup>] = 1.0 × 10<sup>−7</sup> M</span>.</div>
+  </div>
+  <div class="act">
+    <span class="tag">سيسو الأيونات</span>
+    <p>حرّك المؤشر لتضيف أيونات <span class="f">H<sup>+</sup></span> (حمض) أو <span class="f">OH<sup>−</sup></span> (قاعدة). راقب حاصل الضرب.</p>
+    <svg class="seesaw" viewBox="0 0 560 200" aria-hidden="true">
+      <path d="M280 120 L250 190 L310 190 Z" style="fill:var(--surface2);stroke:var(--ink);stroke-width:2.5"/>
+      <g id="beamG" style="transform-origin:280px 120px">
+        <rect x="40" y="114" width="480" height="12" rx="6" style="fill:var(--ink)"/>
+        <circle id="seatH" cx="90" cy="84" r="30" style="fill:var(--acid)"/>
+        <text x="90" y="90" text-anchor="middle" style="fill:#fff;font:700 18px var(--mono)">H⁺</text>
+        <circle id="seatOH" cx="470" cy="84" r="30" style="fill:var(--base)"/>
+        <text x="470" y="90" text-anchor="middle" style="fill:#fff;font:700 16px var(--mono)">OH⁻</text>
+      </g>
+    </svg>
+    <label for="kwS" class="small" style="display:block;margin-top:8px">نحرّك المؤشر نحو: <b class="ac">حمض</b> ← → <b class="bc">قاعدة</b></label>
+    <input type="range" id="kwS" min="1" max="13" step="0.5" value="7" style="direction:ltr">
+    <div class="readout"><div><span class="small">[H<sup>+</sup>]</span><br><span class="f" id="kwH"></span></div><div><span class="small">[OH<sup>−</sup>]</span><br><span class="f" id="kwOH"></span></div><div><span class="small">حاصل الضرب</span><br><span class="f" id="kwP"></span></div></div>
+    <p style="margin-top:10px;text-align:center">المحلول: <span class="statepill" id="kwState"></span></p>
+    <p class="callout">وفق مبدأ لوتشاتلييه: عند إضافة <span class="f">H<sup>+</sup></span> تتفاعل مع <span class="f">OH<sup>−</sup></span> لتكوين ماء، فيقل تركيز <span class="f">OH<sup>−</sup></span> ويبقى <b><span class="f">K<sub>w</sub></span> ثابتًا</b>.</p>
+  </div>
+  <div class="panel" style="margin-top:18px">
+    <h3 style="margin-bottom:8px">مثال 2-1: كوب القهوة</h3>
+    <p>إذا كان <span class="f">[H<sup>+</sup>] = 1.0 × 10<sup>−5</sup> M</span> في كوب قهوة عند <span class="f">298 K</span>، فما <span class="f">[OH<sup>−</sup>]</span>؟ وهل القهوة حمضية أم قاعدية؟</p>
+    <div class="stack" style="margin-top:10px">
+      <div class="sol"><b>1. تحليل المسألة:</b> <span class="f">[H<sup>+</sup>]</span> أكبر من <span class="f">1.0 × 10<sup>−7</sup></span>، فنتوقع <span class="f">[OH<sup>−</sup>]</span> أقل من <span class="f">1.0 × 10<sup>−7</sup></span>.</div>
+      <div class="sol"><b>2. الحساب:</b> <span class="f">[OH<sup>−</sup>] = K<sub>w</sub> / [H<sup>+</sup>] = (1.0 × 10<sup>−14</sup>) / (1.0 × 10<sup>−5</sup>) = 1.0 × 10<sup>−9</sup> mol/L</span></div>
+      <div class="sol"><b>3. تقويم الإجابة:</b> <span class="f">[H<sup>+</sup>] &gt; [OH<sup>−</sup>]</span>، لذا فالقهوة <b class="ac">حمضية</b>.</div>
+    </div>
+  </div>
+  <div class="sechead" style="margin-top:28px"><h3>مسائل تدريبية (21 و 22)</h3></div>
+  <div class="stack" id="p21"></div>
+</section>
+</div>
+
+<!-- 6 pH -->
+<div class="step" data-step="6" hidden>
+<section class="sec">
+  <div class="sechead"><span class="num">06</span><h2>الرقم الهيدروجيني <span class="f">pH</span> والرقم الهيدروكسيدي <span class="f">pOH</span></h2></div>
+  <p class="lead">تراكيز <span class="f">H<sup>+</sup></span> أرقام صغيرة جدًا، لذلك تبنّى الكيميائيون تدريجًا لوغاريتميًّا أسهل.</p>
+  <div class="grid2">
+    <div class="def" style="margin:0"><b>الرقم الهيدروجيني pH:</b> سالب لوغاريتم تركيز أيون الهيدروجين. <span class="f" style="font-size:20px">pH = −log[H<sup>+</sup>]</span></div>
+    <div class="def" style="margin:0"><b>الرقم الهيدروكسيدي pOH:</b> سالب لوغاريتم تركيز أيون الهيدروكسيد. <span class="f" style="font-size:20px">pOH = −log[OH<sup>−</sup>]</span></div>
+  </div>
+  <div class="formula" style="margin-top:14px"><span>العلاقة بينهما عند <span class="f">298 K</span></span><span class="f">pH + pOH = 14.00</span></div>
+  <div class="act">
+    <span class="tag">تدريج pH في حياتك (الشكل 2-14)</span>
+    <p class="small">اضغط على أي مادة. القيم تقريبية.</p>
+    <div class="phwrap"><div class="phscale" id="phScale"></div></div>
+    <div class="info" id="phInfo" style="margin-top:10px"><b>اختر مادة من التدريج</b><p class="small">لتعرف قيمة pH وتركيز أيونات الهيدروجين فيها.</p></div>
+    <div class="callout" id="predBack"></div>
+  </div>
+  <div class="grid2" style="margin-top:18px">
+    <div class="panel stack">
+      <h3>تذكّر</h3>
+      <p>عند <span class="f">298 K</span>: المحاليل الحمضية <span class="f">pH &lt; 7</span>، والمتعادلة <span class="f">pH = 7</span>، والقاعدية <span class="f">pH &gt; 7</span>.</p>
+      <p>تغيّر <span class="f">pH</span> بمقدار وحدة واحدة يعني تغيّر تركيز الأيونات <b>10 مرات</b>. المحلول الذي <span class="f">pH</span> له 3 فيه عشرة أضعاف تركيز <span class="f">H<sup>+</sup></span> في محلول <span class="f">pH</span> له 4.</p>
+    </div>
+    <div class="act" style="margin-top:0">
+      <span class="tag">كم مرة؟</span>
+      <p style="font-weight:600">سؤال الشكل 2-14: أيهما يحتوي على تركيز أعلى من <span class="f">H<sup>+</sup></span>: ماء البحر <span class="f">(pH 8)</span> أم منظف الأمونيا المنزلي <span class="f">(pH 12)</span>؟ وكم مرة؟</p>
+      <div class="opts" id="timesQ"></div>
+      <p class="fb" id="timesFb" style="margin-top:8px"></p>
+    </div>
+  </div>
+  <div class="life">
+    <span class="lt">الربط مع الصحة ومع المهن</span>
+    <p>قيمة pH للدم نحو 7.4. يُعد تناول الكحول أو المخدرات من أهم أسباب زيادة حموضة الدم، ويحدث ذلك أيضًا عند عدم قدرة الجسم على إنتاج كميات كافية من الأنسولين فترتفع نسبة الكيتونات (مركبات حمضية) في الدم. ويحتاج <b>عامل المشتل</b> إلى معرفة حموضة التربة المناسبة لكل نوع من النباتات.</p>
+  </div>
+</section>
+</div>
+
+<!-- 7 CALCULATOR -->
+<div class="step" data-step="7" hidden>
+<section class="sec">
+  <div class="sechead"><span class="num">07</span><h2>احسب بنفسك</h2></div>
+  <p class="lead">أدخل أي قيمة واحدة من الأربع، وستحسب الأداة الثلاث الباقية خطوة بخطوة وتضع المحلول على الشكل 2-15.</p>
+  <div class="act" style="margin-top:0">
+    <span class="tag">حاسبة المحاليل</span>
+    <div class="row" style="margin-top:4px"><span class="small">أمثلة الكتاب:</span><button class="btn" id="ex22">مثال 2-2: محلول متعادل</button><button class="btn" id="ex23">مثال 2-3: منظف الأمونيا</button><button class="btn" id="exCof">كوب القهوة</button></div>
+    <div class="calc" style="margin-top:14px">
+      <div class="stack">
+        <label for="cType" class="small">أعرف قيمة:</label>
+        <div class="inrow">
+          <select id="cType"><option value="h">[H+]</option><option value="oh">[OH−]</option><option value="ph">pH</option><option value="poh">pOH</option></select>
+        </div>
+        <div class="inrow" id="concIn"><input id="cM" type="text" inputmode="decimal" value="4.0" aria-label="المعامل"><span class="f">× 10^</span><input id="cE" type="text" inputmode="numeric" value="-3" aria-label="الأس"><span class="f">M</span></div>
+        <div class="inrow" id="pIn" hidden><input id="cP" type="text" inputmode="decimal" value="3.70" aria-label="القيمة"></div>
+        <p class="fb no" id="cErr"></p>
+      </div>
+      <div class="res" id="cRes"></div>
+    </div>
+    <div class="numline" id="nl"></div>
+    <div class="stack" id="cSteps" style="margin-top:14px"></div>
+  </div>
+  <div class="sechead" style="margin-top:28px"><h3>مسائل تدريبية (23 إلى 27)</h3></div>
+  <p class="lead">جميع المحاليل عند <span class="f">298 K</span>. يمكنك التحقق من الحل بالحاسبة أعلاه.</p>
+  <div class="stack" id="p23"></div>
+</section>
+</div>
+
+<!-- 8b FROM pH -->
+<div class="step" data-step="8b" hidden>
+<section class="sec">
+  <div class="sechead"><span class="num">08</span><h2>من pH إلى تركيز الأيونات</h2></div>
+  <p class="lead">قد تحتاج أحيانًا إلى حساب تركيز أيونات <span class="f">H<sup>+</sup></span> و<span class="f">OH<sup>−</sup></span> من خلال معرفة قيمة pH للمحلول. نعكس المعادلة: بدل أن نأخذ اللوغاريتم نرفع العدد 10 إلى الأس السالب.</p>
+  <div class="grid2">
+    <div class="formula" style="margin:0"><span>من pH</span><span class="f">[H<sup>+</sup>] = 10<sup>−pH</sup></span></div>
+    <div class="formula" style="margin:0"><span>من pOH</span><span class="f">[OH<sup>−</sup>] = 10<sup>−pOH</sup></span></div>
+  </div>
+  <div class="act">
+    <span class="tag">مثال 2-4: دم الإنسان السليم</span>
+    <p>ما قيم <span class="f">[H<sup>+</sup>]</span> و<span class="f">[OH<sup>−</sup>]</span> في دم الشخص السليم الذي قيمة pH له <span class="f">7.40</span>، مع افتراض أن درجة حرارة الدم <span class="f">298 K</span>؟ اكشف الخطوات واحدة تلو الأخرى، وفكّر في كل خطوة قبل كشفها.</p>
+    <div class="stack" id="ex24" style="margin-top:12px"></div>
+    <div class="row" style="margin-top:10px"><button class="btn pri" id="ex24Next">اكشف الخطوة التالية</button><button class="btn" id="ex24Reset">ابدأ من جديد</button></div>
+  </div>
+  <div class="callout">طريقة سريعة: إذا كان pH عددًا صحيحًا مثل 5.00، فإن <span class="f">[H<sup>+</sup>] = 1.0 × 10<sup>−5</sup> M</span> مباشرة. وإذا كان فيه كسر، نستعمل زر <span class="f">10<sup>x</sup></span> في الحاسبة العلمية.</div>
+  <div class="sechead" style="margin-top:28px"><h3>مسائل تدريبية (29): احسب [H⁺] و [OH⁻]</h3></div>
+  <p class="lead">يمكنك التحقق من الحل بإدخال قيمة pH في «احسب بنفسك».</p>
+  <div class="stack" id="p29"></div>
+</section>
+</div>
+
+<!-- 8c MOLARITY -->
+<div class="step" data-step="8c" hidden>
+<section class="sec">
+  <div class="sechead"><span class="num">09</span><h2>المولارية و pH للأحماض والقواعد القوية</h2></div>
+  <p class="lead">تأمل الدورقين في الشكل 17-2: أحدهما فيه <span class="f">HCl</span> تركيزه <span class="f">0.1 M</span>، والآخر <span class="f">NaOH</span> تركيزه <span class="f">0.1 M</span>. الأحماض والقواعد القوية توجد بتركيز 100% تقريبًا في صورة أيونات، لذلك يكفي التركيز المكتوب على الدورق لمعرفة pH.</p>
+  <div class="grid2">
+    <div class="def" style="margin:0"><b class="ac">الحمض القوي الأحادي البروتون:</b> كل جزيء <span class="f">HCl</span> ينتج أيون <span class="f">H<sup>+</sup></span> واحدًا، إذن <span class="f">[H<sup>+</sup>]</span> = مولارية الحمض.<br><span class="f">HCl → H<sup>+</sup> + Cl<sup>−</sup></span></div>
+    <div class="def" style="margin:0"><b class="bc">القاعدة القوية:</b> كل وحدة <span class="f">NaOH</span> تنتج أيون <span class="f">OH<sup>−</sup></span> واحدًا. أما <span class="f">Ca(OH)<sub>2</sub></span> فتنتج أيونين، فيكون <span class="f">[OH<sup>−</sup>]</span> ضعف مولاريتها.<br><span class="f">7.5 × 10<sup>−4</sup> M × 2 = 1.5 × 10<sup>−3</sup> M</span></div>
+  </div>
+  <div class="act">
+    <span class="tag">من الملصق إلى pH</span>
+    <p>اختر المادة واكتب المولارية المكتوبة على الدورق.</p>
+    <div class="row toggle" id="molPick" style="margin-top:10px"></div>
+    <div class="inrow" style="justify-content:center;margin-top:12px"><span class="small" style="direction:rtl">المولارية:</span><input id="molM" type="text" inputmode="decimal" value="1.0" aria-label="المعامل"><span class="f">× 10^</span><input id="molE" type="text" inputmode="numeric" value="-1" aria-label="الأس"><span class="f">M</span></div>
+    <div class="stack" id="molOut" style="margin-top:12px"></div>
+  </div>
+  <div class="act">
+    <span class="tag">ماذا قرأت؟</span>
+    <div class="stack" id="molQ"></div>
+  </div>
+  <div class="sechead" style="margin-top:28px"><h3>التقويم 2-3: السؤال 41</h3></div>
+  <p class="lead">احسب قيمة pH في المحاليل الآتية:</p>
+  <div class="stack" id="p41"></div>
+</section>
+</div>
+
+<!-- 8d MEASURE -->
+<div class="step" data-step="8d" hidden>
+<section class="sec">
+  <div class="sechead"><span class="num">10</span><h2>قياس الرقم الهيدروجيني</h2></div>
+  <p class="lead">يعد ورق تبّاع الشمس الذي استعملته في التجربة الاستهلالية مثالًا على نوع من أوراق كاشف الحموضة. فكل ورقة منها مشبعة بمادة أو أكثر تسمى <b>الكواشف</b>، يتغير لونها اعتمادًا على تركيز أيونات الهيدروجين في المحلول.</p>
+  <div class="grid2">
+    <div class="def" style="margin:0"><b>ورقة الكاشف العام:</b> نغمسها في المحلول ونقارن لونها الجديد بمجموعة الألوان المعيارية، فنحصل على قيمة <b>تقريبية</b> للـ pH (الشكل 18-2 a).</div>
+    <div class="def" style="margin:0"><b>مقياس pH الرقمي:</b> نضع أقطابه في المحلول فيعطي قراءة <b>مباشرة ودقيقة</b> (الشكل 18-2 b). هو أدق من ورق تبّاع الشمس.</div>
+  </div>
+  <div class="act">
+    <span class="tag">اغمس الورقة ثم تحقق بالمقياس</span>
+    <p>اختر عينة واغمس فيها ورقة الكاشف العام. قارن لونها بالألوان المعيارية واضغط على الرقم الأقرب، ثم استعمل المقياس الرقمي لتتحقق.</p>
+    <div class="row toggle" id="msPick" style="margin-top:10px"></div>
+    <div class="grid2" style="margin-top:14px;align-items:center">
+      <div class="row" style="justify-content:center;gap:28px">
+        <div class="strip"><svg viewBox="0 0 40 140" style="width:44px;height:150px"><rect x="8" y="4" width="24" height="132" rx="3" style="fill:var(--surface);stroke:var(--ink);stroke-width:2"/><rect id="uPad" x="8" y="80" width="24" height="56" rx="3" style="fill:#F2EEE6;stroke:var(--ink);stroke-width:2;transition:fill .9s"/></svg><span class="small">ورقة الكاشف</span></div>
+        <div class="meterdev"><div class="scr" id="msScr">--.--</div><span class="small">مقياس pH</span></div>
+      </div>
+      <div class="stack">
+        <div class="row"><button class="btn pri" id="msDip">اغمس الورقة</button><button class="btn" id="msRead">اقرأ بالمقياس</button></div>
+        <p class="fb" id="msFb"></p>
+      </div>
+    </div>
+    <div class="chart" id="msChart" style="margin-top:12px"></div>
+  </div>
+  <div class="act">
+    <span class="tag">ماذا قرأت؟</span>
+    <div class="stack" id="msQ"></div>
+  </div>
+</section>
+</div>
+
+<!-- 8 QUIZ -->
+<div class="step" data-step="8" hidden>
+<section class="sec">
+  <div class="sechead"><span class="num">11</span><h2>اختبر نفسك</h2></div>
+  <p class="lead">أسئلة من التقويم 2-2 وأسئلة على الدرس 2-3. لكل سؤال محاولة واحدة.</p>
+  <div class="panel row" style="justify-content:space-between;margin-bottom:14px">
+    <div><div class="score" id="qScore"></div><div class="meter" style="width:220px;max-width:100%"><div id="qMeter"></div></div></div>
+    <button class="btn" id="qReset">ابدأ من جديد</button>
+  </div>
+  <div class="qz" id="qz"></div>
+</section>
+</div>
+
+<footer>المصدر: كتاب الكيمياء، وزارة التعليم، الفصل 2 الأحماض والقواعد: الدرس 2-2 قوة الأحماض والقواعد (ص 67–71)، والدرس 2-3 أيونات الهيدروجين والرقم الهيدروجيني (ص 72–80).</footer>
+</div>
+<div class="bottom"><div class="in"><button class="btn" id="prevB">السابق ←</button><span class="count" id="stepN">1 / 12</span><button class="btn pri" id="nextB">التالي →</button></div></div>
+<script>
+const $ = s => document.querySelector(s);
+const MIN = '−';
+/* chem('H3O^+') -> H<sub>3</sub>O<sup>+</sup> ; chem('CO3^2-') */
+const chem = s => { const [b, c] = s.split('^'); return b.replace(/(\d+)/g,'<sub>$1</sub>') + (c ? '<sup>'+c.replace('-',MIN)+'</sup>' : ''); };
+const F = s => `<span class="f">${chem(s)}</span>`;
+function sci(x, sig=2){ if (x === 0) return '0'; let e = Math.floor(Math.log10(x)); let m = x / 10**e;
+  m = +m.toFixed(sig-1); if (m >= 10){ m = m/10; e++; }
+  return `${m.toFixed(sig-1)} × 10<sup>${e<0?MIN+(-e):e}</sup>`; }
+const S = (x,sig) => `<span class="f">${sci(x,sig)}</span>`;
+const fx = x => (Math.round(x*100)/100).toFixed(2);
+
+/* shell */
+let starCount = 0; const earned = new Set();
+function award(key){ if (earned.has(key)) return; earned.add(key); starCount++; $('#starN').textContent = starCount;
+  const el = $('#stars'); el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); }
+const steps = [...document.querySelectorAll('.step')], tabsB = [...document.querySelectorAll('#tabs button')]; let cur = 0;
+const onEnter = {};
+function go(i){ cur = Math.max(0, Math.min(steps.length-1, i)); steps.forEach((s,k)=> s.hidden = k!==cur);
+  tabsB.forEach((b,k)=>{ b.classList.toggle('on',k===cur); b.setAttribute('aria-selected',k===cur); if(k<cur) b.classList.add('done'); });
+  tabsB[cur].scrollIntoView({inline:'center',block:'nearest'}); $('#stepN').textContent = `${cur+1} / ${steps.length}`;
+  $('#progBar').style.width = ((cur+1)/steps.length*100)+'%'; $('#prevB').disabled = cur===0;
+  $('#nextB').disabled = cur===steps.length-1; if (onEnter[cur]) onEnter[cur](); }
+tabsB.forEach(b => b.onclick = () => go(+b.dataset.i));
+$('#prevB').onclick = () => go(cur-1); $('#nextB').onclick = () => go(cur+1);
+
+/* practice MCQ with retries + worked solution */
+function mcq(root, items, key){
+  items.forEach(([q,opts,ans,why,sol],i) => { const d = document.createElement('div'); d.className = 'prob';
+    d.innerHTML = `<div class="q">${q}</div><div class="opts">${opts.map((o,j)=>`<button class="btn" data-j="${j}">${o}</button>`).join('')}</div><p class="fb" style="margin-top:8px"></p>${sol?`<details><summary>الحل خطوة بخطوة</summary><div class="sol">${sol}</div></details>`:''}`;
+    const fb = d.querySelector('.fb');
+    d.querySelectorAll('.opts .btn').forEach(b => b.onclick = () => { if (d.dataset.done) return; const ok = +b.dataset.j === ans;
+      b.classList.add(ok?'ok':'no'); fb.className = 'fb '+(ok?'ok':'no');
+      if (ok){ d.dataset.done = 1; award(key+i); fb.innerHTML = 'صحيح. ' + (why||''); } else fb.textContent = 'ليست هذه. حاول مرة أخرى.'; });
+    root.appendChild(d); });
+}
+
+/* ---------- 0: predictions ---------- */
+let pred1 = null; const pred2 = [];
+const P2 = [['القهوة',5.0],['منظف الأفران',13.5],['عصير الليمون',2.3],['حليب الماغنسيا',10.5],['الماء النقي',7.0]];
+document.querySelectorAll('#pred1 .btn').forEach(b => b.onclick = () => {
+  pred1 = b.dataset.v; document.querySelectorAll('#pred1 .btn').forEach(x => x.classList.toggle('on', x===b));
+  document.querySelectorAll('#pred1 .btn').forEach(x => x.style.borderColor = x===b ? 'var(--ink)' : '');
+  $('#pred1Fb').className = 'fb'; $('#pred1Fb').textContent = 'سجّلنا توقعك. ستختبره بنفسك في تبويب «قوي أم ضعيف؟».'; award('pred1'); });
+function p2Draw(){ $('#pred2').innerHTML = P2.map(([n],i) => { const k = pred2.indexOf(i); return `<button class="btn" data-i="${i}" ${k>=0?'disabled':''}>${k>=0?`<span class="k">${k+1}</span>`:''}${n}</button>`; }).join('');
+  $('#pred2').querySelectorAll('.btn').forEach(b => b.onclick = () => { pred2.push(+b.dataset.i); p2Draw();
+    if (pred2.length === P2.length){ $('#pred2Fb').className = 'fb'; $('#pred2Fb').textContent = 'سجّلنا ترتيبك. ستعرف إن كان صحيحًا في تبويب «pH و pOH».'; award('pred2'); } }); }
+$('#pred2Reset').onclick = () => { pred2.length = 0; $('#pred2Fb').textContent = ''; p2Draw(); };
+p2Draw();
+
+/* ---------- 1: conductivity ---------- */
+const SOLS = [
+  {k:'hcl', n:'حمض الهيدروكلوريك', f:'HCl', an:'Cl^-', a:1},
+  {k:'hno3', n:'حمض النيتريك', f:'HNO3', an:'NO3^-', a:1},
+  {k:'hf', n:'حمض الهيدروفلوريك', f:'HF', an:'F^-', Ka:6.3e-4},
+  {k:'ac', n:'حمض الإيثانويك (الخل)', f:'CH3COOH', an:'CH3COO^-', Ka:1.8e-5},
+  {k:'hcn', n:'حمض الهيدروسيانيك', f:'HCN', an:'CN^-', Ka:6.2e-10}];
+const alpha = (Ka, C) => ((-Ka + Math.sqrt(Ka*Ka + 4*Ka*C))/2)/C;
+SOLS.forEach(s => { if (!s.a) s.a = alpha(s.Ka, 0.10); });
+/* deterministic scattered positions */
+function seeded(n){ let x = n*9301 + 49297; return () => (x = (x*9301 + 49297) % 233280) / 233280; }
+function spots(count, seed){ const r = seeded(seed), pts = []; let guard = 0;
+  while (pts.length < count && guard++ < 4000){ const a = r()*Math.PI*2, d = Math.sqrt(r())*0.38, x = 0.5 + d*Math.cos(a), y = 0.5 + d*Math.sin(a);
+    if (pts.every(p => Math.hypot(p[0]-x, p[1]-y) > 0.105)) pts.push([x,y]); }
+  while (pts.length < count) pts.push([0.3 + r()*0.4, 0.3 + r()*0.4]); return pts; }
+const N = 12;
+$('#solBtns').innerHTML = SOLS.map((s,i) => `<button class="btn" data-i="${i}"><span class="f">${chem(s.f)}</span></button>`).join('');
+function showSol(i){ const s = SOLS[i];
+  document.querySelectorAll('#solBtns .btn').forEach((b,k) => b.classList.toggle('on', k===i));
+  const strong = s.a >= 0.999, ion = strong ? N : (s.a >= 0.005 ? Math.max(1, Math.round(N*s.a)) : 0);
+  const mol = N - ion, pts = spots(mol + ion*2, i+3); let h = '', k = 0;
+  for (let j=0;j<mol;j++){ const [x,y] = pts[k++]; h += `<div class="p mol" style="left:${x*100}%;top:${y*100}%">${chem(s.f).length>30?'HA':chem(s.f)}</div>`; }
+  for (let j=0;j<ion;j++){ let [x,y] = pts[k++]; h += `<div class="p h3o" style="left:${x*100}%;top:${y*100}%">+</div>`; [x,y] = pts[k++]; h += `<div class="p an" style="left:${x*100}%;top:${y*100}%">−</div>`; }
+  $('#beaker').innerHTML = h;
+  const b = strong ? 1 : Math.max(0.06, (Math.log10(s.a)+5)/5*0.6);
+  $('#halo').setAttribute('opacity', (b*0.75).toFixed(2));
+  $('#glass').style.fill = 'var(--glow)'; $('#glass').style.fillOpacity = (0.12 + 0.88*b).toFixed(2);
+  $('#solBar').style.width = (b*100)+'%';
+  $('#solName').innerHTML = `${s.n} <span class="f">0.10 M</span>`;
+  $('#solPct').textContent = strong ? 'نسبة التأين ≈ 100%' : `نسبة التأين ≈ ${s.a*100 < 0.1 ? (s.a*100).toFixed(3) : (s.a*100).toFixed(1)}%`;
+  const fb = $('#solFb');
+  fb.className = 'fb ' + (strong ? 'ok' : '');
+  fb.innerHTML = strong ? `حمض قوي: كل جزيئات ${F(s.f)} تأينت إلى ${F('H3O^+')} و${F(s.an)}، فالمصباح يضيء بشدة.` : `حمض ضعيف: معظم ${F(s.f)} بقي جزيئات، وقليل منه تأين، فالإضاءة ${b<0.2?'خافتة جدًا':'خافتة'}.`;
+  $('#solNote').innerHTML = strong ? '' : ion ? `للتوضيح رسمنا ${ion===1?'زوجًا واحدًا':ion+' أزواج'} من الأيونات بين ${N} وحدة. في المحلول الحقيقي زوج واحد تقريبًا لكل ${Math.round(1/s.a)} جزيئًا.` : `لم نرسم أي أيونات لأن النسبة الحقيقية نحو زوج واحد لكل ${Math.round(1/s.a).toLocaleString('en-US')} جزيء.`;
+  if ((s.k==='hcl' || s.k==='ac') && pred1){ const right = pred1==='hcl';
+    fb.innerHTML += `<br><span class="${right?'ac':''}" style="color:${right?'var(--good)':'var(--copper)'}">توقعك في التمهيد: ${pred1==='hcl'?'HCl أكثر إضاءة':pred1==='vin'?'الخل أكثر إضاءة':'متساويان'}، ${right?'وهو صحيح!':'قارنه الآن بما تراه: التركيز متساوٍ لكن عدد الأيونات مختلف.'}</span>`;
+    if (right) award('pred1ok'); }
+  award('sol'+i); }
+document.querySelectorAll('#solBtns .btn').forEach(b => b.onclick = () => showSol(+b.dataset.i));
+showSol(0);
+
+/* sorter */
+const SORT = [['HCl','HCl → H^+ + Cl^-',1,'الهيدروكلوريك'],['HF','HF ⇌ H^+ + F^-',0,'الهيدروفلوريك'],['HI','HI → H^+ + I^-',1,'الهيدرويوديك'],['CH3COOH','CH3COOH ⇌ H^+ + C2H3O2^-',0,'الإيثانويك'],['HClO4','HClO4 → H^+ + ClO4^-',1,'البيركلوريك'],['H2S','H2S ⇌ H^+ + HS^-',0,'كبريتيد الهيدروجين'],['HNO3','HNO3 → H^+ + NO3^-',1,'النيتريك'],['H2CO3','H2CO3 ⇌ H^+ + HCO3^-',0,'الكربونيك'],['H2SO4','H2SO4 → H^+ + HSO4^-',1,'الكبريتيك'],['HClO','HClO ⇌ H^+ + ClO^-',0,'الهيبوكلوروز']];
+const eqH = e => e.split(' ').map(t => /^[→⇌+]$/.test(t) ? ` ${t} ` : chem(t)).join('');
+let sSel = null; const sDone = new Set();
+function sortDraw(){ $('#sortQ').innerHTML = SORT.map((s,i) => sDone.has(i) ? '' : `<button class="btn${sSel===i?' pri':''}" data-i="${i}">حمض ${s[3]} <span class="f">${chem(s[0])}</span></button>`).join('');
+  $('#sortQ').querySelectorAll('.btn').forEach(b => b.onclick = () => { sSel = +b.dataset.i; sortDraw(); }); }
+function sortTo(strong){ const fb = $('#sortFb'); if (sSel===null){ fb.className='fb'; fb.textContent = 'اختر حمضًا أولًا.'; return; }
+  const s = SORT[sSel];
+  if (!!s[2] === strong){ sDone.add(sSel); award('sort'+sSel);
+    (strong?$('#binS'):$('#binW')).insertAdjacentHTML('beforeend', `<span class="chip"><span class="f">${eqH(s[1])}</span></span>`);
+    fb.className = 'fb ok'; fb.innerHTML = sDone.size===SORT.length ? 'أحسنت! صنّفت الأحماض العشرة. لاحظ: القوية بسهم واحد →، والضعيفة بسهمي اتزان ⇌.' : 'صحيح.'; sSel = null; }
+  else { fb.className = 'fb no'; fb.textContent = strong ? 'ليس قويًّا. هذا الحمض يتأين جزئيًّا فقط.' : 'ليس ضعيفًا. هذا الحمض يتأين كليًّا في المحلول المخفف.'; }
+  sortDraw(); }
+$('#toStrong').onclick = () => sortTo(true); $('#toWeak').onclick = () => sortTo(false);
+sortDraw();
+
+/* ---------- 2: tug of war ---------- */
+let tugM = 's';
+const TUG = {
+  s:{acid:'HX', cb:'X^-', eq:['HX','+','H2O','→','H3O^+','+','X^-'], lab:['حمض','قاعدة','حمض مرافق','قاعدة مرافقة'], win:'w',
+     fb:`الماء قاعدة أقوى من ${F('X^-')} في جذب ${F('H^+')}، فيتأين ${F('HX')} بنسبة 100% تقريبًا. الاتزان يقع كليًّا تقريبًا إلى اليمين، لذلك تُكتب المعادلة بسهم واحد.`},
+  w:{acid:'CH3COOH', cb:'CH3COO^-', eq:['CH3COOH','+','H2O','⇌','H3O^+','+','CH3COO^-'], lab:['حمض','قاعدة','حمض مرافق','قاعدة مرافقة'], win:'c',
+     fb:`القاعدة المرافقة ${F('CH3COO^-')} أقوى من الماء في جذب ${F('H^+')}، فيبقى معظم الحمض جزيئات. يميل الاتزان إلى اليسار، لذلك تحتوي المعادلة على سهمي اتزان.`}};
+function tugDraw(pos){ const t = TUG[tugM];
+  const svgT = s => s.replace(/(\d+)/g,'<tspan baseline-shift="sub" font-size="11">$1</tspan>').replace(/\^(\S+)/,'<tspan baseline-shift="super" font-size="11">$1</tspan>').replace('-','⁻');
+  $('#tug').innerHTML = `
+    <line x1="120" y1="95" x2="520" y2="95" style="stroke:var(--copper);stroke-width:6;stroke-linecap:round"/>
+    <circle cx="70" cy="95" r="52" style="fill:var(--base-soft);stroke:var(--base);stroke-width:3"/>
+    <text x="70" y="102" text-anchor="middle" style="fill:var(--base);font:700 20px var(--mono)">H<tspan baseline-shift="sub" font-size="13">2</tspan>O</text>
+    <text x="70" y="166" text-anchor="middle" style="fill:var(--muted);font:600 13px var(--body)">القاعدة (الماء)</text>
+    <circle cx="570" cy="95" r="52" style="fill:var(--surface2);stroke:var(--teal);stroke-width:3"/>
+    <text x="570" y="102" text-anchor="middle" style="fill:var(--teal);font:700 ${tugM==='s'?20:14}px var(--mono)">${svgT(t.cb)}</text>
+    <text x="570" y="166" text-anchor="middle" style="fill:var(--muted);font:600 13px var(--body)">القاعدة المرافقة</text>
+    <line x1="320" y1="70" x2="320" y2="120" style="stroke:var(--line);stroke-width:2;stroke-dasharray:4 4"/>
+    <g id="hball" style="transition:transform 1.2s cubic-bezier(.3,1.4,.5,1);transform:translateX(${pos}px)">
+      <circle cx="320" cy="95" r="22" style="fill:var(--acid)"/>
+      <text x="320" y="101" text-anchor="middle" style="fill:#fff;font:700 16px var(--mono)">H⁺</text></g>`;
+  $('#tugEq').innerHTML = t.eq.map(x => /^[+→⇌]$/.test(x) ? ` ${x} ` : chem(x)).join('');
+  $('#tugL').innerHTML = t.lab.map((l,i) => `<span class="${i%2===0?'l-a':'l-b'}">${l}</span>`).join('');
+}
+document.querySelectorAll('#tugBtns .btn').forEach(b => b.onclick = () => { tugM = b.dataset.m;
+  document.querySelectorAll('#tugBtns .btn').forEach(x => x.classList.toggle('on', x===b)); tugDraw(0); $('#tugFb').textContent = ''; });
+$('#tugGo').onclick = () => { tugDraw(0); requestAnimationFrame(() => requestAnimationFrame(() => {
+  const g = document.getElementById('hball'); g.style.transform = `translateX(${TUG[tugM].win==='w' ? -170 : 170}px)`; }));
+  $('#tugFb').className = 'fb ok'; $('#tugFb').innerHTML = TUG[tugM].fb; award('tug'+tugM); };
+tugDraw(0);
+
+/* role labeler (Q18) */
+const ROLES = ['حمض','قاعدة','حمض مرافق','قاعدة مرافقة'];
+const RQ = [
+  {t:'a', sp:['HCOOH','H2O','HCOO^-','H3O^+'], ops:['+','⇌','+'], ans:[0,1,3,2]},
+  {t:'b', sp:['NH3','H2O','NH4^+','OH^-'], ops:['+','⇌','+'], ans:[1,0,2,3]}];
+RQ.forEach((q,qi) => { const d = document.createElement('div'); d.className = 'prob';
+  d.innerHTML = `<div class="q">${q.t}. <span class="f">${q.sp.map((s,i)=>chem(s)+(i<3?` ${q.ops[i]} `:'')).join('')}</span></div>
+    <div class="roles">${q.sp.map((s,i)=>`<div class="cell"><span class="f">${chem(s)}</span><select aria-label="دور ${s}"><option value="-1">اختر</option>${ROLES.map((r,j)=>`<option value="${j}">${r}</option>`).join('')}</select></div>`).join('')}</div>
+    <div class="row" style="margin-top:10px"><button class="btn pri">تحقق</button><span class="fb"></span></div>`;
+  const sels = [...d.querySelectorAll('select')], fb = d.querySelector('.fb');
+  d.querySelector('.btn').onclick = () => { let ok = 0; sels.forEach((s,i) => { const r = +s.value === q.ans[i]; s.className = r ? 'ok' : 'no'; ok += r; });
+    fb.className = 'fb ' + (ok===4?'ok':'no');
+    fb.textContent = ok===4 ? `ممتاز! الزوجان: ${q.t==='a'?'HCOOH/HCOO⁻ و H₃O⁺/H₂O':'NH₄⁺/NH₃ و H₂O/OH⁻'}` : `${ok} من 4 صحيحة. تذكّر: الحمض يعطي H⁺ فيتحول إلى قاعدته المرافقة.`;
+    if (ok===4) award('role'+qi); };
+  $('#roleQ').appendChild(d); });
+
+mcq($('#bQ'), [
+  ['لخّص أهم اختلاف بين الأحماض القوية والضعيفة عند تفاعلها مع الماء (القاعدة).', ['القوي يتأين كليًّا ومعادلته بسهم واحد، والضعيف يتأين جزئيًّا ومعادلته بسهمي اتزان','القوي أكثر تركيزًا دائمًا من الضعيف','الضعيف لا يتفاعل مع الماء إطلاقًا','كلاهما يتأين كليًّا لكن الضعيف أبطأ'], 0, 'القوة تعني درجة التأين وليس التركيز.'],
+  ['سؤال 17: ما العلاقة بين قوة الحمض الضعيف وقوة قاعدته المرافقة؟', ['طردية','عكسية','لا علاقة','متساويتان دائمًا'], 1, 'كلما كان الحمض أضعف كانت قاعدته المرافقة أقوى.'],
+  [`في تأين ${F('HCl')} في الماء، أي القاعدتين أقوى؟`, [F('H2O'), F('Cl^-'), 'متساويتان', F('H3O^+')], 0, `الماء يجذب ${F('H^+')} أكثر من ${F('Cl^-')}، لذلك تتجه المعادلة إلى اليمين.`],
+], 'bq');
+
+/* ---------- 3: K builder ---------- */
+function kBuilder(pickRoot, root, items, K, key){
+  let cur = 0, st = [];
+  pickRoot.innerHTML = items.map((it,i) => `<button class="btn" data-i="${i}">${it.n}</button>`).join('');
+  pickRoot.querySelectorAll('.btn').forEach(b => b.onclick = () => set(+b.dataset.i));
+  function set(i){ cur = i; st = items[i].sp.map(() => 0); pickRoot.querySelectorAll('.btn').forEach((b,k)=>b.classList.toggle('on',k===i)); draw(); }
+  function draw(msg, ok){ const it = items[cur];
+    const num = it.sp.filter((s,i)=>st[i]===1).map(s=>`[${chem(s)}]`).join(''), den = it.sp.filter((s,i)=>st[i]===2).map(s=>`[${chem(s)}]`).join('');
+    root.innerHTML = `<div class="small">المعادلة: <span class="f">${it.sp.map((s,i)=>chem(s)+(i===0?' + ':i===1?' ⇌ ':i===2?' + ':'')).join('')}</span></div>
+      <div class="row spec">${it.sp.map((s,i)=>`<button class="btn ${st[i]===1?'st-n':st[i]===2?'st-d':''}" data-i="${i}">${chem(s)}</button>`).join('')}</div>
+      <div class="row" style="gap:14px"><span class="f" style="font-size:22px">${K} =</span><span class="fraction"><span class="num2">${num||'<span class="slot">البسط</span>'}</span><span class="ln"></span><span class="den">${den||'<span class="slot">المقام</span>'}</span></span></div>
+      <div class="row"><button class="btn pri" id="${key}Chk">تحقق</button><span class="fb ${ok===undefined?'':ok?'ok':'no'}">${msg||''}</span></div>`;
+    root.querySelectorAll('.spec .btn').forEach(b => b.onclick = () => { const i = +b.dataset.i; st[i] = (st[i]+1)%3; draw(); });
+    root.querySelector('#'+key+'Chk').onclick = () => {
+      const good = it.sp.every((s,i) => st[i] === (it.num.includes(i)?1:it.den.includes(i)?2:0));
+      if (good){ award(key+cur); draw(`صحيح! ${it.k ? `وقيمته ${S(it.k)}.` : ''} الماء السائل لا يظهر في التعبير.`, true); }
+      else if (st[1]) draw('الماء السائل تركيزه ثابت، فلا يُكتب في التعبير.', false);
+      else draw('راجع: النواتج (الأيونات) في البسط، والمادة المتفاعلة غير المتأينة في المقام.', false); };
+  }
+  set(0);
+}
+const KA = [
+  {n:'حمض الكلوروز HClO₂', sp:['HClO2','H2O','H3O^+','ClO2^-'], num:[2,3], den:[0]},
+  {n:'حمض النيتروز HNO₂', sp:['HNO2','H2O','H3O^+','NO2^-'], num:[2,3], den:[0]},
+  {n:'حمض الهيبويوديك HIO', sp:['HIO','H2O','H3O^+','IO^-'], num:[2,3], den:[0]},
+  {n:'حمض الهيدروسيانيك HCN', sp:['HCN','H2O','H3O^+','CN^-'], num:[2,3], den:[0], k:6.2e-10},
+  {n:'حمض الإيثانويك', sp:['CH3COOH','H2O','H3O^+','CH3COO^-'], num:[2,3], den:[0], k:1.8e-5}];
+kBuilder($('#kaPick'), $('#kaB'), KA, 'K<sub>a</sub>', 'ka');
+
+function ladder(root, rows, lo, color){ root.innerHTML = rows.map(([n,f,k]) => `<div class="lrow"><span class="nm">${n}<br><span class="f small">${chem(f)}</span></span><div class="track"><div class="fill" style="width:${Math.max(2,(Math.log10(k)-lo)/(-lo)*100)}%;background:${color}"></div></div><span class="v">${sci(k)}</span></div>`).join(''); }
+ladder($('#ladder'), [['الهيدروفلوريك','HF',6.3e-4],['الإيثانويك','CH3COOH',1.8e-5],['الكربونيك (1)','H2CO3',4.5e-7],['كبريتيد الهيدروجين (1)','H2S',8.9e-8],['الهيدروسيانيك','HCN',6.2e-10],['الكربونيك (2)','HCO3^-',4.7e-11],['كبريتيد الهيدروجين (2)','HS^-',1e-19]], -20, 'var(--acid)');
+ladder($('#kbLadder'), [['إيثيل أمين','C2H5NH2',5.0e-4],['ميثيل أمين','CH3NH2',4.3e-4],['الأمونيا','NH3',2.5e-5],['الأنيلين','C6H5NH2',4.3e-10]], -12, 'var(--base)');
+$('#kbLadder').insertAdjacentHTML('afterend','<p class="small" style="margin-top:6px">طول الشريط على مقياس لوغاريتمي من 10<sup>−12</sup> إلى 1.</p>');
+
+/* dilution */
+function dil(){ const v = +$('#dil').value, C = 10 ** (-3 + v/100*(Math.log10(6)+3)), Ka = 1.8e-5, a = alpha(Ka, C);
+  $('#dilC').innerHTML = `${C >= 1 ? C.toFixed(1) : C >= 0.1 ? C.toFixed(2) : C.toFixed(3)} M`;
+  $('#dilP').textContent = (a*100).toFixed(a*100 < 1 ? 2 : 1) + '%';
+  $('#dilH').innerHTML = sci(a*C) + ' M';
+  if (v < 40) award('dil'); }
+$('#dil').oninput = dil; dil();
+
+mcq($('#p11'), [
+  [`11a. ما تعبير ثابت تأين حمض الكلوروز ${F('HClO2')}؟`, [`<span class="f">[HClO<sub>2</sub>] / [H<sub>3</sub>O<sup>+</sup>][ClO<sub>2</sub><sup>−</sup>]</span>`, `<span class="f">[H<sub>3</sub>O<sup>+</sup>][ClO<sub>2</sub><sup>−</sup>] / [HClO<sub>2</sub>]</span>`, `<span class="f">[H<sub>3</sub>O<sup>+</sup>][ClO<sub>2</sub><sup>−</sup>] / [HClO<sub>2</sub>][H<sub>2</sub>O]</span>`, `<span class="f">[H<sub>3</sub>O<sup>+</sup>] / [HClO<sub>2</sub>]</span>`], 1, 'الأيونات الناتجة في البسط والحمض غير المتأين في المقام.'],
+  [`12. ما معادلة التأين الأولى لحمض السلينوز ${F('H2SeO3')}؟`, [`<span class="f">H<sub>2</sub>SeO<sub>3</sub> + H<sub>2</sub>O ⇌ H<sub>3</sub>O<sup>+</sup> + HSeO<sub>3</sub><sup>−</sup></span>`, `<span class="f">H<sub>2</sub>SeO<sub>3</sub> → 2H<sup>+</sup> + SeO<sub>3</sub><sup>2−</sup></span>`, `<span class="f">HSeO<sub>3</sub><sup>−</sup> + H<sub>2</sub>O ⇌ H<sub>3</sub>O<sup>+</sup> + SeO<sub>3</sub><sup>2−</sup></span>`, `<span class="f">H<sub>2</sub>SeO<sub>3</sub> + H<sub>2</sub>O ⇌ H<sub>3</sub>SeO<sub>3</sub><sup>+</sup> + OH<sup>−</sup></span>`], 0, `التأين الثاني: ${F('HSeO3^-')} + ${F('H2O')} ⇌ ${F('H3O^+')} + ${F('SeO3^2-')}. الحمض المتعدد البروتونات يفقد بروتونًا واحدًا في كل خطوة.`],
+  [`13. تحفيز: إذا كان <span class="f">K<sub>a</sub> = [AsO<sub>4</sub><sup>3−</sup>][H<sub>3</sub>O<sup>+</sup>] / [HAsO<sub>4</sub><sup>2−</sup>]</span>، فما المعادلة الموزونة؟`, [`<span class="f">HAsO<sub>4</sub><sup>2−</sup> + H<sub>2</sub>O ⇌ H<sub>3</sub>O<sup>+</sup> + AsO<sub>4</sub><sup>3−</sup></span>`, `<span class="f">AsO<sub>4</sub><sup>3−</sup> + H<sub>3</sub>O<sup>+</sup> ⇌ HAsO<sub>4</sub><sup>2−</sup> + H<sub>2</sub>O</span>`, `<span class="f">H<sub>3</sub>AsO<sub>4</sub> ⇌ 3H<sup>+</sup> + AsO<sub>4</sub><sup>3−</sup></span>`, `<span class="f">HAsO<sub>4</sub><sup>2−</sup> + OH<sup>−</sup> ⇌ AsO<sub>4</sub><sup>3−</sup> + H<sub>2</sub>O</span>`], 0, 'ما في المقام متفاعل، وما في البسط نواتج، ونضيف الماء متفاعلًا.'],
+], 'p11');
+
+/* ---------- 4: bases ---------- */
+const KB = [
+  {n:'أيون الكربونات CO₃²⁻', sp:['CO3^2-','H2O','HCO3^-','OH^-'], num:[2,3], den:[0]},
+  {n:'هكسيل أمين', sp:['C6H13NH2','H2O','C6H13NH3^+','OH^-'], num:[2,3], den:[0]},
+  {n:'بروبيل أمين', sp:['C3H7NH2','H2O','C3H7NH3^+','OH^-'], num:[2,3], den:[0]},
+  {n:'الأمونيا', sp:['NH3','H2O','NH4^+','OH^-'], num:[2,3], den:[0], k:2.5e-5}];
+kBuilder($('#kbPick'), $('#kbB'), KB, 'K<sub>b</sub>', 'kb');
+mcq($('#baseQ'), [
+  ['هيدروكسيد الكالسيوم قليل الذوبان في الماء. هل هو قاعدة ضعيفة؟', ['نعم، لأنه ينتج قليلًا من OH⁻','لا، هو قاعدة قوية لأن ما يذوب منه يتفكك كليًّا','نعم، لأن Ksp له صغير','لا، لأنه ليس هيدروكسيدًا'], 1, 'القوة تتعلق بدرجة التفكك، لا بمقدار الذوبان.'],
+  ['سؤال 19: ماذا نستفيد من أن Kb للأنيلين يساوي 4.3 × 10⁻¹⁰؟', ['الأنيلين قاعدة قوية','الأنيلين قاعدة ضعيفة جدًا، ويميل اتزان تأينها بشدة نحو اليسار','الأنيلين حمض ضعيف','تركيز OH⁻ في محلوله أكبر من تركيز الأنيلين'], 1, 'قيمة Kb صغيرة جدًا، فمعظم الأنيلين يبقى جزيئات غير متأينة.'],
+  ['أي قواعد الجدول 2-6 أقوى؟', ['الأنيلين','الأمونيا','ميثيل أمين','إيثيل أمين'], 3, 'له أكبر قيمة Kb = 5.0 × 10⁻⁴.'],
+  [`15. تحفيز: أي معادلة يكون فيها ${F('PO4^3-')} قاعدة في التفاعل الأمامي و${F('OH^-')} قاعدة في التفاعل العكسي؟`, [`<span class="f">PO<sub>4</sub><sup>3−</sup> + H<sub>2</sub>O ⇌ HPO<sub>4</sub><sup>2−</sup> + OH<sup>−</sup></span>`, `<span class="f">HPO<sub>4</sub><sup>2−</sup> ⇌ H<sup>+</sup> + PO<sub>4</sub><sup>3−</sup></span>`, `<span class="f">PO<sub>4</sub><sup>3−</sup> + H<sub>3</sub>O<sup>+</sup> ⇌ HPO<sub>4</sub><sup>2−</sup> + H<sub>2</sub>O</span>`, `<span class="f">H<sub>3</sub>PO<sub>4</sub> + OH<sup>−</sup> ⇌ H<sub>2</sub>PO<sub>4</sub><sup>−</sup> + H<sub>2</sub>O</span>`], 0, `${F('PO4^3-')} يستقبل ${F('H^+')} من الماء، و${F('OH^-')} يستطيع استقباله في الاتجاه العكسي.`],
+], 'base');
+
+/* ---------- 5: Kw seesaw ---------- */
+function kw(){ const pH = +$('#kwS').value, h = 10**-pH, oh = 10**-(14-pH);
+  document.getElementById('beamG').style.transform = `rotate(${(pH-7)*2.4}deg)`;
+  $('#kwH').innerHTML = sci(h) + ' M'; $('#kwOH').innerHTML = sci(oh) + ' M'; $('#kwP').innerHTML = sci(h*oh);
+  const st = $('#kwState'); if (pH < 7){ st.className = 'statepill a'; st.textContent = 'حمضي: [H⁺] > [OH⁻]'; } else if (pH > 7){ st.className = 'statepill b'; st.textContent = 'قاعدي: [OH⁻] > [H⁺]'; } else { st.className = 'statepill n'; st.textContent = 'متعادل: [H⁺] = [OH⁻]'; }
+  if (pH !== 7) award('kw' + (pH<7?'a':'b')); }
+$('#kwS').oninput = kw; kw();
+
+mcq($('#p21'), [
+  [`21a. <span class="f">[H<sup>+</sup>] = 1.0 × 10<sup>−13</sup> M</span>`, [`[OH⁻] = 1.0 × 10⁻¹ M، قاعدي`, `[OH⁻] = 1.0 × 10⁻¹ M، حمضي`, `[OH⁻] = 1.0 × 10⁻¹³ M، متعادل`, `[OH⁻] = 1.0 × 10¹ M، قاعدي`], 0, '[OH⁻] أكبر من [H⁺]، فالمحلول قاعدي.', `[OH⁻] = K<sub>w</sub> / [H⁺] = (1.0 × 10⁻¹⁴) / (1.0 × 10⁻¹³) = 1.0 × 10⁻¹ M`],
+  [`21b. <span class="f">[OH<sup>−</sup>] = 1.0 × 10<sup>−7</sup> M</span>`, [`[H⁺] = 1.0 × 10⁻⁷ M، متعادل`, `[H⁺] = 1.0 × 10⁻⁷ M، قاعدي`, `[H⁺] = 1.0 × 10⁻¹⁴ M، حمضي`, `[H⁺] = 1.0 × 10⁷ M، حمضي`], 0, 'التركيزان متساويان.', `[H⁺] = (1.0 × 10⁻¹⁴) / (1.0 × 10⁻⁷) = 1.0 × 10⁻⁷ M`],
+  [`21c. <span class="f">[OH<sup>−</sup>] = 1.0 × 10<sup>−3</sup> M</span>`, [`[H⁺] = 1.0 × 10⁻¹¹ M، حمضي`, `[H⁺] = 1.0 × 10⁻¹¹ M، قاعدي`, `[H⁺] = 1.0 × 10⁻³ M، متعادل`, `[H⁺] = 1.0 × 10⁻¹⁷ M، قاعدي`], 1, '[OH⁻] أكبر من [H⁺].', `[H⁺] = (1.0 × 10⁻¹⁴) / (1.0 × 10⁻³) = 1.0 × 10⁻¹¹ M`],
+  [`21d. <span class="f">[H<sup>+</sup>] = 4.0 × 10<sup>−5</sup> M</span>`, [`[OH⁻] = 2.5 × 10⁻¹⁰ M، حمضي`, `[OH⁻] = 2.5 × 10⁻⁶ M، قاعدي`, `[OH⁻] = 4.0 × 10⁻⁹ M، حمضي`, `[OH⁻] = 2.5 × 10⁻¹⁰ M، قاعدي`], 0, '[H⁺] أكبر من [OH⁻].', `[OH⁻] = (1.0 × 10⁻¹⁴) / (4.0 × 10⁻⁵) = 0.25 × 10⁻⁹ = 2.5 × 10⁻¹⁰ M`],
+  [`22. تحفيز: كم عدد أيونات <span class="f">H<sup>+</sup></span> في <span class="f">300 mL</span> من الماء النقي عند <span class="f">298 K</span>؟`, ['6.0 × 10²³ أيون','1.8 × 10¹⁶ أيون','3.0 × 10⁻⁸ أيون','1.0 × 10⁻⁷ أيون'], 1, 'وعدد أيونات OH⁻ مساوٍ له تمامًا.', `عدد المولات = 1.0 × 10⁻⁷ mol/L × 0.300 L = 3.0 × 10⁻⁸ mol<br>عدد الأيونات = 3.0 × 10⁻⁸ × 6.02 × 10²³ = 1.8 × 10¹⁶ أيون`],
+], 'p21');
+
+/* ---------- 6: pH scale ---------- */
+const PHI = [['حمض البطارية',0.5],['حمض المعدة',1.5],['عصير الليمون',2.3],['مشروبات غازية',3.0],['الخل',3.5],['طماطم',4.3],['قهوة',5.0],['ماء نقي',7.0],['دم',7.4],['ماء البحر',8.0],['مضاد حموضة',9.3],['منظف',10.0],['حليب الماغنسيا',10.5],['منظف أمونيا منزلي',12.0],['منظف أفران',13.5]];
+const X = p => `calc(3% + ${p/14*94}%)`;
+const LANES = [[4,76],[44,36],[172,30],[208,66]];
+(function(){ let h = '<div class="phbar"></div>';
+  for (let i=0;i<=14;i++) h += `<span class="phtick" style="left:${X(i)}">${i}</span>`;
+  PHI.forEach(([n,p],i) => { const L = [0,2,1,3][i%4], [top, hh] = LANES[L];
+    h += `<button class="phitem ${L<2?'up':'dn'}" data-i="${i}" style="left:${X(p)};top:${top}px;--h:${hh}px">${n}</button>`; });
+  h += '<div class="phmark" id="phMark" hidden></div>';
+  $('#phScale').innerHTML = h;
+  $('#phScale').querySelectorAll('.phitem').forEach(b => b.onclick = () => { const [n,p] = PHI[+b.dataset.i];
+    $('#phScale').querySelectorAll('.phitem').forEach(x => x.classList.toggle('on', x===b));
+    const m = $('#phMark'); m.hidden = false; m.style.left = X(p);
+    const h = 10**-p, kind = p < 7 ? '<span class="statepill a">حمضي</span>' : p > 7 ? '<span class="statepill b">قاعدي</span>' : '<span class="statepill n">متعادل</span>';
+    const ratio = 10**Math.abs(7-p), rtxt = ratio >= 10 ? Math.round(ratio).toLocaleString('en-US') : ratio.toFixed(1);
+    $('#phInfo').innerHTML = `<div class="row"><b style="font-size:20px">${n}</b>${kind}</div>
+      <p><span class="f">pH ≈ ${p.toFixed(1)}</span> ← <span class="f">[H<sup>+</sup>] ≈ ${sci(h)} M</span> و <span class="f">pOH ≈ ${(14-p).toFixed(1)}</span></p>
+      <p class="small">${p===7 ? 'تركيز أيونات H⁺ يساوي تركيز أيونات OH⁻.' : p<7 ? `تركيز H⁺ فيها أكبر من الماء النقي بنحو <b class="f">${rtxt}</b> مرة.` : `تركيز H⁺ فيها أقل من الماء النقي بنحو <b class="f">${rtxt}</b> مرة.`}</p>`;
+    award('ph'+b.dataset.i); }); })();
+onEnter[6] = () => { const el = $('#predBack'); const correct = [2,0,4,3,1];
+  if (pred2.length < P2.length){ el.innerHTML = 'الترتيب الصحيح من الأكثر حمضية: عصير الليمون (2.3) ← القهوة (5.0) ← الماء النقي (7.0) ← حليب الماغنسيا (10.5) ← منظف الأفران (13.5).'; return; }
+  const hit = pred2.filter((v,i) => v === correct[i]).length;
+  el.innerHTML = `عودة إلى توقعك في التمهيد: رتّبت <b>${pred2.map(i=>P2[i][0]).join(' ← ')}</b>. أصبت في ${hit} من 5 مواقع. الترتيب الصحيح: ${correct.map(i=>`${P2[i][0]} (${P2[i][1].toFixed(1)})`).join(' ← ')}.`;
+  if (hit === 5) award('pred2ok'); };
+mcq($('#timesQ'), [['', ['ماء البحر، أكبر بـ 4 مرات','ماء البحر، أكبر بـ 10 000 مرة','المنظف، أكبر بـ 10 000 مرة','المنظف، أكبر بـ 4 مرات'], 1, 'الفرق 4 وحدات، أي 10⁴ = 10 000 مرة، وpH الأقل يعني H⁺ أكثر.']], 'times');
+$('#timesQ').querySelector('.q').remove();
+
+/* ---------- 7: calculator ---------- */
+const KIND = p => p < 7 ? '<span class="statepill a">حمضي</span>' : p > 7 ? '<span class="statepill b">قاعدي</span>' : '<span class="statepill n">متعادل</span>';
+$('#nl').innerHTML = '<div class="ln"></div>' + Array.from({length:15},(_,i)=>`<span class="t" style="left:${X(i)}">${i}</span>`).join('') + '<span class="mk" id="nlMk"></span>';
+function calc(){ const t = $('#cType').value, conc = t==='h' || t==='oh';
+  $('#concIn').hidden = !conc; $('#pIn').hidden = conc; const err = $('#cErr'); err.textContent = '';
+  let h;
+  if (conc){ const m = parseFloat($('#cM').value.replace('٫','.')), e = parseInt($('#cE').value.replace('−','-'),10);
+    if (!(m > 0) || isNaN(e)){ err.textContent = 'أدخل معاملًا موجبًا وأسًّا صحيحًا، مثل 4.0 و −3.'; return; }
+    const c = m * 10**e; h = t==='h' ? c : 1e-14/c; }
+  else { const v = parseFloat($('#cP').value.replace('٫','.')); if (isNaN(v)){ err.textContent = 'أدخل رقمًا، مثل 3.70.'; return; } h = t==='ph' ? 10**-v : 10**-(14-v); }
+  const ph = -Math.log10(h), poh = 14 - ph, oh = 1e-14/h;
+  $('#cRes').innerHTML = `<div><span class="k">[H<sup>+</sup>]</span><span class="f">${sci(h)} M</span></div><div><span class="k">[OH<sup>−</sup>]</span><span class="f">${sci(oh)} M</span></div><div><span class="k">pH</span><span class="f">${fx(ph)}</span></div><div><span class="k">pOH</span><span class="f">${fx(poh)}</span></div><div style="grid-column:1/-1;text-align:center">${KIND(Math.round(ph*100)/100)}</div>`;
+  const mk = $('#nlMk'); mk.style.left = X(Math.max(0, Math.min(14, ph))); mk.textContent = 'pH ' + fx(ph);
+  let s = [];
+  if (t==='h') s = [`pH = −log[H⁺] = −log(${sci(h)}) = <b>${fx(ph)}</b>`, `pOH = 14.00 − pH = 14.00 − ${fx(ph)} = <b>${fx(poh)}</b>`, `[OH⁻] = K<sub>w</sub> / [H⁺] = (1.0 × 10<sup>${MIN}14</sup>) / (${sci(h)}) = <b>${sci(oh)} M</b>`];
+  if (t==='oh') s = [`pOH = −log[OH⁻] = −log(${sci(oh)}) = <b>${fx(poh)}</b>`, `pH = 14.00 − pOH = 14.00 − ${fx(poh)} = <b>${fx(ph)}</b>`, `[H⁺] = K<sub>w</sub> / [OH⁻] = (1.0 × 10<sup>${MIN}14</sup>) / (${sci(oh)}) = <b>${sci(h)} M</b>`];
+  if (t==='ph') s = [`[H⁺] = 10<sup>−pH</sup> = 10<sup>${MIN}${fx(ph)}</sup> = <b>${sci(h)} M</b>`, `pOH = 14.00 − ${fx(ph)} = <b>${fx(poh)}</b>`, `[OH⁻] = 10<sup>−pOH</sup> = <b>${sci(oh)} M</b>`];
+  if (t==='poh') s = [`[OH⁻] = 10<sup>−pOH</sup> = 10<sup>${MIN}${fx(poh)}</sup> = <b>${sci(oh)} M</b>`, `pH = 14.00 − ${fx(poh)} = <b>${fx(ph)}</b>`, `[H⁺] = 10<sup>−pH</sup> = <b>${sci(h)} M</b>`];
+  $('#cSteps').innerHTML = s.map((x,i) => `<div class="sol" style="margin:0"><b>${i+1}.</b> <span class="f" style="white-space:normal">${x}</span></div>`).join('');
+  award('calc'+t); }
+['cType','cM','cE','cP'].forEach(id => $('#'+id).addEventListener('input', calc));
+function preset(t, a, b){ $('#cType').value = t; if (t==='h'||t==='oh'){ $('#cM').value = a; $('#cE').value = b; } else $('#cP').value = a; calc(); }
+$('#ex22').onclick = () => preset('h','1.0','-7'); $('#ex23').onclick = () => preset('oh','4.0','-3'); $('#exCof').onclick = () => preset('h','1.0','-5');
+preset('oh','4.0','-3');
+
+const pr = (q, o, a, w, s) => [q, o.map(x => `<span class="f">${x}</span>`), a, w, s];
+mcq($('#p23'), [
+  pr('23a. [H⁺] = 1.0 × 10⁻² M: احسب pH.', ['2.00','12.00','1.00','0.02'], 0, '', 'pH = −log(1.0 × 10⁻²) = 2.00'),
+  pr('23b. [H⁺] = 3.0 × 10⁻⁶ M: احسب pH.', ['6.00','5.52','6.48','8.48'], 1, '', 'pH = −log(3.0 × 10⁻⁶) = 6 − 0.48 = 5.52'),
+  pr('24a. [H⁺] = 0.0055 M: احسب pH.', ['2.26','5.50','3.26','11.74'], 0, '', '0.0055 = 5.5 × 10⁻³ ← pH = −log(5.5 × 10⁻³) = 2.26'),
+  pr('24b. [H⁺] = 0.000084 M: احسب pH.', ['4.08','5.08','3.92','9.92'], 0, '', '0.000084 = 8.4 × 10⁻⁵ ← pH = 4.08'),
+  pr('26a. [OH⁻] = 1.0 × 10⁻⁶ M', ['pOH = 6.00 ، pH = 8.00','pH = 6.00 ، pOH = 8.00','pOH = 8.00 ، pH = 8.00','pOH = 6.00 ، pH = 6.00'], 0, '', 'pOH = 6.00 ← pH = 14.00 − 6.00 = 8.00'),
+  pr('26b. [OH⁻] = 6.5 × 10⁻⁴ M', ['pOH = 3.19 ، pH = 10.81','pOH = 4.19 ، pH = 9.81','pOH = 10.81 ، pH = 3.19','pOH = 3.65 ، pH = 10.35'], 0, '', 'pOH = −log(6.5 × 10⁻⁴) = 3.19 ← pH = 10.81'),
+  pr('26c. [H⁺] = 3.6 × 10⁻⁹ M', ['pH = 9.00 ، pOH = 5.00','pH = 8.44 ، pOH = 5.56','pH = 5.56 ، pOH = 8.44','pH = 8.56 ، pOH = 5.44'], 1, '', 'pH = −log(3.6 × 10⁻⁹) = 8.44 ← pOH = 5.56'),
+  pr('26d. [H⁺] = 2.5 × 10⁻² M', ['pH = 1.60 ، pOH = 12.40','pH = 2.40 ، pOH = 11.60','pH = 2.00 ، pOH = 12.00','pH = 12.40 ، pOH = 1.60'], 0, '', 'pH = −log(2.5 × 10⁻²) = 1.60 ← pOH = 12.40'),
+  pr('27a. [OH⁻] = 0.000033 M', ['pOH = 4.48 ، pH = 9.52','pOH = 5.48 ، pH = 8.52','pOH = 9.52 ، pH = 4.48','pOH = 3.30 ، pH = 10.70'], 0, '', '0.000033 = 3.3 × 10⁻⁵ ← pOH = 4.48 ← pH = 9.52'),
+  pr('27b. [H⁺] = 0.0095 M', ['pH = 2.02 ، pOH = 11.98','pH = 3.02 ، pOH = 10.98','pH = 1.02 ، pOH = 12.98','pH = 9.50 ، pOH = 4.50'], 0, '', '0.0095 = 9.5 × 10⁻³ ← pH = 2.02 ← pOH = 11.98'),
+], 'p23');
+
+/* extra */
+/* ---------- EXTRA: from pH ---------- */
+const EX24 = [
+  ['1. تحليل المسألة','لدينا pH، والمطلوب [H⁺] و [OH⁻]. نجد [H⁺] من معادلة pH، ثم نطرح pH من 14.00 لنحصل على pOH، ثم نجد [OH⁻].'],
+  ['2. المعطيات والمطلوب','المعطيات: pH = 7.40 · المطلوب: [H⁺] = ? mol/L و [OH⁻] = ? mol/L'],
+  ['3. إيجاد [H⁺]','pH = −log[H⁺] ← −pH = log[H⁺] ← [H⁺] = 10<sup>−pH</sup> = 10<sup>−7.40</sup> = <b>4.0 × 10<sup>−8</sup> M</b>'],
+  ['4. إيجاد pOH','pOH = 14.00 − pH = 14.00 − 7.40 = <b>6.60</b>'],
+  ['5. إيجاد [OH⁻]','[OH⁻] = 10<sup>−pOH</sup> = 10<sup>−6.60</sup> = <b>2.5 × 10<sup>−7</sup> M</b>'],
+  ['6. تقويم الإجابة','[H⁺] أقل من 10<sup>−7</sup> و [OH⁻] أكبر من 10<sup>−7</sup>، وهذا مقبول لأن الدم قاعدي قليلًا (pH أكبر من 7).']];
+let ex24i = 0;
+function ex24Draw(){ $('#ex24').innerHTML = EX24.slice(0, ex24i).map(([t,b],k) => `<div class="sol" style="margin:0"><b>${t}:</b> ${k>=2 && k<=4 ? `<span class="f" style="white-space:normal">${b}</span>` : b}</div>`).join('') || '<p class="small">اضغط «اكشف الخطوة التالية» لتبدأ.</p>';
+  $('#ex24Next').disabled = ex24i >= EX24.length; if (ex24i >= EX24.length) award('ex24'); }
+$('#ex24Next').onclick = () => { ex24i++; ex24Draw(); }; $('#ex24Reset').onclick = () => { ex24i = 0; ex24Draw(); }; ex24Draw();
+
+const prs = (q, o, a, w, s) => [q, o.map(x => `<span class="f">${x}</span>`), a, w, s];
+mcq($('#p29'), [
+  prs('29a. الحليب، pH = 6.50', ['[H⁺] = 3.2 × 10⁻⁷ M ، [OH⁻] = 3.2 × 10⁻⁸ M','[H⁺] = 6.5 × 10⁻⁷ M ، [OH⁻] = 7.5 × 10⁻⁸ M','[H⁺] = 3.2 × 10⁻⁸ M ، [OH⁻] = 3.2 × 10⁻⁷ M','[H⁺] = 1.0 × 10⁻⁶ M ، [OH⁻] = 1.0 × 10⁻⁸ M'], 0, 'الحليب حمضي قليلًا.', '[H⁺] = 10<sup>−6.50</sup> = 3.2 × 10⁻⁷ M<br>pOH = 14.00 − 6.50 = 7.50 ← [OH⁻] = 10<sup>−7.50</sup> = 3.2 × 10⁻⁸ M'),
+  prs('29b. عصير الليمون، pH = 2.37', ['[H⁺] = 2.4 × 10⁻³ M ، [OH⁻] = 4.3 × 10⁻¹² M','[H⁺] = 4.3 × 10⁻³ M ، [OH⁻] = 2.3 × 10⁻¹² M','[H⁺] = 4.3 × 10⁻² M ، [OH⁻] = 2.3 × 10⁻¹³ M','[H⁺] = 2.3 × 10⁻¹² M ، [OH⁻] = 4.3 × 10⁻³ M'], 1, '', '[H⁺] = 10<sup>−2.37</sup> = 4.3 × 10⁻³ M<br>pOH = 11.63 ← [OH⁻] = 10<sup>−11.63</sup> = 2.3 × 10⁻¹² M'),
+  prs('29c. حليب الماغنسيا، pH = 10.50', ['[H⁺] = 3.2 × 10⁻⁴ M ، [OH⁻] = 3.2 × 10⁻¹¹ M','[H⁺] = 1.0 × 10⁻¹⁰ M ، [OH⁻] = 1.0 × 10⁻⁴ M','[H⁺] = 3.2 × 10⁻¹¹ M ، [OH⁻] = 3.2 × 10⁻⁴ M','[H⁺] = 5.0 × 10⁻¹¹ M ، [OH⁻] = 2.0 × 10⁻⁴ M'], 2, 'محلول قاعدي: [OH⁻] أكبر من [H⁺].', '[H⁺] = 10<sup>−10.50</sup> = 3.2 × 10⁻¹¹ M<br>pOH = 3.50 ← [OH⁻] = 10<sup>−3.50</sup> = 3.2 × 10⁻⁴ M'),
+  prs('29d. الأمونيا المنزلية، pH = 11.90', ['[H⁺] = 7.9 × 10⁻³ M ، [OH⁻] = 1.3 × 10⁻¹² M','[H⁺] = 1.3 × 10⁻¹² M ، [OH⁻] = 7.9 × 10⁻³ M','[H⁺] = 1.2 × 10⁻¹¹ M ، [OH⁻] = 8.1 × 10⁻⁴ M','[H⁺] = 1.0 × 10⁻¹² M ، [OH⁻] = 1.0 × 10⁻² M'], 1, '', '[H⁺] = 10<sup>−11.90</sup> = 1.3 × 10⁻¹² M<br>pOH = 2.10 ← [OH⁻] = 10<sup>−2.10</sup> = 7.9 × 10⁻³ M'),
+], 'p29');
+
+/* ---------- EXTRA: molarity ---------- */
+const MOL = [
+  {n:'HCl', t:'a', k:1, nm:'حمض الهيدروكلوريك'}, {n:'HNO3', t:'a', k:1, nm:'حمض النيتريك'}, {n:'HI', t:'a', k:1, nm:'حمض الهيدرويوديك'},
+  {n:'NaOH', t:'b', k:1, nm:'هيدروكسيد الصوديوم'}, {n:'KOH', t:'b', k:1, nm:'هيدروكسيد البوتاسيوم'},
+  {n:'Ca(OH)2', t:'b', k:2, nm:'هيدروكسيد الكالسيوم'}, {n:'Mg(OH)2', t:'b', k:2, nm:'هيدروكسيد الماغنسيوم'},
+  {n:'CH3COOH', t:'w', k:1, nm:'حمض الإيثانويك (ضعيف)'}];
+const chemP = s => chem(s.replace('(OH)2','(OH)₂')).replace('₂','<sub>2</sub>');
+let molI = 0;
+$('#molPick').innerHTML = MOL.map((m,i) => `<button class="btn" data-i="${i}"><span class="f">${chemP(m.n)}</span></button>`).join('');
+$('#molPick').querySelectorAll('.btn').forEach(b => b.onclick = () => { molI = +b.dataset.i; molCalc(); });
+function molCalc(){ const m = MOL[molI]; $('#molPick').querySelectorAll('.btn').forEach((b,k) => b.classList.toggle('on', k===molI));
+  const a = parseFloat($('#molM').value), e = parseInt($('#molE').value.replace('−','-'),10), out = $('#molOut');
+  if (!(a > 0) || isNaN(e)){ out.innerHTML = '<p class="fb no">أدخل معاملًا موجبًا وأسًّا صحيحًا.</p>'; return; }
+  const C = a * 10**e, F2 = `<span class="f">${chemP(m.n)}</span>`;
+  if (m.t === 'w'){ out.innerHTML = `<div class="sol" style="margin:0">${m.nm} حمض <b>ضعيف</b> يتأين جزئيًّا فقط، لذا لا يساوي <span class="f">[H<sup>+</sup>]</span> مولارية الحمض. نحتاج إلى قيمة <span class="f">K<sub>a</sub></span> لتحديد تركيز الأيونات.</div>`; award('molw'); return; }
+  const ion = C * m.k; let ph, s;
+  if (m.t === 'a'){ ph = -Math.log10(ion);
+    s = [`${F2} حمض قوي يتأين كليًّا: كل جزيء ينتج أيون <span class="f">H<sup>+</sup></span> واحدًا.`, `<span class="f">[H<sup>+</sup>] = ${sci(C)} M</span>`, `<span class="f">pH = −log(${sci(ion)}) = <b>${fx(ph)}</b></span>`]; }
+  else { const poh = -Math.log10(ion); ph = 14 - poh;
+    s = [`${F2} قاعدة قوية تتفكك كليًّا: كل وحدة صيغة تنتج ${m.k===2?'<b>أيوني</b>':'أيون'} <span class="f">OH<sup>−</sup></span>${m.k===2?' (نضرب المولارية في 2)':''}.`, `<span class="f">[OH<sup>−</sup>] = ${m.k===2 ? sci(C)+' × 2 = ' : ''}${sci(ion)} M</span>`, `<span class="f">pOH = −log(${sci(ion)}) = ${fx(poh)}</span>`, `<span class="f">pH = 14.00 − ${fx(poh)} = <b>${fx(ph)}</b></span>`]; }
+  out.innerHTML = s.map((x,i) => `<div class="sol" style="margin:0"><b>${i+1}.</b> ${x}</div>`).join('') + `<p style="text-align:center">${KIND(Math.round(ph*100)/100)}</p>`;
+  award('mol'+molI); }
+['molM','molE'].forEach(id => $('#'+id).addEventListener('input', molCalc)); molCalc();
+mcq($('#molQ'), [
+  ['لماذا لا تستطيع الحصول على [H⁺] مباشرة من مولارية محلول حمض ضعيف؟', ['لأن الحمض الضعيف لا يذوب في الماء','لأنه يتأين جزئيًّا فقط، فتركيز H⁺ أقل كثيرًا من مولارية الحمض','لأن مولاريته دائمًا صغيرة','لأنه لا ينتج أيونات H⁺ إطلاقًا'], 1, 'لذلك نستعمل Ka و Kb مع الأحماض والقواعد الضعيفة.'],
+  ['حدّد [H⁺] في دورق HCl تركيزه 0.1 M، و [OH⁻] في دورق NaOH تركيزه 0.1 M (الشكل 17-2).', ['[H⁺] = 0.1 M ، [OH⁻] = 0.1 M','[H⁺] = 0.2 M ، [OH⁻] = 0.2 M','[H⁺] = 0.1 M ، [OH⁻] = 1.0 × 10⁻¹³ M','[H⁺] = 1.0 × 10⁻⁷ M ، [OH⁻] = 1.0 × 10⁻⁷ M'], 0, 'كلاهما يتأين كليًّا، وكل وحدة صيغة تنتج أيونًا واحدًا.'],
+  ['محلول Ca(OH)₂ تركيزه 7.5 × 10⁻⁴ M. ما [OH⁻]؟', ['7.5 × 10⁻⁴ M','3.75 × 10⁻⁴ M','1.5 × 10⁻³ M','1.5 × 10⁻⁴ M'], 2, 'كل وحدة صيغة تنتج أيوني OH⁻.'],
+], 'molq');
+mcq($('#p41'), [
+  prs('41a. 1.0 M HI', ['pH = 1.00','pH = 0.00','pH = 14.00','pH = 7.00'], 1, 'HI حمض قوي.', '[H⁺] = 1.0 M ← pH = −log(1.0) = 0.00'),
+  prs('41b. 0.050 M HNO₃', ['pH = 1.30','pH = 0.05','pH = 2.30','pH = 12.70'], 0, '', '[H⁺] = 0.050 M = 5.0 × 10⁻² M ← pH = −log(5.0 × 10⁻²) = 1.30'),
+  prs('41c. 1.0 M KOH', ['pH = 0.00','pH = 1.00','pH = 13.00','pH = 14.00'], 3, 'KOH قاعدة قوية.', '[OH⁻] = 1.0 M ← pOH = 0.00 ← pH = 14.00 − 0.00 = 14.00'),
+  prs('41d. 2.4 × 10⁻⁵ M Mg(OH)₂', ['pH = 9.38','pH = 4.32','pH = 9.68','pH = 4.62'], 2, 'انتبه: كل وحدة Mg(OH)₂ تعطي أيوني OH⁻.', '[OH⁻] = 2 × 2.4 × 10⁻⁵ = 4.8 × 10⁻⁵ M<br>pOH = −log(4.8 × 10⁻⁵) = 4.32 ← pH = 14.00 − 4.32 = 9.68'),
+], 'p41');
+
+/* ---------- EXTRA: measuring ---------- */
+const UCOL = ['#C81E1E','#E0352B','#EE5A2A','#F38B2C','#F5B335','#F2D23C','#C9D843','#7CC24A','#3FA45B','#2E8F7E','#2C78A8','#2F5DB5','#3D45A6','#4B3592','#3A2478'];
+const MS = [['عصير الليمون',2.32],['المشروبات الغازية',3.05],['القهوة',5.12],['الماء النقي',7.00],['ماء البحر',8.10],['حليب الماغنسيا',10.48],['منظف الأمونيا',11.90]];
+let msI = 0, msDipped = false;
+$('#msPick').innerHTML = MS.map(([n],i) => `<button class="btn" data-i="${i}">${n}</button>`).join('');
+$('#msChart').innerHTML = UCOL.map((c,i) => `<button class="cc2" data-p="${i}" style="background:${c}" aria-label="pH ${i}">${i}</button>`).join('');
+function msSet(i){ msI = i; msDipped = false; $('#msPick').querySelectorAll('.btn').forEach((b,k) => b.classList.toggle('on', k===i));
+  $('#uPad').style.fill = '#F2EEE6'; $('#msScr').textContent = '--.--'; $('#msFb').className = 'fb'; $('#msFb').textContent = 'اغمس الورقة أولًا.';
+  document.querySelectorAll('.cc2').forEach(b => b.classList.remove('pick')); }
+$('#msPick').querySelectorAll('.btn').forEach(b => b.onclick = () => msSet(+b.dataset.i));
+$('#msDip').onclick = () => { msDipped = true; $('#uPad').style.fill = UCOL[Math.round(MS[msI][1])];
+  $('#msFb').className = 'fb'; $('#msFb').textContent = 'قارن لون الورقة بالألوان المعيارية أدناه، واضغط على الرقم الأقرب.'; };
+document.querySelectorAll('.cc2').forEach(b => b.onclick = () => { if (!msDipped){ $('#msFb').textContent = 'اغمس الورقة أولًا.'; return; }
+  document.querySelectorAll('.cc2').forEach(x => x.classList.remove('pick')); b.classList.add('pick');
+  const p = +b.dataset.p, real = MS[msI][1], ok = Math.abs(p - real) <= 0.6;
+  $('#msFb').className = 'fb ' + (ok?'ok':'no');
+  $('#msFb').textContent = ok ? `أحسنت! تقدير الورقة: pH ≈ ${p}. استعمل المقياس الرقمي لتعرف القيمة الدقيقة.` : 'قارن اللون مرة أخرى بدقة.';
+  if (ok) award('ms'+msI); });
+$('#msRead').onclick = () => { const r = MS[msI][1]; $('#msScr').textContent = r.toFixed(2);
+  $('#msFb').className = 'fb ok'; $('#msFb').innerHTML = `قراءة المقياس: <span class="f">pH = ${r.toFixed(2)}</span>. الورقة تعطي رقمًا تقريبيًّا صحيحًا، والمقياس يعطي قيمة أدق بمنزلتين عشريتين.`; award('msr'+msI); };
+msSet(0);
+mcq($('#msQ'), [
+  ['ما الذي يجعل لون ورقة الكاشف يتغير؟', ['درجة حرارة المحلول','تركيز أيونات الهيدروجين في المحلول','حجم المحلول','لون المحلول'], 1, ''],
+  ['أي الطرائق تعطي قياسًا أدق لقيمة pH؟', ['ورق تبّاع الشمس','ورقة الكاشف العام','مقياس pH الرقمي','التذوق'], 2, 'وتذكّر: لا تتذوق أي مادة في المختبر أبدًا.'],
+], 'msq');
+
+/* ---------- 8: quiz ---------- */
+const QZ = [
+  ['16. صف محتويات محلول مائي مخفف للحمض القوي HI.', ['أيونات H₃O⁺ و I⁻ وماء، لأنه يتأين كليًّا','جزيئات HI غير متأينة في معظمها','جزيئات HI وأيونات OH⁻','ماء فقط'], 0],
+  ['16. صف محتويات محلول مائي مخفف للحمض الضعيف HCOOH.', ['أيونات H₃O⁺ و HCOO⁻ فقط','جزيئات HCOOH غير متأينة بتركيز عالٍ وقليل من أيونات H₃O⁺ و HCOO⁻','أيونات HCOO⁻ و OH⁻','جزيئات HCOOH فقط دون أي أيونات'], 1],
+  ['أي الأحماض الآتية أقوى؟', ['HCN (Ka = 6.2 × 10⁻¹⁰)','CH₃COOH (Ka = 1.8 × 10⁻⁵)','HF (Ka = 6.3 × 10⁻⁴)','H₂CO₃ (Ka = 4.5 × 10⁻⁷)'], 2],
+  ['في المعادلة NH₃ + H₂O ⇌ NH₄⁺ + OH⁻ ، ما الحمض المرافق؟', ['NH₃','H₂O','NH₄⁺','OH⁻'], 2],
+  ['لماذا لا يظهر [H₂O] في تعبير Ka؟', ['لأن الماء لا يتفاعل','لأن تركيزه ثابت في المحاليل المخففة فيُدمج مع الثابت','لأن الماء قاعدة قوية','لأن تركيزه صفر'], 1],
+  ['ما قيمة Kw عند 298 K؟', ['1.0 × 10⁻⁷','14','1.0 × 10⁻¹⁴','7'], 2],
+  ['إذا زاد تركيز H⁺ في محلول مائي عند 298 K، فإن:', ['[OH⁻] يزداد و Kw يزداد','[OH⁻] يقل و Kw يبقى ثابتًا','[OH⁻] يبقى ثابتًا','Kw يقل'], 1],
+  ['ما قيمة pH لمحلول فيه [H⁺] = 1.0 × 10⁻⁴ M؟', ['4.00','10.00','−4.00','1.04'], 0],
+  ['محلول قيمة pOH له تساوي 3.00. قيمة pH له ونوعه:', ['3.00، حمضي','11.00، قاعدي','11.00، حمضي','7.00، متعادل'], 1],
+  ['المحلول A قيمة pH له 2، والمحلول B قيمة pH له 5. تركيز H⁺ في A:', ['أكبر بـ 3 مرات','أصغر بـ 1000 مرة','أكبر بـ 1000 مرة','يساوي تركيزه في B'], 2],
+  ['أي مما يأتي قاعدة قوية؟', ['NH₃','Ba(OH)₂','CH₃NH₂','C₆H₅NH₂'], 1],
+  ['انسكب حمض على يد زميلك في المختبر. لماذا نغسله بكمية كبيرة من الماء؟', ['لأن الماء يحوّل الحمض إلى قاعدة','لأن التخفيف الكبير يقلل تركيز H₃O⁺ كثيرًا فيقل الضرر','لأن الماء يوقف تأين الحمض تمامًا','لأن الماء يرفع قيمة Ka'], 1],
+  ['ما قيمة [H⁺] في محلول قيمة pH له 3.00؟', ['3.0 × 10⁻¹ M','1.0 × 10⁻³ M','1.0 × 10⁻¹¹ M','3.0 M'], 1],
+  ['محلول Ba(OH)₂ تركيزه 0.010 M. ما قيمة [OH⁻]؟', ['0.010 M','0.005 M','0.020 M','1.0 × 10⁻¹² M'], 2],
+  ['أي الطرائق الآتية تعطي قيمة pH دقيقة بمنزلتين عشريتين؟', ['ورق تبّاع الشمس','ورقة الكاشف العام','مقياس pH الرقمي','مقارنة لون المحلول'], 2],
+];
+function quiz(){ const root = $('#qz'); root.innerHTML = ''; let score = 0, done = 0;
+  const upd = () => { $('#qScore').textContent = `${score} / ${QZ.length}`; $('#qMeter').style.width = (score/QZ.length*100)+'%'; };
+  QZ.forEach(([q,o,a],i) => { const d = document.createElement('div'); d.className = 'qitem';
+    d.innerHTML = `<div style="font-weight:600">${i+1}. ${q}</div><div class="opts">${o.map((x,j)=>`<button class="btn" data-j="${j}">${x}</button>`).join('')}</div>`;
+    d.querySelectorAll('.btn').forEach(b => b.onclick = () => { if (d.dataset.done) return; d.dataset.done = 1; done++;
+      const ok = +b.dataset.j === a; b.classList.add(ok?'ok':'no'); if (!ok) d.querySelectorAll('.btn')[a].classList.add('ok');
+      if (ok){ score++; award('qz'+i); } upd(); });
+    root.appendChild(d); });
+  upd(); }
+$('#qReset').onclick = quiz; quiz();
+
+
+go(0);
+</script>
+
+</body></html>

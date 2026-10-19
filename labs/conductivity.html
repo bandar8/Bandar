@@ -1,0 +1,590 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style id="portfolio-return-style">.portfolio-return{position:fixed;z-index:9999;top:14px;inset-inline-start:14px;display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border:1px solid rgba(20,121,91,.25);border-radius:999px;background:rgba(255,255,255,.92);box-shadow:0 6px 20px rgba(23,59,53,.12);color:#14795b;text-decoration:none;font:600 14px/1.2 Tahoma,Arial,sans-serif;backdrop-filter:blur(8px)}.portfolio-return:hover{background:#14795b;color:#fff}@media(max-width:600px){.portfolio-return{top:8px;inset-inline-start:8px;padding:7px 10px;font-size:12px}}</style></head><body><a class="portfolio-return" href="../#gallery" aria-label="العودة إلى معرض التجارب">← العودة إلى المعرض</a>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>خواص الأحماض والقواعد — درس تفاعلي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#f4f2ee; --grid:#e6e1d8; --surface:#ffffff; --soft:#eeebe3; --ink:#231b12; --muted:#6b6152; --line:#dcd5c7;
+  --btn:#231b12; --btn-ink:#ffffff; --amber:#c17a2e; --amber-soft:#f6e5cf;
+  --acid:#b3392b; --base:#1f6f6b;
+  --ok:#1f7a4d; --ok-soft:#e1f2e7; --no:#b3392b; --no-soft:#fbe6e2;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#181410; --grid:#241f18; --surface:#221d16; --soft:#2a2419; --ink:#efe8db; --muted:#b4a891; --line:#3a3225;
+    --btn:#efe8db; --btn-ink:#181410; --amber-soft:#3c2c14;
+    --acid:#e87c6d; --base:#4fbcb5;
+    --ok:#5fce8f; --ok-soft:#173324; --no:#e87c6d; --no-soft:#3a1e18;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#181410; --grid:#241f18; --surface:#221d16; --soft:#2a2419; --ink:#efe8db; --muted:#b4a891; --line:#3a3225;
+  --btn:#efe8db; --btn-ink:#181410; --amber-soft:#3c2c14;
+  --acid:#e87c6d; --base:#4fbcb5;
+  --ok:#5fce8f; --ok-soft:#173324; --no:#e87c6d; --no-soft:#3a1e18;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{
+  margin:0;background-color:var(--bg);color:var(--ink);
+  background-image:radial-gradient(var(--grid) 1.1px,transparent 1.1px);
+  background-size:22px 22px;
+  font-family:'Almarai',system-ui,'Segoe UI',Tahoma,Arial,sans-serif;
+  font-size:16.5px;line-height:1.85;
+}
+h1,h2,h3{font-family:'Almarai',system-ui,Tahoma,sans-serif;line-height:1.4;margin:0}
+p{margin:.4em 0}
+.app{max-width:820px;margin:0 auto;padding:0 14px 110px}
+
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 0 10px}
+.top h1{font-size:1.2rem;font-weight:700}
+@media(max-width:520px){h1,header.app h1,.hero h1{font-size:clamp(1.35rem,5.8vw,2rem)!important;line-height:1.3!important}p.lead,.hero .sub,header.app .sub{font-size:.92rem!important;line-height:1.7!important}}
+.top small{color:var(--muted);font-size:.85rem}
+.pts{background:var(--amber);color:#241200;border-radius:999px;padding:4px 14px;font-weight:700;white-space:nowrap}
+.pts.pop{animation:pop .35s}
+@keyframes pop{50%{transform:scale(1.18)}}
+
+.stepper{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:6px;overflow-x:auto;padding:8px 0 9px;border-bottom:2px solid var(--ink);scrollbar-width:none}
+.stepper::-webkit-scrollbar{display:none}
+.stp{flex:0 0 auto;font:inherit;font-size:.86rem;border:1.5px solid var(--line);background:var(--surface);color:var(--muted);border-radius:10px;padding:3px 11px;cursor:pointer}
+.stp b{font-family:'Almarai',sans-serif;margin-inline-end:5px}
+.stp.done{color:var(--ink);border-color:var(--ink)}
+.stp.on{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}
+.bar{height:4px;background:var(--line);border-radius:4px;margin:0 0 6px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--amber);transition:width .4s}
+
+.step{display:none}
+.step.on{display:block}
+.step>h2{font-size:1.45rem;margin:18px 0 4px}
+.lead{color:var(--muted);margin:0 0 8px}
+.card{background:var(--surface);border:1.5px solid var(--ink);border-radius:14px;padding:15px 16px;margin:14px 0}
+.note{border-inline-start:5px solid var(--amber);background:var(--amber-soft);padding:10px 14px;border-radius:6px 12px 12px 6px;margin:12px 0}
+.def{border-inline-start:5px solid var(--ink);background:var(--surface);padding:10px 14px;margin:12px 0;border-radius:6px 12px 12px 6px}
+.def strong{font-family:'Almarai',sans-serif}
+.btn{font:inherit;font-weight:600;border:1.5px solid var(--ink);background:var(--surface);color:var(--ink);padding:7px 15px;border-radius:11px;cursor:pointer}
+.btn:hover{background:var(--soft)}
+.btn.pri{background:var(--btn);color:var(--btn-ink)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn:focus-visible,.stp:focus-visible,.opt:focus-visible,.ionBtn:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.hide{display:none!important}
+ul.goals{margin:8px 0 0;padding-inline-start:22px}
+ul.goals li{margin:3px 0}
+
+.fb{margin-top:8px;padding:8px 12px;border-radius:10px}
+.fb.ok{background:var(--ok-soft);border:1.5px solid var(--ok)}
+.fb.no{background:var(--no-soft);border:1.5px solid var(--no)}
+.opts{display:grid;gap:8px;margin-top:10px}
+.opt{font:inherit;text-align:start;border:1.5px solid var(--ink);background:var(--surface);color:var(--ink);border-radius:11px;padding:9px 13px;cursor:pointer}
+.opt:hover{background:var(--soft)}
+.opt.right{background:var(--ok-soft);border-color:var(--ok)}
+.opt.wrong{background:var(--no-soft);border-color:var(--no)}
+.opt:disabled{cursor:default}
+.qn{font-size:.85rem;color:var(--muted)}
+.ionBtn{font:inherit;font-size:.95rem;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:6px 12px;cursor:pointer}
+.ionBtn.on{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}
+.ionBtn.right{background:var(--ok-soft);border-color:var(--ok)}
+.ionBtn.wrong{background:var(--no-soft);border-color:var(--no)}
+
+.fml{font-family:'Almarai',sans-serif;font-weight:700;direction:ltr;unicode-bidi:isolate;white-space:nowrap;display:inline-block}
+
+.wrapx{overflow-x:auto}
+table.cmp{width:100%;border-collapse:collapse;font-size:.9rem}
+table.cmp td,table.cmp th{border-bottom:1px solid var(--line);padding:5px 6px;text-align:start}
+table.cmp td.hl,table.cmp th.hl{background:var(--soft)}
+
+.ionGrid{display:flex;flex-wrap:wrap;gap:8px}
+.litmusWrap{display:flex;align-items:center;justify-content:center;gap:24px;padding:10px}
+.litmusStrip{width:34px;height:120px;border-radius:6px;border:2px solid var(--ink);background:#5b8fc7;transition:background .5s}
+.beakerRow{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;margin-top:12px}
+.beakerBox{text-align:center}
+.beaker3{width:64px;height:78px;border:3px solid var(--ink);border-radius:0 0 14px 14px;position:relative;overflow:hidden;background:var(--surface);margin:0 auto}
+.liquid3{position:absolute;bottom:0;left:0;right:0;height:68%;background:#cfe3f5;transition:background .5s}
+.beakerLbl{font-size:.82rem;margin-top:6px;color:var(--muted)}
+.dropBtns .btn.on{border-color:var(--acid);background:var(--soft)}
+.litmusPaper{width:30px;height:88px;background:#5b8fc7;border:2px solid var(--ink);border-radius:5px;display:inline-flex;align-items:flex-end;justify-content:center;font-size:1rem;padding-bottom:4px;cursor:grab;transition:background .5s;user-select:none;-webkit-user-select:none}
+.litmusPaper.sel{box-shadow:0 0 0 3px var(--amber)}
+.beaker3.can-drop{box-shadow:0 0 0 3px var(--amber)}
+
+.circuitWrap{display:flex;align-items:center;justify-content:center;gap:22px;padding:14px;background:var(--soft);border-radius:14px;margin-top:8px}
+.bulb{font-size:2.6rem;filter:grayscale(1) brightness(.55);transition:filter .35s}
+.bulb.lit{filter:none;text-shadow:0 0 20px gold}
+.beaker{width:70px;height:82px;border:3px solid var(--ink);border-radius:0 0 16px 16px;position:relative;overflow:hidden;background:var(--surface)}
+.liquid{position:absolute;bottom:0;left:0;right:0;height:0%;background:#8ec6e8;transition:background .4s,height .4s}
+
+.tubeWrap{display:flex;justify-content:center;padding:8px;margin-top:8px}
+.tube{width:46px;height:130px;border:3px solid var(--ink);border-radius:0 0 20px 20px;position:relative;overflow:hidden;background:var(--surface)}
+.tubeLiquid{position:absolute;bottom:0;left:0;right:0;height:55%;background:#bcd9ee;transition:background .3s}
+.bubbles{position:absolute;inset:0}
+.bub{position:absolute;bottom:8px;width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.9);border:1px solid rgba(0,0,0,.25);animation:rise 1.3s ease-in forwards}
+@keyframes rise{0%{transform:translateY(0) scale(.6);opacity:.95}100%{transform:translateY(-105px) scale(1.15);opacity:0}}
+.sortGrid{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:8px}
+.sortBtn{font:inherit;font-size:.92rem;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:11px;padding:8px 14px;cursor:pointer}
+.sortBtn.acid{background:var(--no-soft);border-color:var(--acid)}
+.sortBtn.base{background:var(--ok-soft);border-color:var(--base)}
+.sortBtn:disabled{cursor:default;opacity:.85}
+
+.score{font-family:'Almarai',sans-serif;font-size:2.6rem;text-align:center;margin:0}
+.pager{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--bg);border-top:2px solid var(--ink);padding:9px 14px calc(9px + env(safe-area-inset-bottom,0px))}
+.pager div{max-width:820px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.pager .btn[disabled]{opacity:.35;cursor:default}
+#pageLbl{color:var(--muted);font-size:.9rem}
+@media (max-width:520px){
+  body{font-size:16px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div>
+      <h1>خواص الأحماض والقواعد</h1>
+      <small>كيمياء 3 – الأحماض والقواعد</small>
+    </div>
+    <div class="pts" id="ptsBox">⭐ <span id="pts">0</span></div>
+  </header>
+
+  <nav class="stepper" id="stepper" aria-label="مراحل الدرس"></nav>
+  <div class="bar"><i id="barFill"></i></div>
+
+  <main>
+    <!-- 0: opening experiment -->
+    <section class="step on" id="s0">
+      <h2>التجربة الاستهلالية</h2>
+      <p class="lead">كيف نميّز بين الحمض والقاعدة دون تذوّقهما أو لمسهما؟</p>
+
+      <div class="card">
+        <h3>🧰 المواد والأدوات</h3>
+        <ul class="goals">
+          <li>ثلاث كاسات زجاجية (خلّ – محلول صابون – ماء نقي).</li>
+          <li>ورقتا تباع الشمس (زرقاء وحمراء).</li>
+          <li>دليل الفينولفثالين (Phenolphthalein).</li>
+          <li>قطّارات.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>📋 خطوات العمل</h3>
+        <ul class="goals">
+          <li>ضع خلًّا في الكاس الأولى، ومحلول صابون في الثانية، وماءً نقيًّا في الثالثة.</li>
+          <li>أضِف قطرات من ورقة تباع الشمس (أو اغمس الورقة) في كل كاس، وسجّل لون كل محلول.</li>
+          <li>أعِد التجربة نفسها، ولكن هذه المرة أضِف قطرات من دليل الفينولفثالين بدلًا من ورقة تباع الشمس، وسجّل ما يحدث.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h3>▶ نفّذ التجربة افتراضيًا</h3>
+        <p class="lead" style="margin:0 0 8px">اسحب أيًّا من ورقتي تباع الشمس (الزرقاء أو الحمراء) بيدك إلى أحد الكاسات لتغمسها فيه، أو جرّب دليل الفينولفثالين على الكاسات كلّها:</p>
+        <div class="row dropBtns" style="justify-content:center;align-items:center">
+          <div class="litmusPaper" id="litmusPaperBlue" data-color="blue" draggable="true" title="اسحبني إلى كاس" style="background:#5b8fc7">🧻</div>
+          <div class="litmusPaper" id="litmusPaperRed" data-color="red" draggable="true" title="اسحبني إلى كاس" style="background:#c0392b">🧻</div>
+          <button class="btn" id="tryPhenol">💧 دليل الفينولفثالين</button>
+          <button class="btn" id="resetBeakers">إعادة</button>
+        </div>
+        <div class="beakerRow" id="beakerRow"></div>
+        <p class="heroCap" id="beakerCap" style="text-align:center;color:var(--muted)">اسحب إحدى الورقتين إلى أحد الكاسات (أو اضغط عليها ثم اضغط على الكاس)، أو جرّب دليل الفينولفثالين.</p>
+      </div>
+
+      <div class="card">
+        <h3>🤔 التحليل والاستنتاج</h3>
+        <ul class="goals">
+          <li>ما لون كل كاس مع ورقة تباع الشمس؟ وما لونها مع دليل الفينولفثالين؟</li>
+          <li>أيّ الدليلين يميّز القاعدة بشكل أوضح؟ لماذا؟</li>
+          <li>هل يمكن أن يكون هذا التغيّر طريقة لتصنيف أي مادة مجهولة إلى حمض أو قاعدة؟</li>
+        </ul>
+        <div class="note">تعرّف الأحماض والقواعد أولًا من خلال خواصها القابلة للرصد — كتغيّر لون الدليل — وهذا ما ستتعلّمه بالتفصيل في هذا الدرس.</div>
+      </div>
+
+      <div class="card">
+        <h3>بعد هذا الدرس ستكون قادرًا على أن:</h3>
+        <ul class="goals">
+          <li>تصف الخواص المشتركة للأحماض (الطعم، تأثيرها في ورقة تباع الشمس، تفاعلها مع الفلزات والكربونات).</li>
+          <li>تصف الخواص المشتركة للقواعد (الطعم، الملمس، تأثيرها في ورقة تباع الشمس).</li>
+          <li>تفسّر توصيل محاليل الأحماض والقواعد للكهرباء.</li>
+          <li>تصنّف مواد من حياتك اليومية إلى أحماض وقواعد بناءً على خواصها.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 1: general properties -->
+    <section class="step" id="s1">
+      <h2>الخواص العامة للأحماض والقواعد</h2>
+      <div class="wrapx"><table class="cmp">
+        <tr><th></th><th>الأحماض</th><th class="hl">القواعد</th></tr>
+        <tr><td>الطعم</td><td>حامض</td><td class="hl">مرّ</td></tr>
+        <tr><td>الملمس</td><td>—</td><td class="hl">صابوني/زلق</td></tr>
+        <tr><td>ورقة تباع الشمس</td><td>تحوّل الزرقاء إلى حمراء</td><td class="hl">تحوّل الحمراء إلى زرقاء</td></tr>
+      </table></div>
+      <div class="note">لا تُتذوَّق أو تُلمَس المواد الكيميائية أبدًا في المختبر للتعرف عليها — هذه الخواص وُصفت من مواد مألوفة وآمنة (كالخل والصابون) وليس من مواد المختبر.</div>
+
+      <div class="card">
+        <h3>🎯 صنّف المادة: حمض أم قاعدة؟</h3>
+        <div id="propQ"></div>
+      </div>
+    </section>
+
+    <!-- 2: conductivity & reactions -->
+    <section class="step" id="s2">
+      <h2>التوصيل الكهربائي والتفاعل مع الفلزات والكربونات</h2>
+      <div class="def"><strong>التوصيل الكهربائي:</strong> محاليل الأحماض والقواعد موصلة للكهرباء لأنها <b>إلكتروليتات</b> — تتأين في الماء منتجةً أيونات حرة الحركة تحمل التيار الكهربائي.</div>
+
+      <div class="card">
+        <h3>🔌 جرّب دائرة التوصيل الكهربائي</h3>
+        <div class="row" id="condPick" style="justify-content:center"></div>
+        <div class="circuitWrap">
+          <div class="bulb" id="bulb">💡</div>
+          <div class="beaker"><div class="liquid" id="liquidFill"></div></div>
+        </div>
+        <div class="row" style="justify-content:center">
+          <button class="btn pri" id="condRun">▶ أغلق الدائرة</button>
+        </div>
+        <p class="note" id="condInfo">اختر محلولًا ثم اضغط "أغلق الدائرة" لتشاهد هل تضيء اللمبة.</p>
+      </div>
+
+      <div class="def"><strong>التفاعل مع الفلزات النشطة:</strong> تتفاعل الأحماض مع الفلزات النشطة (كالمغنيسيوم والزنك) منتجةً <b>غاز الهيدروجين H₂</b>. القواعد لا تتفاعل معها عادةً.</div>
+      <div class="def"><strong>التفاعل مع الكربونات:</strong> تتفاعل الأحماض مع كربونات الفلزات منتجةً <b>غاز ثاني أكسيد الكربون CO₂</b>. القواعد لا تتفاعل معها عادةً.</div>
+
+      <div class="card">
+        <h3>🧫 نفّذ التجربة وشاهد الفقاعات</h3>
+        <div class="row" id="reactPick" style="justify-content:center"></div>
+        <div class="tubeWrap"><div class="tube" id="tube"><div class="tubeLiquid" id="tubeLiquid"></div><div class="bubbles" id="bubbles"></div></div></div>
+        <div class="row" style="justify-content:center">
+          <button class="btn pri" id="runExp">▶ نفّذ التجربة</button>
+        </div>
+        <div class="note" id="reactInfo">اختر تجربة ثم اضغط "نفّذ التجربة".</div>
+      </div>
+
+      <div class="card">
+        <h3>🎯 اختبر نفسك</h3>
+        <div id="reactQ"></div>
+      </div>
+    </section>
+
+    <!-- 3: everyday examples -->
+    <section class="step" id="s3">
+      <h2>أحماض وقواعد من حياتنا اليومية</h2>
+      <p class="lead">صنّف كل مادة إلى حمض أو قاعدة بناءً على خواصها المألوفة.</p>
+      <div class="card">
+        <h3>🧺 صنّف المادة</h3>
+        <div id="sortGame"></div>
+        <p class="qn" id="sortScore" style="text-align:center;margin-top:10px"></p>
+      </div>
+    </section>
+
+    <!-- 4: quiz -->
+    <section class="step" id="s4">
+      <h2>اختبر نفسك</h2>
+      <div id="quiz"></div>
+    </section>
+  </main>
+</div>
+
+<div class="pager"><div>
+  <button class="btn" id="prev">← السابق</button>
+  <span id="pageLbl"></span>
+  <button class="btn pri" id="next">التالي →</button>
+</div></div>
+
+<script>
+(function(){
+'use strict';
+var $=function(s){return document.querySelector(s)}, $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+var points=0;
+function addPts(n){
+  points+=n; $('#pts').textContent=points;
+  var b=$('#ptsBox'); b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop');
+}
+var awarded={};
+function addPtsOnce(k){ if(!awarded[k]){awarded[k]=true; addPts(5)} }
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+
+/* ---------- navigation ---------- */
+var TITLES=['التجربة الاستهلالية','الخواص العامة','التوصيل والتفاعل','من حياتنا اليومية','اختبار'];
+var cur=0, visited={0:true};
+function renderNav(){
+  var nav=$('#stepper');
+  nav.innerHTML=TITLES.map(function(t,i){
+    return '<button class="stp'+(i===cur?' on':(visited[i]?' done':''))+'" data-i="'+i+'"><b>'+(i+1)+'</b>'+t+'</button>';
+  }).join('');
+  var on=nav.querySelector('.on'); if(on&&on.scrollIntoView){on.scrollIntoView({inline:'center',block:'nearest'})}
+  $$('.stp').forEach(function(b){b.onclick=function(){go(+b.getAttribute('data-i'))}});
+  var n=Object.keys(visited).length;
+  $('#barFill').style.width=(n/TITLES.length*100)+'%';
+  $('#prev').disabled=cur===0; $('#next').disabled=cur===TITLES.length-1;
+  $('#pageLbl').textContent=(cur+1)+' / '+TITLES.length;
+}
+function go(i){
+  cur=Math.max(0,Math.min(TITLES.length-1,i)); visited[cur]=true;
+  $$('.step').forEach(function(s,k){s.classList.toggle('on',k===cur)});
+  renderNav(); window.scrollTo(0,0);
+}
+$('#prev').onclick=function(){go(cur-1)};
+$('#next').onclick=function(){go(cur+1)};
+
+/* ---------- 0: beakers + indicators hook ---------- */
+var SUBSTANCES=[
+  {name:'خلّ (حمض)', key:'acid'},
+  {name:'صابون (قاعدة)', key:'base'},
+  {name:'ماء نقي (متعادل)', key:'neutral'}
+];
+var LITMUS_PAPERS={
+  blue:{start:'#5b8fc7', turn:{acid:'#c0392b', base:'#5b8fc7', neutral:'#5b8fc7'}, changesOn:'acid'},
+  red:{start:'#c0392b', turn:{acid:'#c0392b', base:'#2f6fb0', neutral:'#c0392b'}, changesOn:'base'}
+};
+var IND_COLOR={
+  phenol:{acid:'#eef6fb', base:'#e64ac9', neutral:'#eef6fb'}
+};
+var IND_CAP={
+  phenol:'دليل الفينولفثالين: يبقى بلا لون في الحمض والمحلول المتعادل، ويتحوّل إلى اللون الوردي القرمزي في القاعدة فقط — لهذا يُستخدم للتمييز عن القواعد بدقّة.'
+};
+var paperSelected=null;
+function paperEl(c){ return c==='blue' ? $('#litmusPaperBlue') : $('#litmusPaperRed'); }
+function renderBeakers(mode){
+  var html='';
+  SUBSTANCES.forEach(function(s,i){
+    var color = mode==='phenol' ? IND_COLOR.phenol[s.key] : '#cfe3f5';
+    html+='<div class="beakerBox"><div class="beaker3" id="bkr'+i+'"><div class="liquid3" style="background:'+color+'"></div></div><p class="beakerLbl">'+s.name+'</p></div>';
+  });
+  $('#beakerRow').innerHTML=html;
+  bindBeakerTargets();
+}
+function bindBeakerTargets(){
+  SUBSTANCES.forEach(function(s,i){
+    var b=$('#bkr'+i);
+    if(!b)return;
+    b.ondragover=function(e){ if(e&&e.preventDefault)e.preventDefault(); b.classList.add('can-drop'); };
+    b.ondragleave=function(){ b.classList.remove('can-drop'); };
+    b.ondrop=function(e){ if(e&&e.preventDefault)e.preventDefault(); b.classList.remove('can-drop'); var c=(e&&e.dataTransfer&&e.dataTransfer.getData)?e.dataTransfer.getData('text'):paperSelected; dipPaper(c||paperSelected,s.key,i); };
+    b.onclick=function(){ if(paperSelected) dipPaper(paperSelected,s.key,i); };
+  });
+}
+function dipPaper(color,key,i){
+  if(!color)return;
+  var P=LITMUS_PAPERS[color];
+  var el=paperEl(color);
+  el.style.background=P.turn[key];
+  el.classList.remove('sel'); paperSelected=null;
+  var name=SUBSTANCES[i].name;
+  var changed = (key===P.changesOn);
+  var pname = color==='blue' ? 'الزرقاء' : 'الحمراء';
+  var res = changed ? ('تحوّلت الورقة '+pname+' إلى '+(color==='blue'?'الأحمر':'الأزرق')+' — إشارة إلى أنه '+(color==='blue'?'حمض':'قاعدة')+'.') : ('بقيت الورقة '+pname+' على حالها — لا تغيّر.');
+  $('#beakerCap').textContent='غمست الورقة '+pname+' في «'+name+'»: '+res;
+  addPtsOnce('dip'+color+key);
+}
+renderBeakers(null);
+['blue','red'].forEach(function(c){
+  var el=paperEl(c);
+  el.ondragstart=function(e){ if(e&&e.dataTransfer)e.dataTransfer.setData('text',c); };
+  el.onclick=function(){
+    if(paperSelected===c){ paperSelected=null; el.classList.remove('sel'); $('#beakerCap').textContent='اسحب إحدى الورقتين إلى أحد الكاسات (أو اضغط عليها ثم اضغط على الكاس)، أو جرّب دليل الفينولفثالين.'; return; }
+    paperSelected=c;
+    $$('.litmusPaper').forEach(function(p){p.classList.remove('sel')});
+    el.classList.add('sel');
+    $('#beakerCap').textContent='اضغط الآن على أحد الكاسات لغمس الورقة '+(c==='blue'?'الزرقاء':'الحمراء')+' فيه.';
+  };
+});
+$('#tryPhenol').onclick=function(){
+  renderBeakers('phenol');
+  $('#litmusPaperBlue').style.background=LITMUS_PAPERS.blue.start;
+  $('#litmusPaperRed').style.background=LITMUS_PAPERS.red.start;
+  $('#beakerCap').textContent=IND_CAP.phenol;
+  addPtsOnce('phenolTry');
+};
+$('#resetBeakers').onclick=function(){
+  renderBeakers(null);
+  $('#litmusPaperBlue').style.background=LITMUS_PAPERS.blue.start;
+  $('#litmusPaperRed').style.background=LITMUS_PAPERS.red.start;
+  paperSelected=null; $$('.litmusPaper').forEach(function(p){p.classList.remove('sel')});
+  $('#beakerCap').textContent='اسحب إحدى الورقتين إلى أحد الكاسات (أو اضغط عليها ثم اضغط على الكاس)، أو جرّب دليل الفينولفثالين.';
+};
+
+/* ---------- 1: general properties quiz ---------- */
+var PROP_Q=[
+ {desc:'مادة طعمها حامض، وتحوّل ورقة تباع الشمس الزرقاء إلى حمراء.',ans:'acid'},
+ {desc:'مادة طعمها مرّ وملمسها صابوني.',ans:'base'},
+ {desc:'مادة تحوّل ورقة تباع الشمس الحمراء إلى زرقاء.',ans:'base'},
+ {desc:'مادة طعمها حامض وملمسها ليس صابونيًّا.',ans:'acid'},
+ {desc:'مادة ملمسها زلق، وتحوّل ورقة تباع الشمس الحمراء إلى زرقاء.',ans:'base'},
+ {desc:'مادة تحوّل ورقة تباع الشمس الزرقاء إلى حمراء وطعمها حامض.',ans:'acid'}
+];
+var pqLast=-1,pqDone=false;
+function newPropQ(){
+  var i;do{i=Math.floor(Math.random()*PROP_Q.length)}while(i===pqLast);pqLast=i;var Q=PROP_Q[i];pqDone=false;
+  $('#propQ').innerHTML='<p>'+Q.desc+'</p><div class="opts"><button class="opt" data-v="acid">حمض</button><button class="opt" data-v="base">قاعدة</button></div><div id="pqFb"></div>';
+  $('#propQ .opt').forEach(function(b){b.onclick=function(){
+    if(pqDone)return;pqDone=true;var v=b.getAttribute('data-v');var ok=v===Q.ans;
+    $('#propQ .opt').forEach(function(x){x.disabled=true; if(x.getAttribute('data-v')===Q.ans)x.classList.add('right')});
+    if(!ok)b.classList.add('wrong'); else addPts(10);
+    $('#pqFb').innerHTML='<div class="fb '+(ok?'ok':'no')+'">'+(ok?'صحيح!':'الإجابة الصحيحة: '+(Q.ans==='acid'?'حمض':'قاعدة'))+'</div><div class="row" style="margin-top:8px"><button class="btn" id="pqNext">مثال آخر</button></div>';
+    $('#pqNext').onclick=newPropQ;
+  }});
+}
+newPropQ();
+
+/* ---------- 2a: conductivity circuit ---------- */
+var COND_LIST=[
+ {name:'حمض الهيدروكلوريك (محلول)',glow:true,color:'#bcd9ee',note:'يتأين الحمض في الماء منتجًا أيونات H⁺ وCl⁻ حرة الحركة تحمل التيار، فتضيء اللمبة.'},
+ {name:'هيدروكسيد الصوديوم (محلول)',glow:true,color:'#cfe3d2',note:'تتأين القاعدة في الماء منتجةً أيونات Na⁺ وOH⁻ حرة الحركة تحمل التيار، فتضيء اللمبة.'},
+ {name:'ماء نقي',glow:false,color:'#eaf3fb',note:'الماء النقي لا يحتوي على أيونات كافية لحمل التيار، فلا تضيء اللمبة.'}
+];
+var condIdx=0, condRan=false;
+function renderCondPick(){
+  $('#condPick').innerHTML=COND_LIST.map(function(x,i){return '<button class="ionBtn'+(i===condIdx?' on':'')+'" data-i="'+i+'">'+x.name+'</button>'}).join('');
+  $('#condPick .ionBtn').forEach(function(b){b.onclick=function(){condIdx=+b.getAttribute('data-i');condRan=false;renderCond()}});
+}
+function renderCond(){
+  var x=COND_LIST[condIdx];
+  $('#liquidFill').style.background=x.color;
+  $('#liquidFill').style.height=condRan?'55%':'0%';
+  $('#bulb').classList.toggle('lit', condRan && x.glow);
+  $('#condInfo').textContent=condRan ? x.note : 'اختر محلولًا ثم اضغط "أغلق الدائرة" لتشاهد هل تضيء اللمبة.';
+}
+$('#condRun').onclick=function(){ condRan=true; renderCond(); addPtsOnce('cond'+condIdx); };
+renderCondPick(); renderCond();
+
+/* ---------- 2b: bubbling reaction tube ---------- */
+var REACT_LIST=[
+ {sub:'حمض + مغنيسيوم (فلز نشط)',gas:14,color:'#bcd9ee',result:'ينتج غاز الهيدروجين H₂ — فقاعات كثيرة وسريعة.'},
+ {sub:'حمض + كربونات الكالسيوم',gas:10,color:'#bcd9ee',result:'ينتج غاز ثاني أكسيد الكربون CO₂ — فقاعات واضحة.'},
+ {sub:'قاعدة + مغنيسيوم (فلز نشط)',gas:0,color:'#cfe3d2',result:'لا يحدث تفاعل ملحوظ — لا فقاعات.'},
+ {sub:'قاعدة + كربونات الكالسيوم',gas:0,color:'#cfe3d2',result:'لا يحدث تفاعل ملحوظ — لا فقاعات.'}
+];
+var reIdx=0;
+function popBubbles(n){
+  var html=''; for(var i=0;i<n;i++){
+    var left=6+Math.random()*30, delay=(Math.random()*0.7).toFixed(2);
+    html+='<span class="bub" style="left:'+left+'px;animation-delay:'+delay+'s"></span>';
+  }
+  $('#bubbles').innerHTML=html;
+}
+function renderReact(){
+  $('#reactPick').innerHTML=REACT_LIST.map(function(x,i){return '<button class="ionBtn'+(i===reIdx?' on':'')+'" data-i="'+i+'">'+x.sub+'</button>'}).join('');
+  $('#reactPick .ionBtn').forEach(function(b){b.onclick=function(){reIdx=+b.getAttribute('data-i');$('#bubbles').innerHTML='';$('#reactInfo').textContent='اختر تجربة ثم اضغط "نفّذ التجربة".';renderReact()}});
+  var x=REACT_LIST[reIdx];
+  $('#tubeLiquid').style.background=x.color;
+}
+renderReact();
+$('#runExp').onclick=function(){
+  var x=REACT_LIST[reIdx];
+  popBubbles(x.gas);
+  $('#reactInfo').innerHTML='<b>'+x.sub+':</b> '+x.result;
+  addPtsOnce('react'+reIdx);
+};
+
+var REACT_Q=[
+ {sub:'حمض الهيدروكلوريك + شريط زنك',ans:0},
+ {sub:'حمض الهيدروكلوريك + كربونات الصوديوم',ans:1},
+ {sub:'هيدروكسيد الصوديوم + شريط زنك',ans:2},
+ {sub:'هيدروكسيد الصوديوم + كربونات الصوديوم',ans:2},
+ {sub:'حمض الإيثانويك (الخل) + رقائق مغنيسيوم',ans:0}
+];
+var REACT_OPTS=['ينتج غاز الهيدروجين H₂','ينتج غاز ثاني أكسيد الكربون CO₂','لا يحدث تفاعل ملحوظ'];
+var rqLast=-1,rqDone=false;
+function newReactQ(){
+  var i;do{i=Math.floor(Math.random()*REACT_Q.length)}while(i===rqLast);rqLast=i;var Q=REACT_Q[i];rqDone=false;
+  $('#reactQ').innerHTML='<p>ماذا يحدث في تفاعل: <b>'+Q.sub+'</b>؟</p><div class="opts">'+REACT_OPTS.map(function(t,i){return '<button class="opt" data-i="'+i+'">'+t+'</button>'}).join('')+'</div><div id="rqFb"></div>';
+  $('#reactQ .opt').forEach(function(b){b.onclick=function(){
+    if(rqDone)return;rqDone=true;var i=+b.getAttribute('data-i');var ok=i===Q.ans;
+    $('#reactQ .opt').forEach(function(x,xi){x.disabled=true; if(xi===Q.ans)x.classList.add('right')});
+    if(!ok)b.classList.add('wrong'); else addPts(10);
+    $('#rqFb').innerHTML='<div class="fb '+(ok?'ok':'no')+'">'+(ok?'صحيح!':'الإجابة الصحيحة: '+REACT_OPTS[Q.ans])+'</div><div class="row" style="margin-top:8px"><button class="btn" id="rqNext">مثال آخر</button></div>';
+    $('#rqNext').onclick=newReactQ;
+  }});
+}
+newReactQ();
+
+/* ---------- 3: everyday sorting game ---------- */
+var SORT_ITEMS=shuffle([
+ {name:'الخل (حمض الإيثانويك)',type:'acid'},
+ {name:'عصير الليمون (حمض الستريك)',type:'acid'},
+ {name:'عصير المعدة (حمض الهيدروكلوريك)',type:'acid'},
+ {name:'المشروبات الغازية (حمض الفوسفوريك)',type:'acid'},
+ {name:'محلول البطارية (حمض الكبريتيك)',type:'acid'},
+ {name:'الصابون',type:'base'},
+ {name:'منظف النشادر',type:'base'},
+ {name:'بيكربونات الصودا (صودا الخبز)',type:'base'},
+ {name:'حليب المغنيسيا',type:'base'},
+ {name:'معجون الأسنان',type:'base'}
+]);
+var sortScore=0, sortTotal=0;
+function renderSort(){
+  $('#sortGame').innerHTML='<div class="sortGrid">'+SORT_ITEMS.map(function(x,i){
+    return '<button class="sortBtn" data-i="'+i+'">'+x.name+'</button>';
+  }).join('')+'</div>';
+  bindSortClicks();
+}
+function bindSortClicks(){
+  $('#sortGame .sortBtn').forEach(function(b){
+    if(b._bound)return; b._bound=true;
+    b.onclick=function(){
+      if(b.disabled)return;
+      askSort(+b.getAttribute('data-i'), b);
+    };
+  });
+}
+function askSort(i,btn){
+  var x=SORT_ITEMS[i];
+  $('#sortScore').innerHTML='<span class="fb '+ (x.type==='acid'?'no':'ok') +'" style="display:inline-block">هل "'+x.name+'" حمض أم قاعدة؟</span>';
+  var wrap=document.createElement('div');
+  wrap.className='row'; wrap.style.justifyContent='center'; wrap.style.marginTop='8px';
+  wrap.innerHTML='<button class="btn" data-v="acid">حمض</button><button class="btn" data-v="base">قاعدة</button>';
+  $('#sortScore').appendChild(wrap);
+  $('#sortScore .btn').forEach(function(cb){cb.onclick=function(){
+    var v=cb.getAttribute('data-v'); var ok=v===x.type;
+    sortTotal++; if(ok){sortScore++;addPts(10)}
+    btn.disabled=true; btn.classList.add(ok?x.type:(x.type==='acid'?'base':'acid'));
+    btn.textContent=x.name+(ok?' ✓':' ✗ ('+(x.type==='acid'?'حمض':'قاعدة')+')');
+    $('#sortScore').innerHTML='النتيجة: '+sortScore+' من '+sortTotal+(sortTotal===SORT_ITEMS.length?' — أحسنت! صنّفت كل المواد.':'');
+  };});
+}
+renderSort();
+
+/* ---------- 4: final quiz ---------- */
+var QZ=[
+ {q:'ماذا يحدث لورقة تباع الشمس الزرقاء عند غمسها في حمض؟',o:['تبقى زرقاء','تتحوّل إلى الأحمر','تفقد لونها'],a:1,e:'الأحماض تحوّل ورقة تباع الشمس الزرقاء إلى اللون الأحمر.'},
+ {q:'ما طعم القواعد؟',o:['حامض','مرّ','لا طعم لها'],a:1,e:'طعم القواعد مرّ، وملمسها صابوني — لكن لا تُتذوَّق أو تُلمَس مواد المختبر أبدًا.'},
+ {q:'عند تفاعل حمض مع فلز نشط كالمغنيسيوم، أي غاز ينتج؟',o:['غاز الأكسجين O₂','غاز الهيدروجين H₂','غاز ثاني أكسيد الكربون CO₂'],a:1,e:'تتفاعل الأحماض مع الفلزات النشطة منتجةً غاز الهيدروجين H₂.'},
+ {q:'عند تفاعل حمض مع كربونات الكالسيوم، أي غاز ينتج؟',o:['غاز الهيدروجين H₂','غاز ثاني أكسيد الكربون CO₂','لا ينتج غاز'],a:1,e:'تتفاعل الأحماض مع الكربونات منتجةً غاز ثاني أكسيد الكربون CO₂.'},
+ {q:'لماذا توصّل محاليل الأحماض والقواعد الكهرباء؟',o:['لأنها سائلة','لأنها إلكتروليتات تتأين منتجة أيونات حرة الحركة','لأنها تحتوي على معادن'],a:1,e:'الأحماض والقواعد إلكتروليتات، فهي تتأين في الماء منتجةً أيونات تحمل التيار الكهربائي.'},
+ {q:'ماذا يحدث عند إضافة قاعدة إلى كربونات الكالسيوم؟',o:['ينتج غاز CO₂','ينتج غاز H₂','لا يحدث تفاعل ملحوظ'],a:2,e:'القواعد لا تتفاعل عادةً مع الكربونات أو الفلزات النشطة.'},
+ {q:'أي المواد الآتية من حياتنا اليومية يُصنَّف قاعدة؟',o:['عصير الليمون','الخل','الصابون'],a:2,e:'الصابون قاعدة (طعمه مرّ وملمسه صابوني)، أما الخل وعصير الليمون فأحماض.'},
+ {q:'أي المواد الآتية من حياتنا اليومية يُصنَّف حمضًا؟',o:['بيكربونات الصودا','عصير المعدة','منظف النشادر'],a:1,e:'عصير المعدة يحتوي على حمض الهيدروكلوريك، أما بيكربونات الصودا ومنظف النشادر فقواعد.'}
+];
+var qi=0, qs=0, qAns=false, qGiven={};
+function renderQuiz(){
+  var box=$('#quiz');
+  if(qi>=QZ.length){
+    var msg=qs>=6?'ممتاز! أتقنت الدرس.':qs>=4?'جيد جدًا! راجع ما أخطأت فيه.':'عُد إلى المراحل السابقة وجرّب مرة أخرى.';
+    box.innerHTML='<div class="card"><p class="score">'+qs+' / '+QZ.length+'</p><p style="text-align:center">'+msg+'</p><p style="text-align:center;color:var(--muted)">نقاطك في الدرس: '+points+'</p><div class="row" style="justify-content:center"><button class="btn pri" id="qRe">أعد الاختبار</button></div></div>';
+    $('#qRe').onclick=function(){qi=0;qs=0;renderQuiz()};
+    return;
+  }
+  var Q=QZ[qi], opts=shuffle(Q.o.map(function(t,i){return {t:t,c:i===Q.a}})); qAns=false;
+  box.innerHTML='<div class="card"><div class="qn">السؤال '+(qi+1)+' من '+QZ.length+'</div><h3 style="margin:4px 0 0;font-size:1.15rem">'+Q.q+'</h3><div class="opts">'+opts.map(function(o,i){return '<button class="opt" data-i="'+i+'">'+o.t+'</button>'}).join('')+'</div><div id="qFb"></div></div>';
+  $('#quiz .opt').forEach(function(b){b.onclick=function(){
+    if(qAns)return; qAns=true; var o=opts[+b.getAttribute('data-i')];
+    $('#quiz .opt').forEach(function(x,i){x.disabled=true; if(opts[i].c)x.classList.add('right')});
+    if(o.c){qs++; if(!qGiven[qi]){addPts(10)}} else b.classList.add('wrong');
+    qGiven[qi]=true;
+    $('#qFb').innerHTML='<div class="fb '+(o.c?'ok':'no')+'">'+(o.c?'إجابة صحيحة. ':'إجابة غير صحيحة. ')+Q.e+'</div><div class="row" style="margin-top:8px"><button class="btn pri" id="qNext">'+(qi===QZ.length-1?'النتيجة':'السؤال التالي')+'</button></div>';
+    $('#qNext').onclick=function(){qi++;renderQuiz()};
+  }});
+}
+renderQuiz();
+
+renderNav();
+})();
+</script>
+</body>
+</html>
+
+</body></html>
