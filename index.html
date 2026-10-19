@@ -580,7 +580,6 @@ const ORIGINAL_HTML = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
 const ORIGINAL_DATA_TEXT = document.getElementById('siteData').textContent;
 const siteData = JSON.parse(ORIGINAL_DATA_TEXT);
 var { teacher, highlights, galleryItems, contactChannels, sections } = siteData;
-const labs = siteData.labs || {};
 
 const ic = (name, extra) => `<i data-lucide="${name}" ${extra||''}></i>`;
 
@@ -623,7 +622,7 @@ function renderHome(){
     const kind = g.link ? 'interactive' : g.id ? 'visual' : 'experiment';
     const label = kind==='interactive' ? g.title : kind==='visual' ? 'معرض بصري' : 'تجربة كيميائية';
     const hint = g.link
-      ? `<span class="g-open">${ic('play')} افتح ${g.title}</span>`
+      ? `<span class="g-open">${ic('external-link')} فتح الصفحة المستقلة</span>`
       : g.id
         ? `<span class="g-open">${ic('images')} ${count ? `عرض الصور (${count})` : 'استعراض المعرض'}</span>`
         : `<span class="g-open">${ic('flask-conical')} استكشاف التجربة</span>`;
@@ -859,20 +858,6 @@ function renderGalleryPhotos(item){
     </div>
     ${emptyState}
     <div class="gp-grid">${photosHtml}${addTile}</div>
-  </div>`;
-}
-
-function renderLab(key){
-  const titles = { molecular: "تدرج خواص العناصر — مختبر تفاعلي", elements: "العناصر والمركبات — مختبر تفاعلي", conductivity: "خواص الأحماض والقواعد — مختبر تفاعلي", lesson: "مختبر التوزيع الإلكتروني — مختبر تفاعلي", "reaction-types": "تصنيف التفاعلات الكيميائية — مختبر تفاعلي", "acid-ph": "قوة الأحماض والقواعد والرقم الهيدروجيني — مختبر تفاعلي", "reactions-equations": "التفاعلات والمعادلات — مختبر تفاعلي", "daily-molecules": "جزيئات من حياتنا اليومية — مختبر تفاعلي" };
-  return `
-  <div class="lab-bar">
-    <a href="#top" onclick="return goHome('gallery')">${ic('arrow-left', 'style="transform:scaleX(-1)"')} الرئيسية / معرض التجارب</a>
-    <span>${titles[key] || 'مختبر تفاعلي'}</span>
-  </div>
-  <div class="lab-wrap">
-    <div class="lab-frame-box">
-      <iframe class="lab-frame" id="labFrame" title="${titles[key] || 'مختبر تفاعلي'}"></iframe>
-    </div>
   </div>`;
 }
 
