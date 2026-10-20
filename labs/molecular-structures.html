@@ -1,0 +1,531 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><title>درس التراكيب الجزيئية</title><style id="portfolio-return-style">.portfolio-return{position:fixed;z-index:9999;top:14px;inset-inline-start:14px;display:inline-flex;align-items:center;gap:7px;padding:8px 13px;border:1px solid rgba(11,122,133,.28);border-radius:999px;background:rgba(255,255,255,.92);box-shadow:0 6px 20px rgba(17,35,46,.14);color:#0B7A85;text-decoration:none;font:600 14px/1.2 -apple-system,BlinkMacSystemFont,sans-serif;backdrop-filter:blur(8px)}.portfolio-return:hover{background:#0B7A85;color:#fff}@media(max-width:600px){.portfolio-return{top:8px;inset-inline-start:8px;padding:7px 10px;font-size:12px}}</style></head><body><a class="portfolio-return" href="../#gallery" aria-label="العودة إلى معرض التجارب">← العودة إلى المعرض</a>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Reem+Kufi:wght@500;700&display=swap">
+<style>
+/* Layout: single reading column on graph-paper ground; each concept is a short block followed by one hands-on widget. */
+:root{
+  --paper:#F3F6F8; --card:#FFFFFF; --ink:#11232E; --muted:#52666F; --line:#CBD7DD;
+  --teal:#0B7A85; --teal-soft:#D8EEF0; --amber:#B86E00; --amber-soft:#FBEBCF;
+  --good:#1E7B4B; --good-soft:#DDF1E5; --bad:#B3372D; --bad-soft:#F8E1DE;
+  --f-display:'Reem Kufi','IBM Plex Sans Arabic',system-ui,sans-serif;
+  --f-body:'IBM Plex Sans Arabic',system-ui,-apple-system,'Segoe UI',Tahoma,sans-serif;
+  --grid:rgba(11,122,133,.09);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0E1A20; --card:#15262E; --ink:#E6F0F3; --muted:#93AAB3; --line:#2A3F49;
+    --teal:#4CC3CF; --teal-soft:#12353A; --amber:#F0B050; --amber-soft:#3A2C12;
+    --good:#5CCB8D; --good-soft:#123423; --bad:#F08A7E; --bad-soft:#3E1B17; --grid:rgba(76,195,207,.08);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0E1A20; --card:#15262E; --ink:#E6F0F3; --muted:#93AAB3; --line:#2A3F49;
+  --teal:#4CC3CF; --teal-soft:#12353A; --amber:#F0B050; --amber-soft:#3A2C12;
+  --good:#5CCB8D; --good-soft:#123423; --bad:#F08A7E; --bad-soft:#3E1B17; --grid:rgba(76,195,207,.08);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html{direction:rtl}
+body{direction:rtl;text-align:start;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.8;
+  padding-inline:16px;padding-block:0 48px}
+.wrap{max-width:720px;margin-inline:auto}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;line-height:1.35;text-wrap:balance;margin:0}
+h2{font-size:1.5rem}
+h3{font-size:1.15rem}
+p{margin:0}
+.f{direction:ltr;unicode-bidi:isolate;display:inline-block;font-weight:600}
+sub{font-size:.7em}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+
+/* progress + nav */
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--paper);
+  margin-inline:-16px;padding:8px 16px 0;border-bottom:1px solid var(--line)}
+.prog{height:3px;background:var(--line);margin-inline:-16px;margin-top:8px}
+.prog i{display:block;height:100%;width:0;background:var(--teal);transition:width .15s}
+.chips{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chips button{flex:none;border:1px solid var(--line);background:var(--card);border-radius:999px;padding:3px 12px;font-size:.85rem;line-height:1.7}
+.chips button[aria-current="true"]{background:var(--teal);border-color:var(--teal);color:var(--paper)}
+/* one slide at a time; bar stays in flow so nothing overlaps */
+.slide{display:none}
+.slide.on{display:grid}
+main{padding-block:8px 40px}
+.navrow{display:flex;gap:8px;align-items:center;padding-block:8px 8px}
+.navrow .btn{min-width:92px;min-height:38px;padding:2px 14px}
+.navrow .pos{flex:1;min-width:0;text-align:center;font-size:.85rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.navrow .pos b{color:var(--ink);font-variant-numeric:tabular-nums}
+.endnav{display:flex;gap:8px;justify-content:space-between;padding-top:12px}
+.endnav .btn{min-width:110px}
+
+
+/* hero */
+.hero{padding:24px 16px;border:1px solid var(--line);border-radius:10px;
+  background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:24px 24px}
+.hero .wrap{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+.hero .meta{font-size:.85rem;color:var(--muted);letter-spacing:.02em}
+.hero h1{font-size:clamp(2rem,8vw,3rem);margin-block:4px 8px;color:var(--teal)}
+.hero svg{width:150px;height:auto;max-width:100%}
+@media (max-width:520px){.hero .wrap{grid-template-columns:1fr}.hero svg{width:120px}}
+.goals{margin:20px 0 0;padding:0;list-style:none;display:grid;gap:6px}
+.goals li{padding-inline-start:22px;position:relative;font-size:.97rem}
+.goals li::before{content:"";position:absolute;inset-inline-start:0;top:.7em;width:10px;height:10px;border:2px solid var(--teal);border-radius:50%}
+
+/* sections */
+section{padding-block:36px 8px;scroll-margin-top:64px;display:grid;gap:14px}
+.tag{font-size:.8rem;color:var(--amber);font-weight:600;letter-spacing:.04em}
+.lead{color:var(--muted)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.kv .card{padding:12px;text-align:center;display:grid;gap:4px;min-width:0}
+.kv small{color:var(--muted);font-size:.8rem}
+.kv .big{font-size:1.25rem}
+.def{border-inline-start:4px solid var(--teal);padding:8px 14px;background:var(--teal-soft);border-radius:6px}
+.def b{color:var(--teal)}
+.row{display:flex;flex-wrap:wrap;gap:8px}
+.btn{border:1px solid var(--line);background:var(--card);border-radius:8px;padding:6px 14px;min-height:40px}
+.btn:hover{border-color:var(--teal)}
+.btn.on{background:var(--teal);border-color:var(--teal);color:var(--paper);font-weight:600}
+.btn:disabled{opacity:.45;cursor:default}
+.btn.main{background:var(--teal);border-color:var(--teal);color:var(--paper);font-weight:600}
+.panel{display:grid;gap:12px}
+.stage svg{width:100%;height:auto;display:block;background:var(--paper);border:1px solid var(--line);border-radius:8px}
+.bd{stroke:var(--ink);stroke-width:2.5;stroke-linecap:round}
+.bd.dash{stroke-dasharray:5 5;stroke:var(--teal)}
+.at{fill:var(--card);stroke:var(--ink);stroke-width:2}
+.al{fill:var(--ink);font-family:var(--f-body);font-weight:600;font-size:15px}
+.lp{fill:var(--amber)}
+.counter{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;font-size:.9rem;color:var(--muted)}
+.counter b{color:var(--amber);font-variant-numeric:tabular-nums}
+.say{min-height:5.5em}
+.say h3{color:var(--teal);margin-bottom:2px}
+.steps{display:flex;gap:8px;justify-content:space-between}
+.dots{display:flex;gap:6px;align-items:center}
+.dots i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.dots i.on{background:var(--teal)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.85rem;color:var(--muted)}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:50%;margin-inline-end:6px;background:var(--amber)}
+.legend span.b::before{background:var(--ink);border-radius:2px;height:3px}
+.note{font-size:.9rem;color:var(--muted)}
+
+/* table */
+.tw{overflow-x:auto}
+table{border-collapse:collapse;width:100%;min-width:420px;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:center}
+th{background:var(--teal-soft);font-weight:600}
+
+/* classify + quiz */
+.cl-item{font-size:2rem;text-align:center;font-family:var(--f-display)}
+.opts{display:grid;gap:8px}
+.opt{text-align:start;border:1px solid var(--line);background:var(--card);border-radius:8px;padding:8px 14px;min-height:44px}
+.opt:hover:not(:disabled){border-color:var(--teal)}
+.opt.ok{background:var(--good-soft);border-color:var(--good)}
+.opt.no{background:var(--bad-soft);border-color:var(--bad)}
+.fb{padding:8px 12px;border-radius:8px;font-size:.95rem}
+.fb.ok{background:var(--good-soft)}
+.fb.no{background:var(--bad-soft)}
+.q{display:grid;gap:10px}
+.q h3{font-size:1rem;font-family:var(--f-body);font-weight:600}
+.score{font-family:var(--f-display);font-size:1.4rem;text-align:center}
+.sum{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.sum li{padding-inline-start:20px;position:relative}
+.sum li::before{content:"";position:absolute;inset-inline-start:0;top:.75em;width:8px;height:8px;background:var(--amber);border-radius:50%}
+footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);font-size:.85rem;color:var(--muted)}
+#cc svg g{transition:transform .9s ease}
+#cc .fadeable{transition:opacity .6s ease}
+@media (prefers-reduced-motion:reduce){#cc svg g{transition:none}html{scroll-behavior:auto}}
+</style>
+
+
+
+<div class="bar">
+  <nav class="chips" id="chips" aria-label="أقسام الدرس"></nav>
+  <div class="navrow"><button class="btn" id="prev">→ السابق</button><div class="pos"><b id="posN"></b> · <span id="posT"></span></div><button class="btn main" id="next">التالي ←</button></div>
+  <div class="prog"><i id="pg"></i></div>
+</div>
+
+<main class="wrap">
+<section class="slide hero" id="s0" data-title="مقدمة">
+  <div class="wrap">
+    <div>
+      <div class="meta">كيمياء 2-1 · الفصل 4: الروابط التساهمية · الدرس 4-3</div>
+      <h1>التراكيب الجزيئية</h1>
+      <p class="lead">درس تفاعلي: ارسم، وجرّب، وأجب بنفسك قبل أن ترى الحل.</p>
+    </div>
+    <svg id="heroSvg" viewBox="40 30 220 120" role="img" aria-label="تركيب لويس لجزيء الماء"></svg>
+  </div>
+  <div class="wrap">
+    <ul class="goals">
+      <li>تفرّق بين الصيغة الجزيئية والصيغة البنائية.</li>
+      <li>ترسم تراكيب لويس خطوة بخطوة.</li>
+      <li>تفسّر الرنين وتتعرف على أشكاله.</li>
+      <li>توضّح الرابطة التساهمية التناسقية.</li>
+      <li>تذكر الحالات الاستثنائية من قاعدة الثمانية.</li>
+    </ul>
+  </div>
+</section>
+
+
+<section class="slide" id="s1" data-title="الصيغة البنائية">
+  <div class="tag">المفهوم الأول</div>
+  <h2>الصيغة الجزيئية والصيغة البنائية</h2>
+  <p>تخبرنا الصيغة الجزيئية للمركب التساهمي بأنواع الذرات وأعدادها في الجزيء فقط. أما لمعرفة التركيب الجزيئي فنستعمل نماذج لتمثيل الجزيء، ومنها الصيغة البنائية.</p>
+  <div class="def"><b>الصيغة البنائية:</b> نموذج يستعمل الرموز والروابط لبيان مواقع الذرات في الجزيء.</div>
+  <div class="tw card">
+    <table>
+      <thead><tr><th>المركب</th><th>الصيغة الجزيئية</th><th>الصيغة البنائية</th></tr></thead>
+      <tbody>
+        <tr><td>الماء</td><td><span class="f">H<sub>2</sub>O</span></td><td><span class="f">H–O–H</span></td></tr>
+        <tr><td>ثاني أكسيد الكربون</td><td><span class="f">CO<sub>2</sub></span></td><td><span class="f">O=C=O</span></td></tr>
+        <tr><td>سيانيد الهيدروجين</td><td><span class="f">HCN</span></td><td><span class="f">H–C≡N</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="note">لاحظ أن الخط الواحد يمثل زوجًا مشتركًا من الإلكترونات، والخطان زوجان، والثلاثة خطوط ثلاثة أزواج.</p>
+</section>
+
+<section class="slide" id="s2" data-title="تراكيب لويس">
+  <div class="tag">المفهوم الثاني</div>
+  <h2>ارسم تركيب لويس بنفسك</h2>
+  <p>تركيب لويس يبيّن الروابط وأزواج الإلكترونات غير الرابطة (الأزواج المنفردة) حول كل ذرة. اختر جزيئًا، ثم تقدّم خطوة خطوة وراقب عدد الإلكترونات المتبقية.</p>
+  <div class="card panel" id="lw">
+    <div class="row" id="lwTabs" role="tablist" aria-label="اختر الجزيء"></div>
+    <div class="stage"><svg id="lwSvg" viewBox="0 0 300 180" role="img" aria-label="رسم الجزيء"></svg></div>
+    <div class="counter"><span>إلكترونات التكافؤ الكلية: <b id="lwTot">0</b></span><span>المتبقي للتوزيع: <b id="lwLeft">0</b></span></div>
+    <div class="say" aria-live="polite"><h3 id="lwH"></h3><p id="lwP"></p></div>
+    <div class="steps">
+      <button class="btn" id="lwPrev">السابق</button>
+      <div class="dots" id="lwDots" aria-hidden="true"></div>
+      <button class="btn main" id="lwNext">التالي</button>
+    </div>
+    <div class="legend"><span>زوج منفرد (إلكترونان)</span><span class="b">رابطة (إلكترونان مشتركان)</span></div>
+  </div>
+  <div class="def"><b>اختبر الثمانية:</b> هل الذرة المركزية محاطة بأربعة أزواج من الإلكترونات؟ إذا كان الجواب لا، فهي لا تحقق قاعدة الثمانية، فجرّب تحويل زوج منفرد من ذرة طرفية إلى رابطة إضافية.</div>
+</section>
+
+<section class="slide" id="s3" data-title="الرنين">
+  <div class="tag">المفهوم الثالث</div>
+  <h2>الرنين</h2>
+  <p>يحدث الرنين عندما يمكن رسم أكثر من تركيب لويس صحيح للجزيء الواحد. مثال: جزيء الأوزون <span class="f">O<sub>3</sub></span>. بدّل بين الشكلين، ثم اعرض الهجين.</p>
+  <div class="card panel" id="rs">
+    <div class="row">
+      <button class="btn on" data-r="A">الشكل أ</button>
+      <button class="btn" data-r="B">الشكل ب</button>
+      <button class="btn" data-r="H">الهجين</button>
+    </div>
+    <div class="stage"><svg id="rsSvg" viewBox="0 0 300 180" role="img" aria-label="أشكال رنين الأوزون"></svg></div>
+    <div class="say" aria-live="polite"><p id="rsP"></p></div>
+  </div>
+  <div class="def"><b>تذكّر:</b> أشكال الرنين ليست جزيئات تتبدّل فيما بينها. الجزيء الحقيقي واحد، وتركيبه وسط بين الأشكال.</div>
+</section>
+
+<section class="slide" id="s4" data-title="الرابطة التناسقية">
+  <div class="tag">المفهوم الرابع</div>
+  <h2>الرابطة التساهمية التناسقية</h2>
+  <p>في الرابطة التساهمية العادية تسهم كل ذرة بإلكترون في الزوج المشترك. أما في الرابطة التناسقية فتقدّم ذرة واحدة الزوجين كليهما. جرّب مع <span class="f">NH<sub>3</sub></span> الذي على نيتروجينه زوج منفرد، و<span class="f">BH<sub>3</sub></span> الذي على بورونه مدار فارغ.</p>
+  <div class="card panel" id="cc">
+    <div class="stage"><svg id="ccSvg" viewBox="0 0 320 170" role="img" aria-label="تكوين رابطة تناسقية بين النيتروجين والبورون"></svg></div>
+    <div class="say" aria-live="polite"><p id="ccP"></p></div>
+    <div class="row"><button class="btn main" id="ccBtn">قرّب الجزيئين</button><button class="btn" id="ccReset" disabled>أعد</button></div>
+  </div>
+  <div class="def"><b>الخلاصة:</b> الرابطة التناسقية رابطة تساهمية يأتي زوجها المشترك من ذرة واحدة، وتُرسم أحيانًا بسهم من الذرة المانحة نحو المستقبلة.</div>
+</section>
+
+<section class="slide" id="s5" data-title="استثناءات الثمانية">
+  <div class="tag">المفهوم الخامس</div>
+  <h2>استثناءات قاعدة الثمانية</h2>
+  <p>ليست كل المركبات التساهمية تنتهي بثماني إلكترونات حول كل ذرة. لهذه الحالات ثلاثة أنواع:</p>
+  <div class="kv">
+    <div class="card"><b>عدد فردي</b><span class="big f">NO<sub>2</sub></span><small>مجموع إلكترونات التكافؤ عدد فردي</small></div>
+    <div class="card"><b>أقل من ثمانية</b><span class="big f">BF<sub>3</sub></span><small>الذرة المركزية محاطة بستة إلكترونات</small></div>
+    <div class="card"><b>أكثر من ثمانية</b><span class="big f">PCl<sub>5</sub></span><small>الذرة المركزية محاطة بأكثر من ثمانية</small></div>
+  </div>
+  <div class="card panel" id="cl">
+    <div class="counter"><span>صنّف المركب</span><span>الصحيح: <b id="clSc">0</b> / <b id="clN">6</b></span></div>
+    <div class="cl-item f" id="clF" style="margin-inline:auto"></div>
+    <div class="opts" id="clO"></div>
+    <div id="clFb" aria-live="polite"></div>
+    <div class="row"><button class="btn main" id="clNext" hidden>المركب التالي</button></div>
+  </div>
+</section>
+
+<section class="slide" id="s6" data-title="الخلاصة">
+  <div class="tag">مراجعة</div>
+  <h2>الخلاصة</h2>
+  <ul class="sum">
+    <li>الصيغة البنائية تبيّن مواقع الذرات والروابط، والصيغة الجزيئية تبيّن أنواع الذرات وأعدادها.</li>
+    <li>تركيب لويس: عدّ إلكترونات التكافؤ، ثم الروابط المفردة، ثم الأزواج المنفردة، ثم افحص الثمانية.</li>
+    <li>الرنين: أكثر من تركيب لويس صحيح للجزيء الواحد.</li>
+    <li>الرابطة التناسقية: زوج الرابطة كله من ذرة واحدة.</li>
+    <li>الاستثناءات: عدد فردي من الإلكترونات، أو أقل من ثمانية، أو أكثر من ثمانية.</li>
+  </ul>
+</section>
+
+<section class="slide" id="s7" data-title="اختبر نفسك">
+  <div class="tag">تقويم</div>
+  <h2>اختبر نفسك</h2>
+  <div id="qz" class="panel"></div>
+  <div class="card score" id="qzScore" aria-live="polite">أجب عن الأسئلة لترى نتيجتك</div>
+</section>
+</main>
+
+<script>
+(function(){
+var R=16;
+function drawMol(atoms,st){
+  var s='';
+  (st.bonds||[]).forEach(function(b){
+    var A=atoms[b[0]],B=atoms[b[1]],o=b[2];
+    var dx=B.x-A.x,dy=B.y-A.y,L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L,px=-uy,py=ux;
+    var sx=A.x+ux*R,sy=A.y+uy*R,ex=B.x-ux*R,ey=B.y-uy*R;
+    var n=o===1.5?2:o;
+    for(var k=0;k<n;k++){
+      var off=(k-(n-1)/2)*7, cls=(o===1.5&&k===1)?'bd dash':'bd';
+      s+='<line class="'+cls+'" x1="'+(sx+px*off)+'" y1="'+(sy+py*off)+'" x2="'+(ex+px*off)+'" y2="'+(ey+py*off)+'"/>';
+    }
+  });
+  atoms.forEach(function(a){
+    s+='<circle class="at" cx="'+a.x+'" cy="'+a.y+'" r="'+R+'"/><text class="al" x="'+a.x+'" y="'+a.y+'" dy=".35em" text-anchor="middle">'+a.s+'</text>';
+  });
+  var lps=st.lps||{};
+  Object.keys(lps).forEach(function(i){
+    var a=atoms[i];
+    lps[i].forEach(function(deg){
+      var r=deg*Math.PI/180,dx=Math.cos(r),dy=-Math.sin(r),px=Math.sin(r),py=Math.cos(r);
+      var cx=a.x+dx*(R+8),cy=a.y+dy*(R+8);
+      [-1,1].forEach(function(m){s+='<circle class="lp" cx="'+(cx+px*4*m)+'" cy="'+(cy+py*4*m)+'" r="2.8"/>';});
+    });
+  });
+  return s;
+}
+
+/* hero molecule */
+var H2O={atoms:[{s:'O',x:150,y:70},{s:'H',x:95,y:125},{s:'H',x:205,y:125}]};
+document.getElementById('heroSvg').innerHTML=drawMol(H2O.atoms,{bonds:[[0,1,1],[0,2,1]],lps:{0:[60,120]}});
+
+/* ---------- Lewis stepper ---------- */
+var T=['١) عدّ إلكترونات التكافؤ','٢) ارسم الروابط المفردة','٣) أكمل الذرات الطرفية','٤) أكمل الذرة المركزية وافحص'];
+var M=[
+ {k:'H₂O',tot:8,atoms:H2O.atoms,st:[
+  {b:[],l:{},left:8,p:'الأكسجين 6 + هيدروجينان (1 + 1) = <b>8</b> إلكترونات.'},
+  {b:[[0,1,1],[0,2,1]],l:{},left:4,p:'الذرة المركزية هي O (الهيدروجين لا يكون مركزيًا). كل رابطة تستهلك إلكترونين: 8 − 4 = <b>4</b>.'},
+  {b:[[0,1,1],[0,2,1]],l:{},left:4,p:'كل H يكتفي بزوج واحد (إلكترونان)، فلا أزواج منفردة عليه. المتبقي ما زال 4.'},
+  {b:[[0,1,1],[0,2,1]],l:{0:[60,120]},left:0,p:'نضع الإلكترونات الأربعة المتبقية زوجين منفردين على O. حول O أربعة أزواج: تحقق الثمانية، ولذلك الجزيء <b>منحنٍ</b>.'}]},
+ {k:'NH₃',tot:8,atoms:[{s:'N',x:150,y:70},{s:'H',x:90,y:125},{s:'H',x:150,y:140},{s:'H',x:210,y:125}],st:[
+  {b:[],l:{},left:8,p:'النيتروجين 5 + ثلاث ذرات هيدروجين (3) = <b>8</b> إلكترونات.'},
+  {b:[[0,1,1],[0,2,1],[0,3,1]],l:{},left:2,p:'ثلاث روابط مفردة تستهلك 6 إلكترونات: 8 − 6 = <b>2</b>.'},
+  {b:[[0,1,1],[0,2,1],[0,3,1]],l:{},left:2,p:'ذرات H لا تحتاج أزواجًا منفردة. المتبقي ما زال 2.'},
+  {b:[[0,1,1],[0,2,1],[0,3,1]],l:{0:[90]},left:0,p:'الإلكترونان المتبقيان زوج منفرد على N. حول N أربعة أزواج: ثلاثة رابطة وواحد منفرد. وهذا الزوج المنفرد هو ما سنستعمله في الرابطة التناسقية.'}]},
+ {k:'CH₄',tot:8,atoms:[{s:'C',x:150,y:90},{s:'H',x:150,y:30},{s:'H',x:150,y:150},{s:'H',x:90,y:90},{s:'H',x:210,y:90}],st:[
+  {b:[],l:{},left:8,p:'الكربون 4 + أربع ذرات هيدروجين (4) = <b>8</b> إلكترونات.'},
+  {b:[[0,1,1],[0,2,1],[0,3,1],[0,4,1]],l:{},left:0,p:'أربع روابط مفردة تستهلك الإلكترونات الثمانية كلها: المتبقي <b>0</b>.'},
+  {b:[[0,1,1],[0,2,1],[0,3,1],[0,4,1]],l:{},left:0,p:'لا شيء يُضاف إلى ذرات H.'},
+  {b:[[0,1,1],[0,2,1],[0,3,1],[0,4,1]],l:{},left:0,p:'حول C أربعة أزواج رابطة، فهو يحقق الثمانية دون أزواج منفردة.'}]},
+ {k:'CO₂',tot:16,atoms:[{s:'O',x:60,y:90},{s:'C',x:150,y:90},{s:'O',x:240,y:90}],st:[
+  {b:[],l:{},left:16,p:'الكربون 4 + أكسجينان (6 + 6) = <b>16</b> إلكترونًا.'},
+  {b:[[0,1,1],[1,2,1]],l:{},left:12,p:'الكربون مركزي. رابطتان مفردتان تستهلكان 4: 16 − 4 = <b>12</b>.'},
+  {b:[[0,1,1],[1,2,1]],l:{0:[90,270,180],2:[90,270,0]},left:0,p:'نكمل ثماني كل أكسجين بثلاثة أزواج منفردة: 3 × 2 × 2 = 12، فيصبح المتبقي <b>0</b>.'},
+  {b:[[0,1,2],[1,2,2]],l:{0:[120,240],2:[60,300]},left:0,p:'الكربون محاط بزوجين فقط (4 إلكترونات)، فلا يحقق الثمانية. يشارك كل أكسجين بزوج منفرد ليصبح رابطة ثانية: <b>رابطتان ثنائيتان</b> والشكل خطي.'}]},
+ {k:'HCN',tot:10,atoms:[{s:'H',x:60,y:90},{s:'C',x:150,y:90},{s:'N',x:240,y:90}],st:[
+  {b:[],l:{},left:10,p:'الهيدروجين 1 + الكربون 4 + النيتروجين 5 = <b>10</b> إلكترونات.'},
+  {b:[[0,1,1],[1,2,1]],l:{},left:6,p:'الكربون مركزي. رابطتان مفردتان تستهلكان 4: 10 − 4 = <b>6</b>.'},
+  {b:[[0,1,1],[1,2,1]],l:{2:[90,270,0]},left:0,p:'نضع ثلاثة أزواج منفردة على N لتكتمل ثمانيته. المتبقي <b>0</b>، لكن الكربون ما زال بأربعة إلكترونات فقط.'},
+  {b:[[0,1,1],[1,2,3]],l:{2:[0]},left:0,p:'يشارك N بزوجين منفردين ليصبحا رابطتين إضافيتين مع C: رابطة <b>ثلاثية</b> بين C وN. الكربون الآن محاط بأربعة أزواج رابطة.'}]}
+];
+var cur=0,stp=0;
+var tabs=document.getElementById('lwTabs'),dots=document.getElementById('lwDots');
+M.forEach(function(m,i){
+  var b=document.createElement('button');b.className='btn'+(i===0?' on':'');b.innerHTML='<span class="f">'+m.k+'</span>';
+  b.setAttribute('role','tab');
+  b.onclick=function(){cur=i;stp=0;renderL();};
+  tabs.appendChild(b);
+});
+for(var i=0;i<4;i++){dots.appendChild(document.createElement('i'));}
+function renderL(){
+  var m=M[cur],s=m.st[stp];
+  document.getElementById('lwSvg').innerHTML=drawMol(m.atoms,{bonds:s.b,lps:s.l});
+  document.getElementById('lwTot').textContent=m.tot;
+  document.getElementById('lwLeft').textContent=s.left;
+  document.getElementById('lwH').textContent=T[stp];
+  document.getElementById('lwP').innerHTML=s.p;
+  Array.prototype.forEach.call(tabs.children,function(b,i){b.classList.toggle('on',i===cur);b.setAttribute('aria-selected',i===cur);});
+  Array.prototype.forEach.call(dots.children,function(d,i){d.classList.toggle('on',i<=stp);});
+  document.getElementById('lwPrev').disabled=stp===0;
+  document.getElementById('lwNext').disabled=stp===3;
+}
+document.getElementById('lwPrev').onclick=function(){if(stp>0){stp--;renderL();}};
+document.getElementById('lwNext').onclick=function(){if(stp<3){stp++;renderL();}};
+renderL();
+
+/* ---------- Resonance ---------- */
+var O3=[{s:'O',x:70,y:130},{s:'O',x:150,y:60},{s:'O',x:230,y:130}];
+var RS={
+ A:{b:[[0,1,2],[1,2,1]],l:{0:[180,270],1:[90],2:[0,300,240]},p:'<b>الشكل أ:</b> رابطة ثنائية على اليسار ومفردة على اليمين.'},
+ B:{b:[[0,1,1],[1,2,2]],l:{0:[180,240,300],1:[90],2:[0,270]},p:'<b>الشكل ب:</b> رابطة مفردة على اليسار وثنائية على اليمين. الشكلان لهما عدد الإلكترونات نفسه، والاختلاف في موضع الرابطة الثنائية فقط.'},
+ H:{b:[[0,1,1.5],[1,2,1.5]],l:{0:[180,270],1:[90],2:[0,270]},p:'<b>الهجين:</b> الرابطتان متساويتان في الواقع (نحو 128 بيكومتر)، فهما أقصر من الرابطة المفردة O–O وأطول من الثنائية O=O. لا توجد رابطة ثنائية وأخرى مفردة منفصلتان.'}
+};
+function setR(k){
+  var s=RS[k];
+  document.getElementById('rsSvg').innerHTML=drawMol(O3,{bonds:s.b,lps:s.l});
+  document.getElementById('rsP').innerHTML=s.p;
+  Array.prototype.forEach.call(document.querySelectorAll('#rs [data-r]'),function(b){b.classList.toggle('on',b.dataset.r===k);});
+}
+Array.prototype.forEach.call(document.querySelectorAll('#rs [data-r]'),function(b){b.onclick=function(){setR(b.dataset.r);};});
+setR('A');
+
+/* ---------- Coordinate bond ---------- */
+(function(){
+  var svg=document.getElementById('ccSvg'),p=document.getElementById('ccP');
+  var Nx=80,Ny=85;
+  function atom(x,y,l){return '<circle class="at" cx="'+x+'" cy="'+y+'" r="'+R+'"/><text class="al" x="'+x+'" y="'+y+'" dy=".35em" text-anchor="middle">'+l+'</text>';}
+  function ln(x1,y1,x2,y2){return '<line class="bd" x1="'+x1+'" y1="'+y1+'" x2="'+x2+'" y2="'+y2+'"/>';}
+  var nh='';
+  [[36,50],[36,120],[80,140]].forEach(function(h){
+    var dx=h[0]-Nx,dy=h[1]-Ny,L=Math.hypot(dx,dy),ux=dx/L,uy=dy/L;
+    nh+=ln(Nx+ux*R,Ny+uy*R,h[0]-ux*R,h[1]-uy*R);
+  });
+  [[36,50],[36,120],[80,140]].forEach(function(h){nh+=atom(h[0],h[1],'H');});
+  nh+=atom(Nx,Ny,'N');
+  var lp='<g class="fadeable" id="ccLp" style="transform:none"><circle class="lp" cx="'+(Nx+R+8)+'" cy="'+(Ny-4)+'" r="3"/><circle class="lp" cx="'+(Nx+R+8)+'" cy="'+(Ny+4)+'" r="3"/></g>';
+  var bh='';
+  [[40,-40],[40,40],[68,0]].forEach(function(h){
+    var L=Math.hypot(h[0],h[1]),ux=h[0]/L,uy=h[1]/L;
+    bh+=ln(ux*R,uy*R,h[0]-ux*R,h[1]-uy*R);
+  });
+  [[40,-40],[40,40],[68,0]].forEach(function(h){bh+=atom(h[0],h[1],'H');});
+  bh+=atom(0,0,'B');
+  bh+='<circle id="ccEmpty" class="fadeable" cx="-26" cy="0" r="8" fill="none" stroke="var(--amber)" stroke-width="2" stroke-dasharray="3 3"/>';
+  svg.innerHTML='<g id="ccN">'+nh+'</g>'+lp+
+    '<line id="ccArrow" class="bd fadeable" style="opacity:0" x1="'+(Nx+R)+'" y1="'+Ny+'" x2="158" y2="'+Ny+'"/>'+
+    '<path id="ccHead" class="fadeable" style="opacity:0;fill:var(--ink)" d="M160 '+Ny+' l-9 -5 l0 10 z"/>'+
+    '<g id="ccB" style="transform:translate(250px,'+Ny+'px)">'+bh+'</g>';
+  var done=false;
+  function set(d){
+    done=d;
+    document.getElementById('ccB').style.transform='translate('+(d?178:250)+'px,'+Ny+'px)';
+    document.getElementById('ccLp').style.opacity=d?0:1;
+    document.getElementById('ccEmpty').style.opacity=d?0:1;
+    document.getElementById('ccArrow').style.opacity=d?1:0;
+    document.getElementById('ccHead').style.opacity=d?1:0;
+    document.getElementById('ccBtn').disabled=d;
+    document.getElementById('ccReset').disabled=!d;
+    p.innerHTML=d?'تكوّنت رابطة <b>N→B</b>: زوج N المنفرد صار زوجًا مشتركًا، وقدّمته ذرة N وحدها. الآن حول البورون ثمانية إلكترونات.':'على <b>N</b> زوج منفرد (إلكترونان) لا يشارك في أي رابطة، وعلى <b>B</b> مدار فارغ (دائرة متقطعة) وحول البورون ستة إلكترونات فقط.';
+  }
+  document.getElementById('ccBtn').onclick=function(){set(true);};
+  document.getElementById('ccReset').onclick=function(){set(false);};
+  set(false);
+})();
+
+/* ---------- Octet exceptions classifier ---------- */
+var C=[
+ {f:'NO<sub>2</sub>',c:0,w:'مجموع إلكترونات التكافؤ 5 + 6 + 6 = 17، وهو عدد فردي، فلا يمكن أن تكتمل الثمانية لكل الذرات.'},
+ {f:'BF<sub>3</sub>',c:1,w:'يرتبط B بثلاث روابط مفردة فيحيط به ستة إلكترونات فقط.'},
+ {f:'PCl<sub>5</sub>',c:2,w:'يرتبط P بخمس روابط مفردة فيحيط به عشرة إلكترونات.'},
+ {f:'ClO<sub>2</sub>',c:0,w:'مجموع إلكترونات التكافؤ 7 + 6 + 6 = 19، وهو عدد فردي.'},
+ {f:'BH<sub>3</sub>',c:1,w:'يرتبط B بثلاث روابط مفردة فيحيط به ستة إلكترونات فقط، ولهذا يستقبل زوجًا في الرابطة التناسقية.'},
+ {f:'SF<sub>6</sub>',c:2,w:'يرتبط S بست روابط مفردة فيحيط به اثنا عشر إلكترونًا.'}
+];
+var CL=['عدد فردي من الإلكترونات','أقل من ثمانية','أكثر من ثمانية'];
+var ci=0,cs=0,cdone=false;
+var clO=document.getElementById('clO');
+function renderC(){
+  var it=C[ci];cdone=false;
+  document.getElementById('clF').innerHTML=it.f;
+  document.getElementById('clFb').innerHTML='';
+  document.getElementById('clNext').hidden=true;
+  clO.innerHTML='';
+  CL.forEach(function(t,i){
+    var b=document.createElement('button');b.className='opt';b.textContent=t;
+    b.onclick=function(){
+      if(cdone)return;cdone=true;
+      var ok=i===it.c;if(ok)cs++;
+      Array.prototype.forEach.call(clO.children,function(x,j){x.disabled=true;if(j===it.c)x.classList.add('ok');else if(j===i)x.classList.add('no');});
+      document.getElementById('clFb').innerHTML='<div class="fb '+(ok?'ok':'no')+'">'+(ok?'إجابة صحيحة. ':'الصحيح: '+CL[it.c]+'. ')+it.w+'</div>';
+      document.getElementById('clSc').textContent=cs;
+      var n=document.getElementById('clNext');n.hidden=false;n.textContent=ci<C.length-1?'المركب التالي':'أعد التصنيف';
+    };
+    clO.appendChild(b);
+  });
+}
+document.getElementById('clNext').onclick=function(){if(ci<C.length-1){ci++;}else{ci=0;cs=0;document.getElementById('clSc').textContent=0;}renderC();};
+document.getElementById('clN').textContent=C.length;
+renderC();
+
+/* ---------- Quiz ---------- */
+var Q=[
+ {q:'أي الصيغ الآتية تبيّن مواقع الذرات والروابط بينها؟',o:['الصيغة الجزيئية','الصيغة البنائية','رمز العنصر'],a:1,w:'الصيغة البنائية تستعمل الرموز والروابط لبيان مواقع الذرات.'},
+ {q:'ما العدد الكلي لإلكترونات التكافؤ اللازم لرسم تركيب لويس لـ CO₂؟',o:['12','16','18'],a:1,w:'4 + 6 + 6 = 16.'},
+ {q:'ما نوع الرابطة بين C وN في HCN؟',o:['مفردة','ثنائية','ثلاثية'],a:2,w:'لتكتمل الثمانية حول الكربون يشارك النيتروجين بزوجين منفردين فتصبح الرابطة ثلاثية.'},
+ {q:'متى يحدث الرنين؟',o:['عندما يمكن رسم أكثر من تركيب لويس صحيح للجزيء','عندما يفقد الجزيء إلكترونات','عندما يكون عدد الإلكترونات فرديًا'],a:0,w:'الرنين هو وجود أكثر من تركيب لويس صحيح للجزيء الواحد.'},
+ {q:'في الرابطة التساهمية التناسقية، يأتي الزوج المشترك من:',o:['ذرتين معًا','ذرة واحدة فقط','لا يأتي من أي ذرة'],a:1,w:'تقدّم ذرة واحدة الزوجين، كما يفعل النيتروجين في NH₃ مع البورون في BH₃.'},
+ {q:'أي المركبات الآتية تحيط بذرته المركزية أقل من ثمانية إلكترونات؟',o:['CH₄','NH₃','BF₃'],a:2,w:'البورون في BF₃ محاط بستة إلكترونات.'}
+];
+var qz=document.getElementById('qz'),qs=0,qa=0;
+Q.forEach(function(q,qi){
+  var d=document.createElement('div');d.className='card q';
+  var h=document.createElement('h3');h.textContent=(qi+1)+'. '+q.q;d.appendChild(h);
+  var os=document.createElement('div');os.className='opts';
+  var fb=document.createElement('div');fb.setAttribute('aria-live','polite');
+  var done=false;
+  q.o.forEach(function(t,i){
+    var b=document.createElement('button');b.className='opt';b.textContent=t;
+    b.onclick=function(){
+      if(done)return;done=true;qa++;
+      var ok=i===q.a;if(ok)qs++;
+      Array.prototype.forEach.call(os.children,function(x,j){x.disabled=true;if(j===q.a)x.classList.add('ok');else if(j===i)x.classList.add('no');});
+      fb.innerHTML='<div class="fb '+(ok?'ok':'no')+'">'+(ok?'أحسنت. ':'')+q.w+'</div>';
+      var s=document.getElementById('qzScore');
+      s.textContent=qa<Q.length?('النتيجة حتى الآن: '+qs+' من '+qa):('النتيجة النهائية: '+qs+' من '+Q.length+(qs===Q.length?' — ممتاز':qs>=4?' — جيد جدًا':' — راجع الأقسام وحاول مرة أخرى'));
+    };
+    os.appendChild(b);
+  });
+  d.appendChild(os);d.appendChild(fb);qz.appendChild(d);
+});
+
+/* ---------- Slides ---------- */
+var slides=Array.prototype.slice.call(document.querySelectorAll('main .slide'));
+var chips=document.getElementById('chips'),cur=0;
+slides.forEach(function(sl,i){
+  var b=document.createElement('button');b.textContent=sl.dataset.title;
+  b.onclick=function(){go(i);};
+  chips.appendChild(b);
+  var nav=document.createElement('div');nav.className='endnav';
+  var pv=document.createElement('button');pv.className='btn';pv.textContent='→ السابق';
+  pv.onclick=function(){go(i-1);};
+  if(i===0)pv.style.visibility='hidden';
+  nav.appendChild(pv);
+  if(i<slides.length-1){
+    var nx=document.createElement('button');nx.className='btn main';nx.textContent='التالي ←';
+    nx.onclick=function(){go(i+1);};nav.appendChild(nx);
+  }
+  sl.appendChild(nav);
+});
+function go(n){
+  if(n<0||n>=slides.length)return;
+  cur=n;
+  slides.forEach(function(x,i){x.classList.toggle('on',i===n);});
+  Array.prototype.forEach.call(chips.children,function(c,i){
+    if(i===n){c.setAttribute('aria-current','true');c.scrollIntoView({inline:'center',block:'nearest'});}else{c.removeAttribute('aria-current');}
+  });
+  document.getElementById('posN').textContent=(n+1)+' / '+slides.length;
+  document.getElementById('posT').textContent=slides[n].dataset.title;
+  document.getElementById('prev').disabled=n===0;
+  document.getElementById('next').disabled=n===slides.length-1;
+  document.getElementById('pg').style.width=((n+1)/slides.length*100)+'%';
+  window.scrollTo(0,0);
+}
+document.getElementById('prev').onclick=function(){go(cur-1);};
+document.getElementById('next').onclick=function(){go(cur+1);};
+document.addEventListener('keydown',function(e){
+  if(e.key==='ArrowLeft')go(cur+1);else if(e.key==='ArrowRight')go(cur-1);
+});
+go(0);
+})();
+</script>
+
+</body></html>
