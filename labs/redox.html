@@ -1,0 +1,763 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style id="lab-suite-style">.lab-suite{--suite-ink:#123d47;--suite-muted:#5c747b;--suite-line:#d4e5e3;--suite-accent:#0d7b70;--suite-soft:#e5f4f0;max-width:980px;margin:0 auto 22px;padding:12px 14px;border:1px solid var(--suite-line);border-radius:16px;background:linear-gradient(135deg,var(--suite-soft),rgba(255,255,255,.82));color:var(--suite-ink);display:flex;align-items:center;gap:14px;box-shadow:0 8px 22px rgba(18,61,71,.07);font-family:system-ui,-apple-system,Tahoma,Arial,sans-serif}.lab-suite-main{min-width:0;flex:1}.lab-suite-kicker{display:block;color:var(--suite-accent);font-size:12px;font-weight:700;letter-spacing:.03em}.lab-suite-title{display:block;margin-top:2px;font-size:17px;font-weight:800;line-height:1.4;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.lab-suite-meta{display:block;color:var(--suite-muted);font-size:12px;margin-top:2px}.lab-suite-count{flex:none;border:1px solid var(--suite-line);background:rgba(255,255,255,.62);border-radius:999px;padding:7px 10px;font-size:12px;font-weight:700;white-space:nowrap}.lab-suite-nav{display:flex;align-items:center;gap:6px;flex:none}.lab-suite-nav a,.lab-suite-nav span{display:inline-flex;align-items:center;justify-content:center;min-height:36px;padding:6px 10px;border-radius:10px;border:1px solid var(--suite-line);color:var(--suite-ink);background:rgba(255,255,255,.72);text-decoration:none;font-size:12px;font-weight:700;white-space:nowrap}.lab-suite-nav a:hover{background:var(--suite-accent);border-color:var(--suite-accent);color:#fff}.lab-suite-nav .lab-suite-catalog{background:var(--suite-accent);border-color:var(--suite-accent);color:#fff}.lab-suite-nav .disabled{opacity:.42;pointer-events:none}@media(prefers-color-scheme:dark){.lab-suite{--suite-ink:#e5f3f1;--suite-muted:#9bb8b8;--suite-line:#2b4b4d;--suite-accent:#62c8b5;--suite-soft:#163b3c;background:linear-gradient(135deg,var(--suite-soft),rgba(19,41,47,.82));box-shadow:0 8px 22px rgba(0,0,0,.2)}.lab-suite-count,.lab-suite-nav a,.lab-suite-nav span{background:rgba(19,41,47,.72)}}@media(max-width:650px){.lab-suite{align-items:flex-start;flex-wrap:wrap;gap:10px;margin-inline:0}.lab-suite-main{flex-basis:calc(100% - 100px)}.lab-suite-count{margin-inline-start:auto}.lab-suite-nav{width:100%;justify-content:space-between}.lab-suite-nav a,.lab-suite-nav span{flex:1}.lab-suite-nav .lab-suite-catalog{flex:1.2}.lab-suite-title{font-size:15px}}</style><style id="portfolio-lab-return">.portfolio-return{position:relative;display:inline-flex;align-items:center;gap:7px;margin:0 auto 14px;max-width:980px;padding:8px 13px;border:1px solid #b9d9d3;border-radius:999px;background:rgba(255,255,255,.92);box-shadow:0 6px 20px rgba(23,59,53,.12);color:#14795b;text-decoration:none;font:600 14px/1.2 Tahoma,Arial,sans-serif}.portfolio-return:hover{background:#14795b;color:#fff}@media(max-width:600px){.portfolio-return{margin-inline:0;padding:7px 10px;font-size:12px}}</style></head><body><a class="portfolio-return" href="../#gallery" aria-label="العودة إلى معرض التجارب">← العودة إلى المعرض</a><header class="lab-suite" aria-label="تنقل المختبرات"><div class="lab-suite-main"><span class="lab-suite-kicker">مختبر تفاعلي · الأحماض والتفاعلات</span><strong class="lab-suite-title">الأكسدة والاختزال</strong><span class="lab-suite-meta">التنقل بين المختبرات</span></div><span class="lab-suite-count">10 / 11</span><nav class="lab-suite-nav"><a href="reaction-types.html" aria-label="المختبر السابق">السابق</a><a class="lab-suite-catalog" href="../labs.html">الكتالوج</a><a href="reactions-equations.html" aria-label="المختبر التالي">التالي</a></nav></header>
+<title>الأكسدة والاختزال</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Noto+Kufi+Arabic:wght@600;800&display=swap">
+<style>
+/* Layout: one reading column, RTL. Amber = oxidation, teal = reduction, used the same way in every section. */
+:root{
+  --bg:#f1f5f8; --surface:#ffffff; --fg:#13222d; --muted:#586a77; --line:#d3dde4;
+  --ox:#bf560b; --ox-soft:#fde9dc; --on-ox:#ffffff;
+  --red:#0a7685; --red-soft:#d8f0f3; --on-red:#ffffff;
+  --good:#17784a; --good-soft:#dcf3e6; --bad:#b3261e; --bad-soft:#fbe3e1;
+  --elec:#f2b705;
+  --font-display:"Noto Kufi Arabic","IBM Plex Sans Arabic",Tahoma,sans-serif;
+  --font-body:"IBM Plex Sans Arabic","Segoe UI",Tahoma,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d1a22; --surface:#15262f; --fg:#e5eef3; --muted:#93a6b3; --line:#28414f;
+    --ox:#ff9b5e; --ox-soft:#3a2415; --on-ox:#1d0e04;
+    --red:#4cc4d5; --red-soft:#103840; --on-red:#04252b;
+    --good:#5fd69b; --good-soft:#123826; --bad:#ff8b82; --bad-soft:#40201e;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d1a22; --surface:#15262f; --fg:#e5eef3; --muted:#93a6b3; --line:#28414f;
+  --ox:#ff9b5e; --ox-soft:#3a2415; --on-ox:#1d0e04;
+  --red:#4cc4d5; --red-soft:#103840; --on-red:#04252b;
+  --good:#5fd69b; --good-soft:#123826; --bad:#ff8b82; --bad-soft:#40201e;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--bg); color:var(--fg); direction:rtl;
+  font-family:var(--font-body); font-size:16px; line-height:1.75;
+  padding-block:20px 40px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+.page{max-width:760px;margin-inline:auto;display:flex;flex-direction:column;gap:18px}
+h1,h2,h3{font-family:var(--font-display);line-height:1.4;margin:0;text-wrap:balance}
+h1{font-size:1.9rem;font-weight:800}
+h2{font-size:1.3rem;font-weight:800}
+h3{font-size:1.05rem;font-weight:600}
+p{margin:0}
+.kicker{font-size:.85rem;color:var(--muted);letter-spacing:.04em}
+.f{direction:ltr;unicode-bidi:isolate;display:inline-block;white-space:nowrap}
+.f sub,.f sup,.eq sub,.eq sup{font-size:.7em;line-height:0}
+.eq{
+  direction:ltr;unicode-bidi:isolate;text-align:center;font-size:1.15rem;
+  background:var(--bg);border:1px solid var(--line);border-radius:10px;
+  padding:12px 14px;overflow-x:auto;white-space:nowrap;
+}
+.eq + .eq{margin-top:8px}
+
+/* header */
+.head{display:flex;flex-direction:column;gap:12px}
+.law{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.law div{border-radius:12px;padding:10px 12px;font-size:.95rem;line-height:1.6}
+.law .o{background:var(--ox-soft);border:1px solid var(--ox)}
+.law .r{background:var(--red-soft);border:1px solid var(--red)}
+.law b{display:block;font-family:var(--font-display);font-size:1rem}
+.law .o b{color:var(--ox)} .law .r b{color:var(--red)}
+
+/* tabs */
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.tab{
+  flex:0 0 auto;font:inherit;font-weight:500;font-size:.95rem;cursor:pointer;
+  background:var(--surface);color:var(--fg);border:1px solid var(--line);
+  border-radius:999px;padding:6px 16px;
+}
+.tab[aria-selected="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:flex;flex-direction:column;gap:14px;min-width:0}
+.btn{
+  font:inherit;font-weight:600;cursor:pointer;border:0;border-radius:10px;
+  background:var(--fg);color:var(--bg);padding:9px 18px;align-self:flex-start;
+}
+.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn:disabled{opacity:.5;cursor:default}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+
+/* electron demo */
+.demo{width:100%;height:auto;display:block;direction:ltr}
+.demo text{font-family:var(--font-body)}
+.pane-o{fill:var(--ox-soft);stroke:var(--ox);stroke-width:1.5}
+.pane-r{fill:var(--red-soft);stroke:var(--red);stroke-width:1.5}
+.atom-o{fill:var(--ox)} .atom-r{fill:var(--red)}
+.sym{font-weight:600;font-size:24px;text-anchor:middle}
+.chg{font-size:15px;font-weight:600;text-anchor:middle;fill:var(--fg)}
+.cap{font-size:13px;text-anchor:middle;fill:var(--muted)}
+.wire{stroke:var(--line);stroke-width:2;stroke-dasharray:5 5}
+.el{transition:transform 1.7s cubic-bezier(.5,0,.3,1)}
+.el circle{fill:var(--elec);stroke:var(--fg);stroke-width:1}
+.el text{font-size:13px;font-weight:600;text-anchor:middle;fill:#13222d}
+.go .el{transform:translateX(210px)}
+.done .el{opacity:0;transition:opacity .35s}
+@media (prefers-reduced-motion:reduce){.el{transition:none}}
+.halves{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.half{border-radius:12px;padding:10px 12px;font-size:.92rem;line-height:1.6;min-width:0}
+.half.o{background:var(--ox-soft);border:1px solid var(--ox)}
+.half.r{background:var(--red-soft);border:1px solid var(--red)}
+.half b{display:block;font-family:var(--font-display)}
+.half.o b{color:var(--ox)} .half.r b{color:var(--red)}
+.half .f{font-size:1rem}
+
+/* segmented */
+.seg{display:flex;gap:6px;flex-wrap:wrap}
+.seg button{
+  font:inherit;font-size:.9rem;cursor:pointer;background:transparent;color:var(--fg);
+  border:1px solid var(--line);border-radius:8px;padding:4px 12px;
+}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.cmp div{border-radius:12px;padding:12px;min-width:0}
+.cmp .o{background:var(--ox-soft);border-top:4px solid var(--ox)}
+.cmp .r{background:var(--red-soft);border-top:4px solid var(--red)}
+.cmp b{display:block;font-family:var(--font-display);margin-bottom:2px}
+.cmp .o b{color:var(--ox)} .cmp .r b{color:var(--red)}
+.note{font-size:.92rem;color:var(--muted);border-inline-start:3px solid var(--line);padding-inline-start:12px}
+
+/* rules */
+.rules{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.rules li{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;background:var(--bg);border-radius:10px;padding:10px 12px}
+.rules .val{font-weight:600;font-family:var(--font-display);direction:ltr;unicode-bidi:isolate;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:0 10px;white-space:nowrap}
+.rules small{display:block;color:var(--muted);font-size:.85rem}
+
+/* quiz parts */
+.qmeta{font-size:.85rem;color:var(--muted)}
+.bar{height:6px;border-radius:999px;background:var(--line);overflow:hidden}
+.bar span{display:block;height:100%;background:var(--red);transition:width .3s}
+.q{font-weight:600;font-size:1.05rem}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.opts.compact{grid-template-columns:repeat(auto-fill,minmax(56px,1fr))}
+.opt{
+  font:inherit;cursor:pointer;background:var(--surface);color:var(--fg);
+  border:1.5px solid var(--line);border-radius:10px;padding:9px 10px;text-align:center;min-width:0;
+}
+.opt:hover:not(:disabled){border-color:var(--fg)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.right::before{content:"✓ "} .opt.wrong::before{content:"✗ "}
+.fb-in{border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;margin-top:2px}
+.fb-in.ok{background:var(--good-soft);border:1px solid var(--good)}
+.fb-in.no{background:var(--bad-soft);border:1px solid var(--bad)}
+.fb-in strong{font-family:var(--font-display)}
+.fb-in.ok strong{color:var(--good)} .fb-in.no strong{color:var(--bad)}
+.done-box{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.score{font-family:var(--font-display);font-weight:800;font-size:2.4rem;direction:ltr}
+
+/* analyzer */
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chips button{font:inherit;font-size:.9rem;cursor:pointer;background:transparent;color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:2px 12px}
+.chips button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.chg-table{display:flex;flex-direction:column;gap:6px}
+.chg-row{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;border-radius:10px;padding:8px 12px}
+.chg-row.ox{background:var(--ox-soft)} .chg-row.red{background:var(--red-soft)}
+.chg-row .tag{font-weight:600;font-size:.9rem}
+.chg-row.ox .tag{color:var(--ox)} .chg-row.red .tag{color:var(--red)}
+.chg-row .nums{direction:ltr;unicode-bidi:isolate;text-align:center;white-space:nowrap}
+
+/* oxidation number lab */
+.lab-atoms{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;direction:ltr}
+.atom{background:var(--bg);border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;min-width:88px;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.atom.unk{border-color:var(--red);background:var(--surface)}
+.atom.solved{border-color:var(--good);background:var(--good-soft)}
+.atom .asym{font-family:var(--font-display);font-weight:800;font-size:1.6rem;line-height:1}
+.atom .asym sub{font-size:.55em}
+.atom small{color:var(--muted);font-size:.75rem;line-height:1.35;max-width:110px;direction:rtl}
+.atom .v{min-width:2.6ch;text-align:center;font-family:var(--font-display);font-weight:800;font-size:1.3rem;direction:ltr}
+.atom .lk .v{color:var(--muted)}
+.stp{display:flex;align-items:center;gap:4px}
+.sb{width:42px;height:42px;border-radius:10px;border:1.5px solid var(--red);background:var(--red-soft);color:var(--fg);font:inherit;font-size:1.4rem;font-weight:600;cursor:pointer;line-height:1}
+.sb:active{transform:scale(.94)}
+.scale{position:relative;height:52px;direction:ltr}
+.beam{position:absolute;left:6%;right:6%;top:12px;height:8px;border-radius:4px;background:var(--fg);transform-origin:center;transition:transform .4s cubic-bezier(.3,1.4,.5,1)}
+.beam::before,.beam::after{content:"";position:absolute;top:-6px;width:20px;height:20px;border-radius:50%;background:var(--surface);border:3px solid var(--fg)}
+.beam::before{left:-4px}.beam::after{right:-4px}
+.fulcrum{position:absolute;left:50%;top:16px;transform:translateX(-50%);width:0;height:0;border-left:13px solid transparent;border-right:13px solid transparent;border-bottom:28px solid var(--muted)}
+.sumrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;text-align:center;direction:ltr}
+.sumrow div{display:flex;flex-direction:column;border-radius:12px;background:var(--bg);padding:6px 8px}
+.sumrow span{font-size:.82rem;color:var(--muted);direction:rtl}
+.sumrow b{font-family:var(--font-display);font-size:1.5rem;direction:ltr}
+.sumrow.eqd div:first-child{background:var(--good-soft)}
+@media (prefers-reduced-motion:reduce){.beam{transition:none}}
+/* step-by-step calculator */
+.cstep{border:1.5px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.cstep.active{border-color:var(--red)}
+.cstep.done{background:var(--good-soft);border-color:var(--good)}
+.cstep > b{font-family:var(--font-display)}
+.inrow{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.inwrap{display:inline-flex;align-items:center;gap:6px;direction:ltr}
+.inwrap .il{font-weight:600;min-width:1.4ch}
+.cin{width:80px;font:inherit;font-size:1.1rem;text-align:center;direction:ltr;border:1.5px solid var(--line);border-radius:10px;padding:8px;background:var(--surface);color:var(--fg)}
+.cin.bad{border-color:var(--bad);background:var(--bad-soft)}
+.pm{width:36px;height:40px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--fg);font:inherit;cursor:pointer}
+/* stepper */
+.dots{display:flex;gap:6px}
+.dots i{flex:1;height:6px;border-radius:999px;background:var(--line)}
+.dots i.on{background:var(--red)}
+.step-body{display:flex;flex-direction:column;gap:10px;min-height:150px}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pair .eq{font-size:1rem;padding:10px 8px}
+.pair .eq.o{border-color:var(--ox)} .pair .eq.r{border-color:var(--red)}
+.foot{font-size:.85rem;color:var(--muted);text-align:center}
+@media (max-width:480px){
+  h1{font-size:1.55rem}
+  .pair{grid-template-columns:1fr}
+  .eq{font-size:1.02rem}
+}
+</style>
+
+<div class="page" dir="rtl" lang="ar">
+  <header class="head">
+    <span class="kicker">كيمياء 3 · التفاعلات الكيميائية</span>
+    <h1>الأكسدة والاختزال</h1>
+    <div class="law">
+      <div class="o"><b>الأكسدة</b>فقد إلكترونات، فيزداد عدد التأكسد</div>
+      <div class="r"><b>الاختزال</b>اكتساب إلكترونات، فينقص عدد التأكسد</div>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" id="tabs" aria-label="أقسام الدرس">
+    <button class="tab" role="tab" data-t="concept" aria-selected="true">١. المفهوم</button>
+    <button class="tab" role="tab" data-t="numbers" aria-selected="false">٢. أعداد التأكسد</button>
+    <button class="tab" role="tab" data-t="agents" aria-selected="false">٣. العوامل</button>
+    <button class="tab" role="tab" data-t="balance" aria-selected="false">٤. الموازنة</button>
+    <button class="tab" role="tab" data-t="quiz" aria-selected="false">٥. اختبر نفسك</button>
+  </nav>
+
+  <!-- 1. concept -->
+  <section class="panel" id="p-concept" role="tabpanel">
+    <div class="card">
+      <h2>انتقال الإلكترونات بين Zn و Cu²⁺</h2>
+      <p>تُغمر صفيحة خارصين في محلول كبريتات النحاس. اضغط الزر وراقب الإلكترونين.</p>
+      <svg id="demo" class="demo" viewBox="0 0 560 230" role="img" aria-label="انتقال إلكترونين من ذرة الخارصين إلى أيون النحاس الثنائي">
+        <rect class="pane-o" x="20" y="20" width="200" height="190" rx="14"/>
+        <rect class="pane-r" x="340" y="20" width="200" height="190" rx="14"/>
+        <line class="wire" x1="222" y1="100" x2="338" y2="100"/>
+        <circle class="atom-o" cx="120" cy="100" r="40"/>
+        <text class="sym" x="120" y="109" fill="var(--on-ox)">Zn</text>
+        <text class="chg" id="zc" x="168" y="62">0</text>
+        <text class="cap" x="120" y="184">صفيحة خارصين</text>
+        <circle class="atom-r" cx="440" cy="100" r="40"/>
+        <text class="sym" x="440" y="109" fill="var(--on-red)">Cu</text>
+        <text class="chg" id="cc" x="488" y="62">2+</text>
+        <text class="cap" x="440" y="184">محلول CuSO₄</text>
+        <g class="el">
+          <circle cx="172" cy="86" r="10"/><text x="172" y="90">e⁻</text>
+          <circle cx="172" cy="116" r="10"/><text x="172" y="120">e⁻</text>
+        </g>
+      </svg>
+      <p id="demo-cap" aria-live="polite">الحالة الأولى: Zn ذرة متعادلة، وCu²⁺ أيون موجب.</p>
+      <button class="btn" id="run">ابدأ انتقال الإلكترونات</button>
+      <div class="eq"><span>Zn + Cu<sup>2+</sup> → Zn<sup>2+</sup> + Cu</span></div>
+      <div class="halves">
+        <div class="half o"><b>نصف تفاعل الأكسدة</b><span class="f">Zn → Zn<sup>2+</sup> + 2e<sup>−</sup></span></div>
+        <div class="half r"><b>نصف تفاعل الاختزال</b><span class="f">Cu<sup>2+</sup> + 2e<sup>−</sup> → Cu</span></div>
+      </div>
+      <p class="note">الأكسدة والاختزال يحدثان معًا دائمًا: ما يفقده أحدهما يكتسبه الآخر.</p>
+    </div>
+
+    <div class="card" style="margin-top:18px">
+      <h2>ثلاث طرق لتعريف العمليتين</h2>
+      <div class="seg" id="defseg" role="group" aria-label="اختر التعريف">
+        <button data-d="e" aria-pressed="true">بالإلكترونات</button>
+        <button data-d="n" aria-pressed="false">بعدد التأكسد</button>
+        <button data-d="oh" aria-pressed="false">بالأكسجين والهيدروجين</button>
+      </div>
+      <div class="cmp" id="defbox"></div>
+      <div class="row"><button class="btn" data-go="numbers">التالي: أعداد التأكسد</button></div>
+    </div>
+  </section>
+
+  <!-- 2. oxidation numbers -->
+  <section class="panel" id="p-numbers" role="tabpanel" hidden>
+    <div class="card">
+      <h2>قواعد حساب عدد التأكسد</h2>
+      <ul class="rules">
+        <li><span>العنصر في الحالة الحرة<small>Na ، O₂ ، Cl₂ ، S₈</small></span><span class="val">0</span></li>
+        <li><span>الأيون أحادي الذرة يساوي شحنته<small>Fe³⁺ ، Cl⁻ ، Mg²⁺</small></span><span class="val">+3 ، −1 ، +2</span></li>
+        <li><span>مجموع أعداد التأكسد في المركب المتعادل<small>وفي الأيون متعدد الذرات يساوي شحنة الأيون</small></span><span class="val">0 / الشحنة</span></li>
+        <li><span>فلزات المجموعة 1 والمجموعة 2<small>Na ، K ، Mg ، Ca</small></span><span class="val">+1 ، +2</span></li>
+        <li><span>الهيدروجين غالبًا +1<small>و −1 في هيدريدات الفلزات مثل NaH</small></span><span class="val">+1</span></li>
+        <li><span>الأكسجين غالبًا −2<small>و −1 في فوق الأكاسيد مثل H₂O₂</small></span><span class="val">−2</span></li>
+        <li><span>الهالوجينات في المركبات الثنائية<small>الفلور −1 دائمًا</small></span><span class="val">−1</span></li>
+      </ul>
+    </div>
+    <div class="card" style="margin-top:18px">
+      <h2>مختبر أعداد التأكسد</h2>
+      <p>العناصر المعروفة مثبّتة بحسب القواعد. اضبط عدد تأكسد العنصر ذي الإطار الملون بالزرين + و − حتى يتوازن الميزان.</p>
+      <div id="lab" style="display:flex;flex-direction:column;gap:14px"></div>
+    </div>
+    <div class="card" style="margin-top:18px">
+      <h2>الحل الحسابي خطوة بخطوة</h2>
+      <p>احسب بنفسك: اكتب كل رقم في خانته ثم اضغط «تحقق» (أو Enter). الزر ± يبدّل الإشارة.</p>
+      <div id="calc" style="display:flex;flex-direction:column;gap:12px"></div>
+    </div>
+    <div class="card" style="margin-top:18px">
+      <h2>تدريب سريع</h2>
+      <div id="numq"></div>
+    </div>
+    <div class="row" style="margin-top:18px"><button class="btn" data-go="agents">التالي: العوامل المؤكسدة والمختزلة</button></div>
+  </section>
+
+  <!-- 3. agents -->
+  <section class="panel" id="p-agents" role="tabpanel" hidden>
+    <div class="card">
+      <h2>حلل التفاعل</h2>
+      <p>اختر تفاعلًا، ثم أجب عن الأسئلة بالترتيب.</p>
+      <div class="chips" id="rxchips" role="group" aria-label="التفاعلات"></div>
+      <div id="rxbox" class="step-body" style="min-height:0"></div>
+    </div>
+    <div class="card" style="margin-top:18px">
+      <h3>تذكّر</h3>
+      <div class="cmp">
+        <div class="o"><b>العامل المختزل</b>المادة التي تتأكسد، فهي تعطي الإلكترونات.</div>
+        <div class="r"><b>العامل المؤكسد</b>المادة التي تُختزل، فهي تأخذ الإلكترونات.</div>
+      </div>
+      <div class="row"><button class="btn" data-go="balance">التالي: موازنة المعادلات</button></div>
+    </div>
+  </section>
+
+  <!-- 4. balancing -->
+  <section class="panel" id="p-balance" role="tabpanel" hidden>
+    <div class="card">
+      <h2>موازنة معادلات الأكسدة والاختزال</h2>
+      <div class="seg" id="mseg" role="group" aria-label="طريقة الموازنة">
+        <button data-m="ox" aria-pressed="true">طريقة أعداد التأكسد</button>
+        <button data-m="half" aria-pressed="false">طريقة نصف التفاعل</button>
+      </div>
+      <div class="dots" id="dots" aria-hidden="true"></div>
+      <div class="qmeta" id="stepmeta"></div>
+      <div class="step-body" id="stepbody" aria-live="polite"></div>
+      <div class="row">
+        <button class="btn ghost" id="prev">السابق</button>
+        <button class="btn" id="next">الخطوة التالية</button>
+      </div>
+    </div>
+    <div class="row" style="margin-top:18px"><button class="btn" data-go="quiz">التالي: اختبر نفسك</button></div>
+  </section>
+
+  <!-- 5. quiz -->
+  <section class="panel" id="p-quiz" role="tabpanel" hidden>
+    <div class="card">
+      <h2>اختبار قصير</h2>
+      <div id="quizbox"></div>
+    </div>
+  </section>
+
+  <p class="foot">كيمياء 3 · الأكسدة والاختزال</p>
+</div>
+
+<script>
+(function(){
+  var $=function(s,r){return (r||document).querySelector(s)};
+  var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+  var sg=function(n){return n>0?'+'+n:(n<0?'−'+(-n):'0')};
+
+  /* ---------- tabs ---------- */
+  function showTab(id,scroll){
+    $$('.tab').forEach(function(t){t.setAttribute('aria-selected',t.getAttribute('data-t')===id?'true':'false')});
+    $$('.panel').forEach(function(p){p.hidden=(p.id!=='p-'+id)});
+    if(scroll){var n=$('#tabs');if(n&&n.scrollIntoView)n.scrollIntoView({block:'start'})}
+  }
+  $$('.tab').forEach(function(t){t.addEventListener('click',function(){showTab(t.getAttribute('data-t'),false)})});
+  $$('[data-go]').forEach(function(b){b.addEventListener('click',function(){showTab(b.getAttribute('data-go'),true)})});
+
+  /* ---------- electron demo ---------- */
+  var demo=$('#demo'),run=$('#run'),cap=$('#demo-cap'),zc=$('#zc'),cc=$('#cc');
+  var startCap='الحالة الأولى: Zn ذرة متعادلة، وCu²⁺ أيون موجب.';
+  run.addEventListener('click',function(){
+    if(run.getAttribute('data-s')==='1'){
+      demo.classList.remove('go','done');zc.textContent='0';cc.textContent='2+';
+      cap.textContent=startCap;run.textContent='ابدأ انتقال الإلكترونات';run.removeAttribute('data-s');return;
+    }
+    run.disabled=true;demo.classList.add('go');
+    cap.textContent='ينتقل إلكترونان من Zn إلى Cu²⁺ ...';
+    setTimeout(function(){
+      demo.classList.add('done');zc.textContent='2+';cc.textContent='0';
+      cap.textContent='فقدت ذرة Zn إلكترونين فأصبحت Zn²⁺ (تأكسدت)، واكتسب Cu²⁺ إلكترونين فأصبح Cu (اختُزل).';
+      run.disabled=false;run.textContent='أعد التجربة';run.setAttribute('data-s','1');
+    },1800);
+  });
+
+  /* ---------- definitions ---------- */
+  var DEF={
+    e:['فقد إلكترونات','اكتساب إلكترونات','Zn → Zn<sup>2+</sup> + 2e<sup>−</sup>','Cu<sup>2+</sup> + 2e<sup>−</sup> → Cu'],
+    n:['زيادة في عدد التأكسد','نقصان في عدد التأكسد','Zn: 0 → +2','Cu: +2 → 0'],
+    oh:['اكتساب أكسجين أو فقد هيدروجين','فقد أكسجين أو اكتساب هيدروجين','2Mg + O<sub>2</sub> → 2MgO','CuO + H<sub>2</sub> → Cu + H<sub>2</sub>O']
+  };
+  function drawDef(k){
+    var d=DEF[k];
+    $('#defbox').innerHTML='<div class="o"><b>الأكسدة</b>'+d[0]+'<div class="eq" style="margin-top:8px;font-size:.95rem">'+d[2]+'</div></div>'+
+      '<div class="r"><b>الاختزال</b>'+d[1]+'<div class="eq" style="margin-top:8px;font-size:.95rem">'+d[3]+'</div></div>';
+  }
+  drawDef('e');
+  $$('#defseg button').forEach(function(b){b.addEventListener('click',function(){
+    $$('#defseg button').forEach(function(x){x.setAttribute('aria-pressed','false')});
+    b.setAttribute('aria-pressed','true');drawDef(b.getAttribute('data-d'));
+  })});
+
+  /* ---------- generic multiple choice ---------- */
+  function mcq(root,items,msgs){
+    var i=0,score=0;
+    function draw(){
+      if(i>=items.length){
+        var p=score/items.length;
+        var m=p>=0.85?msgs[0]:(p>=0.6?msgs[1]:msgs[2]);
+        root.innerHTML='<div class="done-box"><div class="score">'+score+' / '+items.length+'</div><p>'+m+'</p><button class="btn" id="again">أعد المحاولة</button></div>';
+        $('#again',root).addEventListener('click',function(){i=0;score=0;draw()});
+        return;
+      }
+      var it=items[i];
+      root.innerHTML='<div style="display:flex;flex-direction:column;gap:12px">'+
+        '<div class="qmeta">السؤال '+(i+1)+' من '+items.length+'</div>'+
+        '<div class="bar"><span style="width:'+(i/items.length*100)+'%"></span></div>'+
+        '<p class="q">'+it.q+'</p>'+
+        '<div class="opts'+(it.compact?' compact':'')+'">'+it.opts.map(function(o,k){return '<button class="opt" data-k="'+k+'">'+o+'</button>'}).join('')+'</div>'+
+        '<div class="fb" aria-live="polite"></div></div>';
+      $$('.opt',root).forEach(function(b){b.addEventListener('click',function(){pick(+b.getAttribute('data-k'))})});
+    }
+    function pick(k){
+      var it=items[i],ok=(k===it.a);if(ok)score++;
+      $$('.opt',root).forEach(function(b,j){b.disabled=true;if(j===it.a)b.classList.add('right');else if(j===k)b.classList.add('wrong')});
+      $('.fb',root).innerHTML='<div class="fb-in '+(ok?'ok':'no')+'"><strong>'+(ok?'إجابة صحيحة':'إجابة غير صحيحة')+'</strong><div>'+it.why+'</div>'+
+        '<button class="btn" id="nx">'+(i<items.length-1?'السؤال التالي':'عرض النتيجة')+'</button></div>';
+      $('#nx',root).addEventListener('click',function(){i++;draw()});
+      $('#nx',root).focus();
+    }
+    draw();
+  }
+  function nums(list){return list.map(function(n){return '<span class="f">'+sg(n)+'</span>'})}
+  var F=function(s){return '<span class="f">'+s+'</span>'};
+
+  /* ---------- oxidation number lab ---------- */
+  var LAB=[
+    {f:'H<sub>2</sub>SO<sub>4</sub>',z:0,at:[{s:'H',n:2,a:1,r:'H = +1'},{s:'S',n:1,a:6,u:1},{s:'O',n:4,a:-2,r:'O = −2'}]},
+    {f:'KMnO<sub>4</sub>',z:0,at:[{s:'K',n:1,a:1,r:'المجموعة 1: +1'},{s:'Mn',n:1,a:7,u:1},{s:'O',n:4,a:-2,r:'O = −2'}]},
+    {f:'NH<sub>3</sub>',z:0,at:[{s:'N',n:1,a:-3,u:1},{s:'H',n:3,a:1,r:'H = +1'}]},
+    {f:'Fe<sub>2</sub>O<sub>3</sub>',z:0,at:[{s:'Fe',n:2,a:3,u:1},{s:'O',n:3,a:-2,r:'O = −2'}]},
+    {f:'NO<sub>3</sub><sup>−</sup>',z:-1,at:[{s:'N',n:1,a:5,u:1},{s:'O',n:3,a:-2,r:'O = −2'}]},
+    {f:'Cr<sub>2</sub>O<sub>7</sub><sup>2−</sup>',z:-2,at:[{s:'Cr',n:2,a:6,u:1},{s:'O',n:7,a:-2,r:'O = −2'}]},
+    {f:'H<sub>2</sub>O<sub>2</sub>',z:0,at:[{s:'H',n:2,a:1,r:'H = +1'},{s:'O',n:2,a:-1,u:1}],note:'هذا فوق أكسيد، فعدد تأكسد الأكسجين −1 وليس −2.'},
+    {f:'NaH',z:0,at:[{s:'Na',n:1,a:1,r:'المجموعة 1: +1'},{s:'H',n:1,a:-1,u:1}],note:'هذا هيدريد فلز، فعدد تأكسد الهيدروجين −1 وليس +1.'},
+    {f:'Cl<sub>2</sub>',z:0,at:[{s:'Cl',n:2,a:0,u:1}],note:'العنصر في الحالة الحرة عدد تأكسده صفر.'}
+  ];
+  var lab={i:0,v:[],done:{}};
+  LAB.forEach(function(c,k){var u=c.at.filter(function(a){return a.u})[0];lab.v[k]=(u.a===0?2:0)});
+  var labRoot=$('#lab');
+  function labTerm(a,v){return (a.n>1?a.n:'')+'('+sg(v)+')'}
+  function labTotal(c,val){var t=0;c.at.forEach(function(a){t+=a.n*(a.u?val:a.a)});return t}
+  function labChips(){
+    var box=$('#lchips');
+    box.innerHTML=LAB.map(function(x,k){return '<button data-k="'+k+'" aria-pressed="'+(k===lab.i)+'">'+(lab.done[k]?'✓ ':'')+F(x.f)+'</button>'}).join('');
+    $$('button',box).forEach(function(b){b.addEventListener('click',function(){lab.i=+b.getAttribute('data-k');drawLab()})});
+  }
+  function drawLab(){
+    var c=LAB[lab.i];
+    labRoot.innerHTML='<div class="chips" id="lchips"></div>'+
+      '<div class="lab-atoms" id="latoms">'+c.at.map(function(a){
+        var sub=a.n>1?'<sub>'+a.n+'</sub>':'';
+        var num=a.u?'<div class="stp"><button class="sb" data-d="-1" aria-label="انقص عدد التأكسد">−</button><span class="v"></span><button class="sb" data-d="1" aria-label="زِد عدد التأكسد">+</button></div>'
+                   :'<div class="lk"><span class="v">'+sg(a.a)+'</span></div>';
+        return '<div class="atom'+(a.u?' unk':'')+'">'+num+'<div class="asym">'+a.s+sub+'</div><small>'+(a.u?'المجهول':a.r)+'</small></div>';
+      }).join('')+'</div>'+
+      '<div class="scale" aria-hidden="true"><div class="beam" id="beam"></div><div class="fulcrum"></div></div>'+
+      '<div class="sumrow" id="srow"><div><span>مجموع أعداد التأكسد</span><b id="stot"></b></div><div><span id="ttl"></span><b id="stgt"></b></div></div>'+
+      '<div class="eq" id="seq"></div><div id="lfb" aria-live="polite"></div>';
+    labChips();
+    $$('.sb',labRoot).forEach(function(b){b.addEventListener('click',function(){
+      var v=lab.v[lab.i]+(+b.getAttribute('data-d'));
+      lab.v[lab.i]=Math.max(-4,Math.min(8,v));updateLab();
+    })});
+    updateLab();
+  }
+  function updateLab(){
+    var c=LAB[lab.i],val=lab.v[lab.i],tot=labTotal(c,val),diff=tot-c.z,ok=(diff===0);
+    $('#latoms .unk .v').textContent=sg(val);
+    $('#stot').textContent=sg(tot);$('#stgt').textContent=sg(c.z);
+    $('#ttl').textContent=c.z===0?'المطلوب (مركب متعادل)':'المطلوب (شحنة الأيون)';
+    $('#seq').textContent=c.at.map(function(a){return labTerm(a,a.u?val:a.a)}).join(' + ')+' = '+sg(tot);
+    var ang=-Math.max(-14,Math.min(14,diff*3.5));
+    $('#beam').style.transform='rotate('+ang+'deg)';
+    $('#latoms .unk').classList.toggle('solved',ok);
+    $('#srow').classList.toggle('eqd',ok);
+    var fb=$('#lfb');
+    if(!ok){
+      fb.innerHTML='<p class="note">'+(diff>0?'المجموع أكبر من المطلوب.':'المجموع أصغر من المطلوب.')+' غيّر عدد التأكسد المجهول حتى يتساوى الطرفان.</p>';
+      return;
+    }
+    var wasDone=lab.done[lab.i];lab.done[lab.i]=true;if(!wasDone)labChips();
+    var u=c.at.filter(function(a){return a.u})[0];
+    var sol=c.at.map(function(a){return a.u?(a.n>1?a.n+a.s:a.s):labTerm(a,a.a)}).join(' + ')+' = '+sg(c.z)+' ⟹ '+u.s+' = '+sg(u.a);
+    var next=-1;for(var k=1;k<=LAB.length;k++){var j=(lab.i+k)%LAB.length;if(!lab.done[j]){next=j;break}}
+    fb.innerHTML='<div class="fb-in ok"><strong>الميزان متزن، الحل صحيح</strong><div class="eq">'+sol+'</div>'+
+      (c.note?'<div>'+c.note+'</div>':'')+
+      (next>=0?'<button class="btn" id="lnext">المركب التالي</button>':'<div>أنهيت جميع المركبات.</div>')+'</div>';
+    var nb=$('#lnext');if(nb)nb.addEventListener('click',function(){lab.i=next;drawLab()});
+  }
+  drawLab();
+
+  /* ---------- step-by-step calculator ---------- */
+  var calc={i:0,k:0,vals:{},bad:{},fb:'',done:{}};
+  var calcRoot=$('#calc');
+  function esc(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;')}
+  function pnum(s){
+    s=String(s).trim().replace(/[−‒-—]/g,'-').replace(/[٠-٩]/g,function(d){return String(d.charCodeAt(0)-1632)});
+    if(s.charAt(0)==='+')s=s.slice(1);
+    if(!/^-?\d+$/.test(s))return null;
+    return parseInt(s,10);
+  }
+  function cInfo(c){
+    var known=c.at.filter(function(a){return !a.u}),u=c.at.filter(function(a){return a.u})[0],sum=0,types=[];
+    known.forEach(function(a){sum+=a.n*a.a});
+    if(known.length){types.push('A','B')}
+    types.push('C');
+    if(u.n>1)types.push('D');
+    return {known:known,u:u,sum:sum,types:types,nx:(u.n>1?u.n:'')+u.s};
+  }
+  function resetCalc(i){calc.i=i;calc.k=0;calc.vals={};calc.bad={};calc.fb=''}
+  function inp(key,sym){
+    return '<span class="inwrap"><span class="f il">'+sym+'</span><input class="cin'+(calc.bad[key]?' bad':'')+'" data-key="'+key+'" value="'+esc(calc.vals[key]||'')+'" inputmode="text" autocomplete="off" dir="ltr" aria-label="'+sym+'" placeholder="؟"><button class="pm" type="button" data-key="'+key+'" aria-label="تبديل الإشارة">±</button></span>';
+  }
+  function stepBody(t,act,c,I){
+    var h='',z=c.z,rest=z-I.sum,chk='<button class="btn chk" type="button">تحقق</button>';
+    var expr=I.known.map(function(a){return labTerm(a,a.a)}).join(' + ');
+    if(t==='A'){
+      h+='اكتب عدد تأكسد كل عنصر معروف بحسب القواعد.';
+      h+=act?'<div class="inrow">'+I.known.map(function(a,j){return inp('A'+j,a.s)}).join('')+'</div>'+chk
+            :'<div class="eq">'+I.known.map(function(a){return a.s+' = '+sg(a.a)}).join(' ، ')+'</div>';
+    }else if(t==='B'){
+      h+='اضرب عدد الذرات في عدد التأكسد، ثم اجمع مساهمات العناصر المعروفة.';
+      h+=act?'<div class="eq">'+expr+' = ؟</div><div class="inrow">'+inp('B','المجموع')+'</div>'+chk
+            :'<div class="eq">'+expr+' = '+sg(I.sum)+'</div>';
+    }else if(t==='C'){
+      var eq=(I.known.length?'('+sg(I.sum)+') + ':'')+I.nx+' = '+sg(z);
+      h+=(I.u.n>1?'مجموع أعداد التأكسد يساوي '+(z===0?'صفرًا (مركب متعادل)':'شحنة الأيون')+'. أوجد '+I.nx+'.'
+                  :'مجموع أعداد التأكسد يساوي '+(z===0?'صفرًا (مركب متعادل)':'شحنة الأيون')+'. أوجد عدد تأكسد '+I.u.s+'.');
+      h+=act?'<div class="eq">'+eq+'</div><div class="inrow">'+inp('C',I.nx)+'</div>'+chk
+            :'<div class="eq">'+I.nx+' = '+sg(rest)+'</div>';
+    }else{
+      h+='اقسم على عدد الذرات لتحصل على عدد تأكسد ذرة واحدة.';
+      h+=act?'<div class="eq">'+I.u.s+' = ('+sg(rest)+') ÷ '+I.u.n+'</div><div class="inrow">'+inp('D',I.u.s)+'</div>'+chk
+            :'<div class="eq">'+I.u.s+' = '+sg(I.u.a)+'</div>';
+    }
+    return h;
+  }
+  function drawCalc(focus){
+    var c=LAB[calc.i],I=cInfo(c),h='';
+    h+='<div class="chips" id="cchips">'+LAB.map(function(x,k){return '<button data-k="'+k+'" aria-pressed="'+(k===calc.i)+'">'+(calc.done[k]?'✓ ':'')+F(x.f)+'</button>'}).join('')+'</div>';
+    h+='<p>المركب '+F(c.f)+' ، والمجهول هو عدد تأكسد <b>'+I.u.s+'</b>.</p>';
+    I.types.forEach(function(t,idx){
+      if(idx>calc.k)return;
+      var act=(idx===calc.k);
+      h+='<div class="cstep '+(act?'active':'done')+'"><b>الخطوة '+(idx+1)+'</b>'+stepBody(t,act,c,I)+'</div>';
+    });
+    if(calc.fb)h+='<div class="fb-in no" role="alert"><strong>حاول مرة أخرى</strong><div>'+calc.fb+'</div></div>';
+    var finished=(calc.k>=I.types.length);
+    if(finished){
+      var sol=c.at.map(function(a){return a.u?(a.n>1?a.n+a.s:a.s):labTerm(a,a.a)}).join(' + ')+' = '+sg(c.z)+' ⟹ '+I.u.s+' = '+sg(I.u.a);
+      var next=-1;for(var q=1;q<=LAB.length;q++){var j=(calc.i+q)%LAB.length;if(!calc.done[j]){next=j;break}}
+      h+='<div class="fb-in ok"><strong>أحسنت، '+I.u.s+' = '+sg(I.u.a)+'</strong><div class="eq">'+sol+'</div>'+(c.note?'<div>'+c.note+'</div>':'')+
+        (next>=0?'<button class="btn" id="cnext" type="button">المركب التالي</button>':'<div>أنهيت جميع المركبات.</div>')+'</div>';
+    }
+    calcRoot.innerHTML=h;
+    $$('#cchips button',calcRoot).forEach(function(b){b.addEventListener('click',function(){resetCalc(+b.getAttribute('data-k'));drawCalc(false)})});
+    $$('.cin',calcRoot).forEach(function(el){
+      el.addEventListener('input',function(){calc.vals[el.getAttribute('data-key')]=el.value});
+      el.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();checkCalc()}});
+    });
+    $$('.pm',calcRoot).forEach(function(b){b.addEventListener('click',function(){
+      var el=$('.cin[data-key="'+b.getAttribute('data-key')+'"]',calcRoot),v=el.value.trim();
+      if(v.charAt(0)==='-'||v.charAt(0)==='−')v=v.slice(1);
+      else if(v.charAt(0)==='+')v='-'+v.slice(1);
+      else v='-'+v;
+      el.value=v;calc.vals[el.getAttribute('data-key')]=v;el.focus();
+    })});
+    var ck=$('.chk',calcRoot);if(ck)ck.addEventListener('click',checkCalc);
+    var nb=$('#cnext',calcRoot);if(nb)nb.addEventListener('click',function(){resetCalc(next);drawCalc(true)});
+    if(focus){var fi=$('.cstep.active .cin',calcRoot);if(fi)fi.focus()}
+  }
+  function checkCalc(){
+    var c=LAB[calc.i],I=cInfo(c),t=I.types[calc.k],ok=true,fb='',rest=c.z-I.sum;
+    if(!t)return;
+    calc.bad={};
+    function read(key){var el=$('.cin[data-key="'+key+'"]',calcRoot);calc.vals[key]=el.value;return pnum(el.value)}
+    if(t==='A'){
+      var hints=[];
+      I.known.forEach(function(a,j){if(read('A'+j)!==a.a){ok=false;calc.bad['A'+j]=true;hints.push(a.s+': '+a.r)}});
+      if(!ok)fb='اكتب رقمًا بإشارته مثل +1 أو −2. تذكير: '+F(hints.join(' ، '));
+    }else if(t==='B'){
+      ok=(read('B')===I.sum);if(!ok){calc.bad.B=true;fb='احسب كل حد ثم اجمع: '+F(I.known.map(function(a){return a.n+' × ('+sg(a.a)+') = '+sg(a.n*a.a)}).join(' ، '))}
+    }else if(t==='C'){
+      ok=(read('C')===rest);if(!ok){calc.bad.C=true;fb='الطرف الأيمن مطروح منه مجموع المعروفة: '+F(I.nx+' = '+sg(c.z)+' − ('+sg(I.sum)+')')}
+    }else{
+      ok=(read('D')===I.u.a);if(!ok){calc.bad.D=true;fb='اقسم الناتج على عدد الذرات: '+F(I.u.s+' = '+sg(rest)+' ÷ '+I.u.n)}
+    }
+    if(ok){
+      calc.k++;calc.vals={};calc.bad={};calc.fb='';
+      if(calc.k>=I.types.length)calc.done[calc.i]=true;
+    }else{calc.fb=fb}
+    drawCalc(true);
+  }
+  drawCalc(false);
+
+  /* ---------- oxidation number practice ---------- */
+  var range=[-3,-2,-1,0,1,2,3,4,5,6,7];
+  var NQ=[
+    {f:'H<sub>2</sub>SO<sub>4</sub>',el:'S',a:6,s:'2(+1) + S + 4(−2) = 0 ⟹ S = +6'},
+    {f:'KMnO<sub>4</sub>',el:'Mn',a:7,s:'(+1) + Mn + 4(−2) = 0 ⟹ Mn = +7'},
+    {f:'NH<sub>3</sub>',el:'N',a:-3,s:'N + 3(+1) = 0 ⟹ N = −3'},
+    {f:'Fe<sub>2</sub>O<sub>3</sub>',el:'Fe',a:3,s:'2Fe + 3(−2) = 0 ⟹ 2Fe = +6 ⟹ Fe = +3'},
+    {f:'Cr<sub>2</sub>O<sub>7</sub><sup>2−</sup>',el:'Cr',a:6,s:'2Cr + 7(−2) = −2 ⟹ 2Cr = +12 ⟹ Cr = +6 (المجموع يساوي شحنة الأيون)'},
+    {f:'H<sub>2</sub>O<sub>2</sub>',el:'O',a:-1,s:'2(+1) + 2O = 0 ⟹ O = −1 (فوق أكسيد، وليس −2)'},
+    {f:'NO<sub>3</sub><sup>−</sup>',el:'N',a:5,s:'N + 3(−2) = −1 ⟹ N = +5'}
+  ];
+  mcq($('#numq'),NQ.map(function(q){
+    return {q:'ما عدد تأكسد <b>'+q.el+'</b> في '+F(q.f)+' ؟',
+      opts:range.map(function(n){return F(sg(n))}),a:range.indexOf(q.a),compact:true,
+      why:'<span class="f" style="white-space:normal">'+q.s+'</span>'};
+  }),['أتقنت حساب أعداد التأكسد.','نتيجة جيدة. راجع القواعد ثم أعد المحاولة.','راجع قواعد الأكسجين والهيدروجين والأيونات ثم أعد المحاولة.']);
+
+  /* ---------- reaction analyzer ---------- */
+  var RX=[
+    {eq:'Zn + CuSO<sub>4</sub> → ZnSO<sub>4</sub> + Cu',redox:true,re:['Zn','CuSO<sub>4</sub>'],ox:0,ag:1,
+     ch:[['Zn',0,2,'o'],['Cu',2,0,'r']]},
+    {eq:'2Mg + O<sub>2</sub> → 2MgO',redox:true,re:['Mg','O<sub>2</sub>'],ox:0,ag:1,
+     ch:[['Mg',0,2,'o'],['O',0,-2,'r']]},
+    {eq:'Fe<sub>2</sub>O<sub>3</sub> + 3CO → 2Fe + 3CO<sub>2</sub>',redox:true,re:['Fe<sub>2</sub>O<sub>3</sub>','CO'],ox:1,ag:0,
+     ch:[['Fe',3,0,'r'],['C',2,4,'o']]},
+    {eq:'Cl<sub>2</sub> + 2KBr → 2KCl + Br<sub>2</sub>',redox:true,re:['Cl<sub>2</sub>','KBr'],ox:1,ag:0,
+     ch:[['Cl',0,-1,'r'],['Br',-1,0,'o']]},
+    {eq:'NaOH + HCl → NaCl + H<sub>2</sub>O',redox:false,re:['NaOH','HCl'],ox:-1,ag:-1,ch:[]}
+  ];
+  var st={r:0,stage:0,log:[]};
+  var rxchips=$('#rxchips'),rxbox=$('#rxbox');
+  function drawChips(){
+    rxchips.innerHTML=RX.map(function(x,i){return '<button data-i="'+i+'" aria-pressed="'+(i===st.r)+'">تفاعل '+(i+1)+'</button>'}).join('');
+    $$('button',rxchips).forEach(function(b){b.addEventListener('click',function(){st={r:+b.getAttribute('data-i'),stage:0,log:[]};drawRx()})});
+  }
+  function qOpts(arr){return '<div class="opts">'+arr.map(function(o,k){return '<button class="opt" data-k="'+k+'">'+o+'</button>'}).join('')+'</div>'}
+  function logHtml(){return st.log.join('')}
+  function summary(x){
+    if(!x.redox){
+      return '<div class="fb-in ok"><strong>الخلاصة</strong><div>لا يتغير عدد تأكسد أي عنصر في هذا التفاعل، فهو تفاعل تعادل وليس أكسدة واختزال.</div></div>';
+    }
+    var rows=x.ch.map(function(c){
+      return '<div class="chg-row '+(c[3]==='o'?'ox':'red')+'"><span class="f">'+c[0]+'</span><span class="nums">'+sg(c[1])+' → '+sg(c[2])+'</span><span class="tag">'+(c[3]==='o'?'تأكسد':'اختُزل')+'</span></div>';
+    }).join('');
+    return '<div class="chg-table">'+rows+'</div>'+
+      '<div class="halves"><div class="half o"><b>العامل المختزل</b>'+F(x.re[x.ox])+'</div><div class="half r"><b>العامل المؤكسد</b>'+F(x.re[x.ag])+'</div></div>';
+  }
+  function drawRx(){
+    drawChips();
+    var x=RX[st.r],h='<div class="eq">'+x.eq+'</div>'+logHtml();
+    var done=(st.stage>=3)||(st.stage>=1&&!x.redox);
+    if(done){h+=summary(x)+'<button class="btn ghost" id="rxre">أعد هذا التفاعل</button>'}
+    else if(st.stage===0){h+='<p class="q">هل هذا التفاعل أكسدة واختزال؟</p>'+qOpts(['نعم','لا'])}
+    else if(st.stage===1){h+='<p class="q">أي مادة متفاعلة تأكسدت؟</p>'+qOpts(x.re.map(F))}
+    else{h+='<p class="q">أي مادة هي العامل المؤكسد؟</p>'+qOpts(x.re.map(F))}
+    rxbox.innerHTML=h;
+    $$('.opt',rxbox).forEach(function(b){b.addEventListener('click',function(){answer(+b.getAttribute('data-k'))})});
+    var re=$('#rxre',rxbox);if(re)re.addEventListener('click',function(){st.stage=0;st.log=[];drawRx()});
+  }
+  function answer(k){
+    var x=RX[st.r],ok,msg;
+    if(st.stage===0){
+      ok=((k===0)===x.redox);
+      msg=x.redox?'يتغير عدد تأكسد عنصرين على الأقل، فهو تفاعل أكسدة واختزال.':'أعداد التأكسد كلها ثابتة، فليس أكسدة واختزال.';
+    }else if(st.stage===1){
+      ok=(k===x.ox);msg=F(x.re[x.ox])+' هي التي زاد عدد تأكسد أحد عناصرها، فهي التي تأكسدت وهي العامل المختزل.';
+    }else{
+      ok=(k===x.ag);msg=F(x.re[x.ag])+' هي التي نقص عدد تأكسد أحد عناصرها، فهي التي اختُزلت وهي العامل المؤكسد.';
+    }
+    st.log.push('<div class="fb-in '+(ok?'ok':'no')+'"><strong>'+(ok?'صحيح':'غير صحيح')+'</strong><div>'+msg+'</div></div>');
+    st.stage++;drawRx();
+  }
+  drawRx();
+
+  /* ---------- balancing stepper ---------- */
+  var M={
+    ox:{label:'طريقة أعداد التأكسد',steps:[
+      {t:'اكتب المعادلة وحدد أعداد التأكسد',b:'أعطِ كل عنصر عدد تأكسده بحسب القواعد.',
+       eq:['Fe<sub>2</sub>O<sub>3</sub> + CO → Fe + CO<sub>2</sub>'],
+       n:'Fe: +3 → 0 &nbsp;|&nbsp; C: +2 → +4 &nbsp;|&nbsp; O: −2 في كل المركبات'},
+      {t:'حدد ما تأكسد وما اختُزل',b:'Fe نقص عدد تأكسده فاختُزل. C زاد عدد تأكسده فتأكسد.',
+       eq:['Fe: +3 → 0 &nbsp; (اختزال)','C: +2 → +4 &nbsp; (أكسدة)']},
+      {t:'احسب الإلكترونات المنتقلة',b:'في Fe₂O₃ ذرتا حديد، وكل ذرة تكتسب 3 إلكترونات. ذرة C الواحدة تفقد إلكترونين.',
+       eq:['Fe: 2 × 3 = 6e<sup>−</sup> مكتسبة','C: 1 × 2 = 2e<sup>−</sup> مفقودة']},
+      {t:'ساوِ عدد الإلكترونات',b:'أصغر مضاعف مشترك للعددين 6 و2 هو 6. نضرب CO في 3 فيفقد 6 إلكترونات.',
+       eq:['Fe<sub>2</sub>O<sub>3</sub> + 3CO → Fe + 3CO<sub>2</sub>']},
+      {t:'وازن الذرات المتبقية',b:'نضع المعامل 2 أمام Fe ثم نتحقق من كل عنصر.',
+       eq:['Fe<sub>2</sub>O<sub>3</sub> + 3CO → 2Fe + 3CO<sub>2</sub>'],n:'Fe: 2 = 2 &nbsp;|&nbsp; C: 3 = 3 &nbsp;|&nbsp; O: 6 = 6'}
+    ]},
+    half:{label:'طريقة نصف التفاعل (وسط حمضي)',steps:[
+      {t:'قسّم المعادلة إلى نصفين',b:'Mn تغير من +7 إلى +2 فهو اختزال. Fe تغير من +2 إلى +3 فهو أكسدة.',
+       eq:['MnO<sub>4</sub><sup>−</sup> + Fe<sup>2+</sup> → Mn<sup>2+</sup> + Fe<sup>3+</sup>'],
+       pair:['اختزال: MnO<sub>4</sub><sup>−</sup> → Mn<sup>2+</sup>','أكسدة: Fe<sup>2+</sup> → Fe<sup>3+</sup>']},
+      {t:'وازن الأكسجين بإضافة H₂O',b:'في نصف الاختزال أربع ذرات أكسجين على اليسار، فنضيف 4H₂O إلى اليمين.',
+       eq:['MnO<sub>4</sub><sup>−</sup> → Mn<sup>2+</sup> + 4H<sub>2</sub>O']},
+      {t:'وازن الهيدروجين بإضافة H⁺',b:'في الطرف الأيمن 8 ذرات هيدروجين، فنضيف 8H⁺ إلى اليسار.',
+       eq:['MnO<sub>4</sub><sup>−</sup> + 8H<sup>+</sup> → Mn<sup>2+</sup> + 4H<sub>2</sub>O']},
+      {t:'وازن الشحنة بإضافة الإلكترونات',b:'شحنة اليسار (−1 + 8) = +7، وشحنة اليمين +2، فنضيف 5e⁻ إلى اليسار. في نصف الأكسدة نضيف e⁻ إلى اليمين.',
+       pair:['MnO<sub>4</sub><sup>−</sup> + 8H<sup>+</sup> + 5e<sup>−</sup> → Mn<sup>2+</sup> + 4H<sub>2</sub>O','Fe<sup>2+</sup> → Fe<sup>3+</sup> + e<sup>−</sup>']},
+      {t:'ساوِ عدد الإلكترونات',b:'نصف الاختزال يستقبل 5 إلكترونات، ونصف الأكسدة يعطي إلكترونًا واحدًا. نضرب نصف الأكسدة في 5.',
+       pair:['MnO<sub>4</sub><sup>−</sup> + 8H<sup>+</sup> + 5e<sup>−</sup> → Mn<sup>2+</sup> + 4H<sub>2</sub>O','5Fe<sup>2+</sup> → 5Fe<sup>3+</sup> + 5e<sup>−</sup>']},
+      {t:'اجمع نصفي التفاعل',b:'نجمع الطرفين ونحذف الإلكترونات المتساوية من الجهتين.',
+       eq:['MnO<sub>4</sub><sup>−</sup> + 8H<sup>+</sup> + 5Fe<sup>2+</sup> → Mn<sup>2+</sup> + 4H<sub>2</sub>O + 5Fe<sup>3+</sup>']},
+      {t:'تحقق من الذرات والشحنة',b:'عدد كل ذرة متساوٍ في الطرفين، والشحنة الكلية متساوية أيضًا.',
+       eq:['Mn: 1 = 1 &nbsp;|&nbsp; Fe: 5 = 5 &nbsp;|&nbsp; O: 4 = 4 &nbsp;|&nbsp; H: 8 = 8','الشحنة: (−1 + 8 + 10) = +17 &nbsp;و&nbsp; (+2 + 15) = +17']}
+    ]}
+  };
+  var mk='ox',si=0;
+  function drawStep(){
+    var m=M[mk],s=m.steps[si],n=m.steps.length;
+    $('#dots').innerHTML=m.steps.map(function(_,i){return '<i class="'+(i<=si?'on':'')+'"></i>'}).join('');
+    $('#stepmeta').textContent=m.label+' · الخطوة '+(si+1)+' من '+n;
+    var h='<h3>'+s.t+'</h3><p>'+s.b+'</p>';
+    if(s.eq)h+=s.eq.map(function(e){return '<div class="eq">'+e+'</div>'}).join('');
+    if(s.pair)h+='<div class="pair"><div class="eq r">'+s.pair[0]+'</div><div class="eq o">'+s.pair[1]+'</div></div>';
+    if(s.n)h+='<p class="note" style="direction:rtl">'+s.n+'</p>';
+    $('#stepbody').innerHTML=h;
+    $('#prev').disabled=(si===0);
+    $('#next').disabled=(si===n-1);
+    $('#next').textContent=(si===n-2)?'الخطوة الأخيرة':'الخطوة التالية';
+  }
+  $('#prev').addEventListener('click',function(){if(si>0){si--;drawStep()}});
+  $('#next').addEventListener('click',function(){if(si<M[mk].steps.length-1){si++;drawStep()}});
+  $$('#mseg button').forEach(function(b){b.addEventListener('click',function(){
+    $$('#mseg button').forEach(function(x){x.setAttribute('aria-pressed','false')});
+    b.setAttribute('aria-pressed','true');mk=b.getAttribute('data-m');si=0;drawStep();
+  })});
+  drawStep();
+
+  /* ---------- final quiz ---------- */
+  var Q=[
+    {q:'أي العبارات الآتية تصف عملية الأكسدة؟',opts:['اكتساب إلكترونات','فقد إلكترونات','نقصان في عدد التأكسد','اكتساب هيدروجين'],a:1,
+     why:'الأكسدة فقد إلكترونات، ويرافقها زيادة في عدد التأكسد.'},
+    {q:'في التفاعل '+F('Zn + 2HCl → ZnCl<sub>2</sub> + H<sub>2</sub>')+' ما العامل المختزل؟',opts:[F('Zn'),F('HCl'),F('ZnCl<sub>2</sub>'),F('H<sub>2</sub>')],a:0,
+     why:'Zn تأكسد (0 ← +2) فهو العامل المختزل، وHCl اختُزل فيه الهيدروجين (+1 ← 0) فهو العامل المؤكسد.'},
+    {q:'ما عدد تأكسد Mn في '+F('MnO<sub>4</sub><sup>−</sup>')+' ؟',opts:nums([2,4,6,7]),a:3,
+     why:F('Mn + 4(−2) = −1')+' ⟹ '+F('Mn = +7')},
+    {q:'العامل المؤكسد هو المادة التي:',opts:['تفقد إلكترونات','تكتسب إلكترونات وتُختزل','يزداد عدد تأكسد ذراتها','لا يتغير عدد تأكسدها'],a:1,
+     why:'العامل المؤكسد يأخذ الإلكترونات من غيره فيُختزل هو، ولذلك ينقص عدد تأكسده.'},
+    {q:'أي التفاعلات الآتية ليس تفاعل أكسدة واختزال؟',
+     opts:[F('2Na + Cl<sub>2</sub> → 2NaCl'),F('Zn + CuSO<sub>4</sub> → ZnSO<sub>4</sub> + Cu'),F('AgNO<sub>3</sub> + NaCl → AgCl + NaNO<sub>3</sub>'),F('2H<sub>2</sub> + O<sub>2</sub> → 2H<sub>2</sub>O')],a:2,
+     why:'في تفاعل الترسيب هذا تبقى أعداد التأكسد ثابتة: Ag (+1) وNa (+1) وCl (−1) وN (+5).'},
+    {q:'عند تحول '+F('Fe<sup>2+</sup>')+' إلى '+F('Fe<sup>3+</sup>')+' فإن الأيون:',
+     opts:['يكتسب إلكترونًا ويُختزل','يفقد إلكترونًا ويتأكسد','يفقد إلكترونين ويتأكسد','يكتسب إلكترونين ويُختزل'],a:1,
+     why:'ارتفعت الشحنة من +2 إلى +3 بفقد إلكترون واحد، وهذه أكسدة.'},
+    {q:'في '+F('2Mg + O<sub>2</sub> → 2MgO')+' كم عدد تأكسد الأكسجين في الناتج؟',opts:nums([0,-1,-2,2]),a:2,
+     why:'المركب متعادل وMg عدده +2، فيكون عدد تأكسد O يساوي −2.'},
+    {q:'عند موازنة '+F('MnO<sub>4</sub><sup>−</sup> + 8H<sup>+</sup> → Mn<sup>2+</sup> + 4H<sub>2</sub>O')+' كم إلكترونًا نضيف إلى اليسار؟',opts:nums([1,3,5,7]).map(function(s){return s.replace('+','')}),a:2,
+     why:'شحنة اليسار +7 وشحنة اليمين +2، والفرق 5، فنضيف 5e⁻ إلى اليسار.'}
+  ];
+  mcq($('#quizbox'),Q,['ممتاز، أتقنت الدرس.','جيد. راجع الأسئلة التي أخطأت فيها وأعد المحاولة.','راجع الأقسام السابقة ثم أعد المحاولة.']);
+})();
+</script>
+
+</body></html>
