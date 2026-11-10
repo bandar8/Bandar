@@ -1,0 +1,71 @@
+name: Supabase activity check
+
+on:
+  schedule:
+    # قراءة واحدة كل 3 أيام تقريبًا، في الساعة 04:17 UTC.
+    - cron: "17 4 */3 * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  read-one-record:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Read one Supabase record
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import sys
+          from urllib.error import HTTPError, URLError
+          from urllib.parse import urlencode
+          from urllib.request import Request, urlopen
+
+          base_url = os.environ.get("SUPABASE_URL", "").rstrip("/")
+          publishable_key = os.environ.get("SUPABASE_PUBLISHABLE_KEY", "")
+
+          if not base_url or not publishable_key:
+              print("Missing SUPABASE_URL or SUPABASE_PUBLISHABLE_KEY secret.", file=sys.stderr)
+              sys.exit(1)
+
+          query = urlencode({"select": "id", "limit": "1"})
+          request = Request(
+              f"{base_url}/rest/v1/site_files?{query}",
+              method="GET",
+              headers={
+                  "apikey": publishable_key,
+                  "Authorization": f"Bearer {publishable_key}",
+                  "Accept": "application/json",
+                  "User-Agent": "bandar-supabase-activity-check/1.0",
+              },
+          )
+
+          try:
+              with urlopen(request, timeout=20) as response:
+                  status = response.status
+                  body = response.read().decode("utf-8")
+              if status != 200:
+                  print(f"Supabase returned HTTP {status}", file=sys.stderr)
+                  sys.exit(1)
+              rows = json.loads(body)
+              if not isinstance(rows, list):
+                  print("Unexpected Supabase response format.", file=sys.stderr)
+                  sys.exit(1)
+              print(f"Supabase read succeeded; rows returned: {len(rows)}")
+          except HTTPError as error:
+              print(f"Supabase request failed with HTTP {error.code}.", file=sys.stderr)
+              sys.exit(1)
+          except (URLError, TimeoutError) as error:
+              print(f"Network error while contacting Supabase: {error}", file=sys.stderr)
+              sys.exit(1)
+          except (ValueError, OSError) as error:
+              print(f"Unexpected check error: {error}", file=sys.stderr)
+              sys.exit(1)
+          PY

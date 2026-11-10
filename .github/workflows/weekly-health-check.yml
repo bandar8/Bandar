@@ -1,0 +1,125 @@
+name: Weekly project health check
+
+on:
+  schedule:
+    # كل أحد في الساعة 05:31 UTC.
+    - cron: "31 5 * * 0"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  verify-workflow-and-supabase:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Check latest Supabase activity workflow run
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import sys
+          from datetime import datetime, timedelta, timezone
+          from urllib.error import HTTPError, URLError
+          from urllib.request import Request, urlopen
+
+          repository = os.environ["GITHUB_REPOSITORY"]
+          token = os.environ["GH_TOKEN"]
+          url = (
+              f"https://api.github.com/repos/{repository}/actions/workflows/"
+              "supabase-activity.yml/runs?per_page=1"
+          )
+          request = Request(
+              url,
+              headers={
+                  "Accept": "application/vnd.github+json",
+                  "Authorization": f"Bearer {token}",
+                  "X-GitHub-Api-Version": "2022-11-28",
+                  "User-Agent": "bandar-weekly-health-check/1.0",
+              },
+          )
+
+          try:
+              with urlopen(request, timeout=20) as response:
+                  payload = json.loads(response.read().decode("utf-8"))
+          except (HTTPError, URLError, ValueError, OSError) as error:
+              print(f"GitHub Actions status check failed: {error}", file=sys.stderr)
+              sys.exit(1)
+
+          runs = payload.get("workflow_runs", [])
+          if not runs:
+              print("No Supabase activity workflow run found yet.", file=sys.stderr)
+              sys.exit(1)
+
+          latest = runs[0]
+          status = latest.get("status")
+          conclusion = latest.get("conclusion")
+          completed_at = latest.get("completed_at")
+          print(f"Latest activity workflow: status={status}, conclusion={conclusion}")
+
+          if status != "completed" or conclusion != "success":
+              print("The latest Supabase activity workflow did not succeed.", file=sys.stderr)
+              sys.exit(1)
+
+          if not completed_at:
+              print("The latest workflow has no completion time.", file=sys.stderr)
+              sys.exit(1)
+
+          completed = datetime.fromisoformat(completed_at.replace("Z", "+00:00"))
+          if completed < datetime.now(timezone.utc) - timedelta(days=8):
+              print("The latest successful activity check is older than 8 days.", file=sys.stderr)
+              sys.exit(1)
+          PY
+
+      - name: Read one Supabase record
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_PUBLISHABLE_KEY: ${{ secrets.SUPABASE_PUBLISHABLE_KEY }}
+        run: |
+          python3 - <<'PY'
+          import json
+          import os
+          import sys
+          from urllib.error import HTTPError, URLError
+          from urllib.parse import urlencode
+          from urllib.request import Request, urlopen
+
+          base_url = os.environ.get("SUPABASE_URL", "").rstrip("/")
+          publishable_key = os.environ.get("SUPABASE_PUBLISHABLE_KEY", "")
+          if not base_url or not publishable_key:
+              print("Missing Supabase secrets.", file=sys.stderr)
+              sys.exit(1)
+
+          query = urlencode({"select": "id", "limit": "1"})
+          request = Request(
+              f"{base_url}/rest/v1/site_files?{query}",
+              method="GET",
+              headers={
+                  "apikey": publishable_key,
+                  "Authorization": f"Bearer {publishable_key}",
+                  "Accept": "application/json",
+                  "User-Agent": "bandar-weekly-health-check/1.0",
+              },
+          )
+
+          try:
+              with urlopen(request, timeout=20) as response:
+                  status = response.status
+                  rows = json.loads(response.read().decode("utf-8"))
+              if status != 200 or not isinstance(rows, list):
+                  print("Supabase activity check returned an unexpected response.", file=sys.stderr)
+                  sys.exit(1)
+              print(f"Supabase read succeeded; rows returned: {len(rows)}")
+          except HTTPError as error:
+              print(f"Supabase request failed with HTTP {error.code}.", file=sys.stderr)
+              sys.exit(1)
+          except (URLError, TimeoutError, ValueError, OSError) as error:
+              print(f"Supabase activity check failed: {error}", file=sys.stderr)
+              sys.exit(1)
+          PY
