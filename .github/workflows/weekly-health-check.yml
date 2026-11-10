@@ -60,7 +60,7 @@ jobs:
           latest = runs[0]
           status = latest.get("status")
           conclusion = latest.get("conclusion")
-          completed_at = latest.get("completed_at")
+          completed_at = latest.get("updated_at")
           print(f"Latest activity workflow: status={status}, conclusion={conclusion}")
 
           if status != "completed" or conclusion != "success":
