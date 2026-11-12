@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="description" content="المكتبة التعليمية لمادة الكيمياء: مراجع وملفات لطلاب أول وثاني وثالث ثانوي.">
+  <link rel="canonical" href="https://bandar8.github.io/Bandar/references.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="المكتبة التعليمية | Bandar">
+  <meta property="og:description" content="مراجع وملفات تعليمية منظمة لطلاب المرحلة الثانوية في مادة الكيمياء.">
+  <meta property="og:url" content="https://bandar8.github.io/Bandar/references.html">
+  <meta property="og:site_name" content="Bandar Chemistry">
+  <title>المكتبة التعليمية | Bandar</title>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root{--bg:#f5faf9;--surface:#fff;--surface-2:#edf7f4;--ink:#123d47;--muted:#58717a;--line:#d4e6e4;--primary:#0d7b70;--primary-strong:#075d58;--soft:#e5f4f0;--accent:#e99b4d;--shadow:0 14px 34px rgba(18,61,71,.09)}
+    @media(prefers-color-scheme:dark){:root{--bg:#0b1a20;--surface:#13292f;--surface-2:#173c3d;--ink:#e5f3f1;--muted:#9bb8b8;--line:#28464a;--primary:#62c8b5;--primary-strong:#85dfcb;--soft:#173c3d;--accent:#f0b56d;--shadow:0 14px 34px rgba(0,0,0,.24)}}
+    :root[data-theme="dark"]{--bg:#0b1a20;--surface:#13292f;--surface-2:#173c3d;--ink:#e5f3f1;--muted:#9bb8b8;--line:#28464a;--primary:#62c8b5;--primary-strong:#85dfcb;--soft:#173c3d;--accent:#f0b56d;--shadow:0 14px 34px rgba(0,0,0,.24)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font-family:'IBM Plex Sans Arabic','Tahoma',system-ui,sans-serif}a{color:inherit;text-decoration:none}button{font:inherit}.wrap{max-width:1080px;margin:auto;padding:0 22px}.top{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--surface) 94%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}.top-inner{min-height:66px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{display:flex;align-items:center;gap:10px;font-weight:800}.brand-mark{width:38px;height:38px;display:grid;place-items:center;border-radius:13px;background:var(--primary);color:var(--bg)}.nav{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:14px}.nav a{padding:8px 11px;border-radius:10px;color:var(--muted)}.nav a:hover,.nav a.active{background:var(--soft);color:var(--primary-strong)}.hero{padding:64px 0 34px;display:grid;grid-template-columns:1fr auto;align-items:end;gap:24px}.eyebrow{color:var(--primary);font-size:13px;font-weight:800;letter-spacing:.05em}.hero h1{font-family:'Amiri','IBM Plex Sans Arabic',serif;font-size:clamp(34px,6vw,58px);line-height:1.15;margin:10px 0 12px}.hero p{max-width:650px;color:var(--muted);font-size:17px;line-height:1.9;margin:0}.hero-badge{border:1px solid var(--line);background:var(--surface);border-radius:20px;padding:18px 20px;text-align:center;min-width:135px;box-shadow:var(--shadow)}.hero-badge strong{display:block;font-size:30px;color:var(--primary)}.hero-badge span{font-size:13px;color:var(--muted)}.status{display:none;margin:0 0 24px;padding:14px 16px;border-radius:14px;background:var(--surface-2);color:var(--muted);border:1px solid var(--line)}.status.show{display:block}.status.error{color:#b84b43;background:#fff0ed;border-color:#f0c3bb}@media(prefers-color-scheme:dark){.status.error{color:#ffb0a5;background:#3b2428;border-color:#724149}}.grades{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:14px 0 64px}.grade{background:var(--surface);border:1px solid var(--line);border-radius:22px;overflow:hidden;box-shadow:var(--shadow);min-height:230px}.grade-head{padding:20px 20px 16px;background:linear-gradient(135deg,var(--soft),transparent);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}.grade-head h2{font-family:'Amiri','IBM Plex Sans Arabic',serif;font-size:25px;margin:0}.grade-head svg{color:var(--primary)}.files{padding:15px}.empty{margin:3px 4px;padding:18px 12px;color:var(--muted);font-size:14px;text-align:center}.file-card{display:flex;align-items:center;gap:12px;padding:13px 10px;border-bottom:1px solid var(--line)}.file-card:last-child{border-bottom:0}.file-icon{width:38px;height:38px;flex:0 0 38px;border-radius:11px;display:grid;place-items:center;background:var(--soft);color:var(--primary)}.file-copy{min-width:0;flex:1}.file-copy strong{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:15px}.file-copy small{display:block;color:var(--muted);font-size:12px;margin-top:3px}.file-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.file-actions a{font-size:12px;color:var(--primary-strong);border:1px solid var(--line);border-radius:9px;padding:6px 8px;white-space:nowrap}.file-actions a.primary{background:var(--primary);border-color:var(--primary);color:var(--bg)}.foot{border-top:1px solid var(--line);padding:25px 0 40px;color:var(--muted);font-size:13px;text-align:center}@media(max-width:760px){.hero{grid-template-columns:1fr;padding-top:42px}.hero-badge{justify-self:start}.grades{grid-template-columns:1fr;padding-bottom:40px}.top-inner{align-items:flex-start;padding:11px 0}.nav{justify-content:flex-end}.nav a{padding:7px 8px;font-size:13px}}@media(max-width:480px){.wrap{padding:0 15px}.brand span:last-child{display:none}.nav{gap:2px}.nav a{font-size:12px;padding:7px 6px}.file-card{align-items:flex-start;flex-wrap:wrap}.file-actions{width:100%;padding-right:50px;justify-content:flex-start}}
+  </style>
+</head>
+<body>
+  <header class="top"><div class="wrap top-inner">
+    <a class="brand" href="index.html"><span class="brand-mark"><i data-lucide="library-big"></i></span><span>المكتبة التعليمية</span></a>
+    <nav class="nav" aria-label="التنقل الرئيسي"><a href="index.html">الرئيسية</a><a href="labs.html">المختبرات</a><a class="active" href="references.html" aria-current="page">المكتبة التعليمية</a></nav>
+  </div></header>
+  <main class="wrap">
+    <section class="hero"><div><div class="eyebrow">CHEM · EDU / مراجع منظمة</div><h1>المكتبة التعليمية</h1><p>مراجع وملفات مساندة لطلاب المرحلة الثانوية، مرتبة حسب الصف لتسهيل الوصول إلى المراجعات وأوراق العمل والنماذج.</p></div><div class="hero-badge"><strong id="totalCount">—</strong><span>ملف منشور</span></div></section>
+    <div id="status" class="status show" role="status">جارٍ تحميل المراجع التعليمية…</div>
+    <section class="grades" aria-label="مراجع المراحل الدراسية">
+      <article class="grade" data-grade="أول ثانوي"><div class="grade-head"><h2>أول ثانوي</h2><i data-lucide="graduation-cap"></i></div><div class="files" id="files-first"></div></article>
+      <article class="grade" data-grade="ثاني ثانوي"><div class="grade-head"><h2>ثاني ثانوي</h2><i data-lucide="graduation-cap"></i></div><div class="files" id="files-second"></div></article>
+      <article class="grade" data-grade="ثالث ثانوي"><div class="grade-head"><h2>ثالث ثانوي</h2><i data-lucide="graduation-cap"></i></div><div class="files" id="files-third"></div></article>
+    </section>
+  </main>
+  <footer class="foot"><div class="wrap">المكتبة التعليمية — ملف مادة الكيمياء</div></footer>
+  <script>
+    const SUPABASE_URL='https://xomnbmquixdakhbafncv.supabase.co';
+    const SUPABASE_KEY='sb_publishable_9L2LiL1Fep3TCYC5_kFEvw_UkVoUo45';
+    const db=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+    const statusEl=document.getElementById('status');
+    const gradeTargets={'أول ثانوي':'files-first','ثاني ثانوي':'files-second','ثالث ثانوي':'files-third'};
+    const esc=value=>String(value??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+    const formatSize=bytes=>{const n=Number(bytes);if(!Number.isFinite(n)||n<=0)return '';if(n<1024)return `${n} بايت`;if(n<1048576)return `${(n/1024).toFixed(1)} كيلوبايت`;return `${(n/1048576).toFixed(1)} ميغابايت`};
+    const safeUrl=(row)=>{const raw=row.file_url||`${SUPABASE_URL}/storage/v1/object/public/educational-resources/${row.file_path||''}`;try{const u=new URL(raw,location.href);return ['http:','https:'].includes(u.protocol)?u.href:'#'}catch{return '#'}};
+    const fileHtml=row=>{const url=safeUrl(row),title=esc(row.title||row.name||'مرجع تعليمي'),meta=[row.file_type||'ملف تعليمي',formatSize(row.file_size)].filter(Boolean).join(' · ');return `<div class="file-card"><span class="file-icon" aria-hidden="true"><i data-lucide="file-text"></i></span><div class="file-copy"><strong title="${title}">${title}</strong><small>${esc(row.description||meta)}</small></div><div class="file-actions"><a class="primary" href="${esc(url)}" target="_blank" rel="noopener">فتح</a><a href="${esc(url)}" download>تنزيل</a></div></div>`};
+    function render(rows){document.getElementById('totalCount').textContent=rows.length;Object.entries(gradeTargets).forEach(([grade,id])=>{const target=document.getElementById(id),items=rows.filter(row=>String(row.grade||'').trim()===grade);target.innerHTML=items.length?items.map(fileHtml).join(''):`<p class="empty">لا توجد مراجع منشورة حاليًا.</p>`});statusEl.classList.remove('show');lucide.createIcons()}
+    async function load(){try{const {data,error}=await db.from('educational_files').select('*').eq('is_published',true).order('created_at',{ascending:false});if(error)throw error;render(data||[])}catch(error){document.getElementById('totalCount').textContent='0';Object.values(gradeTargets).forEach(id=>document.getElementById(id).innerHTML='<p class="empty">تعذر تحميل المراجع حاليًا. حاول تحديث الصفحة.</p>');statusEl.textContent='تعذر الاتصال بالمكتبة التعليمية حاليًا.';statusEl.classList.add('error','show');console.error('Educational library error',error)}}
+    lucide.createIcons();load();
+  </script>
+</body>
+</html>

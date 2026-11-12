@@ -569,6 +569,8 @@ body{background:#f7faf8;color:var(--foreground)}
 </a>
 <nav class="top-nav" id="topNav">
 <a href="#top" onclick="return goHome(null)">الرئيسية</a>
+<a href="labs.html">المختبرات</a>
+<a href="references.html">المكتبة التعليمية</a>
 <button onclick="goHome('intro')">المقدمة</button>
 <button onclick="goHome('sections')">الأقسام</button>
 <button onclick="goHome('gallery')">معرض التجارب</button>
@@ -576,6 +578,8 @@ body{background:#f7faf8;color:var(--foreground)}
 </nav>
 <select aria-label="الانتقال إلى قسم" class="mobile-nav" id="mobileNav">
 <option value="top">الرئيسية</option>
+<option value="labs.html">المختبرات</option>
+<option value="references.html">المكتبة التعليمية</option>
 <option value="intro">المقدمة</option>
 <option value="sections">الأقسام</option>
 <option value="gallery">معرض التجارب</option>
@@ -1088,7 +1092,9 @@ try{route();}catch(e){setTimeout(()=>{try{route();}catch(_e){}},80);}
 
 document.getElementById('mobileNav').addEventListener('change', (e)=>{
   const v = e.target.value;
-  if(v === 'top'){ goHome(null); } else { goHome(v); }
+  if(v === 'top'){ goHome(null); }
+  else if(v.endsWith('.html')){ location.href = v; }
+  else { goHome(v); }
 });
 </script>
 <script>
