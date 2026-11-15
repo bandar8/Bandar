@@ -93,6 +93,9 @@
   nav.top-nav{display:none;align-items:center;gap:2px;flex:1;overflow-x:auto;margin-inline-end:auto;}
   nav.top-nav a, nav.top-nav button{background:none;border:none;font-family:inherit;cursor:pointer;font-size:13px;color:var(--muted-foreground);padding:7px 13px;border-radius:999px;white-space:nowrap;}
   nav.top-nav a:hover, nav.top-nav button:hover{background:var(--accent);color:var(--accent-foreground);}
+  .library-hero-btn{border-color:color-mix(in srgb,var(--accent) 35%, transparent);}
+  .library-hero-btn svg{width:16px;height:16px;vertical-align:-3px;}
+
   select.mobile-nav{margin-inline-start:auto;border-radius:999px;border:1px solid var(--border);background:var(--card);color:var(--foreground);padding:8px 14px;font-size:13px;font-family:inherit;max-width:56vw;}
   @media (min-width:920px){
     nav.top-nav{display:flex;}
@@ -684,6 +687,7 @@ function renderHome(){
         <div class="hero-ctas">
           <a class="btn solid" href="#sections" onclick="return goHome('sections')">استعراض الأقسام ${ic('arrow-left')}</a>
           <a class="btn ghost" href="#gallery" onclick="return goHome('gallery')">استكشف التجارب ${ic('flask-conical')}</a>
+          <a class="btn ghost library-hero-btn" href="references.html" title="المكتبة التعليمية">${ic('library-big')} المكتبة التعليمية</a>
         </div>
         <div class="hero-trust"><span>${ic('badge-check')} توثيق منظم</span><span>${ic('shield-check')} عرض آمن</span><span>${ic('sparkles')} تجربة تعليمية</span></div>
       </div>
