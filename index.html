@@ -738,7 +738,7 @@ function renderHome(){
         <button class="gallery-filter" data-gallery-filter="visual" onclick="filterGallery('visual',this)">${ic('images')} صور</button>
       </div>
       <div class="gallery-grid">${galleryHtml}</div>
-      <div class="gallery-all-link"><a href="labs.html">${ic('layout-grid')} عرض جميع المختبرات (11)</a></div>
+      <div class="gallery-all-link"><a href="labs.html">${ic('layout-grid')} عرض جميع المختبرات (${String((siteData.galleryItems||[]).length).padStart(2,'0')})</a></div>
       <p class="gallery-note"></p>
     </div>
   </section>
