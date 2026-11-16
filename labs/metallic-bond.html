@@ -1,0 +1,712 @@
+<!doctype html><html><head><meta charset=utf8><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>الرابطة الفلزية</title>
+<style>
+/* Layout: sticky header with a 5-stage stepper (5E cycle); one stage visible at a time; cards for activities.
+   Palette: steel-blue ground, teal = delocalized electrons, gold = metal cations, blue/rust = ionic ions. */
+:root{
+  --bg:#EDF1F3; --surface:#FFFFFF; --surface2:#E3EAEE; --fg:#12222B; --muted:#4D626E; --line:#C7D3DA;
+  --accent:#0A7686; --accent-ink:#FFFFFF; --metal:#B8872B; --ion-pos:#4A6FC4; --ion-neg:#CC6A52; --carbon:#2B3A42;
+  --good:#1D7B4D; --bad:#B03229; --good-bg:#DDF1E6; --bad-bg:#F7E0DD; --accent-bg:#D8EEF1;
+  --font-display:'IBM Plex Sans Arabic',system-ui,sans-serif;
+  --font-body:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0C171C; --surface:#13232A; --surface2:#1A2E37; --fg:#E6EFF2; --muted:#9DB3BC; --line:#2A424D;
+  --accent:#3CC3D6; --accent-ink:#05191D; --metal:#E0B04F; --ion-pos:#7B9CF0; --ion-neg:#EE8D75; --carbon:#C7D3D9;
+  --good:#4CC38A; --bad:#F0776D; --good-bg:#14352A; --bad-bg:#3A1E1B; --accent-bg:#12333A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0C171C; --surface:#13232A; --surface2:#1A2E37; --fg:#E6EFF2; --muted:#9DB3BC; --line:#2A424D;
+  --accent:#3CC3D6; --accent-ink:#05191D; --metal:#E0B04F; --ion-pos:#7B9CF0; --ion-neg:#EE8D75; --carbon:#C7D3D9;
+  --good:#4CC38A; --bad:#F0776D; --good-bg:#14352A; --bad-bg:#3A1E1B; --accent-bg:#12333A; color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:16px;line-height:1.75;margin:0}
+#app{min-height:100%}
+h1,h2,h3{font-family:var(--font-display);font-weight:700;line-height:1.35;text-wrap:balance;margin:0}
+h2{font-size:1.5rem} h3{font-size:1.15rem}
+p{margin:0}
+sup,sub{line-height:0}
+.wrap{max-width:980px;margin-inline:auto;padding-inline:16px}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);border-bottom:1px solid var(--line)}
+.head-row{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;padding-block:12px 8px;flex-wrap:wrap}
+.eyebrow{font-size:.8rem;letter-spacing:.04em;color:var(--accent);font-weight:700}
+h1{font-size:1.9rem}
+.switch{display:inline-flex;align-items:center;gap:8px;font-size:.88rem;color:var(--muted);cursor:pointer;min-height:44px}
+.switch input{width:20px;height:20px;accent-color:var(--accent)}
+.steps{display:flex;gap:6px;padding-bottom:10px;overflow-x:auto}
+.steps button{flex:1 0 64px;display:flex;flex-direction:column;align-items:center;gap:0;padding:6px 4px;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:8px;font:inherit;font-size:.78rem;line-height:1.4;cursor:pointer;min-height:48px}
+.steps button b{font-family:var(--font-display);font-size:1rem;color:var(--fg)}
+.steps button.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.steps button.on b{color:var(--accent-ink)}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* stages */
+main{padding-block:20px 56px}
+.stage{display:flex;flex-direction:column;gap:18px}
+.stage-head{display:flex;flex-direction:column;gap:4px}
+.stage-head .time{font-size:.85rem;color:var(--muted)}
+.lede{color:var(--muted);max-width:68ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.card.soft{background:var(--surface2);border-color:transparent}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px}
+.tag{display:inline-block;font-size:.78rem;font-weight:700;color:var(--accent);background:var(--accent-bg);padding:1px 10px;border-radius:99px;align-self:flex-start}
+
+/* teacher notes */
+.tnote{display:none;border:1px dashed var(--accent);border-radius:10px;padding:14px 16px;background:var(--accent-bg);font-size:.93rem}
+.show-t .tnote{display:block}
+.tnote h3{font-size:1rem;color:var(--accent);margin-bottom:4px}
+.tnote ul{margin:4px 0 0;padding-inline-start:20px}
+
+/* buttons / chips */
+.btn{font:inherit;font-weight:700;border:0;border-radius:8px;background:var(--accent);color:var(--accent-ink);padding:10px 18px;min-height:44px;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--fg);border:1px solid var(--line)}
+.btn.next{align-self:flex-start}
+.seg{display:flex;flex-wrap:wrap;gap:8px}
+.seg button{font:inherit;min-height:44px;padding:6px 14px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{font:inherit;text-align:start;min-height:44px;padding:8px 14px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer;line-height:1.6}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt.ok{background:var(--good-bg);border-color:var(--good)}
+.opt.ok::after{content:" ✓";color:var(--good);font-weight:700}
+.opt.no{background:var(--bad-bg);border-color:var(--bad)}
+.opt.no::after{content:" ✗";color:var(--bad);font-weight:700}
+.opt.picked{background:var(--accent-bg);border-color:var(--accent)}
+.why{padding:10px 14px;border-radius:8px;background:var(--surface2);font-size:.95rem}
+.q{display:flex;flex-direction:column;gap:10px}
+.qt{font-weight:700}
+
+/* sim */
+.simbox{background:var(--surface2);border-radius:10px;overflow:hidden}
+#sim{display:block;width:100%;aspect-ratio:16/9;max-height:360px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.88rem;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-inline-end:6px;vertical-align:-1px}
+.ctrl{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:14px}
+.ctrl label{display:flex;flex-direction:column;gap:2px;font-weight:500;font-size:.95rem}
+.ctrl input[type=range]{width:100%;accent-color:var(--accent);min-height:32px}
+.meter{height:12px;background:var(--surface2);border-radius:6px;overflow:hidden}
+.meter span{display:block;height:100%;background:var(--accent);width:0;transition:width .25s}
+.read{display:flex;flex-direction:column;gap:6px;font-size:.93rem}
+.read b{font-variant-numeric:tabular-nums}
+
+/* svg demos */
+.demo svg{display:block;width:100%;height:auto;background:var(--surface2);border-radius:8px}
+.c-metal{fill:var(--metal)} .c-pos{fill:var(--ion-pos)} .c-neg{fill:var(--ion-neg)} .c-el{fill:var(--accent)} .c-carbon{fill:var(--carbon)}
+.sea{fill:var(--accent);opacity:.16}
+.svgt{font-family:var(--font-body);font-size:11px;fill:#fff;text-anchor:middle;dominant-baseline:central;font-weight:700}
+.row{transition:transform .8s ease}
+.rep{stroke:var(--bad);stroke-width:3;stroke-dasharray:4 3;opacity:0;transition:opacity .4s .6s}
+.crack{stroke:var(--bad);stroke-width:2.5;fill:none;opacity:0;transition:opacity .4s .7s}
+.on .rep,.on .crack{opacity:1}
+.wire{stroke:var(--fg);stroke-width:3;fill:none;stroke-linecap:round}
+.cap{font-size:.9rem;color:var(--muted);min-height:3.2em}
+.demo-title{font-weight:700;font-size:.95rem;margin-bottom:6px}
+
+/* property cards */
+details{border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:0}
+details summary{cursor:pointer;padding:12px 16px;font-weight:700;min-height:44px;display:flex;align-items:center;gap:8px;list-style:none}
+details summary::-webkit-details-marker{display:none}
+details summary::before{content:"+";font-family:var(--font-display);color:var(--accent);width:1em}
+details[open] summary::before{content:"−"}
+details .body{padding:0 16px 14px;display:flex;flex-direction:column;gap:6px}
+details .use{font-size:.9rem;color:var(--muted)}
+.def{font-size:1.1rem;font-weight:500;border-inline-start:4px solid var(--accent);padding:6px 14px}
+.def b{color:var(--accent)}
+
+/* bars */
+.bars{display:flex;flex-direction:column;gap:14px}
+.bar-group h4{margin:0 0 6px;font-size:.92rem;font-weight:700}
+.bar-row{display:grid;grid-template-columns:5.2rem 1fr 4.2rem;gap:8px;align-items:center;font-size:.88rem;margin-bottom:4px}
+.bar-row .track{height:14px;background:var(--surface2);border-radius:7px;overflow:hidden}
+.bar-row .fill{display:block;height:100%;background:var(--metal);border-radius:7px}
+.bar-row b{font-variant-numeric:tabular-nums;text-align:end}
+
+/* chain */
+.chain{display:flex;flex-direction:column;align-items:stretch;gap:0}
+.node{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px;font-weight:500}
+.node.key{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:700}
+.link{display:flex;align-items:center;gap:10px;padding:6px 16px;min-height:52px}
+.link::before{content:"";width:2px;align-self:stretch;background:var(--line);margin-inline-start:12px}
+.link select{font:inherit;font-size:.92rem;min-height:40px;max-width:100%;padding:4px 8px;border-radius:8px;border:1px solid var(--line);background:var(--surface);color:var(--fg)}
+.link select.ok{border-color:var(--good);background:var(--good-bg)}
+.link select.no{border-color:var(--bad);background:var(--bad-bg)}
+.link .mark{font-weight:700;min-width:1.2em}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chips span{background:var(--surface2);padding:2px 12px;border-radius:99px;font-size:.88rem}
+
+/* table */
+.tscroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:.93rem}
+th,td{padding:10px 12px;text-align:start;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--surface2);font-weight:700}
+tr:last-child td{border-bottom:0}
+td.m,th.m{background:var(--accent-bg)}
+
+.result{display:flex;flex-direction:column;gap:6px;background:var(--accent-bg);border-radius:10px;padding:16px}
+.result .score{font-family:var(--font-display);font-size:2rem;font-variant-numeric:tabular-nums}
+.note{font-size:.85rem;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.row,.meter span,.rep,.crack{transition:none}}
+@media (max-width:520px){h1{font-size:1.6rem}h2{font-size:1.3rem}.bar-row{grid-template-columns:4.4rem 1fr 3.6rem}}
+</style>
+
+<div id="app" dir="rtl" lang="ar">
+<header class="top"><div class="wrap">
+  <div class="head-row">
+    <div><p class="eyebrow">كيمياء 2-1 · الفصل 3 · الدرس 3-4</p><h1>الروابط الفلزية وخواص الفلزات</h1></div>
+    <label class="switch"><input type="checkbox" id="tt"> ملاحظات المعلم</label>
+  </div>
+  <nav class="steps" id="steps" aria-label="مراحل الدرس">
+    <button type="button" aria-selected="true" class="on"><b>1</b>التهيئة</button>
+    <button type="button"><b>2</b>الاستكشاف</button>
+    <button type="button"><b>3</b>التفسير</button>
+    <button type="button"><b>4</b>التوسّع</button>
+    <button type="button"><b>5</b>التقويم</button>
+  </nav>
+</div></header>
+
+<main class="wrap">
+
+<!-- ================= 1 التهيئة ================= -->
+<section class="stage" id="s1">
+  <div class="stage-head">
+    <span class="time">5 دقائق · توقّع ثم لاحظ</span>
+    <h2>ماذا نلاحظ؟</h2>
+    <p class="lede">قطعة ملح وسلك نحاس، وكلاهما صلب. ضع كل عينة في دائرة كهربائية بسيطة وراقب المصباح.</p>
+  </div>
+
+  <div class="card" id="diffCard">
+    <span class="tag">السؤال المحوري للدرس</span>
+    <h3>ما الفرق بين المركب الأيوني الصلب والفلز الصلب؟</h3>
+    <p>كلاهما صلب، لكنهما لا يتصرفان بالطريقة نفسها في دائرة كهربائية. جرّب التجربة أدناه واكتب إجابتك المبدئية في دفترك. سنجمع الأدلة للإجابة عن هذا التساؤل من خلال الدرس، ونعود إليه في مرحلة التفسير.</p>
+  </div>
+
+  <div class="card demo">
+    <p class="demo-title">تجربة التوصيل الكهربائي</p>
+    <svg id="circ" viewBox="0 0 320 180" role="img" aria-label="دائرة كهربائية فيها بطارية ومصباح وفجوة توضع فيها العينة"></svg>
+    <div class="seg" id="sampleSeg">
+      <button type="button" aria-pressed="false" data-s="salt">ضع قطعة ملح (NaCl)</button>
+      <button type="button" aria-pressed="false" data-s="cu">ضع سلك نحاس (Cu)</button>
+    </div>
+    <p class="cap" id="circCap" aria-live="polite">اختر عينة لتضعها في الدائرة، وتوقّع قبل ذلك: هل سيضيء المصباح؟</p>
+    <div class="tscroll"><table style="min-width:0">
+      <thead><tr><th>العينة</th><th>نوعها</th><th>المصباح</th></tr></thead>
+      <tbody>
+        <tr><td>ملح الطعام NaCl</td><td>مركب أيوني صلب</td><td id="obsSalt">لم تُجرَّب</td></tr>
+        <tr><td>سلك نحاس Cu</td><td>فلز صلب</td><td id="obsCu">لم تُجرَّب</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="card soft">
+    <h3>أهداف الدرس</h3>
+    <div class="opts" style="gap:4px">
+      <p>1. نفهم نموذج بحر الإلكترونات لإلكترونات التكافؤ في ذرات الفلزات.</p>
+      <p>2. تصف ترتيب الأيونات والإلكترونات في الفلز، وتفسّر خواص الفلزات بالرابطة الفلزية.</p>
+      <p>3. توضح أهمية السبائك وخواصها.</p>
+    </div>
+  </div>
+  <div class="tnote">
+    <h3>تنبيه للمعلم · أهداف الدرس</h3>
+    <ul>
+      <li>هذه الأهداف صياغة مبدئية لم تُطابَق مع نص الكتاب. استبدلها بأهداف الدرس 3-4 كما وردت في كتاب كيمياء 2-1 قبل استخدام الدرس مع الطلاب.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>مفردات الدرس</h3>
+    <dl style="margin:0;display:flex;flex-direction:column;gap:6px">
+      <div><b>الرابطة الفلزية:</b> جذب بين الأيون الفلزي الموجب والإلكترونات غير المتمركزة.</div>
+      <div><b>الإلكترونات غير المتمركزة:</b> إلكترونات تكافؤ تتحرك بحرية بين أيونات الفلز.</div>
+      <div><b>قابلية الطرق:</b> إمكانية تشكيل الفلز إلى صفائح. <b>قابلية السحب:</b> إمكانية تشكيله إلى أسلاك.</div>
+      <div><b>السبيكة:</b> خليط من العناصر له خواص فلزية.</div>
+    </dl>
+  </div>
+
+  <div class="tnote">
+    <h3>دليل المعلم · التهيئة (5 دقائق)</h3>
+    <ul>
+      <li><b>الاستراتيجية:</b> دورة التعلم الخماسية (5E) مع التوقّع ثم الملاحظة ثم التفسير (POE).</li>
+      <li>اطلب من الطلاب التوقع شفهياً قبل وضع كل عينة: هل سيضيء المصباح؟ ثم قارن توقعاتهم بالملاحظة.</li>
+      <li>بعد التجربتين اكتب السؤال المحوري على السبورة: ما الفرق بين المركب الأيوني الصلب والفلز الصلب؟ لا تجب عنه الآن. دع الطلاب يسجلون إجابات مبدئية، ثم عد إليه في التفسير: الجواب هو حرية حركة الإلكترونات غير المتمركزة في الفلز، مقابل ثبات الأيونات في المركب الأيوني الصلب.</li>
+      <li>فكرة خاطئة شائعة: «الملح فيه أيونات إذن يوصل الكهرباء». وضّح أن الأيونات في الشبكة البلورية الصلبة لا تتحرك، وأن الملح المنصهر أو المحلول يوصل.</li>
+      <li>الربط بمعرفة سابقة: تكوّن الأيون الموجب من ذرات الفلزات (الدرس 3-1) والرابطة الأيونية (الدرس 3-2).</li>
+    </ul>
+  </div>
+  <button class="btn next" type="button" data-go="1">التالي: الاستكشاف ←</button>
+</section>
+
+<!-- ================= 2 الاستكشاف ================= -->
+<section class="stage" id="s2" hidden>
+  <div class="stage-head">
+    <span class="time">12 دقيقة · استقصاء موجّه بثنائيات</span>
+    <h2>استكشف بحر الإلكترونات</h2>
+    <p class="lede">غيّر المتغيرات الثلاثة وراقب الإلكترونات والأيونات، ثم أجب عن أسئلة الملاحظة أسفل المحاكاة.</p>
+  </div>
+
+  <div class="card">
+    <div class="simbox"><canvas id="sim" aria-label="محاكاة لشبكة أيونات فلزية موجبة وبحر من الإلكترونات المتحركة"></canvas></div>
+    <div class="legend">
+      <span><i style="background:var(--metal)"></i>أيون فلزي موجب</span>
+      <span><i style="background:var(--accent)"></i>إلكترون غير متمركز</span>
+      <span>القطب الموجب (+) يسار الشاشة، والسالب (−) يمينها</span>
+    </div>
+    <div class="ctrl">
+      <label>الجهد الكهربائي: <b id="vOut">0</b>
+        <input id="vIn" type="range" min="0" max="100" value="0"></label>
+      <label>الطاقة الحرارية (درجة الحرارة): <b id="tOut">30</b>
+        <input id="tIn" type="range" min="0" max="100" value="30"></label>
+      <div>
+        <div style="font-weight:500;font-size:.95rem;margin-bottom:6px">إلكترونات التكافؤ لكل ذرة</div>
+        <div class="seg" id="valSeg">
+          <button type="button" aria-pressed="true" data-v="1">1 · Na</button>
+          <button type="button" aria-pressed="false" data-v="2">2 · Mg</button>
+          <button type="button" aria-pressed="false" data-v="3">3 · Al</button>
+        </div>
+      </div>
+    </div>
+    <div class="read">
+      <div>التيار النسبي (تقريبي): <b id="iOut">0%</b></div>
+      <div class="meter"><span id="iBar"></span></div>
+      <div id="bondOut"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="tag">أسئلة الملاحظة</span>
+    <div id="tasks" style="display:flex;flex-direction:column;gap:20px"></div>
+  </div>
+
+  <div class="card demo">
+    <p class="demo-title">تجربة الطرق: ماذا يحدث عند إزاحة طبقة من الجسيمات؟</p>
+    <div class="grid2">
+      <div><p class="note" style="margin-bottom:4px">فلز</p><svg id="hmMetal" viewBox="0 0 300 150" aria-label="طبقات أيونات فلزية في بحر إلكترونات"></svg></div>
+      <div><p class="note" style="margin-bottom:4px">مركب أيوني</p><svg id="hmIonic" viewBox="0 0 300 150" aria-label="طبقات أيونات موجبة وسالبة متبادلة"></svg></div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn" type="button" id="hit">اطرق: أزِح الطبقة العليا</button>
+      <button class="btn ghost" type="button" id="hitReset">أعد التجربة</button>
+    </div>
+    <p class="cap" id="hitCap" aria-live="polite">اضغط «اطرق» وقارن بين ما يحدث في الشكلين.</p>
+  </div>
+
+  <div class="card soft">
+    <span class="tag">أدلة للسؤال المحوري</span>
+    <p>في المحاكاة انجرفت الإلكترونات غير المتمركزة نحو القطب الموجب، وعند الطرق انزلقت طبقات الفلز وبقيت الرابطة، بينما تحطمت بلورة المركب الأيوني. ما الذي تضيفه هذه الملاحظات إلى إجابتك عن الفرق بين المركب الأيوني الصلب والفلز الصلب؟</p>
+  </div>
+
+  <div class="tnote">
+    <h3>دليل المعلم · الاستكشاف (12 دقيقة)</h3>
+    <ul>
+      <li><b>الاستراتيجية:</b> التعلم بالاستقصاء الموجّه عبر المحاكاة، ثنائيات، ورقة ملاحظات من ثلاثة أسئلة.</li>
+      <li>اطلب من كل ثنائي تغيير متغير واحد في كل مرة، ثم تسجيل ما لاحظاه قبل الإجابة.</li>
+      <li>تدخّل بسؤال: «أين تذهب الإلكترونات حين يُطبَّق الجهد؟ وهل تنتمي لذرة بعينها؟».</li>
+      <li>في تجربة الطرق اترك الطلاب يصفون الفرق قبل أن تعطيهم المصطلحات.</li>
+    </ul>
+  </div>
+  <button class="btn next" type="button" data-go="2">التالي: التفسير ←</button>
+</section>
+
+<!-- ================= 3 التفسير ================= -->
+<section class="stage" id="s3" hidden>
+  <div class="stage-head">
+    <span class="time">10 دقائق · بناء المفهوم من الملاحظات</span>
+    <h2>نموذج بحر الإلكترونات</h2>
+  </div>
+
+  <div class="card">
+    <p class="def"><b>الرابطة الفلزية:</b> قوة جذب كهروستاتيكية بين الأيونات الفلزية الموجبة والإلكترونات غير المتمركزة (بحر الإلكترونات) المحيطة بها.</p>
+    <p>تحتوي ذرات الفلزات على عدد قليل من إلكترونات التكافؤ تتحرر بسهولة، فتتكون أيونات موجبة مرتبة في شبكة بلورية، وتصبح إلكترونات التكافؤ غير متمركزة تتحرك بحرية بينها. الرابطة الفلزية قوية وغير موجهة، لذلك تتراص الأيونات بكثافة عالية. والفلز في مجمله متعادل كهربائياً لأن عدد الشحنات الموجبة يساوي عدد الإلكترونات.</p>
+    <div class="legend">
+      <span><i style="background:var(--metal)"></i>أيونات موجبة ثابتة نسبياً</span>
+      <span><i style="background:var(--accent)"></i>إلكترونات حرة الحركة</span>
+    </div>
+  </div>
+
+  <div class="card" id="predBack"></div>
+
+  <h3>كل خاصية تفسّرها الرابطة الفلزية</h3>
+  <div style="display:flex;flex-direction:column;gap:10px">
+    <details open><summary>التوصيل الكهربائي</summary><div class="body"><p>تتحرك الإلكترونات غير المتمركزة باتجاه القطب الموجب عند تطبيق فرق جهد، فينتقل التيار عبر الفلز.</p><p class="use">مثال: أسلاك النحاس في الدوائر الكهربائية.</p></div></details>
+    <details><summary>التوصيل الحراري</summary><div class="body"><p>تنقل الإلكترونات الحرة طاقة الحركة بسرعة من الجزء الساخن إلى البارد، وتساعد اهتزازات الأيونات في ذلك.</p><p class="use">مثال: قواعد أواني الطهي من الألمنيوم والنحاس.</p></div></details>
+    <details><summary>القابلية للطرق والسحب</summary><div class="body"><p>قابلية الطرق تشكيل الفلز إلى صفائح، وقابلية السحب تشكيله إلى أسلاك. تنزلق طبقات الأيونات فوق بعضها. تبقى الإلكترونات محيطة بالأيونات في المواضع الجديدة، فتستمر الرابطة ولا يتحطم الفلز. في المركب الأيوني تتقابل شحنات متشابهة فتتنافر وتنكسر البلورة.</p><p class="use">مثال: رقائق الألمنيوم وأسلاك النحاس.</p></div></details>
+    <details><summary>اللمعان</summary><div class="body"><p>تمتص الإلكترونات الحرة على السطح الضوء الساقط ثم تعيد إشعاعه، فيظهر السطح لامعاً.</p><p class="use">مثال: المرايا الفضية وحلي الذهب.</p></div></details>
+    <details><summary>الصلابة والقوة ودرجات الانصهار والغليان</summary><div class="body"><p>الرابطة الفلزية قوية، وكسر الجذب بين الأيونات والإلكترونات يحتاج إلى طاقة كبيرة. لذلك تكون الفلزات صلبة وقوية في الغالب، ودرجات انصهارها وغليانها مرتفعة.</p><p class="use">مثال: الحديد والفولاذ في الجسور والمباني.</p></div></details>
+  </div>
+
+  <div class="tnote">
+    <h3>دليل المعلم · التفسير (10 دقائق)</h3>
+    <ul>
+      <li><b>الاستراتيجية:</b> بناء المفهوم من ملاحظات الطلاب، ثم مقارنة النموذج بتوقعاتهم الأولى.</li>
+      <li>اطلب من طالب أن يعيد صياغة التعريف بكلماته قبل إظهار التعريف الرسمي.</li>
+      <li>أفكار خاطئة شائعة: «الفلز يحمل شحنة موجبة» أو «الرابطة الفلزية بين ذرتين فقط» أو «كل إلكترون يخص ذرة محددة».</li>
+      <li>قارن مع الرابطة الأيونية: هنا لا ينتقل الإلكترون إلى ذرة محددة، بل ينتشر على الشبكة كلها.</li>
+    </ul>
+  </div>
+  <button class="btn next" type="button" data-go="3">التالي: التوسّع ←</button>
+</section>
+
+<!-- ================= 4 التوسّع ================= -->
+<section class="stage" id="s4" hidden>
+  <div class="stage-head">
+    <span class="time">12 دقيقة · تطبيق وربط المفاهيم</span>
+    <h2>من الرابطة إلى الخواص والتطبيقات</h2>
+  </div>
+
+  <div class="card demo">
+    <span class="tag">أ · السبائك</span>
+    <p>السبيكة خليط من العناصر له خواص فلزية، ومن أمثلتها الفولاذ (حديد + كربون). جرّب إزاحة الطبقة العليا في كل حالة لترى أثر ذرات العنصر الإضافي.</p>
+    <div class="seg" id="alloySeg">
+      <button type="button" aria-pressed="true" data-m="pure">فلز نقي (Cu)</button>
+      <button type="button" aria-pressed="false" data-m="sub">سبيكة النحاس الأصفر (Cu + Zn)</button>
+      <button type="button" aria-pressed="false" data-m="int">سبيكة الفولاذ (Fe + C)</button>
+    </div>
+    <svg id="alloySvg" viewBox="0 0 300 140" aria-label="شبكة ذرات فلز نقي أو سبيكة"></svg>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn" type="button" id="slide">أزِح الطبقة العليا</button>
+      <button class="btn ghost" type="button" id="slideReset">أعد</button>
+    </div>
+    <div class="read">
+      <div>مقاومة انزلاق الطبقات (توضيح مبسّط): <b id="resOut">منخفضة</b></div>
+      <div class="meter"><span id="resBar" style="width:25%"></span></div>
+      <p class="cap" id="alloyCap" aria-live="polite"></p>
+    </div>
+  </div>
+
+  <div class="card">
+    <span class="tag">ب · الترابط الفكري</span>
+    <p>أكمل خريطة المفاهيم باختيار كلمة الربط المناسبة بين كل مفهومين.</p>
+    <div class="chain" id="chain"></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn" type="button" id="chainCheck">تحقق من الخريطة</button>
+      <button class="btn ghost" type="button" id="chainShow">اعرض الحل</button>
+    </div>
+    <p class="why" id="chainMsg" hidden></p>
+  </div>
+
+  <div class="card">
+    <span class="tag">ج · مقارنة بين الرابطة الأيونية والفلزية</span>
+    <div class="tscroll"><table>
+      <thead><tr><th>الخاصية</th><th>الرابطة الأيونية</th><th class="m">الرابطة الفلزية</th></tr></thead>
+      <tbody>
+        <tr><td>الجسيمات</td><td>أيونات موجبة وسالبة</td><td class="m">أيونات موجبة وإلكترونات غير متمركزة</td></tr>
+        <tr><td>أصل الرابطة</td><td>انتقال إلكترونات ثم جذب بين الأيونات المختلفة الشحنة</td><td class="m">جذب بين الأيونات الموجبة وبحر الإلكترونات</td></tr>
+        <tr><td>التوصيل الكهربائي</td><td>لا توصل في الحالة الصلبة، وتوصل منصهرة أو في المحلول</td><td class="m">توصل في الحالة الصلبة</td></tr>
+        <tr><td>عند الطرق</td><td>هشة تتحطم</td><td class="m">قابلة للطرق والسحب</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">هذا الجدول يلخص الإجابة عن السؤال المحوري.</p>
+  </div>
+
+  <div class="tnote">
+    <h3>دليل المعلم · التوسّع (12 دقيقة)</h3>
+    <ul>
+      <li><b>الاستراتيجية:</b> الخرائط المفاهيمية بكلمات ربط، مع مقارنة الروابط الثلاث لتثبيت الفروق.</li>
+      <li>وزّع الأنشطة أ وب وج على مجموعات، ثم ناقش ناتج كل مجموعة في دقيقتين.</li>
+      <li>في الخريطة اطلب تبرير كل كلمة ربط شفهياً، فالتفكير في العلاقة أهم من الإجابة الصحيحة.</li>
+      <li>تمديد للمتقدمين: لماذا تُستخدم السبائك بدل الفلزات النقية في المباني والأدوات؟</li>
+    </ul>
+  </div>
+  <button class="btn next" type="button" data-go="4">التالي: التقويم ←</button>
+</section>
+
+<!-- ================= 5 التقويم ================= -->
+<section class="stage" id="s5" hidden>
+  <div class="stage-head">
+    <span class="time">6 دقائق · تقويم تكويني فوري</span>
+    <h2>اختبر فهمك</h2>
+    <p class="lede">ست أسئلة، وبعد كل إجابة يظهر التفسير مباشرة.</p>
+  </div>
+  <div id="quiz" style="display:flex;flex-direction:column;gap:14px"></div>
+  <div class="result" id="result" hidden></div>
+
+  <div class="card soft">
+    <span class="tag">تذكرة الخروج</span>
+    <p>ارجع إلى السؤال المحوري: ما الفرق بين المركب الأيوني الصلب والفلز الصلب؟ أجب بجملتين مستخدماً مصطلح «الإلكترونات غير المتمركزة».</p>
+    <details><summary>إجابة نموذجية</summary><div class="body"><p>في الفلز الصلب إلكترونات تكافؤ غير متمركزة تتحرك بحرية بين الأيونات الموجبة، فيوصل الكهرباء ويمكن طرقه وسحبه لأن الرابطة الفلزية تستمر عند انزلاق الطبقات. أما المركب الأيوني الصلب فأيوناته ثابتة في الشبكة البلورية، فلا يوصل الكهرباء ويتحطم عند الطرق.</p></div></details>
+  </div>
+
+  <div class="tnote">
+    <h3>دليل المعلم · التقويم (6 دقائق)</h3>
+    <ul>
+      <li><b>الاستراتيجية:</b> تقويم تكويني بتغذية راجعة فورية، ثم تذكرة الخروج مكتوبة على ورقة.</li>
+      <li>إذا أخطأ أكثر من ثلث الصف في سؤال، أعد شرح الفكرة المرتبطة به في بداية الحصة التالية.</li>
+      <li>واجب مقترح: ابحث عن سبيكة تستخدم في حياتك اليومية، وحدد نوعها ولماذا حُسّنت خواصها.</li>
+    </ul>
+  </div>
+  <p class="note">المحاكاة والرسوم نماذج مبسطة للتوضيح.</p>
+</section>
+
+</main>
+</div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+
+/* ---------- stages ---------- */
+const stages=$$('.stage'), stepBtns=$$('#steps button');
+function go(n,scroll=true){
+  stages.forEach((s,i)=>s.hidden=i!==n);
+  stepBtns.forEach((b,i)=>{b.classList.toggle('on',i===n);b.setAttribute('aria-selected',i===n)});
+  if(n===1) requestAnimationFrame(fitSim);
+  if(n===2) renderPredBack();
+  if(scroll) window.scrollTo({top:0,behavior:'smooth'});
+}
+stepBtns.forEach((b,i)=>b.addEventListener('click',()=>go(i)));
+$$('[data-go]').forEach(b=>b.addEventListener('click',()=>go(+b.dataset.go)));
+$('#tt').addEventListener('change',e=>$('#app').classList.toggle('show-t',e.target.checked));
+
+/* ---------- generic multiple choice ---------- */
+function mcq(host,item,onAnswer){
+  const box=document.createElement('div'); box.className='q';
+  box.innerHTML='<p class="qt"></p><div class="opts"></div><p class="why" hidden></p>';
+  $('.qt',box).innerHTML=item.q;
+  const opts=$('.opts',box), why=$('.why',box);
+  item.o.forEach((t,i)=>{
+    const b=document.createElement('button'); b.type='button'; b.className='opt'; b.innerHTML=t;
+    b.addEventListener('click',()=>{
+      if(box.dataset.done) return; box.dataset.done='1';
+      const ok=i===item.a; b.classList.add(ok?'ok':'no');
+      if(!ok) opts.children[item.a].classList.add('ok');
+      why.hidden=false; why.innerHTML=(ok?'إجابة صحيحة. ':'الإجابة الصحيحة موضّحة بعلامة ✓. ')+item.w;
+      if(onAnswer) onAnswer(ok,i);
+    });
+    opts.appendChild(b);
+  });
+  host.appendChild(box); return box;
+}
+
+/* ---------- stage 1: prediction ---------- */
+const circ=$('#circ'); let sample=null; const tested={salt:false,cu:false};
+function drawCirc(){
+  const on=sample==='cu';
+  let h='<path class="wire" d="M40 70 V30 H138 M182 30 H280 V150 H212 M108 150 H40 V114"/>';
+  h+='<rect x="22" y="70" width="36" height="44" rx="4" style="fill:var(--surface);stroke:var(--fg)" stroke-width="2"/>'+
+     '<text x="40" y="84" class="svgt" style="fill:var(--fg)">+</text><text x="40" y="102" class="svgt" style="fill:var(--fg)">−</text>'+
+     '<text x="96" y="92" class="svgt" style="fill:var(--muted)">بطارية</text>';
+  if(on){
+    for(let a=180;a<=360;a+=30){const r=a*Math.PI/180;
+      h+='<line x1="'+(160+Math.cos(r)*27).toFixed(1)+'" y1="'+(30+Math.sin(r)*27).toFixed(1)+'" x2="'+(160+Math.cos(r)*36).toFixed(1)+'" y2="'+(30+Math.sin(r)*36).toFixed(1)+'" stroke="#FFD23F" stroke-width="3" stroke-linecap="round"/>';}
+  }
+  h+='<g'+(on?' style="filter:drop-shadow(0 0 8px #FFD23F)"':'')+'><circle cx="160" cy="30" r="22" style="fill:'+(on?'#FFD23F':'var(--surface2)')+';stroke:'+(on?'#B8860B':'var(--muted)')+'" stroke-width="2.5"/>'+
+     '<path d="M148 36 q6 -14 12 0 q6 -14 12 0" fill="none" style="stroke:'+(on?'#8A5A00':'var(--muted)')+'" stroke-width="2"/></g>'+
+     '<text x="160" y="72" class="svgt" style="fill:var(--muted)">مصباح</text>';
+  if(sample==='salt'){
+    h+='<rect x="108" y="138" width="104" height="24" rx="3" style="fill:var(--surface);stroke:var(--line)" stroke-width="2"/><text x="160" y="150" class="svgt" style="fill:var(--fg)">ملح NaCl</text>';
+  }else if(sample==='cu'){
+    h+='<rect x="108" y="138" width="104" height="24" rx="12" class="c-metal"/><text x="160" y="150" class="svgt" style="fill:#111">نحاس Cu</text>';
+  }else{
+    h+='<line x1="108" y1="150" x2="212" y2="150" style="stroke:var(--muted)" stroke-width="2" stroke-dasharray="5 4"/>'+
+       '<text x="160" y="172" class="svgt" style="fill:var(--muted)">ضع العينة هنا</text>';
+  }
+  circ.innerHTML=h;
+}
+function setSample(k){
+  sample=k; tested[k]=true; drawCirc();
+  $$('#sampleSeg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.s===k));
+  if(k==='salt'){ $('#circCap').textContent='المصباح لا يضيء: لا يمر تيار كهربائي عبر الملح الصلب.'; $('#obsSalt').textContent='لم يضئ'; }
+  else{ $('#circCap').textContent='المصباح يضيء: يمر تيار كهربائي عبر النحاس.'; $('#obsCu').textContent='أضاء'; }
+}
+$$('#sampleSeg button').forEach(b=>b.addEventListener('click',()=>setSample(b.dataset.s)));
+drawCirc();
+function renderPredBack(){
+  $('#predBack').innerHTML='<span class="tag">الإجابة عن السؤال المحوري</span>'+
+    '<h3>ما الفرق بين المركب الأيوني الصلب والفلز الصلب؟</h3>'+
+    '<p>الفرق في حرية حركة الجسيمات المشحونة. في الفلز إلكترونات تكافؤ غير متمركزة تتحرك بحرية بين الأيونات الموجبة، فتنقل التيار الكهربائي، ولهذا أضاء المصباح مع النحاس.</p>'+
+    '<p>وفي المركب الأيوني الصلب تثبت الأيونات في مواقعها داخل الشبكة البلورية، فلا توجد جسيمات مشحونة حرة الحركة، ولهذا لم يضئ المصباح مع الملح.</p>';
+}
+
+/* ---------- stage 2: simulation ---------- */
+const cv=$('#sim'), ctx=cv.getContext('2d');
+const sim={val:1,V:0,T:30}; let W=0,H=0,R=10,ions=[],els=[],col={},frameN=0;
+function readCols(){const cs=getComputedStyle(document.documentElement),g=n=>cs.getPropertyValue(n).trim();col={metal:g('--metal'),acc:g('--accent'),mut:g('--muted'),ink:'#111'}}
+function fitSim(){
+  const r=cv.getBoundingClientRect(); if(!r.width) return;
+  const d=Math.min(window.devicePixelRatio||1,2); W=r.width; H=r.height;
+  cv.width=Math.round(W*d); cv.height=Math.round(H*d); ctx.setTransform(d,0,0,d,0,0); readCols(); buildSim();
+}
+function buildSim(){
+  const cols=7,rows=4,sx=W/(cols+1),sy=H/(rows+1); R=Math.min(sx,sy)*0.36; ions=[];
+  for(let r=0;r<rows;r++)for(let c=0;c<cols;c++)ions.push({x:(c+1)*sx,y:(r+1)*sy,p:Math.random()*6.28});
+  els=Array.from({length:cols*rows*sim.val},()=>({x:Math.random()*W,y:Math.random()*H,a:Math.random()*6.28}));
+}
+function frame(t){
+  requestAnimationFrame(frame);
+  if(!W||document.hidden||stages[1].hidden) return;
+  if(++frameN%120===0) readCols();
+  ctx.clearRect(0,0,W,H);
+  const amp=(0.06+sim.T/100*0.42)*R, sp=0.5+sim.T/100*2.2, drift=(sim.V/100)*2.8;
+  ctx.font='700 '+Math.max(9,R*0.95)+'px sans-serif'; ctx.textAlign='center'; ctx.textBaseline='middle';
+  const chg=sim.val===1?'+':sim.val+'+';
+  for(const i of ions){
+    const x=i.x+Math.sin(t/170+i.p)*amp, y=i.y+Math.cos(t/210+i.p*1.3)*amp;
+    ctx.beginPath(); ctx.arc(x,y,R,0,6.283); ctx.fillStyle=col.metal; ctx.fill();
+    ctx.fillStyle=col.ink; ctx.fillText(chg,x,y+0.5);
+  }
+  ctx.fillStyle=col.acc;
+  for(const e of els){
+    e.a+=(Math.random()-.5)*0.7;
+    e.x+=Math.cos(e.a)*sp-drift; e.y+=Math.sin(e.a)*sp;
+    if(e.x<0)e.x+=W; else if(e.x>W)e.x-=W;
+    if(e.y<2){e.y=2;e.a=-e.a} else if(e.y>H-2){e.y=H-2;e.a=-e.a}
+    ctx.beginPath(); ctx.arc(e.x,e.y,2.6,0,6.283); ctx.fill();
+  }
+  ctx.fillStyle=col.mut; ctx.font='700 18px sans-serif'; ctx.textAlign='left'; ctx.fillText('+',8,16);
+  ctx.textAlign='right'; ctx.fillText('−',W-8,16);
+}
+requestAnimationFrame(frame);
+window.addEventListener('resize',()=>{if(!stages[1].hidden)fitSim()});
+const BOND={1:'ذرة Na تسهم بإلكترون واحد في بحر الإلكترونات، فيتكوّن أيون Na⁺.',
+            2:'ذرة Mg تسهم بإلكترونين في بحر الإلكترونات، فيتكوّن أيون Mg²⁺.',
+            3:'ذرة Al تسهم بثلاثة إلكترونات في بحر الإلكترونات، فيتكوّن أيون Al³⁺.'};
+function updSim(){
+  $('#vOut').textContent=sim.V; $('#tOut').textContent=sim.T;
+  const I=Math.round((sim.V/100)*(sim.val/3)*100);
+  $('#iOut').textContent=I+'%'; $('#iBar').style.width=I+'%'; $('#bondOut').textContent=BOND[sim.val];
+}
+$('#vIn').addEventListener('input',e=>{sim.V=+e.target.value;updSim()});
+$('#tIn').addEventListener('input',e=>{sim.T=+e.target.value;updSim()});
+$$('#valSeg button').forEach(b=>b.addEventListener('click',()=>{
+  sim.val=+b.dataset.v; $$('#valSeg button').forEach(x=>x.setAttribute('aria-pressed',x===b)); buildSim(); updSim();
+}));
+updSim();
+
+const TASKS=[
+ {q:'ارفع الجهد إلى الحد الأقصى. كيف تتحرك الإلكترونات؟',o:['تتحرك عشوائياً فقط.','تنجرف نحو القطب الموجب مع بقاء حركتها العشوائية.','تثبت في أماكنها.'],a:1,w:'انجراف الإلكترونات غير المتمركزة نحو القطب الموجب هو التيار الكهربائي.'},
+ {q:'ارفع درجة الحرارة. ماذا يحدث لحركة الإلكترونات واهتزاز الأيونات؟',o:['تتوقف حركتها.','لا تتأثر.','تزداد طاقة حركتها، وتنقل الإلكترونات الحرة هذه الطاقة عبر الفلز.'],a:2,w:'هكذا ينتقل التسخين من جزء إلى آخر، ولهذا توصل الفلزات الحرارة جيداً.'},
+ {q:'انتقل من 1 إلى 3 إلكترونات تكافؤ. ماذا يتغير؟',o:['يزداد عدد الإلكترونات في البحر وتزداد شحنة الأيون الموجب.','ينقص عدد الإلكترونات الحرة.','لا يتغير شيء.'],a:0,w:'تسهم كل ذرة بعدد أكبر من الإلكترونات في بحر الإلكترونات، فتصبح شحنة الأيون +1 أو +2 أو +3.'}
+];
+TASKS.forEach((t,i)=>mcq($('#tasks'),Object.assign({},t,{q:(i+1)+'. '+t.q})));
+
+/* ---------- hammer demo ---------- */
+const NS='http://www.w3.org/2000/svg';
+function el(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e}
+const SP=40,X0=40,YS=[32,74,116],COLS=6;
+function buildHammer(svg,type){
+  svg.innerHTML=''; svg.classList.remove('on');
+  if(type==='metal') el('rect',{x:16,y:10,width:268,height:132,rx:12,class:'sea'},svg);
+  const rows=[];
+  for(let r=0;r<3;r++){
+    const g=el('g',{class:'row'},svg); rows.push(g);
+    for(let c=0;c<COLS;c++){
+      const x=X0+c*SP,y=YS[r];
+      if(type==='metal'){ el('circle',{cx:x,cy:y,r:13,class:'c-metal'},g); el('text',{x,y,class:'svgt',style:'fill:#111'},g).textContent='+'; }
+      else{ const pos=(r+c)%2===0; el('circle',{cx:x,cy:y,r:pos?11:15,class:pos?'c-pos':'c-neg'},g); el('text',{x,y,class:'svgt'},g).textContent=pos?'+':'−'; }
+    }
+  }
+  if(type==='metal'){
+    const eg=el('g',{},svg);
+    for(let r=0;r<3;r++)for(let c=0;c<COLS+1;c++){
+      el('circle',{cx:X0+c*SP-SP/2+(r%2?4:-4),cy:YS[r]+(c%2?9:-9),r:2.8,class:'c-el'},eg);
+    }
+  }else{
+    for(let c=0;c<COLS;c++) el('line',{x1:X0+c*SP+SP,y1:YS[0]+16,x2:X0+c*SP+SP,y2:YS[1]-16,class:'rep'},svg);
+    el('path',{d:'M20 53 L60 48 L90 56 L130 47 L170 55 L210 48 L250 54 L280 49',class:'crack'},svg);
+  }
+  svg._top=rows[0];
+}
+const hmM=$('#hmMetal'), hmI=$('#hmIonic');
+function resetHammer(){
+  buildHammer(hmM,'metal'); buildHammer(hmI,'ionic');
+  $('#hitCap').textContent='اضغط «اطرق» وقارن بين ما يحدث في الشكلين.';
+}
+$('#hit').addEventListener('click',()=>{
+  hmM._top.style.transform='translateX('+SP+'px)';
+  hmI._top.style.transform='translate('+SP+'px,-8px)'; hmI.classList.add('on');
+  $('#hitCap').textContent='الفلز: انزلقت الطبقة وما زالت الإلكترونات تحيط بالأيونات، فبقيت الرابطة. المركب الأيوني: تقابلت أيونات متشابهة الشحنة فتنافرت (الخطوط الحمراء) وتشققت البلورة.';
+});
+$('#hitReset').addEventListener('click',resetHammer);
+resetHammer();
+
+/* ---------- stage 4b: alloys ---------- */
+let alloyMode='pure', slid=false;
+const AL_TXT={pure:'في الفلز النقي تتشابه الأيونات في الحجم والترتيب، فتنزلق الطبقات بسهولة.',
+  sub:'في النحاس الأصفر تحل ذرات الخارصين محل بعض ذرات النحاس، فتتغير خواص الفلز ويصبح أصلب.',
+  int:'في الفولاذ تقع ذرات الكربون الصغيرة بين ذرات الحديد الكبيرة وتعيق انزلاق الطبقات، فيصبح أصلب وأقوى من الحديد النقي.'};
+const RES={pure:['منخفضة',25],sub:['متوسطة',62],int:['عالية',90]};
+function drawAlloy(){
+  const svg=$('#alloySvg'); svg.innerHTML=''; const AY=[28,66,104],AS=38,AX=30;
+  const rows=[];
+  for(let r=0;r<3;r++){
+    const g=el('g',{class:'row'},svg); rows.push(g);
+    for(let c=0;c<7;c++){
+      const x=AX+c*AS,y=AY[r]; let cls='c-metal',rad=14;
+      if(alloyMode==='sub'&&((r===0&&(c===2||c===5))||(r===1&&(c===1||c===4))||(r===2&&c===3))){cls='c-pos';rad=15.5;}
+      el('circle',{cx:x,cy:y,r:rad,class:cls},g);
+    }
+  }
+  if(alloyMode==='int'){
+    [[1,0],[3,0],[5,0],[2,1],[4,1]].forEach(([c,r])=>el('circle',{cx:AX+c*AS+AS/2,cy:AY[r]+AS/2,r:5.5,class:'c-carbon'},svg));
+  }
+  svg._top=rows[0];
+  if(slid) svg._top.style.transform='translateX('+(alloyMode==='pure'?AS:12)+'px)';
+}
+function setAlloy(){
+  $('#resOut').textContent=RES[alloyMode][0]; $('#resBar').style.width=RES[alloyMode][1]+'%';
+  $('#alloyCap').textContent=AL_TXT[alloyMode]; drawAlloy();
+}
+$$('#alloySeg button').forEach(b=>b.addEventListener('click',()=>{
+  alloyMode=b.dataset.m; slid=false; $$('#alloySeg button').forEach(x=>x.setAttribute('aria-pressed',x===b)); setAlloy();
+}));
+$('#slide').addEventListener('click',()=>{slid=true;const t=$('#alloySvg')._top;t.style.transform='translateX('+(alloyMode==='pure'?38:12)+'px)'});
+$('#slideReset').addEventListener('click',()=>{slid=false;setAlloy()});
+setAlloy();
+
+/* ---------- stage 4c: concept chain ---------- */
+const NODES=['تحتوي ذرات الفلزات على عدد قليل من إلكترونات التكافؤ','تفقدها بسهولة فتتكون أيونات موجبة، وتصبح إلكترونات التكافؤ غير متمركزة','أيونات موجبة مرتبة في شبكة بلورية ومحاطة ببحر من الإلكترونات','الرابطة الفلزية: جذب بين الأيونات الموجبة والإلكترونات غير المتمركزة','خواص الفلزات','السبائك: خلائط لها خواص فلزية محسّنة'];
+const LINKS=[
+  {o:['على عكس ذلك','وبسبب ذلك','ولا علاقة لها بأن'],a:1},
+  {o:['فتنفصل عن','فتنتج عنها','فتتنافر مع'],a:1},
+  {o:['فينشأ جذب بينها هو','فلا تتكون','فيحدث تنافر هو'],a:0},
+  {o:['وتتعارض مع','وتنفي','وتفسّر'],a:2},
+  {o:['ويستحيل تغييرها بـ','ويمكن تحسينها بتكوين','وتلغيها'],a:1}
+];
+(function(){
+  const ch=$('#chain'); let h='';
+  NODES.forEach((n,i)=>{
+    h+='<div class="node'+(i===3?' key':'')+'">'+n+(i===4?'<div class="chips" style="margin-top:8px"><span>توصيل كهربائي</span><span>توصيل حراري</span><span>قابلية الطرق والسحب</span><span>لمعان</span><span>درجة انصهار مرتفعة</span></div>':'')+'</div>';
+    if(i<LINKS.length){
+      h+='<div class="link"><select data-i="'+i+'" aria-label="كلمة الربط '+(i+1)+'"><option value="">اختر كلمة الربط…</option>'+
+         LINKS[i].o.map((t,j)=>'<option value="'+j+'">'+t+'</option>').join('')+'</select><span class="mark"></span></div>';
+    }
+  });
+  ch.innerHTML=h;
+})();
+function checkChain(){
+  let ok=0,done=0;
+  $$('#chain select').forEach(s=>{
+    const i=+s.dataset.i, m=s.nextElementSibling; s.classList.remove('ok','no'); m.textContent='';
+    if(s.value==='') return; done++;
+    if(+s.value===LINKS[i].a){s.classList.add('ok');m.textContent='✓';ok++}else{s.classList.add('no');m.textContent='✗'}
+  });
+  const msg=$('#chainMsg'); msg.hidden=false;
+  msg.textContent=done<LINKS.length?'أكمل جميع كلمات الربط ثم تحقق. أكملت '+done+' من '+LINKS.length+'.'
+    :ok===LINKS.length?'خريطة مكتملة وصحيحة. السلسلة تبدأ بإلكترونات التكافؤ وتنتهي بالسبائك.'
+    :'صحيح '+ok+' من '+LINKS.length+'. راجع الروابط المعلّمة بـ ✗ واسأل: هل العلاقة سببية أم تفسيرية؟';
+}
+$('#chainCheck').addEventListener('click',checkChain);
+$('#chainShow').addEventListener('click',()=>{$$('#chain select').forEach(s=>s.value=LINKS[+s.dataset.i].a);checkChain()});
+
+/* ---------- stage 5: quiz ---------- */
+const QUIZ=[
+ {q:'ما الرابطة الفلزية؟',o:['انتقال إلكترونات من فلز إلى لا فلز.','جذب بين أيونات موجبة وسالبة متبادلة في شبكة بلورية.','قوة جذب بين الأيونات الفلزية الموجبة والإلكترونات غير المتمركزة.','جذب بين ذرات متعادلة.'],a:2,w:'هذا هو تعريف الرابطة الفلزية. الخيار الثاني يصف الرابطة الأيونية.',r:'التفسير'},
+ {q:'السبب الرئيس لتوصيل الفلزات للكهرباء:',o:['وجود أيونات سالبة حرة الحركة.','كبر حجم ذراتها.','حرية حركة الإلكترونات غير المتمركزة بين الأيونات.','وجود جزيئات في الشبكة البلورية.'],a:2,w:'تنجرف الإلكترونات الحرة نحو القطب الموجب عند تطبيق جهد.',r:'الاستكشاف'},
+ {q:'عند طرق قطعة فلز تتشوه ولا تتحطم لأن:',o:['الأيونات الموجبة تتنافر عند الإزاحة.','الطبقات تنزلق وتبقى الإلكترونات غير المتمركزة محيطة بالأيونات فتستمر الرابطة.','الفلز يتحول إلى مركب أيوني.','الإلكترونات تنتقل إلى ذرة محددة.'],a:1,w:'في المركب الأيوني فقط تتقابل الأيونات المتشابهة الشحنة فتتنافر وتتحطم البلورة.',r:'الاستكشاف (تجربة الطرق)'},
+ {q:'كم إلكتروناً تسهم به 5 ذرات من الكالسيوم Ca في بحر الإلكترونات؟',o:['5','10','15','20'],a:1,w:'لكل ذرة Ca إلكترونان من إلكترونات التكافؤ، إذن 5 × 2 = 10 إلكترونات.',r:'التفسير (بحر الإلكترونات)'},
+ {q:'أي مما يأتي سبيكة؟',o:['النحاس النقي.','الفولاذ.','ملح الطعام.','الحديد النقي.'],a:1,w:'الفولاذ خليط من الحديد والكربون، وله خواص فلزية أفضل من الحديد النقي.',r:'التوسّع (السبائك)'},
+ {q:'أي العبارات الآتية صحيحة؟',o:['الفلز يحمل شحنة موجبة كلية.','الإلكترونات الحرة تنتمي لذرة واحدة محددة.','الرابطة الفلزية تنشأ بين ذرتين فقط.','الفلز متعادل كهربائياً رغم احتوائه على أيونات موجبة.'],a:3,w:'عدد الإلكترونات في البحر يعادل مجموع الشحنات الموجبة للأيونات.',r:'التفسير'}
+];
+let score=0,answered=0,review=[];
+QUIZ.forEach((it,i)=>mcq($('#quiz'),Object.assign({},it,{q:(i+1)+'. '+it.q}),ok=>{
+  answered++; if(ok)score++; else review.push(it.r);
+  if(answered===QUIZ.length){
+    const r=$('#result'); r.hidden=false;
+    const lvl=score===6?'إتقان كامل.':score>=4?'مستوى جيد.':'يحتاج إلى مراجعة.';
+    r.innerHTML='<span class="score">'+score+' / '+QUIZ.length+'</span><p><b>'+lvl+'</b></p>'+
+      (review.length?'<p>راجع: '+[...new Set(review)].join('، ')+'.</p>':'<p>أنت جاهز للانتقال إلى الدرس التالي.</p>');
+  }
+}));
+</script>
+
+</body></html>

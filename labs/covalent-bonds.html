@@ -1,0 +1,616 @@
+<!doctype html><html><head><meta charset=utf8><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>مختبر الروابط التساهمية</title>
+<style>
+:root{
+  /* Layout: numbered rail on the right (RTL) like the lab menu, one working stage per section on the left. Indigo ink on cool paper; amber marks lone pairs. */
+  --bg:#f3f5fb;--surface:#ffffff;--surface2:#e9ecf8;--ink:#12142b;--muted:#585e82;--line:#d5daee;
+  --accent:#3a30e6;--accent-ink:#ffffff;--accent-soft:#e2e0fd;--warm:#d97f00;--good:#12805a;--bad:#c92b46;
+  --f-d:'IBM Plex Sans Arabic',system-ui,sans-serif;
+  --f-b:'IBM Plex Sans Arabic',system-ui,sans-serif;
+  --f-m:'IBM Plex Sans Arabic',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0e1022;--surface:#171a35;--surface2:#20244a;--ink:#eceefc;--muted:#a3a9d3;--line:#2c3160;
+  --accent:#8f8bff;--accent-ink:#0e1022;--accent-soft:#2a2866;--warm:#ffb13b;--good:#4fd6a0;--bad:#ff7a90;color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0e1022;--surface:#171a35;--surface2:#20244a;--ink:#eceefc;--muted:#a3a9d3;--line:#2c3160;
+  --accent:#8f8bff;--accent-ink:#0e1022;--accent-soft:#2a2866;--warm:#ffb13b;--good:#4fd6a0;--bad:#ff7a90;color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-b);font-size:16px;line-height:1.75}
+*{box-sizing:border-box}
+button,select{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+sub{font-size:.7em;line-height:0}
+.f{font-family:var(--f-b);direction:ltr;unicode-bidi:isolate;display:inline-block}
+.app{direction:rtl;display:grid;grid-template-columns:250px minmax(0,1fr);gap:28px;max-width:1200px;margin-inline:auto;padding-inline:16px;padding-block:20px}
+.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 16px);align-self:start;display:flex;flex-direction:column;gap:14px}
+.brand{display:flex;flex-direction:column;padding-inline:6px}
+.brand-en{font-family:var(--f-b);font-size:13px;letter-spacing:.12em;color:var(--accent);direction:ltr;text-align:right}
+.brand-ar{font-family:var(--f-d);font-weight:700;font-size:22px;line-height:1.3}
+nav{display:flex;flex-direction:column;gap:3px}
+nav button{display:flex;justify-content:space-between;align-items:center;gap:10px;border:0;background:transparent;padding:9px 14px;border-radius:12px;cursor:pointer;text-align:start;color:var(--ink)}
+nav button:hover{background:var(--surface2)}
+nav button[aria-current="page"]{background:var(--accent);color:var(--accent-ink)}
+nav .no{font-family:var(--f-b);font-size:12px;opacity:.65}
+main{min-width:0}
+.sec{display:flex;flex-direction:column;gap:22px}
+.sh{display:flex;flex-direction:column;gap:4px}
+.eyebrow{font-family:var(--f-b);font-size:12px;letter-spacing:.14em;color:var(--accent);margin:0;direction:ltr;text-align:right}
+h1,h2,h3{font-family:var(--f-d);margin:0;line-height:1.3;text-wrap:balance}
+h1{font-size:clamp(34px,6vw,54px);font-weight:700}
+h2{font-size:clamp(26px,4vw,34px);font-weight:700}
+h3{font-size:19px;font-weight:500}
+.lede{color:var(--muted);margin:0;max-width:62ch}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center}
+.hero-text{display:flex;flex-direction:column;gap:14px;min-width:0}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.btn{border:1px solid var(--line);background:var(--surface);padding:8px 18px;border-radius:999px;cursor:pointer}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{border:1px solid var(--line);background:var(--surface);padding:5px 14px;border-radius:999px;cursor:pointer;min-height:36px}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.card{display:flex;flex-direction:column;gap:4px;text-align:start;border:1px solid var(--line);background:var(--surface);border-radius:14px;padding:14px 16px;cursor:pointer}
+.card:hover{border-color:var(--accent)}
+.card b{font-family:var(--f-d);font-weight:500}
+.card span{color:var(--muted);font-size:14px;line-height:1.6}
+.stage{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.stage canvas{display:block;width:100%;height:340px;touch-action:none;cursor:grab}
+.stage canvas:active{cursor:grabbing}
+.stage-cap{position:absolute;inset-inline:0;bottom:8px;text-align:center;font-size:13px;color:var(--muted);pointer-events:none}
+.stage svg{display:block;width:100%;height:auto;max-height:340px}
+.stage svg text{font-family:var(--f-b)}
+.work{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;align-items:start}
+.work>*{min-width:0}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px 20px;display:flex;flex-direction:column;gap:12px}
+dl.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;margin:0}
+dl.kv dt{color:var(--muted)}
+dl.kv dd{margin:0;font-weight:500}
+.note{margin:0;color:var(--muted);font-size:14px}
+.tools{display:flex;flex-wrap:wrap;gap:8px;padding:10px 12px;border-top:1px solid var(--line)}
+.tools .btn{padding:4px 14px;font-size:14px}
+.ctl{display:flex;flex-direction:column;gap:6px}
+.ctl label,.lbl{font-size:14px;color:var(--muted)}
+select{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 12px;min-width:0;width:100%}
+.verdict{font-family:var(--f-d);font-size:26px;font-weight:700}
+.scale{direction:ltr;position:relative;margin-top:6px}
+.zones{display:flex;height:34px;border-radius:10px;overflow:hidden;font-size:12px;line-height:34px;text-align:center;color:var(--ink)}
+.zones i{font-style:normal;white-space:nowrap;overflow:hidden}
+.z0{background:var(--accent-soft)}.z1{background:var(--surface2)}.z2{background:var(--line)}
+.mark{position:absolute;top:-6px;width:3px;height:46px;background:var(--ink);border-radius:2px;transition:left .3s}
+.ticks{display:flex;justify-content:space-between;font-family:var(--f-b);font-size:11px;color:var(--muted);margin-top:4px}
+.bars{display:flex;flex-direction:column;gap:12px}
+.bar-row{display:grid;grid-template-columns:96px 1fr 92px;gap:10px;align-items:center}
+.bar{height:12px;background:var(--surface2);border-radius:6px;overflow:hidden;direction:ltr}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:6px;transition:width .35s}
+.bar-row b{text-align:end;font-weight:500}
+.big{font-size:clamp(22px,4vw,30px);font-family:var(--f-d);font-weight:700;line-height:1.5}
+.prefix{display:grid;grid-template-columns:repeat(auto-fill,minmax(88px,1fr));gap:6px;margin:0;padding:0;list-style:none;font-size:14px}
+.prefix li{background:var(--surface2);border-radius:8px;padding:4px 10px;display:flex;justify-content:space-between;gap:6px}
+.form2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.octet{display:flex;flex-wrap:wrap;gap:8px}
+.octet span{border:1px solid var(--line);border-radius:999px;padding:2px 12px;font-size:14px}
+.octet .ok{border-color:var(--good);color:var(--good)}
+.octet .ex{border-color:var(--warm);color:var(--warm)}
+.octet .no{border-color:var(--bad);color:var(--bad)}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:15px}
+th,td{padding:10px 14px;text-align:start;border-bottom:1px solid var(--line);white-space:nowrap}
+th{font-weight:500;color:var(--muted);font-size:14px;background:var(--surface2)}
+tr:last-child td{border-bottom:0}
+td button{border:0;background:none;color:var(--accent);cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:3px}
+.tag{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:0 8px;color:var(--muted);margin-inline-start:6px}
+.qhead{display:flex;justify-content:space-between;color:var(--muted);font-size:14px}
+.qtext{font-size:19px;font-family:var(--f-d);font-weight:500;line-height:1.6}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.opt{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:10px 14px;cursor:pointer;text-align:start;min-height:48px}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt.right{border-color:var(--good);background:var(--surface2);color:var(--good)}
+.opt.wrong{border-color:var(--bad);color:var(--bad)}
+.opt:disabled{cursor:default}
+.fb p{margin:0 0 8px}
+.fb .ok{color:var(--good);font-weight:600}.fb .no{color:var(--bad);font-weight:600}
+.sum{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:50%;margin-inline-end:6px;vertical-align:-1px}
+.stepper{display:flex;flex-wrap:wrap;gap:8px}
+@media (max-width:860px){
+  .app{grid-template-columns:minmax(0,1fr);gap:16px}
+  .side{top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:6px;gap:6px}
+  .brand{flex-direction:row;align-items:baseline;justify-content:space-between}
+  nav{flex-direction:row;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+  nav button{flex:none;white-space:nowrap;padding:7px 14px;border:1px solid var(--line)}
+  nav .no{display:none}
+  .hero,.work{grid-template-columns:minmax(0,1fr)}
+  .opts,.form2{grid-template-columns:minmax(0,1fr)}
+  .bar-row{grid-template-columns:78px 1fr 78px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="app" dir="rtl" lang="ar">
+<aside class="side">
+  <div class="brand"><span class="brand-en">COVALENT 360°</span><span class="brand-ar">المختبر الجزيئي</span></div>
+  <nav id="nav" aria-label="أقسام المختبر"></nav>
+</aside>
+<main>
+
+<section class="sec" id="sec-home">
+  <div class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">CHEMISTRY · COVALENT BONDS</p>
+      <h1>مختبر الروابط التساهمية</h1>
+      <p class="lede">شاهد كيف تتشارك الذرات الإلكترونات، وارسم تراكيب لويس خطوة بخطوة، وأدر الجزيئات في الفضاء لترى شكلها وزواياها.</p>
+      <div class="row"><button class="btn primary" data-go="shapes">أدر الجزيئات 360°</button><button class="btn" data-go="cov">ابدأ بالرابطة</button></div>
+    </div>
+    <div class="stage"><canvas id="cv-home" aria-label="نموذج ثلاثي الأبعاد لجزيء الماء"></canvas><div class="stage-cap">جزيء الماء · اسحب للتدوير</div></div>
+  </div>
+  <div class="cards" id="cards"></div>
+</section>
+
+<section class="sec" id="sec-cov" hidden>
+  <header class="sh"><p class="eyebrow">02 · COVALENT BOND</p><h2>الرابطة التساهمية</h2>
+  <p class="lede">تتكوّن عندما تتشارك ذرتان لافلزيتان زوجًا إلكترونيًا أو أكثر، فتكمل كل ذرة غلافها الخارجي. اختر عدد الأزواج المشتركة.</p></header>
+  <div class="chips" id="cov-chips"></div>
+  <div class="work">
+    <div class="stage"><svg id="cov-svg" viewBox="0 0 520 200" role="img" aria-label="ذرتا كربون تتشاركان أزواجًا إلكترونية"></svg></div>
+    <div class="panel">
+      <div class="big f" id="cov-sym"></div>
+      <p class="note" id="cov-txt"></p>
+      <div class="bars" id="cov-bars"></div>
+      <p class="note">القيم متوسطة تقريبية لروابط الكربون.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="sec-types" hidden>
+  <header class="sh"><p class="eyebrow">03 · BOND TYPES</p><h2>أنواع الروابط</h2>
+  <p class="lede">يحدد الفرق في السالبية الكهربائية (ΔEN) نوع الرابطة بين ذرتين. اختر عنصرين وشاهد موضع الإلكترونات.</p></header>
+  <div class="form2">
+    <div class="ctl"><label for="t-a">الذرة الأولى</label><select id="t-a"></select></div>
+    <div class="ctl"><label for="t-b">الذرة الثانية</label><select id="t-b"></select></div>
+  </div>
+  <div class="work">
+    <div class="stage"><svg id="t-svg" viewBox="0 0 520 190" role="img" aria-label="موضع الإلكترونات بين ذرتين"></svg></div>
+    <div class="panel">
+      <div class="verdict" id="t-verdict"></div>
+      <p class="note" id="t-why"></p>
+      <div class="scale"><div class="zones"><i class="z0" style="width:11.43%"></i><i class="z1" style="width:37.14%">قطبية</i><i class="z2" style="width:51.43%">أيونية</i><span class="mark" id="t-mark"></span></div>
+      <div class="ticks"><span>0</span><span>0.4</span><span>1.7</span><span>3.5</span></div></div>
+      <p class="note">الحدّان 0.4 و1.7 قاعدة تقريبية، وتوجد استثناءات مثل B–F.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="sec-explore" hidden>
+  <header class="sh"><p class="eyebrow">04 · MOLECULE EXPLORER</p><h2>مستكشف الجزيئات</h2>
+  <p class="lede">اختر جزيئًا لترى تركيبه وروابطه وأزواجه الحرة وقطبيته.</p></header>
+  <div class="chips" id="ex-chips"></div>
+  <div class="work">
+    <div class="stage"><svg id="ex-svg" viewBox="0 0 300 220"></svg></div>
+    <div class="panel"><dl class="kv" id="ex-kv"></dl><p class="note" id="ex-note"></p></div>
+  </div>
+</section>
+
+<section class="sec" id="sec-name" hidden>
+  <header class="sh"><p class="eyebrow">05 · NAMING LAB</p><h2>مختبر التسمية</h2>
+  <p class="lede">اسم المركب التساهمي الثنائي يبدأ بعدد ذرات العنصر الثاني (أول، ثاني، ثالث...) ثم اسمه بصيغة «ـيد»، ثم العنصر الأول وعدد ذراته إن زاد على واحدة.</p></header>
+  <div class="work">
+    <div class="panel">
+      <div class="form2">
+        <div class="ctl"><label for="n-n1">عدد ذرات العنصر الأول</label><select id="n-n1"></select></div>
+        <div class="ctl"><label for="n-a">العنصر الأول</label><select id="n-a"></select></div>
+        <div class="ctl"><label for="n-n2">عدد ذرات العنصر الثاني</label><select id="n-n2"></select></div>
+        <div class="ctl"><label for="n-b">العنصر الثاني</label><select id="n-b"></select></div>
+      </div>
+      <div class="big" id="n-out"></div>
+      <div class="big f" id="n-formula"></div>
+      <p class="note">قد لا يوجد المركب في الواقع، فالهدف التدرّب على التسمية.</p>
+      <h3>المقاطع</h3>
+      <ul class="prefix" id="n-prefix"></ul>
+    </div>
+    <div class="panel"><h3>اختبر نفسك</h3><div id="n-quiz"></div></div>
+  </div>
+</section>
+
+<section class="sec" id="sec-lewis" hidden>
+  <header class="sh"><p class="eyebrow">06 · LEWIS STRUCTURES</p><h2>مختبر تراكيب لويس</h2>
+  <p class="lede">اختر جزيئًا ثم تقدّم بين الخطوات الأربع لترى كيف تتوزع النقاط.</p></header>
+  <div class="chips" id="lw-chips"></div>
+  <div class="stepper" id="lw-steps"></div>
+  <div class="row"><div class="chips" id="lw-mode"></div><div class="legend"><span><i style="background:var(--accent)"></i>زوج رابط مشترك</span><span><i style="background:var(--warm)"></i>زوج حر</span></div></div>
+  <div class="work">
+    <div class="stage"><svg id="lw-svg" viewBox="0 0 300 220"></svg></div>
+    <div class="panel"><div id="lw-txt"></div></div>
+  </div>
+</section>
+
+<section class="sec" id="sec-shapes" hidden>
+  <header class="sh"><p class="eyebrow">07 · MOLECULAR SHAPES 360°</p><h2>أشكال الجزيئات 360°</h2>
+  <p class="lede">اسحب النموذج بإصبعك أو بالفأرة لتدويره من كل الجهات.</p></header>
+  <div class="chips" id="sh-chips"></div>
+  <div class="work">
+    <div class="stage"><canvas id="cv-shapes" aria-label="نموذج ثلاثي الأبعاد للجزيء"></canvas>
+      <div class="tools"><button class="btn" id="sh-auto" aria-pressed="true">تدوير تلقائي</button><button class="btn" id="sh-lone" aria-pressed="true">إظهار الأزواج الحرة</button><button class="btn" id="sh-reset">إعادة الضبط</button></div></div>
+    <div class="panel"><dl class="kv" id="sh-kv"></dl><p class="note" id="sh-why"></p></div>
+  </div>
+</section>
+
+<section class="sec" id="sec-vsepr" hidden>
+  <header class="sh"><p class="eyebrow">08 · VSEPR EXPLORER</p><h2>مستكشف VSEPR</h2>
+  <p class="lede">تتنافر المجموعات الإلكترونية حول الذرة المركزية فتبتعد قدر الإمكان. اختر عددها، ثم عدد الأزواج الحرة بينها.</p></header>
+  <div class="ctl"><span class="lbl">عدد المجموعات الإلكترونية</span><div class="chips" id="vs-n"></div></div>
+  <div class="ctl"><span class="lbl">منها أزواج حرة</span><div class="chips" id="vs-e"></div></div>
+  <div class="work">
+    <div class="stage"><canvas id="cv-vsepr" aria-label="نموذج VSEPR"></canvas>
+      <div class="tools"><button class="btn" id="vs-auto" aria-pressed="true">تدوير تلقائي</button></div></div>
+    <div class="panel"><dl class="kv" id="vs-kv"></dl><p class="note" id="vs-why"></p>
+      <div class="legend"><span><i style="background:#5a55f0"></i>ذرة مرتبطة</span><span><i style="background:var(--warm);opacity:.6"></i>زوج حر</span></div></div>
+  </div>
+</section>
+
+<section class="sec" id="sec-compare" hidden>
+  <header class="sh"><p class="eyebrow">09 · SHAPE COMPARISON</p><h2>مقارنة الأشكال</h2>
+  <p class="lede">اضغط على صيغة الجزيء لتفتحه في النموذج ثلاثي الأبعاد.</p></header>
+  <div class="chips" id="cp-chips"></div>
+  <div class="tablewrap"><table id="cp-table"></table></div>
+  <p class="note">الجزيء الذي تتشابه روابطه ويتماثل شكله تتلاشى فيه المحصلة فيكون غير قطبي، مثل <span class="f">CO<sub>2</sub></span>.</p>
+</section>
+
+<section class="sec" id="sec-quiz" hidden>
+  <header class="sh"><p class="eyebrow">10 · CHALLENGES</p><h2>التحديات</h2>
+  <p class="lede">عشرة أسئلة عن نوع الرابطة والشكل والأزواج الحرة والقطبية، مع شرح بعد كل إجابة.</p></header>
+  <div class="panel" id="gq"></div>
+</section>
+
+<section class="sec" id="sec-shapequiz" hidden>
+  <header class="sh"><p class="eyebrow">11 · SHAPE CHALLENGES</p><h2>تحديات الأشكال</h2>
+  <p class="lede">أدر النموذج وحدّد شكل الجزيء. الفصوص البرتقالية أزواج حرة.</p></header>
+  <div class="work">
+    <div class="stage"><canvas id="cv-quiz" aria-label="نموذج للتخمين"></canvas><div class="stage-cap">اسحب للتدوير</div></div>
+    <div class="panel" id="sq"></div>
+  </div>
+</section>
+
+</main>
+</div>
+
+<script>
+(()=>{
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const sub=f=>f.replace(/(\d+)/g,'<sub>$1</sub>');
+const F=f=>`<span class="f">${sub(f)}</span>`;
+const shuffle=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const pick=a=>a[Math.random()*a.length|0];
+const VAL={H:1,C:4,N:5,O:6,F:7,Cl:7,B:3,S:6,P:5};
+const COL={H:'#d9deee',C:'#4a4f63',N:'#3a5cf0',O:'#e5484d',F:'#6fd08c',Cl:'#2fa84f',S:'#e3bd1c',B:'#e58db0',P:'#f08a24',A:'#f08a24',X:'#5a55f0'};
+const TXT={H:'#12142b',C:'#ffffff',N:'#ffffff',O:'#ffffff',F:'#12142b',Cl:'#ffffff',S:'#12142b',B:'#12142b',P:'#12142b',A:'#12142b',X:'#ffffff'};
+const RING={...COL,H:'#8e97c0'};
+
+/* ---------- data ---------- */
+const EN={H:2.20,Li:0.98,Na:0.93,K:0.82,Mg:1.31,Ca:1.00,Al:1.61,B:2.04,Si:1.90,C:2.55,P:2.19,S:2.58,N:3.04,Br:2.96,Cl:3.16,O:3.44,F:3.98};
+const ELAR={H:'هيدروجين',Li:'ليثيوم',Na:'صوديوم',K:'بوتاسيوم',Mg:'مغنيسيوم',Ca:'كالسيوم',Al:'ألومنيوم',B:'بورون',Si:'سيليكون',C:'كربون',P:'فوسفور',S:'كبريت',N:'نيتروجين',Br:'بروم',Cl:'كلور',O:'أكسجين',F:'فلور'};
+const SHAPES={
+ '2-0':{n:'خطي',a:'180°',ex:'CO2'},
+ '3-0':{n:'مثلثي مستوٍ',a:'120°',ex:'BF3'},
+ '2-1':{n:'منحنٍ',a:'أقل من 120°',ex:'SO2'},
+ '4-0':{n:'رباعي الأوجه',a:'109.5°',ex:'CH4'},
+ '3-1':{n:'هرمي ثلاثي',a:'أقل من 109.5° (≈107°)',ex:'NH3'},
+ '2-2':{n:'منحنٍ',a:'أقل من 109.5° (≈104.5°)',ex:'H2O'},
+ '5-0':{n:'ثنائي الهرم الثلاثي',a:'90° و120°',ex:'PCl5',x:1},
+ '4-1':{n:'متأرجح',a:'أقل من 90° و120°',ex:'SF4',x:1},
+ '3-2':{n:'شكل T',a:'أقل من 90°',ex:'ClF3',x:1},
+ '2-3':{n:'خطي',a:'180°',ex:'XeF2',x:1},
+ '6-0':{n:'ثماني الأوجه',a:'90°',ex:'SF6',x:1},
+ '5-1':{n:'هرمي رباعي القاعدة',a:'أقل من 90°',ex:'BrF5',x:1},
+ '4-2':{n:'مربع مستوٍ',a:'90°',ex:'XeF4',x:1}
+};
+const ax=(m,e)=>`AX${m>1?`<sub>${m}</sub>`:''}${e?`E${e>1?`<sub>${e}</sub>`:''}`:''}`;
+const MOLS=[
+ {f:'H2',n:'الهيدروجين',atoms:[['H',90,110],['H',210,110]],bonds:[[0,1,1]],lone:[0,0],den:0,bt:'غير قطبية',shape:'خطي (ثنائي الذرة)',ang:'—',pol:false,why:'ذرتان متماثلتان، فلا فرق في السالبية.'},
+ {f:'Cl2',n:'الكلور',atoms:[['Cl',90,110],['Cl',210,110]],bonds:[[0,1,1]],lone:[3,3],den:0,bt:'غير قطبية',shape:'خطي (ثنائي الذرة)',ang:'—',pol:false,why:'ذرتان متماثلتان، فلا فرق في السالبية.'},
+ {f:'O2',n:'الأكسجين',atoms:[['O',90,110],['O',210,110]],bonds:[[0,1,2]],lone:[2,2],den:0,bt:'غير قطبية',shape:'خطي (ثنائي الذرة)',ang:'—',pol:false,why:'ذرتان متماثلتان، فلا فرق في السالبية.'},
+ {f:'N2',n:'النيتروجين',atoms:[['N',90,110],['N',210,110]],bonds:[[0,1,3]],lone:[1,1],den:0,bt:'غير قطبية',shape:'خطي (ثنائي الذرة)',ang:'—',pol:false,why:'ذرتان متماثلتان، فلا فرق في السالبية.'},
+ {f:'HCl',n:'كلوريد الهيدروجين',atoms:[['H',90,110],['Cl',210,110]],bonds:[[0,1,1]],lone:[0,3],den:0.96,bt:'قطبية',shape:'خطي (ثنائي الذرة)',ang:'—',pol:true,why:'رابطة قطبية واحدة ولا شيء يلغي أثرها.'},
+ {f:'H2O',n:'الماء',atoms:[['O',150,70],['H',85,150],['H',215,150]],bonds:[[0,1,1],[0,2,1]],lone:[2,0,0],den:1.24,bt:'قطبية',shape:'منحنٍ',ang:'≈104.5°',pol:true,m:2,e:2,c:'O',l:'H',bo:1,why:'الشكل منحنٍ فلا تُلغي ثنائيات القطب بعضها.'},
+ {f:'NH3',n:'الأمونيا',atoms:[['N',150,70],['H',80,150],['H',150,165],['H',220,150]],bonds:[[0,1,1],[0,2,1],[0,3,1]],lone:[1,0,0,0],den:0.84,bt:'قطبية',shape:'هرمي ثلاثي',ang:'≈107°',pol:true,m:3,e:1,c:'N',l:'H',bo:1,why:'الشكل هرمي ثلاثي وفيه زوج حر، فالمحصلة لا تساوي صفرًا.'},
+ {f:'CH4',n:'الميثان',atoms:[['C',150,110],['H',150,38],['H',150,182],['H',78,110],['H',222,110]],bonds:[[0,1,1],[0,2,1],[0,3,1],[0,4,1]],lone:[0,0,0,0,0],den:0.35,bt:'غير قطبية',shape:'رباعي الأوجه',ang:'109.5°',pol:false,m:4,e:0,c:'C',l:'H',bo:1,why:'الشكل رباعي الأوجه متماثل، والروابط C–H شبه غير قطبية.'},
+ {f:'CO2',n:'ثاني أكسيد الكربون',atoms:[['O',60,110],['C',150,110],['O',240,110]],bonds:[[0,1,2],[1,2,2]],lone:[2,0,2],den:0.89,bt:'قطبية',shape:'خطي',ang:'180°',pol:false,m:2,e:0,c:'C',l:'O',bo:2,why:'الرابطتان قطبيتان لكن الشكل خطي، فتُلغي كل منهما الأخرى.'},
+ {f:'BF3',n:'ثالث فلوريد البورون',atoms:[['B',150,105],['F',150,33],['F',87.6,141],['F',212.4,141]],bonds:[[0,1,1],[0,2,1],[0,3,1]],lone:[0,3,3,3],den:1.94,bt:'قطبية',shape:'مثلثي مستوٍ',ang:'120°',pol:false,m:3,e:0,c:'B',l:'F',bo:1,note:'قيمة ΔEN كبيرة، لكن B–F رابطة تساهمية قطبية (القاعدة تقريبية)، والبورون يكتفي بستة إلكترونات.',why:'الروابط قطبية لكن الشكل مثلثي مستوٍ متماثل، فتتلاشى المحصلة.'},
+ {f:'SO2',n:'ثاني أكسيد الكبريت',atoms:[['S',150,70],['O',85,150],['O',215,150]],bonds:[[0,1,2],[0,2,1]],lone:[1,2,3],fc:[1,0,-1],den:0.86,bt:'قطبية',shape:'منحنٍ',ang:'≈119°',pol:true,m:2,e:1,c:'S',l:'O',bo:[2,1],note:'يتردد التركيب بين شكلين رنينيين، ويظهر هنا أحدهما بالشحنات الشكلية.',why:'الشكل منحنٍ فلا تُلغي ثنائيات القطب بعضها.'},
+ {f:'PCl5',n:'خامس كلوريد الفوسفور',m:5,e:0,c:'P',l:'Cl',bo:1,shape:'ثنائي الهرم الثلاثي',ang:'90° و120°',pol:false,why:'الشكل ثنائي الهرم الثلاثي متماثل، فتتلاشى المحصلة.'},
+ {f:'SF6',n:'سادس فلوريد الكبريت',m:6,e:0,c:'S',l:'F',bo:1,shape:'ثماني الأوجه',ang:'90°',pol:false,why:'الشكل ثماني الأوجه متماثل تمامًا، فتتلاشى المحصلة.'}
+];
+const L2=MOLS.filter(m=>m.atoms),D3=MOLS.filter(m=>m.c);
+const byF=f=>MOLS.find(m=>m.f===f);
+
+/* ---------- navigation ---------- */
+const SECS=[['home','الرئيسية',''],['cov','الرابطة التساهمية','شارك الإلكترونات وقارن الرابطة الأحادية والثنائية والثلاثية.'],['types','أنواع الروابط','اختر ذرتين وشاهد أثر الفرق في السالبية الكهربائية.'],['explore','مستكشف الجزيئات','أحد عشر جزيئًا بروابطها وأزواجها وقطبيتها.'],['name','مختبر التسمية','ابنِ اسم المركب التساهمي الثنائي بالمقاطع الصحيحة.'],['lewis','مختبر تراكيب لويس','عدّ الإلكترونات وارسم التركيب خطوة بخطوة.'],['shapes','أشكال الجزيئات 360°','أدر الجزيء في الفضاء وشاهد زواياه.'],['vsepr','مستكشف VSEPR','اختر عدد الأزواج الإلكترونية وشاهد الشكل الناتج.'],['compare','مقارنة الأشكال','جدول يقارن الشكل والزاوية والقطبية.'],['quiz','التحديات','عشرة أسئلة متنوعة مع شرح كل إجابة.'],['shapequiz','تحديات الأشكال','تعرّف على الشكل من النموذج ثلاثي الأبعاد.']];
+$('#nav').innerHTML=SECS.map(([k,l],i)=>`<button type="button" data-k="${k}" aria-current="${i===0?'page':'false'}"><span>${l}</span><span class="no">${String(i+1).padStart(2,'0')}</span></button>`).join('');
+$('#cards').innerHTML=SECS.slice(1).map(([k,l,d])=>`<button type="button" class="card" data-go="${k}"><b>${l}</b><span>${d}</span></button>`).join('');
+function go(id){
+  SECS.forEach(([k])=>{$('#sec-'+k).hidden=k!==id});
+  $$('#nav button').forEach(b=>{const on=b.dataset.k===id;b.setAttribute('aria-current',on?'page':'false');if(on){try{b.scrollIntoView({block:'nearest',inline:'center'})}catch(e){}}});
+  try{scrollTo({top:0})}catch(e){}
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-go],#nav button');if(!b)return;go(b.dataset.go||b.dataset.k)});
+
+function chips(el,items,cur,cb){
+  el.innerHTML=items.map(([v,l])=>`<button class="chip" type="button" data-v="${v}" aria-pressed="${String(v)===String(cur)}">${l}</button>`).join('');
+  el.onclick=e=>{const b=e.target.closest('.chip');if(!b)return;$$('.chip',el).forEach(x=>x.setAttribute('aria-pressed',x===b));cb(b.dataset.v)};
+}
+function setChip(el,v){$$('.chip',el).forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.v)===String(v)))}
+
+/* ---------- 02 covalent bond ---------- */
+const COV={1:{s:'C–C',l:154,e:347,t:'أحادية',txt:'زوج واحد مشترك (إلكترونان). أطول رابطة وأضعفها.'},2:{s:'C=C',l:134,e:614,t:'ثنائية',txt:'زوجان مشتركان (أربعة إلكترونات). تقصر الرابطة وتقوى.'},3:{s:'C≡C',l:120,e:839,t:'ثلاثية',txt:'ثلاثة أزواج مشتركة (ستة إلكترونات). أقصر رابطة وأقواها.'}};
+function cov(n){
+  const d=COV[n];let s='';
+  [140,380].forEach(x=>{s+=`<circle cx="${x}" cy="100" r="48" fill="var(--surface2)" stroke="var(--accent)" stroke-width="3"/><text x="${x}" y="100" dy=".35em" text-anchor="middle" font-size="30" font-weight="500" fill="var(--ink)">C</text>`});
+  for(let k=0;k<n;k++){const y=100+(k-(n-1)/2)*30;s+=`<circle cx="252" cy="${y}" r="5" fill="var(--warm)"/><circle cx="268" cy="${y}" r="5" fill="var(--warm)"/>`}
+  $('#cov-svg').innerHTML=s;
+  $('#cov-sym').textContent=d.s;
+  $('#cov-txt').textContent=`رابطة ${d.t}: ${d.txt}`;
+  $('#cov-bars').innerHTML=`<div class="bar-row"><span>طول الرابطة</span><div class="bar"><i style="width:${d.l/160*100}%"></i></div><b class="f">${d.l} pm</b></div><div class="bar-row"><span>طاقة الرابطة</span><div class="bar"><i style="width:${d.e/900*100}%"></i></div><b class="f">${d.e} kJ/mol</b></div>`;
+}
+chips($('#cov-chips'),[[1,'أحادية'],[2,'ثنائية'],[3,'ثلاثية']],1,v=>cov(+v));cov(1);
+
+/* ---------- 03 bond types ---------- */
+const ELS=Object.keys(EN);
+['t-a','t-b'].forEach((id,i)=>{$('#'+id).innerHTML=ELS.map(k=>`<option value="${k}">${k} · ${ELAR[k]}</option>`).join('');$('#'+id).value=i?'Cl':'H'});
+function types(){
+  const a=$('#t-a').value,b=$('#t-b').value,ea=EN[a],eb=EN[b],d=Math.abs(ea-eb);
+  const cls=d<.4?0:d<=1.7?1:2,lo=ea<=eb?a:b,hi=ea<=eb?b:a,xa=120,xb=400;
+  const lab=s=>cls===0?'':cls===1?(s===lo?'δ+':'δ−'):(s===lo?'+':'−');
+  let s='';
+  [[a,xa],[b,xb]].forEach(([k,x])=>{s+=`<circle cx="${x}" cy="105" r="48" fill="var(--surface2)" stroke="${RING[k]||'#8e97c0'}" stroke-width="4"/><text x="${x}" y="105" dy=".35em" text-anchor="middle" font-size="28" font-weight="500" fill="var(--ink)">${k}</text>`;
+    if(cls>0)s+=`<text x="${x}" y="40" text-anchor="middle" font-size="${cls===2?30:22}" fill="${cls===2&&k===hi?'var(--bad)':'var(--accent)'}">${lab(k)}</text>`});
+  if(cls<2){const x=xa+(xb-xa)*eb/(ea+eb);s+=`<circle cx="${x-8}" cy="105" r="5" fill="var(--warm)"/><circle cx="${x+8}" cy="105" r="5" fill="var(--warm)"/>`}
+  else{const from=lo===a?xa+50:xb-50,to=lo===a?xb-50:xa+50,dir=to>from?1:-1;s+=`<line x1="${from+dir*8}" y1="105" x2="${to-dir*14}" y2="105" stroke="var(--ink)" stroke-width="3"/><path d="M${to-dir*4} 105 l${-dir*14} -8 l0 16z" fill="var(--ink)"/><text x="260" y="88" text-anchor="middle" font-size="16" fill="var(--muted)">e⁻</text>`}
+  s+=`<text x="${xa}" y="176" text-anchor="middle" font-size="14" fill="var(--muted)">${ea}</text><text x="${xb}" y="176" text-anchor="middle" font-size="14" fill="var(--muted)">${eb}</text>`;
+  $('#t-svg').innerHTML=s;
+  $('#t-verdict').innerHTML=`${['تساهمية غير قطبية','تساهمية قطبية','أيونية'][cls]} · <span class="f">ΔEN = ${d.toFixed(2)}</span>`;
+  $('#t-why').textContent=a===b?'ذرتان متماثلتان، فتتشاركان الإلكترونات بالتساوي.':cls===0?'الفرق صغير، فالإلكترونات مشتركة بالتساوي تقريبًا.':cls===1?`الإلكترونات أقرب إلى ${hi} لأنها أكبر سالبية، فتحمل ${hi} شحنة جزئية سالبة وتحمل ${lo} شحنة جزئية موجبة.`:`ينتقل إلكترون أو أكثر من ${lo} إلى ${hi}، فتتكوّن أيونات موجبة وسالبة.`;
+  $('#t-mark').style.left=`calc(${Math.min(d/3.5,1)*100}% - 1.5px)`;
+}
+$('#t-a').onchange=$('#t-b').onchange=types;types();
+
+/* ---------- Lewis drawing (04 + 06) ---------- */
+function lone3(m){
+  const deg=m.atoms.map((_,i)=>m.bonds.filter(b=>b[0]===i||b[1]===i).length),c=m.atoms.length>2?deg.indexOf(Math.max(...deg)):-1;
+  let rem=vtot(m)/2-m.bonds.length;const L=m.atoms.map(()=>0),T=[...m.atoms.keys()].filter(i=>i!==c);
+  const need=i=>Math.max(0,((m.atoms[i][0]==='H'?2:8)-2*deg[i])/2-L[i]);
+  for(let g=0;g<20;g++){const who=T.filter(i=>need(i)>0);if(!who.length||rem<who.length)break;who.forEach(i=>{L[i]++;rem--})}
+  while(c>=0&&rem>0&&need(c)>0){L[c]++;rem--}
+  return L;
+}
+function lewis(m,step,mode='lines'){
+  const A=m.atoms,R=19,L3=lone3(m);let s='';
+  const inc=A.map(()=>[]);
+  m.bonds.forEach(([i,j])=>{inc[i].push(Math.atan2(A[j][2]-A[i][2],A[j][1]-A[i][1]));inc[j].push(Math.atan2(A[i][2]-A[j][2],A[i][1]-A[j][1]))});
+  if(step>=2)m.bonds.forEach(([i,j,o])=>{
+    const k=step>=4?o:1,x1=A[i][1],y1=A[i][2],x2=A[j][1],y2=A[j][2],L=Math.hypot(x2-x1,y2-y1),ux=(x2-x1)/L,uy=(y2-y1)/L,px=-uy,py=ux;
+    if(mode==='dots'){const mx=(x1+x2)/2,my=(y1+y2)/2;for(let q=0;q<k;q++){const off=(q-(k-1)/2)*11;[-4.5,4.5].forEach(t=>{s+=`<circle cx="${mx+ux*t+px*off}" cy="${my+uy*t+py*off}" r="3.2" fill="var(--accent)"/>`})}}
+    else ({1:[0],2:[-4,4],3:[-6,0,6]})[k].forEach(q=>{s+=`<line x1="${x1+ux*R+px*q}" y1="${y1+uy*R+py*q}" x2="${x2-ux*R+px*q}" y2="${y2-uy*R+py*q}" stroke="var(--ink)" stroke-width="2.4" stroke-linecap="round"/>`})});
+  A.forEach(([k,x,y],i)=>{
+    s+=`<circle cx="${x}" cy="${y}" r="${R}" fill="var(--surface)" stroke="${RING[k]}" stroke-width="3"/><text x="${x}" y="${y}" dy=".35em" text-anchor="middle" font-size="17" font-weight="500" fill="var(--ink)">${k}</text>`;
+    if(step>=4&&m.fc&&m.fc[i])s+=`<text x="${x+22}" y="${y-18}" font-size="15" font-weight="500" fill="${m.fc[i]>0?'var(--accent)':'var(--bad)'}">${m.fc[i]>0?'+':'−'}</text>`;
+    const n=step>=4?m.lone[i]:step===3?L3[i]:0;
+    if(n){
+      const angs=[...inc[i]].sort((p,q)=>p-q);let start=angs[0],gap=2*Math.PI;
+      gap=0;angs.forEach((a,t)=>{const nx=t+1<angs.length?angs[t+1]:angs[0]+2*Math.PI;if(nx-a>gap){gap=nx-a;start=a}});
+      for(let q=0;q<n;q++){
+        const th=start+gap*(q+1)/(n+1),cx=x+Math.cos(th)*31,cy=y+Math.sin(th)*31,px=-Math.sin(th)*4.5,py=Math.cos(th)*4.5;
+        s+=`<circle cx="${cx+px}" cy="${cy+py}" r="2.8" fill="var(--warm)"/><circle cx="${cx-px}" cy="${cy-py}" r="2.8" fill="var(--warm)"/>`;
+      }
+    }
+  });
+  if(step===3){const lf=vtot(m)/2-m.bonds.length-L3.reduce((a,b)=>a+b,0);
+    if(lf>0&&m.bonds.length){const [i,j]=m.bonds[0],x=(A[i][1]+A[j][1])/2,y=(A[i][2]+A[j][2])/2-34;
+      s+=`<ellipse cx="${x}" cy="${y}" rx="16" ry="10" fill="none" stroke="var(--warm)" stroke-width="1.5" stroke-dasharray="3 3"/><circle cx="${x-4.5}" cy="${y}" r="2.8" fill="var(--warm)"/><circle cx="${x+4.5}" cy="${y}" r="2.8" fill="var(--warm)"/>`}}
+  return s;
+}
+const vtot=m=>m.atoms.reduce((s,a)=>s+VAL[a[0]],0);
+const orderName={1:'أحادية',2:'ثنائية',3:'ثلاثية'};
+function explore(m){
+  $('#ex-svg').innerHTML=lewis(m,4);
+  const orders=[...new Set(m.bonds.map(b=>b[2]))].sort(),bp=m.bonds.reduce((s,b)=>s+b[2],0),lp=m.lone.reduce((a,b)=>a+b,0);
+  $('#ex-kv').innerHTML=[['الاسم',m.n],['الصيغة',F(m.f)],['الإلكترونات التكافؤية',vtot(m)],['أزواج رابطة',bp],['أزواج حرة',lp],['نوع الروابط',orders.map(o=>orderName[o]).join(' و')],['ΔEN',`<span class="f">${m.den.toFixed(2)}</span>`],['نوع الرابطة',m.bt],['الشكل',m.shape],['الزاوية',m.ang],['الجزيء',m.pol?'قطبي':'غير قطبي']].map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('');
+  $('#ex-note').textContent=(m.note?m.note+' ':'')+m.why;
+}
+chips($('#ex-chips'),L2.map(m=>[m.f,F(m.f)]),'H2O',v=>explore(byF(v)));explore(byF('H2O'));
+
+/* ---------- 05 naming ---------- */
+const P2=['','أول','ثاني','ثالث','رابع','خامس','سادس','سابع','ثامن'],P1=['','','ثنائي','ثلاثي','رباعي','خماسي','سداسي','سباعي','ثماني'];
+const A1={C:'الكربون',N:'النيتروجين',S:'الكبريت',P:'الفوسفور',Si:'السيليكون',B:'البورون'},A2={O:'أكسيد',Cl:'كلوريد',F:'فلوريد',S:'كبريتيد',Br:'بروميد'};
+const nm=(a,n1,b,n2)=>`${P2[n2]} ${A2[b]} ${n1>1?P1[n1]+' ':''}${A1[a]}`;
+const fm=(a,n1,b,n2)=>`${a}${n1>1?n1:''}${b}${n2>1?n2:''}`;
+$('#n-a').innerHTML=Object.keys(A1).map(k=>`<option value="${k}">${k} · ${A1[k].replace('ال','')}</option>`).join('');
+$('#n-b').innerHTML=Object.keys(A2).map(k=>`<option value="${k}">${k} · ${A2[k]}</option>`).join('');
+$('#n-n1').innerHTML=[1,2,3,4,5,6].map(n=>`<option>${n}</option>`).join('');
+$('#n-n2').innerHTML=[1,2,3,4,5,6,7,8].map(n=>`<option>${n}</option>`).join('');
+$('#n-a').value='N';$('#n-b').value='O';$('#n-n1').value=2;$('#n-n2').value=5;
+$('#n-prefix').innerHTML=[1,2,3,4,5,6,7,8].map(n=>`<li><span class="f">${n}</span><span>${P2[n]}${n>1&&n<=6?' / '+P1[n]:''}</span></li>`).join('');
+function naming(){
+  const a=$('#n-a').value,b=$('#n-b').value,n1=+$('#n-n1').value,n2=+$('#n-n2').value;
+  if(a===b){$('#n-out').textContent='اختر عنصرين مختلفين';$('#n-formula').innerHTML='';return}
+  $('#n-out').textContent=nm(a,n1,b,n2);$('#n-formula').innerHTML=sub(fm(a,n1,b,n2));
+}
+['n-a','n-b','n-n1','n-n2'].forEach(id=>$('#'+id).onchange=naming);naming();
+const COMP=[['C',1,'O',1],['C',1,'O',2],['S',1,'O',2],['S',1,'O',3],['N',1,'O',2],['N',2,'O',1],['N',2,'O',3],['N',2,'O',5],['P',1,'Cl',3],['P',1,'Cl',5],['C',1,'Cl',4],['C',1,'S',2],['P',2,'O',5],['S',1,'F',6],['Si',1,'Cl',4]];
+function genName(){
+  const [a,n1,b,n2]=pick(COMP);const right=nm(a,n1,b,n2),set=new Set([right]);let g=0;
+  while(set.size<4&&g++<60){const x=Math.max(1,Math.min(4,n1+pick([-1,0,0,1]))),y=Math.max(1,Math.min(7,n2+pick([-2,-1,1,2])));set.add(nm(a,x,b,y))}
+  const opts=shuffle([...set]);
+  return{q:`ما اسم المركب ${F(fm(a,n1,b,n2))}؟`,opts,ans:opts.indexOf(right),why:`العنصر الثاني فيه ${n2} ${n2>1?'ذرات':'ذرة'} فنقول «${P2[n2]}»${n1>1?`، والعنصر الأول فيه ${n1} ذرات فنقول «${P1[n1]}»`:''}. الاسم: ${right}.`};
+}
+
+/* ---------- 06 Lewis lab ---------- */
+let lwM=byF('CO2'),lwS=1,lwMode='dots';
+const octet=(m,L,fin)=>m.atoms.map(([k],i)=>{const v=2*m.bonds.reduce((s,b)=>s+(b[0]===i||b[1]===i?(fin?b[2]:1):0),0)+2*L[i],t=k==='H'?2:k==='B'?6:8;return `<span class="${v===t?(k==='B'?'ex':'ok'):'no'}">${k}: ${v}${k==='B'?' (استثناء)':''}</span>`}).join('');
+function lw(){
+  const m=lwM;$('#lw-svg').innerHTML=lewis(m,lwS,lwMode);setChip($('#lw-steps'),lwS);
+  const tot=vtot(m),bn=m.bonds.length,pairs=tot/2,L3=lone3(m),lf=pairs-bn-L3.reduce((a,b)=>a+b,0),same=m.atoms.every(([k],i)=>2*m.bonds.filter(b=>b[0]===i||b[1]===i).length+2*L3[i]===(k==='H'?2:k==='B'?6:8));let h='';
+  if(lwS===1){
+    const cnt={};m.atoms.forEach(a=>cnt[a[0]]=(cnt[a[0]]||0)+1);
+    h=`<h3>١. عدّ الإلكترونات التكافؤية</h3><p>${Object.entries(cnt).map(([k,n])=>`<span class="f">${n>1?n+'×':''}${k}</span> = ${n*VAL[k]}`).join(' + ')}</p><p class="big">${tot} إلكترونًا = ${pairs} ${pairs>1?'أزواج':'زوج'}</p><p class="note">هذه الأزواج هي ما سنوزعه نقطتين نقطتين.</p>`;
+  }else if(lwS===2){
+    h=`<h3>٢. الأزواج الرابطة</h3><p>نضع الذرة المركزية ونربطها بكل ذرة بزوج مشترك (نقطتان بين الذرتين). استخدمنا ${bn} ${bn>1?'أزواج':'زوجًا'}، فتبقى ${pairs-bn} ${pairs-bn===1?'زوج':'أزواج'} من أصل ${pairs}.</p>`;
+  }else if(lwS===3){
+    const used=L3.reduce((a,b)=>a+b,0),parts=m.atoms.map(([k],i)=>L3[i]?`<span class="f">${k}</span> ${L3[i]}`:'').filter(Boolean).join('، ');
+    h=`<h3>٣. توزيع الأزواج الحرة</h3><p>نوزّع الأزواج الباقية نقطتين نقطتين على الذرات الطرفية أولًا حتى تكمل ثمانية (الهيدروجين يكتفي باثنين)، ثم نعطي ما بقي للذرة المركزية.</p>${parts?`<p>${parts}</p>`:''}<p class="note">وُزّع ${used} ${used===1?'زوج':'أزواج'}، وتبقى ${lf}.${lf>0?' الزوج المتبقي (بخط متقطع) لو وضعناه على ذرة واحدة لاختل التماثل، فيصبح لاحقًا رابطة ثانية.':''}</p><div class="octet">${octet(m,L3,false)}</div>`;
+  }else{
+    h=`<h3>٤. التركيب النهائي</h3><p>${same?(m.atoms.some(a=>a[0]==='B')?'لا حاجة لروابط متعددة؛ البورون يكتفي بستة إلكترونات (استثناء من قاعدة الثمانية).':'اكتملت الذرات بعد التوزيع، فلا حاجة لروابط متعددة.'):'الذرة الناقصة تأخذ زوجًا حرًا من ذرة مجاورة ويتحول إلى رابطة إضافية بين الذرتين، فتتحول الرابطة الأحادية إلى ثنائية أو ثلاثية.'+(lf>0?' ويصبح الزوج المتبقي رابطة ثانية.':'')}</p><div class="octet">${octet(m,m.lone,true)}</div>${m.note?`<p class="note">${m.note}</p>`:''}`;
+  }
+  $('#lw-txt').innerHTML=h;
+}
+chips($('#lw-chips'),L2.map(m=>[m.f,F(m.f)]),'CO2',v=>{lwM=byF(v);lw()});
+chips($('#lw-steps'),[[1,'١ العدّ'],[2,'٢ الروابط'],[3,'٣ الأزواج الحرة'],[4,'٤ التركيب النهائي']],1,v=>{lwS=+v;lw()});
+chips($('#lw-mode'),[['dots','نقاط'],['lines','خطوط']],'dots',v=>{lwMode=v;lw()});lw();
+
+/* ---------- 3D viewer ---------- */
+const nrm=v=>{const l=Math.hypot(...v);return v.map(x=>x/l)};
+const DIRS={2:[[1,0,0],[-1,0,0]],3:[[1,0,0],[-.5,.866,0],[-.5,-.866,0]],4:[[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]].map(nrm),5:[[0,1,0],[0,-1,0],[1,0,0],[-.5,0,.866],[-.5,0,-.866]],6:[[0,1,0],[0,-1,0],[1,0,0],[-1,0,0],[0,0,1],[0,0,-1]]};
+const LONE={3:{1:[2]},4:{1:[3],2:[2,3]},5:{1:[2],2:[2,3],3:[2,3,4]},6:{1:[0],2:[0,1]}};
+function geo(m,e,o={}){
+  const {c='A',l='X',bo=1,lone=true}=o,n=m+e,dirs=DIRS[n],le=(LONE[n]&&LONE[n][e])||[];
+  const atoms=[{p:[0,0,0],s:c,r:.3}],bonds=[],lobes=[];let k=0;
+  dirs.forEach((d,i)=>{
+    if(le.includes(i)){lobes.push({p:d.map(x=>x*.64),show:lone})}
+    else{const ord=Array.isArray(bo)?bo[k]:bo;atoms.push({p:d,s:l,r:l==='H'?.17:.23});bonds.push({a:0,b:atoms.length-1,o:ord});k++}
+  });
+  return{atoms,bonds,lobes};
+}
+const mix=(h,t)=>{const n=parseInt(h.slice(1),16),r=n>>16,g=n>>8&255,b=n&255,f=c=>Math.round(c+(255-c)*t);return `rgb(${f(r)},${f(g)},${f(b)})`};
+const viewers=[];let TH={ink:'#12142b',warm:'#d97f00'};
+class Viewer{
+  constructor(cv){this.cv=cv;this.ctx=cv.getContext('2d');this.rx=-.35;this.ry=.6;this.auto=!reduce;this.data=null;this.drag=null;
+    cv.addEventListener('pointerdown',e=>{this.drag={x:e.clientX,y:e.clientY};try{cv.setPointerCapture(e.pointerId)}catch(_){}});
+    cv.addEventListener('pointermove',e=>{if(!this.drag)return;this.ry+=(e.clientX-this.drag.x)*.01;this.rx=Math.max(-1.5,Math.min(1.5,this.rx+(e.clientY-this.drag.y)*.01));this.drag={x:e.clientX,y:e.clientY}});
+    const end=()=>{this.drag=null};cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);
+    viewers.push(this)}
+  set(d){this.data=d}
+  reset(){this.rx=-.35;this.ry=.6}
+  draw(){
+    const cv=this.cv,r=cv.getBoundingClientRect(),d=window.devicePixelRatio||1,w=r.width,h=r.height;
+    if(!w||!h)return;
+    if(cv.width!==Math.round(w*d)||cv.height!==Math.round(h*d)){cv.width=Math.round(w*d);cv.height=Math.round(h*d)}
+    const c=this.ctx;c.setTransform(d,0,0,d,0,0);c.clearRect(0,0,w,h);if(!this.data)return;
+    const U=Math.min(w,h)*.3,cy=Math.cos(this.ry),sy=Math.sin(this.ry),cx=Math.cos(this.rx),sx=Math.sin(this.rx);
+    const pr=p=>{const x1=p[0]*cy+p[2]*sy,z1=-p[0]*sy+p[2]*cy,y2=p[1]*cx-z1*sx,z2=p[1]*sx+z1*cx,s=1/(1-z2*.13);return{x:w/2+x1*U*s,y:h/2-y2*U*s,z:z2,s}};
+    const P=this.data.atoms.map(a=>pr(a.p)),items=[];
+    this.data.bonds.forEach(b=>{const A=P[b.a],B=P[b.b];items.push({z:(A.z+B.z)/2,f:()=>{
+      const dx=B.x-A.x,dy=B.y-A.y,L=Math.hypot(dx,dy)||1,nx=-dy/L,ny=dx/L,off=b.o===2?[-.07,.07]:[0],lw=(b.o===2?.055:.09)*U*(A.s+B.s)/2;
+      c.save();c.globalAlpha=.7;c.strokeStyle=TH.ink;c.lineCap='round';c.lineWidth=lw;
+      off.forEach(o=>{c.beginPath();c.moveTo(A.x+nx*o*U,A.y+ny*o*U);c.lineTo(B.x+nx*o*U,B.y+ny*o*U);c.stroke()});c.restore()}})});
+    this.data.atoms.forEach((a,i)=>{const q=P[i];items.push({z:q.z,f:()=>{
+      const rr=a.r*U*q.s,g=c.createRadialGradient(q.x-rr*.35,q.y-rr*.35,rr*.1,q.x,q.y,rr),col=COL[a.s]||COL.X;
+      g.addColorStop(0,mix(col,.55));g.addColorStop(1,col);c.beginPath();c.arc(q.x,q.y,rr,0,7);c.fillStyle=g;c.fill();
+      c.lineWidth=1;c.strokeStyle=TH.ink;c.globalAlpha=.35;c.stroke();c.globalAlpha=1;
+      c.fillStyle=TXT[a.s]||'#fff';c.font=`600 ${Math.max(10,rr*.9)}px 'IBM Plex Sans Arabic', sans-serif`;c.textAlign='center';c.textBaseline='middle';c.fillText(a.s,q.x,q.y+1)}})});
+    this.data.lobes.forEach(l=>{if(!l.show)return;const q=pr(l.p);items.push({z:q.z,f:()=>{
+      const rr=.3*U*q.s;c.beginPath();c.arc(q.x,q.y,rr,0,7);c.fillStyle=TH.warm;c.globalAlpha=.3;c.fill();c.globalAlpha=.9;c.lineWidth=1.5;c.strokeStyle=TH.warm;c.setLineDash([4,3]);c.stroke();c.setLineDash([]);
+      c.globalAlpha=1;c.fillStyle=TH.warm;[-1,1].forEach(k=>{c.beginPath();c.arc(q.x+k*rr*.3,q.y,rr*.14,0,7);c.fill()})}})});
+    items.sort((a,b)=>a.z-b.z).forEach(i=>i.f());
+  }
+}
+function loop(){
+  const cs=getComputedStyle(document.documentElement);TH={ink:cs.getPropertyValue('--ink').trim()||TH.ink,warm:cs.getPropertyValue('--warm').trim()||TH.warm};
+  viewers.forEach(v=>{if(!v.cv.offsetParent)return;if(v.auto&&!v.drag)v.ry+=.008;v.draw()});
+  requestAnimationFrame(loop);
+}
+const molGeo=(m,lone=true)=>geo(m.m,m.e,{c:m.c,l:m.l,bo:m.bo,lone});
+const vHome=new Viewer($('#cv-home'));vHome.set(molGeo(byF('H2O')));
+
+/* ---------- 07 shapes ---------- */
+const vSh=new Viewer($('#cv-shapes'));let shM=byF('H2O'),shLone=true;
+function shapes(){
+  const m=shM;vSh.set(molGeo(m,shLone));
+  $('#sh-kv').innerHTML=[['الاسم',m.n],['الصيغة',F(m.f)],['الرمز',`<span class="f">${ax(m.m,m.e)}</span>`],['أزواج رابطة',m.m],['أزواج حرة',m.e],['الشكل',m.shape],['الزاوية',m.ang],['الجزيء',m.pol?'قطبي':'غير قطبي']].map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('');
+  $('#sh-why').textContent=m.why;$('#sh-lone').hidden=!m.e;
+}
+chips($('#sh-chips'),D3.map(m=>[m.f,F(m.f)]),'H2O',v=>{shM=byF(v);shapes()});shapes();
+$('#sh-auto').onclick=e=>{vSh.auto=!vSh.auto;e.currentTarget.setAttribute('aria-pressed',vSh.auto)};
+$('#sh-auto').setAttribute('aria-pressed',vSh.auto);
+$('#sh-lone').onclick=e=>{shLone=!shLone;e.currentTarget.setAttribute('aria-pressed',shLone);shapes()};
+$('#sh-reset').onclick=()=>vSh.reset();
+
+/* ---------- 08 VSEPR ---------- */
+const vVs=new Viewer($('#cv-vsepr'));let vsN=4,vsE=0;
+const loneOpts={2:[0],3:[0,1],4:[0,1,2],5:[0,1,2,3],6:[0,1,2]};
+function vsepr(){
+  const m=vsN-vsE,s=SHAPES[m+'-'+vsE];vVs.set(geo(m,vsE));
+  $('#vs-kv').innerHTML=[['الرمز',`<span class="f">${ax(m,vsE)}</span>`],['أزواج رابطة',m],['أزواج حرة',vsE],['الشكل',s.n+(s.x?'<span class="tag">إثراء</span>':'')],['الزاوية',s.a],['مثال',F(s.ex)]].map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('');
+  $('#vs-why').textContent=vsE?'الزوج الحر يحتاج حيّزًا أكبر، فيضغط الروابط ويقلل الزوايا بينها.':'لا أزواج حرة، فتتوزع الروابط بزوايا متساوية.';
+}
+function vsLone(){chips($('#vs-e'),loneOpts[vsN].map(e=>[e,e]),vsE,v=>{vsE=+v;vsepr()})}
+chips($('#vs-n'),[2,3,4,5,6].map(n=>[n,n]),4,v=>{vsN=+v;if(!loneOpts[vsN].includes(vsE))vsE=0;vsLone();vsepr()});vsLone();vsepr();
+$('#vs-auto').onclick=e=>{vVs.auto=!vVs.auto;e.currentTarget.setAttribute('aria-pressed',vVs.auto)};
+$('#vs-auto').setAttribute('aria-pressed',vVs.auto);
+
+/* ---------- 09 compare ---------- */
+let cpF='all';
+function compare(){
+  const rows=D3.filter(m=>cpF==='all'||(cpF==='pol'?m.pol:cpF==='non'?!m.pol:m.e>0));
+  $('#cp-table').innerHTML=`<thead><tr><th>الجزيء</th><th>الاسم</th><th>الرمز</th><th>أزواج رابطة</th><th>أزواج حرة</th><th>الشكل</th><th>الزاوية</th><th>القطبية</th></tr></thead><tbody>${rows.map(m=>`<tr><td><button type="button" data-f="${m.f}">${F(m.f)}</button></td><td>${m.n}</td><td class="f">${ax(m.m,m.e)}</td><td>${m.m}</td><td>${m.e}</td><td>${m.shape}</td><td>${m.ang}</td><td>${m.pol?'قطبي':'غير قطبي'}</td></tr>`).join('')}</tbody>`;
+}
+$('#cp-table').onclick=e=>{const b=e.target.closest('button[data-f]');if(!b)return;shM=byF(b.dataset.f);setChip($('#sh-chips'),shM.f);shapes();go('shapes')};
+chips($('#cp-chips'),[['all','الكل'],['pol','قطبي'],['non','غير قطبي'],['lp','فيه أزواج حرة']],'all',v=>{cpF=v;compare()});compare();
+
+/* ---------- quizzes ---------- */
+function quiz(root,total,gen,onQ){
+  let i=0,score=0,q,locked=false;
+  function next(){
+    if(i>=total){root.innerHTML=`<div class="sum"><h3>النتيجة ${score} من ${total}</h3><p>${score>=total*.8?'ممتاز، أنت متمكن.':score>=total*.5?'جيد، راجع الأقسام التي أخطأت فيها.':'راجع الأقسام وحاول مرة أخرى.'}</p><button class="btn primary" type="button" data-act="again">إعادة المحاولة</button></div>`;return}
+    q=gen(i);locked=false;onQ&&onQ(q);
+    root.innerHTML=`<div class="qhead"><span>السؤال ${i+1} من ${total}</span><span>النتيجة ${score}</span></div><div class="qtext">${q.q}</div><div class="opts">${q.opts.map((o,k)=>`<button class="opt" type="button" data-k="${k}">${o}</button>`).join('')}</div><div class="fb" aria-live="polite"></div>`;
+  }
+  root.onclick=e=>{
+    const b=e.target.closest('button');if(!b)return;
+    if(b.dataset.act==='again'){i=0;score=0;next();return}
+    if(b.dataset.act==='next'){i++;next();return}
+    if(b.classList.contains('opt')&&!locked){
+      locked=true;const k=+b.dataset.k,ok=k===q.ans;if(ok)score++;
+      $$('.opt',root).forEach((x,j)=>{x.disabled=true;if(j===q.ans)x.classList.add('right');else if(j===k)x.classList.add('wrong')});
+      $('.qhead span:last-child',root).textContent='النتيجة '+score;
+      $('.fb',root).innerHTML=`<p class="${ok?'ok':'no'}">${ok?'إجابة صحيحة':'إجابة غير صحيحة'}</p><p>${q.why}</p><button class="btn primary" type="button" data-act="next">${i+1>=total?'عرض النتيجة':'السؤال التالي'}</button>`;
+    }
+  };
+  next();
+}
+const shapeNames=[...new Set(Object.values(SHAPES).map(x=>x.n))];
+function genG(){
+  const t=Math.random()*4|0;
+  if(t===0){
+    const ks=ELS.filter(k=>k!=='B');let a,b,d;
+    do{a=pick(ks);b=pick(ks);d=Math.abs(EN[a]-EN[b])}while(a===b||(d>.3&&d<.5)||(d>1.6&&d<1.8));
+    const ans=d<.4?0:d<=1.7?1:2;
+    return{q:`ما نوع الرابطة بين ${F(a)} و${F(b)}؟ السالبية: ${EN[a]} و${EN[b]}`,opts:['تساهمية غير قطبية','تساهمية قطبية','أيونية'],ans,why:`ΔEN = ${d.toFixed(2)}، ${['وهي أقل من 0.4 فالرابطة غير قطبية.','وهي بين 0.4 و1.7 فالرابطة قطبية.','وهي أكبر من 1.7 فالرابطة أيونية.'][ans]}`};
+  }
+  if(t===1){
+    const m=pick(D3),right=SHAPES[m.m+'-'+m.e].n,opts=shuffle([right,...shuffle(shapeNames.filter(n=>n!==right)).slice(0,3)]);
+    return{q:`ما شكل جزيء ${F(m.f)}؟`,opts,ans:opts.indexOf(right),why:`حول الذرة المركزية ${m.m} ${m.m>1?'أزواج رابطة':'زوج رابط'} و${m.e} ${m.e===1?'زوج حر':'أزواج حرة'}، فالشكل ${right} والزاوية ${m.ang}.`};
+  }
+  if(t===2){
+    const m=pick(D3);
+    return{q:`كم زوجًا إلكترونيًا حرًّا على الذرة المركزية في ${F(m.f)}؟`,opts:['0','1','2','3'],ans:m.e,why:`الذرة المركزية ${m.c} تحيط بها ${m.m} ${m.m>1?'روابط':'رابطة'}، وعدد الأزواج الحرة عليها ${m.e}.`};
+  }
+  const m=pick(MOLS);
+  return{q:`هل جزيء ${F(m.f)} قطبي؟`,opts:['نعم، قطبي','لا، غير قطبي'],ans:m.pol?0:1,why:m.why};
+}
+quiz($('#gq'),10,genG);
+quiz($('#n-quiz'),6,genName);
+const vQ=new Viewer($('#cv-quiz'));let deck=[];
+quiz($('#sq'),8,i=>{
+  if(i===0)deck=shuffle(Object.keys(SHAPES)).slice(0,8);
+  const k=deck[i],s=SHAPES[k],[m,e]=k.split('-').map(Number),opts=shuffle([s.n,...shuffle(shapeNames.filter(n=>n!==s.n)).slice(0,3)]);
+  return{q:'ما شكل هذا الجزيء؟',opts,ans:opts.indexOf(s.n),geo:geo(m,e),why:`الرمز <span class="f">${ax(m,e)}</span>: ${m} ${m>1?'أزواج رابطة':'زوج رابط'} و${e} ${e===1?'زوج حر':e?'أزواج حرة':'أزواج حرة'}. الشكل ${s.n} والزاوية ${s.a}.`};
+},q=>{if(q)vQ.set(q.geo)});
+
+loop();
+})();
+</script>
+
+</body></html>

@@ -1,0 +1,738 @@
+<!doctype html><html><head><meta charset=utf8><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>مختبر المركبات الأيونية والفلزات</title>
+<style>
+/* Layout: sticky lab-bench tab strip; one lesson stage at a time = short brief, live apparatus, key points. Red = cation/metal, blue = anion/electron, amber = metallic bond. */
+:root{
+  --bg:#F1F6F2; --surface:#FFFFFF; --surface2:#E6EFE8; --fg:#10261B; --muted:#4A6155; --line:#C7D8CC;
+  --accent:#0B7A4B; --accent-ink:#FFFFFF;
+  --pos:#D4452A; --pos-ink:#FFFFFF; --neg:#2A66D6; --neg-ink:#FFFFFF;
+  --metal:#B07A12; --glow:#FFD84A; --ok:#12804A; --bad:#C23030;
+  --display:'IBM Plex Sans Arabic',system-ui,sans-serif;
+  --body:'IBM Plex Sans Arabic',system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0B1510; --surface:#12211A; --surface2:#1A2D23; --fg:#E6F2EA; --muted:#9DB5A7; --line:#2A4034;
+  --accent:#3FCB8A; --accent-ink:#06150D; --pos:#FF7A5C; --pos-ink:#1B0A05; --neg:#6C9CFF; --neg-ink:#06122E;
+  --metal:#E2AC3E; --glow:#FFE27A; --ok:#4BD08E; --bad:#FF7676; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B1510; --surface:#12211A; --surface2:#1A2D23; --fg:#E6F2EA; --muted:#9DB5A7; --line:#2A4034;
+  --accent:#3FCB8A; --accent-ink:#06150D; --pos:#FF7A5C; --pos-ink:#1B0A05; --neg:#6C9CFF; --neg-ink:#06122E;
+  --metal:#E2AC3E; --glow:#FFE27A; --ok:#4BD08E; --bad:#FF7676; color-scheme:dark}
+
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.8;padding-inline:16px;padding-block:0 40px}
+*{box-sizing:border-box}
+.wrap{max-width:960px;margin-inline:auto}
+header.top{padding-block:22px 10px}
+header.top .tag{font-size:13px;color:var(--accent);font-weight:600;letter-spacing:.04em}
+h1{font-family:var(--display);font-size:clamp(26px,6vw,38px);line-height:1.3;margin:2px 0 4px;text-wrap:balance}
+header.top p{margin:0;color:var(--muted);max-width:60ch}
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:8px;overflow-x:auto;padding-block:10px;border-bottom:1px solid var(--line);scrollbar-width:thin}
+.tab{flex:none;white-space:nowrap;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:6px 16px;font:inherit;font-size:15px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+:focus-visible{outline:3px solid var(--neg);outline-offset:2px}
+.panel{padding-block:22px}
+h2{font-family:var(--display);font-size:clamp(22px,4.5vw,28px);margin:0 0 6px;line-height:1.4;text-wrap:balance}
+h3{font-family:var(--display);font-size:20px;margin:28px 0 8px;line-height:1.4}
+.lead{color:var(--muted);margin:0 0 16px;max-width:64ch}
+.lab{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;margin-block:12px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:16px;align-items:center}
+.grid2>*{min-width:0}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:12px}
+.pick{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+.pick-label{font-size:14px;color:var(--muted);margin:8px 0 4px;font-weight:500}
+.chip{border:1.5px solid var(--line);background:var(--surface2);color:var(--fg);border-radius:10px;padding:4px 12px;font:inherit;font-size:15px;cursor:pointer;line-height:1.7}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:600}
+.chip.pos[aria-pressed="true"]{background:var(--pos);color:var(--pos-ink);border-color:var(--pos)}
+.chip.neg[aria-pressed="true"]{background:var(--neg);color:var(--neg-ink);border-color:var(--neg)}
+.btn{border:0;background:var(--accent);color:var(--accent-ink);border-radius:10px;padding:8px 18px;font:inherit;font-weight:600;cursor:pointer}
+.btn.ghost{background:transparent;color:var(--fg);border:1.5px solid var(--line)}
+.btn:disabled{opacity:.5;cursor:default}
+.chem{direction:ltr;unicode-bidi:isolate;display:inline-block;font-weight:600}
+sub,sup{font-size:.72em;line-height:0}
+.hint{color:var(--muted);font-size:14px;margin:6px 0 0}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-size:13px;color:var(--muted)}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-inline-end:5px;vertical-align:middle}
+.atom-svg{width:100%;max-width:330px;height:auto;display:block;margin:auto;overflow:visible;direction:ltr}
+.e{transition:transform .85s cubic-bezier(.3,.8,.3,1),opacity .85s}
+dl.facts{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;margin:0}
+dl.facts dt{color:var(--muted);font-size:14px}
+dl.facts dd{margin:0;font-weight:500}
+.scroll{overflow-x:auto;max-width:100%}
+table{border-collapse:collapse;width:100%;min-width:480px;font-size:15px}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:center;line-height:1.6}
+th{background:var(--surface2);font-weight:600}
+.key{background:var(--surface2);border-radius:12px;padding:14px 18px;margin-top:22px}
+.key b{font-family:var(--display);font-size:17px}
+.key ul{margin:6px 0 0;padding-inline-start:20px}
+.key li{margin-block:3px}
+.next{margin-top:18px;display:flex;justify-content:flex-end}
+/* lewis */
+.lw-stage{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 14px;padding-block:8px}
+.lw-group{display:flex;flex-wrap:wrap;justify-content:center;gap:4px}
+.lw-atom{text-align:center;width:92px}
+.lw-atom svg{width:92px;height:92px;direction:ltr;overflow:visible}
+.lw-atom .cap{font-size:15px;min-height:26px}
+.lw-arrow{font-size:26px;color:var(--muted)}
+.lw .halo{fill:var(--surface);stroke:var(--line);stroke-width:2;transition:all .6s}
+.lw .sym{font:700 24px var(--body);text-anchor:middle;fill:var(--fg)}
+.lw .d{transform-box:fill-box;transform-origin:center;transition:transform .7s,opacity .7s}
+.lw .own{fill:var(--neg)} .lw .gain{fill:var(--glow);stroke:var(--metal);stroke-width:1.3;opacity:0;transform:scale(.2)}
+.lw .badge{opacity:0;transition:opacity .6s .4s}
+.lw .badge text{font:700 12px var(--body);text-anchor:middle;fill:#fff}
+.moved .own.cat-d{opacity:0;transform:scale(.2)}
+.moved .gain{opacity:1;transform:scale(1)}
+.moved .badge{opacity:1}
+.moved .lw.cat .halo{stroke:var(--pos);fill:color-mix(in srgb,var(--pos) 14%,var(--surface))}
+.moved .lw.an .halo{stroke:var(--neg);fill:color-mix(in srgb,var(--neg) 14%,var(--surface))}
+.lw.cat .badge circle{fill:var(--pos)} .lw.an .badge circle{fill:var(--neg)}
+.lwp{display:inline-flex;align-items:center;gap:6px;vertical-align:middle}
+.ld{width:96px;height:86px;direction:ltr}
+.out{margin-top:10px;padding:12px 14px;border-radius:10px;background:var(--surface2);min-height:60px}
+.out p{margin:3px 0}
+.big{font-size:34px;font-family:var(--body);line-height:1.3}
+.name{font-family:var(--display);font-size:22px}
+ol.steps{margin:10px 0 0;padding-inline-start:22px}
+ol.steps li{margin-block:4px}
+/* lattice */
+.lat{width:100%;max-width:520px;height:auto;display:block;margin:auto;direction:ltr}
+.lat g.mv{transition:transform .7s cubic-bezier(.4,.1,.2,1)}
+.lat .rep{opacity:0;transition:opacity .3s}
+.lat.s1 .rep,.lat.s2 .rep{opacity:1}
+.lat .sg{font:700 14px var(--body);text-anchor:middle;fill:#fff}
+/* conduction */
+.cond-top{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
+.lamp{width:56px;height:70px}
+.lamp .bulb{fill:var(--surface2);stroke:var(--fg);stroke-width:2.5;transition:all .3s}
+.lamp.lit .bulb{fill:var(--glow);filter:drop-shadow(0 0 10px var(--glow))}
+canvas{width:100%;display:block;border-radius:10px;background:var(--surface2)}
+.sw{border:1.5px solid var(--line);background:var(--surface2);color:var(--fg);border-radius:999px;padding:4px 14px;font:inherit;cursor:pointer}
+.sw[aria-checked="true"]{background:var(--ok);color:#fff;border-color:var(--ok)}
+.bars{display:grid;gap:8px;margin-top:10px}
+.bar{display:grid;grid-template-columns:70px 1fr 74px;gap:10px;align-items:center;font-size:15px}
+.bar .tr{background:var(--surface2);border-radius:6px;height:22px;overflow:hidden;direction:rtl}
+.bar .fl{height:100%;background:var(--pos);border-radius:6px;transition:width .6s}
+.bar .fl.hi{background:var(--accent)}
+.bar .v{text-align:start;font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate}
+/* alloys */
+.alloy-svg{width:100%;max-width:520px;height:auto;display:block;margin:auto;direction:ltr}
+.alloy-svg g.mv{transition:transform .7s cubic-bezier(.4,.1,.2,1)}
+.alloy-svg g.mv.slip{transform:translateX(36px)}
+.alloy-svg g.mv.block{animation:block .6s}
+@keyframes block{0%{transform:translateX(0)}35%{transform:translateX(9px)}100%{transform:translateX(0)}}
+.meter{height:12px;background:var(--surface2);border-radius:6px;overflow:hidden;margin-top:4px}
+.meter i{display:block;height:100%;background:var(--metal);width:30%;transition:width .5s}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:12px;margin-top:10px}
+.cards>div{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:12px 14px;min-width:0}
+.cards b{font-family:var(--display);font-size:17px}
+.cards p{margin:2px 0;font-size:14.5px;color:var(--muted);line-height:1.65}
+/* quiz */
+.opt{display:block;width:100%;text-align:start;border:1.5px solid var(--line);background:var(--surface2);color:var(--fg);border-radius:10px;padding:8px 14px;margin-top:8px;font:inherit;cursor:pointer}
+.opt.right{background:var(--ok);color:#fff;border-color:var(--ok)}
+.opt.wrong{background:var(--bad);color:#fff;border-color:var(--bad)}
+.qmeta{display:flex;justify-content:space-between;color:var(--muted);font-size:14px}
+.prog{height:8px;background:var(--surface2);border-radius:4px;overflow:hidden;margin-block:6px 14px}
+.prog i{display:block;height:100%;background:var(--accent);transition:width .4s}
+.q{font-weight:600;font-size:17px}
+.expl{margin-top:10px;padding:10px 14px;border-radius:10px;background:var(--surface2)}
+.step{display:flex;align-items:center;gap:10px;margin-block:6px}
+.step button{width:38px;height:38px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface2);color:var(--fg);font:600 20px var(--body);cursor:pointer}
+.step output{min-width:30px;text-align:center;font-weight:600;font-size:20px}
+.fb{margin-top:8px;font-weight:500}
+@media (prefers-reduced-motion:reduce){.e,.lw .d,.lat g.mv,.alloy-svg g.mv{transition-duration:.01s}.alloy-svg g.mv.block{animation:none}}
+</style>
+
+<div class="wrap" dir="rtl" lang="ar">
+<header class="top">
+  <div class="tag">كيمياء 2-1 · الفصل 3</div>
+  <h1>مختبر المركبات الأيونية والفلزات</h1>
+  <p>جرّب بنفسك: حوّل الذرات إلى أيونات، وكوّن المركبات واكتب صيغها، واطرق البلورات، ثم اختبر فهمك.</p>
+</header>
+<nav class="tabs" id="tabs" role="tablist" aria-label="دروس المختبر"></nav>
+
+<!-- 1 ions -->
+<section class="panel" id="p-ions" hidden>
+  <h2>3-1 تكوّن الأيون</h2>
+  <p class="lead">الأيون ذرة أو مجموعة ذرات مشحونة. تتكوّن الأيونات حين تفقد الذرات إلكترونات التكافؤ أو تكتسبها لتحقق قاعدة الثمانيات: ثمانية إلكترونات في مستوى الطاقة الأخير كالغازات النبيلة.</p>
+  <div class="lab">
+    <div class="pick" id="ion-pick"></div>
+    <div class="legend"><span><i class="dot" style="background:var(--pos)"></i>فلز: يكوّن كاتيونًا</span><span><i class="dot" style="background:var(--neg)"></i>لافلز: يكوّن أنيونًا</span><span><i class="dot" style="background:var(--glow);border:1.5px solid var(--metal)"></i>إلكترونات التكافؤ</span></div>
+    <div class="grid2" style="margin-top:10px">
+      <svg class="atom-svg" id="atom" viewBox="0 0 300 300" role="img" aria-label="نموذج بور للذرة"></svg>
+      <div id="ion-info"></div>
+    </div>
+    <div class="row"><button class="btn" id="ion-go"></button><span class="hint" id="ion-hint"></span></div>
+    <div class="out" id="ion-lewis"></div>
+    <div class="out" id="ion-cfg"></div>
+  </div>
+  <h3>الشحنات الشائعة للأيونات حسب المجموعة</h3>
+  <div class="scroll"><table>
+    <tr><th>المجموعة</th><th>1</th><th>2</th><th>13</th><th>15</th><th>16</th><th>17</th></tr>
+    <tr><th>إلكترونات التكافؤ</th><td>1</td><td>2</td><td>3</td><td>5</td><td>6</td><td>7</td></tr>
+    <tr><th>ما يحدث</th><td>يفقد 1</td><td>يفقد 2</td><td>يفقد 3</td><td>يكتسب 3</td><td>يكتسب 2</td><td>يكتسب 1</td></tr>
+    <tr><th>الأيون</th><td><span class="chem">Na⁺</span></td><td><span class="chem">Mg²⁺</span></td><td><span class="chem">Al³⁺</span></td><td><span class="chem">N³⁻</span></td><td><span class="chem">O²⁻</span></td><td><span class="chem">Cl⁻</span></td></tr>
+  </table></div>
+  <div class="key"><b>خلاصة الدرس</b><ul>
+    <li>الأيون ذرة أو مجموعة ذرات تحمل شحنة كهربائية.</li>
+    <li>الفلزات تفقد إلكترونات التكافؤ فتصبح كاتيونات موجبة.</li>
+    <li>اللافلزات تكتسب إلكترونات فتصبح أنيونات سالبة.</li>
+    <li>عدد البروتونات لا يتغير؛ الشحنة = عدد البروتونات − عدد الإلكترونات.</li>
+    <li>يبيّن التوزيع الإلكتروني أن الأيون يأخذ تركيب أقرب غاز نبيل: فالفلز يفقد إلكترونات المستوى الفرعي الأخير، واللافلز يكمل مستواه الفرعي <span class="chem">p</span> إلى ستة إلكترونات.</li>
+    <li>يمثّل التمثيل النقطي (تركيب لويس) إلكترونات التكافؤ بنقاط حول الرمز، ويوضع الأيون بين قوسين مع شحنته.</li>
+    <li><b>المصطلحات:</b> التوزيع الإلكتروني، الأيون، الكاتيون، الأنيون، قاعدة الثمانيات، إلكترونات التكافؤ، التمثيل النقطي للإلكترونات.</li>
+  </ul></div>
+  <div class="next"><button class="btn" data-go="bond">التالي: 3-2 الروابط الأيونية والمركبات الأيونية ←</button></div>
+</section>
+
+<!-- 2 bond -->
+<section class="panel" id="p-bond" hidden>
+  <h2>3-2 الروابط الأيونية والمركبات الأيونية</h2>
+  <p class="lead">الرابطة الأيونية قوة تجاذب كهروستاتيكي بين أيونات مختلفة الشحنة. اختر فلزًا ولافلزًا وانقل الإلكترونات لترى كيف يتكوّن المركب الأيوني المتعادل.</p>
+  <div class="lab">
+    <div class="pick-label">الفلز (يفقد)</div><div class="pick" id="b-cat"></div>
+    <div class="pick-label">اللافلز (يكتسب)</div><div class="pick" id="b-an"></div>
+    <div class="lw-stage" id="lw-stage"></div>
+    <div class="row"><button class="btn" id="b-go">انقل الإلكترونات</button><button class="btn ghost" id="b-reset">أعد الذرات</button></div>
+    <div class="out" id="b-out"></div>
+  </div>
+  <h3>الشبكة البلورية: صلبة وهشّة</h3>
+  <div class="lab">
+    <svg class="lat" id="lat" viewBox="0 0 390 240" role="img" aria-label="شبكة بلورية أيونية"></svg>
+    <div class="row"><button class="btn" id="lat-hit">اطرق البلورة</button><button class="btn ghost" id="lat-reset">أعد البلورة</button></div>
+    <div class="out" id="lat-msg">اضغط «اطرق البلورة» لإزاحة طبقة من الأيونات.</div>
+    <p class="hint">في الشبكة ثلاثية الأبعاد لكلوريد الصوديوم <span class="chem">NaCl</span> يحيط بكل أيون ستة أيونات مخالفة له في الشحنة، فعدد التناسق = 6. وحدة الصيغة <span class="chem">NaCl</span> هي أبسط نسبة للأيونات في البلورة.</p>
+  </div>
+
+  <h3>التوصيل الكهربائي والإلكتروليتات</h3>
+  <div class="lab">
+    <div class="cond-top">
+      <div class="pick" style="margin:0" id="c-mode">
+        <button class="chip" data-m="solid" aria-pressed="true">صلب</button>
+        <button class="chip" data-m="sol" aria-pressed="false">محلول مائي</button>
+        <button class="chip" data-m="melt" aria-pressed="false">مصهور</button>
+      </div>
+      <div class="row" style="margin:0">
+        <button class="sw" id="c-sw" role="switch" aria-checked="false">الدائرة مفتوحة</button>
+        <svg class="lamp" id="lamp" viewBox="0 0 56 70" aria-label="مصباح"><path class="bulb" d="M28 6a18 18 0 0 0-10 33v8h20v-8A18 18 0 0 0 28 6z"/><rect x="19" y="50" width="18" height="6" rx="2" fill="var(--fg)"/><rect x="22" y="58" width="12" height="6" rx="2" fill="var(--fg)"/></svg>
+      </div>
+    </div>
+    <canvas id="cond-cv" style="height:210px;margin-top:10px"></canvas>
+    <div class="legend" style="margin-top:6px"><span><i class="dot" style="background:var(--pos)"></i>كاتيون</span><span><i class="dot" style="background:var(--neg)"></i>أنيون</span></div>
+    <div class="out" id="c-msg"></div>
+    <p class="hint">الإلكتروليت مركب أيوني يوصل محلوله المائي أو مصهوره التيار الكهربائي.</p>
+  </div>
+
+  <h3>طاقة الشبكة البلورية ودرجة الانصهار</h3>
+  <div class="lab">
+    <div class="pick" id="bar-mode"><button class="chip" data-k="mp" aria-pressed="true">درجة الانصهار (°س)</button><button class="chip" data-k="le" aria-pressed="false">طاقة الشبكة (كج/مول)</button></div>
+    <div class="bars" id="bars"></div>
+    <p class="hint">طاقة الشبكة هي الطاقة اللازمة لفصل أيونات مول واحد من المركب الأيوني بعضها عن بعض. كلما زادت شحنة الأيونات وصغر حجمها زاد التجاذب بينها، فارتفعت طاقة الشبكة ودرجة الانصهار. أيونات <span class="chem">MgO</span> و<span class="chem">CaO</span> شحنتها ±2 بينما شحنة <span class="chem">NaCl</span> ±1.</p>
+  </div>
+  <div class="scroll"><table>
+    <tr><th>الخاصية</th><th>السبب</th></tr>
+    <tr><td>صلبة بلورية</td><td>تجاذب قوي بين الأيونات في شبكة منتظمة</td></tr>
+    <tr><td>درجة انصهارها مرتفعة</td><td>يلزم طاقة كبيرة لكسر التجاذب بين الأيونات</td></tr>
+    <tr><td>هشّة</td><td>الإزاحة تقرّب أيونات متماثلة الشحنة فتتنافر</td></tr>
+    <tr><td>توصل التيار مصهورة أو ذائبة فقط</td><td>تتحرر الأيونات فتنقل الشحنة</td></tr>
+    <tr><td>كثير منها يذوب في الماء</td><td>تجذب جزيئات الماء القطبية الأيونات وتفصلها عن الشبكة</td></tr>
+  </table></div>
+  <div class="key"><b>خلاصة الدرس</b><ul>
+    <li>الرابطة الأيونية قوة تجاذب كهروستاتيكي بين أيون موجب وأيون سالب، وتنشأ عادة بين فلز ولافلز بانتقال الإلكترونات.</li>
+    <li>المركب الأيوني متعادل كهربائيًا؛ تترتب أيوناته في شبكة بلورية وتعبّر صيغته عن وحدة الصيغة.</li>
+    <li>خواصه: صلب بلوري، درجة انصهاره مرتفعة، هش، ويوصل التيار مصهورًا أو ذائبًا فقط (إلكتروليت).</li>
+    <li>كلما زادت شحنة الأيونات وصغر حجمها زادت طاقة الشبكة.</li>
+    <li><b>المصطلحات:</b> الرابطة الأيونية، المركب الأيوني، الشبكة البلورية، وحدة الصيغة، عدد التناسق، طاقة الشبكة البلورية، الإلكتروليت.</li>
+  </ul></div>
+  <div class="next"><button class="btn" data-go="formula">التالي: 3-3 صيغ المركبات الأيونية وأسماؤها ←</button></div>
+</section>
+
+<!-- 3 formula -->
+<section class="panel" id="p-formula" hidden>
+  <h2>3-3 صيغ المركبات الأيونية وأسماؤها</h2>
+  <p class="lead">عدد التأكسد للأيون أحادي الذرة يساوي شحنته. نكتب صيغة المركب الأيوني بموازنة الشحنات حتى يصبح مجموع أعداد التأكسد صفرًا. اختر كاتيونًا وأنيونًا لترى الخطوات.</p>
+  <div class="lab">
+    <div class="pick-label">الكاتيون</div><div class="pick" id="f-cat"></div>
+    <div class="pick-label">الأنيون</div><div class="pick" id="f-an"></div>
+    <div class="out" id="f-out"></div>
+  </div>
+  <h3>قواعد التسمية والكتابة</h3>
+  <div class="key" style="margin-top:8px"><ul style="margin:0">
+    <li>الأيون أحادي الذرة ذرة واحدة مشحونة مثل <span class="chem">Cl⁻</span>، والأيون عديد الذرات مجموعة ذرات مترابطة تحمل شحنة واحدة مثل <span class="chem">SO₄²⁻</span>.</li>
+    <li>يُكتب الكاتيون أولًا ثم الأنيون في الصيغة، ويُذكر الأنيون أولًا في الاسم: كلوريد الصوديوم.</li>
+    <li>اسم الأنيون أحادي الذرة ينتهي بـ «يد»: كلوريد، أكسيد، كبريتيد، نيتريد.</li>
+    <li>الأنيونات عديدة الذرات تحتفظ باسمها: كبريتات، نترات، كربونات، فوسفات، هيدروكسيد.</li>
+    <li>يوضع الأيون عديد الذرات بين قوسين إذا تكرر أكثر من مرة: <span class="chem">Ca(OH)₂</span>.</li>
+    <li>الفلزات التي لها أكثر من شحنة تُكتب شحنتها بالرقم الروماني: حديد (II) وحديد (III).</li>
+    <li><b>المصطلحات:</b> الأيون أحادي الذرة، الأيون عديد الذرات، عدد التأكسد، وحدة الصيغة، المركب الثنائي.</li>
+  </ul></div>
+  <div class="next"><button class="btn" data-go="metal">التالي: 3-4 الروابط الفلزية وخواص الفلزات ←</button></div>
+</section>
+
+<!-- 4 props -->
+<!-- 5 metal -->
+<section class="panel" id="p-metal" hidden>
+  <h2>3-4 الروابط الفلزية وخواص الفلزات</h2>
+  <p class="lead">الرابطة الفلزية قوة تجاذب بين الأيونات الموجبة للفلز وإلكترونات التكافؤ الحرة التي تحيط بها، وتسمى مجتمعة «بحر الإلكترونات».</p>
+
+  <div class="lab">
+    <canvas id="met-cv" style="height:230px"></canvas>
+    <div class="row">
+      <button class="sw" id="m-volt" role="switch" aria-checked="false">طبّق جهدًا كهربائيًا</button>
+      <button class="btn" id="m-hit">اطرق الفلز</button>
+      <button class="btn ghost" id="m-reset">أعد الفلز</button>
+    </div>
+    <div class="out" id="m-msg"></div>
+  </div>
+
+  <div class="cards">
+    <div><b>التوصيل الكهربائي والحراري</b><p>الإلكترونات الحرة تنتقل بسهولة عند تطبيق جهد أو تسخين.</p></div>
+    <div><b>قابلية الطرق والسحب</b><p>تنزلق طبقات الأيونات الموجبة فوق بعضها ويبقى بحر الإلكترونات رابطًا لها دون أن ينكسر الفلز.</p></div>
+    <div><b>البريق</b><p>تمتص الإلكترونات الحرة الضوء وتعيد إطلاقه فيبدو السطح لامعًا.</p></div>
+  </div>
+
+  <h3>الصلادة ودرجة الانصهار</h3>
+  <div class="lab"><div class="bars" id="mbars"></div>
+    <p class="hint">كلما زاد عدد إلكترونات التكافؤ المشاركة في الرابطة الفلزية قويت الرابطة، فارتفعت درجة الانصهار والصلادة. لذلك الفلزات الانتقالية (مثل Cr وFe وW) أصلب وأعلى انصهارًا من فلزات المجموعتين 1 و2.</p></div>
+  <h3>السبائك: لماذا تكون أصلب من الفلز النقي؟</h3>
+  <div class="lab">
+    <div class="pick" id="al-mode">
+      <button class="chip" data-t="pure" aria-pressed="true">فلز نقي</button>
+      <button class="chip" data-t="alloy" aria-pressed="false">سبيكة</button>
+    </div>
+    <svg class="alloy-svg" id="alloy" viewBox="0 0 330 160" role="img" aria-label="ذرات في فلز أو سبيكة"></svg>
+    <div class="row"><button class="btn" id="al-hit">اطرق</button><div style="flex:1;min-width:150px"><span class="hint">الصلادة</span><div class="meter"><i id="al-meter"></i></div></div></div>
+    <div class="out" id="al-msg"></div>
+  </div>
+  <div class="cards" id="alloys"></div>
+
+  <h3>مقارنة بين الرابطة الأيونية والفلزية</h3>
+  <div class="scroll"><table>
+    <tr><th></th><th>مركب أيوني</th><th>فلز</th></tr>
+    <tr><th>الجسيمات</th><td>أيونات موجبة وسالبة</td><td>أيونات موجبة وإلكترونات حرة</td></tr>
+    <tr><th>نوع التجاذب</th><td>بين أيونين مختلفين في الشحنة</td><td>بين الأيونات الموجبة وبحر الإلكترونات</td></tr>
+    <tr><th>التوصيل وهو صلب</th><td>لا يوصل</td><td>يوصل</td></tr>
+    <tr><th>عند الطرق</th><td>يتحطم (هش)</td><td>يتشكل (مطروق)</td></tr>
+  </table></div>
+  <div class="key"><b>خلاصة الدرس</b><ul>
+    <li>الرابطة الفلزية تجاذب بين الأيونات الموجبة وبحر الإلكترونات المتحركة.</li>
+    <li>حرية حركة الإلكترونات تفسر التوصيل، وانزلاق الطبقات يفسر الطرق والسحب.</li>
+    <li>السبيكة خليط من عنصرين أو أكثر أحدهما على الأقل فلز، وله خواص فلزية، وتتميز بصلادة وقوة أكبر من الفلز النقي.</li>
+    <li><b>المصطلحات:</b> الرابطة الفلزية، بحر الإلكترونات، قابلية الطرق، قابلية السحب، السبيكة.</li>
+  </ul></div>
+  <div class="next"><button class="btn" data-go="quiz">التالي: تقويم الفصل ←</button></div>
+</section>
+
+<!-- 6 quiz -->
+<section class="panel" id="p-quiz" hidden>
+  <h2>تقويم الفصل</h2>
+  <p class="lead">٢١ سؤالًا تغطي الدروس 3-1 إلى 3-4، ثم تحدٍّ سريع لموازنة الصيغ.</p>
+  <div class="lab" id="quiz"></div>
+  <h3>تحدي الصيغ السريع</h3>
+  <div class="lab" id="drill"></div>
+</section>
+</div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const gcd=(a,b)=>b?gcd(b,a%b):a;
+const SUPM={'0':'⁰','1':'¹','2':'²','3':'³'};
+const supU=ch=>(Math.abs(ch)>1?String(Math.abs(ch)).replace(/\d/g,d=>SUPM[d]):'')+(ch>0?'⁺':'⁻');
+const supH=ch=>`<sup>${Math.abs(ch)>1?Math.abs(ch):''}${ch>0?'+':'−'}</sup>`;
+const ch=s=>`<span class="chem">${s}</span>`;
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- tabs ---------- */
+const TABS=[['ions','3-1 تكوّن الأيون'],['bond','3-2 الروابط الأيونية والمركبات الأيونية'],['formula','3-3 صيغ المركبات الأيونية وأسماؤها'],['metal','3-4 الروابط الفلزية وخواص الفلزات'],['quiz','تقويم الفصل']];
+let cur='ions';
+function showTab(id,scroll){
+  cur=id;
+  $$('.panel').forEach(p=>p.hidden=p.id!=='p-'+id);
+  $$('.tab').forEach(t=>t.setAttribute('aria-selected',String(t.dataset.t===id)));
+  try{history.replaceState(null,'','#'+id)}catch(e){}
+  if(scroll)window.scrollTo({top:0,behavior:reduce?'auto':'smooth'});
+  const t=$(`.tab[data-t="${id}"]`);t&&t.scrollIntoView({inline:'center',block:'nearest'});
+}
+$('#tabs').innerHTML=TABS.map(([id,n])=>`<button class="tab" role="tab" data-t="${id}" aria-selected="false">${n}</button>`).join('');
+$('#tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(b)showTab(b.dataset.t,true)});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)showTab(b.dataset.go,true)});
+
+/* ---------- elements ---------- */
+const EL={
+ Li:{n:'الليثيوم',z:3,sh:[2,1],m:1},Na:{n:'الصوديوم',z:11,sh:[2,8,1],m:1},K:{n:'البوتاسيوم',z:19,sh:[2,8,8,1],m:1},
+ Mg:{n:'المغنيسيوم',z:12,sh:[2,8,2],m:1},Ca:{n:'الكالسيوم',z:20,sh:[2,8,8,2],m:1},Al:{n:'الألومنيوم',z:13,sh:[2,8,3],m:1},
+ N:{n:'النيتروجين',z:7,sh:[2,5],m:0},O:{n:'الأكسجين',z:8,sh:[2,6],m:0},F:{n:'الفلور',z:9,sh:[2,7],m:0},
+ S:{n:'الكبريت',z:16,sh:[2,8,6],m:0},Cl:{n:'الكلور',z:17,sh:[2,8,7],m:0},Br:{n:'البروم',z:35,sh:[2,8,18,7],m:0}};
+const NOBLE={'2':'الهيليوم He','2,8':'النيون Ne','2,8,8':'الأرجون Ar','2,8,18,8':'الكريبتون Kr'};
+const ANI={F:'فلوريد',Cl:'كلوريد',Br:'بروميد',O:'أكسيد',S:'كبريتيد',N:'نيتريد'};
+function info(s){const e=EL[s],v=e.sh[e.sh.length-1];return{...e,sym:s,v,ch:e.m?v:-(8-v)}}
+const ionShells=s=>{const e=EL[s];return e.m?e.sh.slice(0,-1):[...e.sh.slice(0,-1),8]};
+
+/* ---------- 1) ions ---------- */
+const IS={sym:'Na',ion:false,busy:false};
+function shellPos(shells){const o=[];shells.forEach((k,si)=>{const r=44+si*25;for(let j=0;j<k;j++){const a=2*Math.PI*j/k-Math.PI/2+si*.4;o.push({x:150+r*Math.cos(a),y:150+r*Math.sin(a),si})}});return o}
+function farPos(p){const dx=p.x-150,dy=p.y-150,l=Math.hypot(dx,dy)||1;return{x:150+dx/l*(l+95),y:150+dy/l*(l+95)}}
+function drawAtom(shells,Z,enterFrom,label,lc){
+  const ps=shellPos(shells),last=shells.length-1;let h='';
+  shells.forEach((k,i)=>h+=`<circle cx="150" cy="150" r="${44+i*25}" fill="none" stroke="var(--line)" stroke-width="1.5" stroke-dasharray="4 5"/>`);
+  h+=`<circle cx="150" cy="150" r="24" fill="var(--pos)"/><text x="150" y="156" text-anchor="middle" font-size="15" font-weight="700" fill="var(--pos-ink)">+${Z}</text>`;
+  let idx=0;
+  ps.forEach(p=>{const outer=p.si===last;let enter=false;
+    if(outer&&enterFrom!=null){enter=idx>=enterFrom}
+    if(outer)idx++;
+    const f=farPos(p),st=enter?f:p;
+    h+=`<g class="e" data-outer="${outer?1:0}" data-x="${p.x}" data-y="${p.y}" data-fx="${f.x}" data-fy="${f.y}" data-enter="${enter?1:0}" style="transform:translate(${st.x}px,${st.y}px);opacity:${enter?0:1}"><circle r="6.5" fill="${outer?'var(--glow)':'var(--neg)'}" stroke="${outer?'var(--metal)':'none'}" stroke-width="1.5"/></g>`});
+  if(label)h+=`<text x="280" y="34" text-anchor="end" font-size="30" font-weight="700" fill="${lc}">${label}</text>`;
+  $('#atom').innerHTML=h;
+  if(enterFrom!=null){const go=()=>$$('#atom .e[data-enter="1"]').forEach(g=>{g.style.transform=`translate(${g.dataset.x}px,${g.dataset.y}px)`;g.style.opacity=1});
+    requestAnimationFrame(()=>requestAnimationFrame(go))}
+}
+const ORDER=[['1s',2],['2s',2],['2p',6],['3s',2],['3p',6],['4s',2],['3d',10],['4p',6]];
+const supN=n=>String(n).replace(/\d/g,d=>'⁰¹²³⁴⁵⁶⁷⁸⁹'[d]);
+function cfg(N){const o=[];let n=N;for(const[l,c]of ORDER){if(n<=0)break;const k=Math.min(c,n);o.push([l,k]);n-=k}return o}
+const cfgStr=a=>a.map(([l,k])=>l+supN(k)).join(' ');
+function cfgShort(N){
+  for(const[z,sy]of[[36,'Kr'],[18,'Ar'],[10,'Ne'],[2,'He']]){
+    if(N===z)return `[${sy}]`;
+    if(N>z){const rest=cfg(N).slice(cfg(z).length);return `[${sy}] ${cfgStr(rest)}`}
+  }
+  return cfgStr(cfg(N));
+}
+function dotsSVG(s,n,chg){
+  let d='';for(let i=0;i<n;i++)d+=`<circle cx="${50+SLOTS[i][0]}" cy="${45+SLOTS[i][1]}" r="4.2" fill="var(--neg)"/>`;
+  const b=chg!=null?`<text x="12" y="60" font-size="54" font-weight="300" text-anchor="middle" fill="var(--fg)">[</text><text x="88" y="60" font-size="54" font-weight="300" text-anchor="middle" fill="var(--fg)">]</text><text x="97" y="16" font-size="15" font-weight="700" text-anchor="end" fill="${chg>0?'var(--pos)':'var(--neg)'}">${badgeTxt(chg)}</text>`:'';
+  return `<svg class="ld" viewBox="0 0 100 90"><text x="50" y="52" text-anchor="middle" font-size="22" font-weight="700" fill="var(--fg)">${s}</text>${d}${b}</svg>`;
+}
+function ionRender(){
+  const s=IS.sym,e=info(s);
+  $('#ion-pick').innerHTML=Object.keys(EL).map(k=>`<button class="chip ${EL[k].m?'pos':'neg'}" data-s="${k}" aria-pressed="${k===s}"><span class="chem">${k}</span> ${EL[k].n}</button>`).join('');
+  const sh=ionShells(s),after=NOBLE[sh.join(',')];
+  const rows=[
+   ['النوع',e.m?'فلز: يفقد إلكترونات':'لافلز: يكتسب إلكترونات'],
+   ['إلكترونات التكافؤ',e.v],
+   ['التوزيع على المستويات',`<span class="chem">${(IS.ion?sh:e.sh).join(' , ')}</span>`],
+   ['البروتونات',e.z],
+   ['الإلكترونات',IS.ion?e.z-e.ch:e.z],
+   ['الشحنة',IS.ion?`<span class="chem">${e.ch>0?'+':'−'}${Math.abs(e.ch)}</span>`:'صفر (ذرة متعادلة)']];
+  if(IS.ion)rows.push(['الأيون',`<span class="chem">${s}${supU(e.ch)}</span> ${e.ch>0?'كاتيون':'أنيون'}`],['يشبه تركيب',after||'—']);
+  $('#ion-info').innerHTML='<dl class="facts">'+rows.map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('')+'</dl>';
+  {
+    const N=e.z-e.ch,cA=cfg(e.z),cI=cfg(N),mp=new Map(cI),ch2=Math.abs(e.ch),sy=s+supU(e.ch);
+    const diff=cA.map(([l,k])=>[l,Math.abs(k-(mp.get(l)||0))]).filter(x=>x[1]).map(([l,k])=>l+supN(k)).join(' و ');
+    const eq=e.m?`${s} → ${sy} + ${ch2>1?ch2:''}e⁻`:`${s} + ${ch2>1?ch2:''}e⁻ → ${sy}`;
+    const nob=NOBLE[ionShells(s).join(',')];
+    $('#ion-cfg').innerHTML=`<b>التوزيع الإلكتروني بالمستويات الفرعية:</b>
+    <p style="margin:4px 0">الذرة <span class="chem">${s}</span>: <span class="chem">${cfgStr(cA)}</span> أو <span class="chem">${cfgShort(e.z)}</span></p>
+    <p style="margin:4px 0">الأيون <span class="chem">${sy}</span>: <span class="chem">${cfgStr(cI)}</span> أو <span class="chem">${cfgShort(N)}</span></p>
+    <p style="margin:4px 0">المعادلة: <span class="chem">${eq}</span></p>
+    <p class="hint" style="margin:4px 0 0">${e.m?`فقدت الذرة إلكترونات التكافؤ الأبعد عن النواة (<span class="chem">${diff}</span>).`:`اكتسبت الذرة إلكترونات في المستوى الفرعي <span class="chem">${diff}</span> حتى اكتمل.`} ${nob?`فأصبح تركيب الأيون كتركيب ${nob}.`:''}</p>`;
+  }
+  $('#ion-lewis').innerHTML=`<b>التمثيل النقطي (لويس):</b> <span class="lwp">${dotsSVG(s,e.v)}<span>←</span>${dotsSVG(s,e.m?0:8,e.ch)}</span><p class="hint" style="margin:4px 0 0">${e.m?`فقدت الذرة إلكترونات التكافؤ فلم تبقَ نقاط حول الرمز، وصار الأيون ${e.ch}+ بين قوسين.`:`اكتسبت الذرة ${8-e.v} إلكترونًا فصار حول الرمز ثماني نقاط بين قوسين، والشحنة ${Math.abs(e.ch)}−.`}</p>`;
+  $('#ion-go').textContent=IS.ion?'أعد الذرة المتعادلة':(e.m?`اجعلها تفقد ${e.v} إلكترون`:`اجعلها تكتسب ${8-e.v} إلكترون`);
+  $('#ion-hint').textContent=IS.ion?'':(e.m?'الإلكترونات الصفراء هي إلكترونات التكافؤ.':'ينقصها '+(8-e.v)+' لتكمل الثمانية.');
+}
+function ionDraw(){
+  const s=IS.sym,e=info(s);
+  if(!IS.ion)drawAtom(e.sh,e.z,null,'','');
+  else drawAtom(ionShells(s),e.z,e.m?null:e.v,s+supU(e.ch),e.ch>0?'var(--pos)':'var(--neg)');
+}
+$('#ion-pick').addEventListener('click',ev=>{const b=ev.target.closest('[data-s]');if(!b||IS.busy)return;IS.sym=b.dataset.s;IS.ion=false;ionRender();ionDraw()});
+$('#ion-go').addEventListener('click',()=>{
+  if(IS.busy)return;const e=info(IS.sym);
+  if(IS.ion){IS.ion=false;ionRender();ionDraw();return}
+  if(e.m){IS.busy=true;
+    $$('#atom .e[data-outer="1"]').forEach(g=>{g.style.transform=`translate(${g.dataset.fx}px,${g.dataset.fy}px)`;g.style.opacity=0});
+    setTimeout(()=>{IS.ion=true;IS.busy=false;ionRender();ionDraw()},reduce?50:850);
+  }else{IS.ion=true;ionRender();ionDraw()}
+});
+
+/* ---------- 2) bond ---------- */
+const SLOTS=[[-6,-27],[27,-6],[6,27],[-27,6],[6,-27],[27,6],[-6,27],[-27,-6]];
+const BS={c:'Na',a:'Cl',moved:false};
+const badgeTxt=c=>(Math.abs(c)>1?Math.abs(c):'')+(c>0?'+':'−');
+function lewis(s,E,kind){
+  let d='';const own=E.v;
+  for(let i=0;i<own;i++)d+=`<circle class="d own ${kind==='cat'?'cat-d':''}" cx="${45+SLOTS[i][0]}" cy="${45+SLOTS[i][1]}" r="4.6"/>`;
+  if(kind==='an')for(let i=own;i<8;i++)d+=`<circle class="d gain" cx="${45+SLOTS[i][0]}" cy="${45+SLOTS[i][1]}" r="4.6"/>`;
+  return `<svg class="lw ${kind}" viewBox="0 0 90 90"><circle class="halo" cx="45" cy="45" r="36"/><text class="sym" x="45" y="53">${s}</text>${d}<g class="badge"><circle cx="74" cy="14" r="12"/><text x="74" y="18.5">${badgeTxt(E.ch)}</text></g></svg>`;
+}
+function bondRender(){
+  const C=info(BS.c),A=info(BS.a),c=C.ch,a=-A.ch,g=gcd(c,a),nc=a/g,na=c/g;
+  $('#b-cat').innerHTML=['Li','Na','K','Mg','Ca','Al'].map(k=>`<button class="chip pos" data-s="${k}" aria-pressed="${k===BS.c}"><span class="chem">${k}</span> ${EL[k].n}</button>`).join('');
+  $('#b-an').innerHTML=['F','Cl','Br','O','S','N'].map(k=>`<button class="chip neg" data-s="${k}" aria-pressed="${k===BS.a}"><span class="chem">${k}</span> ${EL[k].n}</button>`).join('');
+  const atoms=(s,E,n,kind)=>Array.from({length:n},()=>`<div class="lw-atom">${lewis(s,E,kind)}<div class="cap" data-kind="${kind}" data-s="${s}">${ch(s)}</div></div>`).join('');
+  const st=$('#lw-stage');st.classList.remove('moved');BS.moved=false;
+  st.innerHTML=`<div class="lw-group">${atoms(BS.c,C,nc,'cat')}</div><div class="lw-arrow">⇄</div><div class="lw-group">${atoms(BS.a,A,na,'an')}</div>`;
+  $('#b-out').innerHTML=`<p>لتتعادل الشحنات نحتاج <b>${nc}</b> ${nc>1?'ذرات':'ذرة'} من ${C.n} و<b>${na}</b> ${na>1?'ذرات':'ذرة'} من ${A.n}.</p><p class="hint">اضغط «انقل الإلكترونات» لترى ما يحدث.</p>`;
+}
+function bondMove(){
+  if(BS.moved)return;BS.moved=true;
+  const C=info(BS.c),A=info(BS.a),c=C.ch,a=-A.ch,g=gcd(c,a),nc=a/g,na=c/g;
+  $('#lw-stage').classList.add('moved');
+  $$('#lw-stage .cap').forEach(el=>{const E=el.dataset.kind==='cat'?C:A;el.innerHTML=ch(el.dataset.s+supU(E.ch))});
+  const f=(s,n)=>s+(n>1?`<sub>${n}</sub>`:'');
+  $('#b-out').innerHTML=`<p>كل ذرة ${C.n} تفقد <b>${c}</b> ${c>1?'إلكترونات':'إلكترونًا'} ← المجموع ${nc*c}</p>
+  <p>كل ذرة ${A.n} تكتسب <b>${a}</b> ${a>1?'إلكترونات':'إلكترونًا'} ← المجموع ${na*a}</p>
+  <p>تتجاذب الأيونات المختلفة الشحنة: رابطة أيونية. الصيغة: <span class="chem big">${f(BS.c,nc)}${f(BS.a,na)}</span> واسمه <b>${ANI[BS.a]} ${C.n}</b></p>`;
+}
+$('#b-cat').addEventListener('click',e=>{const b=e.target.closest('[data-s]');if(b){BS.c=b.dataset.s;bondRender()}});
+$('#b-an').addEventListener('click',e=>{const b=e.target.closest('[data-s]');if(b){BS.a=b.dataset.s;bondRender()}});
+$('#b-go').addEventListener('click',bondMove);
+$('#b-reset').addEventListener('click',bondRender);
+
+/* ---------- 3) formula ---------- */
+const CAT=[
+ {id:'Na',h:'Na',ch:1,n:'الصوديوم'},{id:'K',h:'K',ch:1,n:'البوتاسيوم'},{id:'Li',h:'Li',ch:1,n:'الليثيوم'},{id:'NH4',h:'NH<sub>4</sub>',ch:1,poly:1,n:'الأمونيوم'},
+ {id:'Mg',h:'Mg',ch:2,n:'المغنيسيوم'},{id:'Ca',h:'Ca',ch:2,n:'الكالسيوم'},{id:'Zn',h:'Zn',ch:2,n:'الخارصين'},{id:'Cu1',h:'Cu',ch:1,n:'النحاس (I)'},{id:'Cu',h:'Cu',ch:2,n:'النحاس (II)'},{id:'Ag',h:'Ag',ch:1,n:'الفضة'},{id:'Fe2',h:'Fe',ch:2,n:'الحديد (II)'},
+ {id:'Al',h:'Al',ch:3,n:'الألومنيوم'},{id:'Fe3',h:'Fe',ch:3,n:'الحديد (III)'}];
+const AN=[
+ {id:'Cl',h:'Cl',ch:-1,n:'كلوريد'},{id:'Br',h:'Br',ch:-1,n:'بروميد'},{id:'F',h:'F',ch:-1,n:'فلوريد'},{id:'OH',h:'OH',ch:-1,poly:1,n:'هيدروكسيد'},{id:'NO3',h:'NO<sub>3</sub>',ch:-1,poly:1,n:'نترات'},
+ {id:'O',h:'O',ch:-2,n:'أكسيد'},{id:'S',h:'S',ch:-2,n:'كبريتيد'},{id:'SO4',h:'SO<sub>4</sub>',ch:-2,poly:1,n:'كبريتات'},{id:'CO3',h:'CO<sub>3</sub>',ch:-2,poly:1,n:'كربونات'},{id:'PO4',h:'PO<sub>4</sub>',ch:-3,poly:1,n:'فوسفات'}];
+const FS={c:'Al',a:'O'};
+const part=(i,n)=>n>1?(i.poly?`(${i.h})<sub>${n}</sub>`:`${i.h}<sub>${n}</sub>`):i.h;
+const ionH=i=>`${i.h}${supH(i.ch)}`;
+function formulaRender(){
+  const c=CAT.find(x=>x.id===FS.c),a=AN.find(x=>x.id===FS.a);
+  $('#f-cat').innerHTML=CAT.map(x=>`<button class="chip pos" data-id="${x.id}" aria-pressed="${x.id===FS.c}">${ch(ionH(x))}</button>`).join('');
+  $('#f-an').innerHTML=AN.map(x=>`<button class="chip neg" data-id="${x.id}" aria-pressed="${x.id===FS.a}">${ch(ionH(x))}</button>`).join('');
+  const cc=c.ch,aa=-a.ch,g=gcd(cc,aa),nc=aa/g,na=cc/g;
+  const raw=`${ch(c.h+'<sub>'+aa+'</sub>')} ${ch(a.h+'<sub>'+cc+'</sub>')}`;
+  $('#f-out').innerHTML=`<div class="grid2"><div><div class="chem big">${part(c,nc)}${part(a,na)}</div><div class="name">${a.n} ${c.n}</div></div>
+  <ol class="steps">
+   <li>اكتب الأيونين: ${ch(ionH(c))} و${ch(ionH(a))}</li>
+   <li>بدّل الشحنات (التقاطع): عدد ${ch(c.h)} = ${aa} وعدد ${ch(a.h)} = ${cc}</li>
+   ${g>1?`<li>اقسم على القاسم المشترك ${g} للوصول إلى أبسط نسبة: ${nc} و${na}</li>`:'<li>النسبة أبسط ما يمكن، فلا حاجة للاختصار.</li>'}
+   <li>تحقق من التعادل: ${ch(`(+${cc} × ${nc}) + (−${aa} × ${na}) = 0`)}</li>
+  </ol></div>`;
+}
+$('#f-cat').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b){FS.c=b.dataset.id;formulaRender()}});
+$('#f-an').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b){FS.a=b.dataset.id;formulaRender()}});
+
+/* ---------- 4a) lattice ---------- */
+const lat=$('#lat');let latStage=0;
+function latBuild(){
+  const X=40,Y=34,S=44;let top='',bot='',rep='';
+  for(let r=0;r<5;r++)for(let c=0;c<7;c++){
+    const pos=(r+c)%2===0,x=X+c*S,y=Y+r*S;
+    const s=pos?`<circle cx="${x}" cy="${y}" r="12" fill="var(--pos)"/><text class="sg" x="${x}" y="${y+5}">+</text>`:`<circle cx="${x}" cy="${y}" r="17" fill="var(--neg)"/><text class="sg" x="${x}" y="${y+5}">−</text>`;
+    if(r<2)top+=s;else bot+=s;
+  }
+  for(let c=0;c<7;c++){const x=X+c*S+S/2*0;rep+=`<path d="M${x+22} ${Y+S+8} l5 8 l-10 8 l5 8" fill="none" stroke="var(--bad)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>`}
+  lat.innerHTML=`<g class="mv" id="lat-bot">${bot}</g><g class="mv" id="lat-top">${top}</g><g class="rep">${rep}</g>`;
+  lat.setAttribute('class','lat');latStage=0;
+  $('#lat-msg').textContent='اضغط «اطرق البلورة» لإزاحة طبقة من الأيونات.';
+}
+function latHit(){
+  if(latStage>0)return;latStage=1;lat.classList.add('s1');
+  $('#lat-top').style.transform='translateX(44px)';
+  $('#lat-msg').innerHTML='انزلقت الطبقة العليا مسافة أيون واحد، فجاورت أيونات <b>متماثلة الشحنة</b> (موجب بجانب موجب وسالب بجانب سالب).';
+  setTimeout(()=>{latStage=2;lat.classList.add('s2');$('#lat-top').style.transform='translate(44px,-22px)';
+    $('#lat-msg').innerHTML='تنافرت الأيونات المتماثلة فانشقّت البلورة. لذلك المركبات الأيونية <b>صلبة لكنها هشّة</b>.'},reduce?100:1100);
+}
+$('#lat-hit').addEventListener('click',latHit);
+$('#lat-reset').addEventListener('click',latBuild);
+
+/* ---------- 4b) conduction ---------- */
+const cond={mode:'solid',on:false,ps:[],w:0,h:0};
+const MSG={solid:'الأيونات مثبتة في مواقعها داخل الشبكة، فلا تستطيع نقل الشحنة. المصباح لا يضيء.',
+ sol:'حين يذوب المركب يتفكك إلى أيونات حرة تحيط بها جزيئات الماء. تتحرك الكاتيونات نحو القطب السالب والأنيونات نحو الموجب.',
+ melt:'تحرر الحرارة الأيونات من مواقعها في الشبكة، فتصبح قادرة على الحركة ونقل التيار.'};
+function condUI(){
+  $$('#c-mode .chip').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.m===cond.mode)));
+  const lit=cond.on&&cond.mode!=='solid';
+  $('#lamp').classList.toggle('lit',lit);
+  $('#c-sw').setAttribute('aria-checked',String(cond.on));$('#c-sw').textContent=cond.on?'الدائرة مغلقة':'الدائرة مفتوحة';
+  $('#c-msg').innerHTML=`<p>${MSG[cond.mode]}</p><p><b>${!cond.on?'أغلق الدائرة لتجرب.':(lit?'المصباح يضيء: المركب يوصل التيار.':'المصباح مطفأ: لا يوصل.')}</b></p>`;
+}
+function condInit(w,h){
+  cond.w=w;cond.h=h;cond.ps=[];const x0=54,x1=w-54,y0=30,y1=h-30;
+  for(let r=0;r<4;r++)for(let c=0;c<7;c++){const gx=x0+(x1-x0)*c/6,gy=y0+(y1-y0)*r/3;cond.ps.push({pos:(r+c)%2===0,gx,gy,x:gx,y:gy,vx:0,vy:0})}
+}
+function fitCanvas(cv){const d=devicePixelRatio||1,w=cv.clientWidth,h=cv.clientHeight;if(!w)return null;
+  if(cv.width!==Math.round(w*d)||cv.height!==Math.round(h*d)){cv.width=Math.round(w*d);cv.height=Math.round(h*d)}
+  const x=cv.getContext('2d');x.setTransform(d,0,0,d,0,0);return{x,w,h}}
+const cs=n=>getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+function condTick(t){
+  const c=fitCanvas($('#cond-cv'));if(!c)return;const{x,w,h}=c;
+  if(Math.abs(cond.w-w)>2||!cond.ps.length)condInit(w,h);
+  const pos=cs('--pos'),neg=cs('--neg'),fg=cs('--fg'),surf=cs('--surface2');
+  x.clearRect(0,0,w,h);
+  if(cond.mode==='sol'){x.fillStyle='rgba(80,150,255,.18)';x.fillRect(28,0,w-56,h)}
+  if(cond.mode==='melt'){x.fillStyle='rgba(255,140,40,.2)';x.fillRect(28,0,w-56,h)}
+  x.fillStyle=neg;x.fillRect(8,10,12,h-20);x.fillStyle=pos;x.fillRect(w-20,10,12,h-20);
+  x.fillStyle='#fff';x.font='700 15px sans-serif';x.textAlign='center';x.fillText('−',14,h/2+5);x.fillText('+',w-14,h/2+5);
+  const k=reduce?.4:1;
+  for(const p of cond.ps){
+    if(cond.mode==='solid'){p.x=p.gx+Math.sin(t/220+p.gy)*1.6;p.y=p.gy+Math.cos(t/260+p.gx)*1.6;p.vx=p.vy=0}
+    else{
+      p.vx+=(Math.random()-.5)*.6;p.vy+=(Math.random()-.5)*.6;
+      if(cond.on)p.vx+=p.pos?-.1:.1;
+      p.vx*=.9;p.vy*=.9;p.x+=p.vx*1.8*k;p.y+=p.vy*1.8*k;
+      if(p.y<14){p.y=14;p.vy=Math.abs(p.vy)}if(p.y>h-14){p.y=h-14;p.vy=-Math.abs(p.vy)}
+      if(p.x<34||p.x>w-34){
+        if(cond.on&&((p.pos&&p.x<34)||(!p.pos&&p.x>w-34))){p.x=p.pos?w-60-Math.random()*(w/3):60+Math.random()*(w/3);p.y=20+Math.random()*(h-40)}
+        else{p.x=Math.min(Math.max(p.x,34),w-34);p.vx*=-1}
+      }
+    }
+    const r=p.pos?7:10;x.beginPath();x.arc(p.x,p.y,r,0,7);x.fillStyle=p.pos?pos:neg;x.fill();
+    x.fillStyle='#fff';x.font='700 12px sans-serif';x.textAlign='center';x.fillText(p.pos?'+':'−',p.x,p.y+4.2);
+  }
+}
+$('#c-mode').addEventListener('click',e=>{const b=e.target.closest('[data-m]');if(b){cond.mode=b.dataset.m;condUI()}});
+$('#c-sw').addEventListener('click',()=>{cond.on=!cond.on;condUI()});
+
+/* ---------- 4c) bars ---------- */
+const BARD={mp:{u:'°س',d:[['NaCl',801],['KCl',770],['LiF',845],['CaO',2613],['MgO',2852]]},le:{u:'كج/مول',d:[['NaCl',787],['KCl',715],['LiF',1037],['CaO',3401],['MgO',3791]]}};
+const MB=[['Na',98],['Mg',650],['Al',660],['Fe',1538],['Cr',1907],['W',3422]];
+function mbars(){
+  $('#mbars').innerHTML=MB.map(([n,v])=>`<div class="bar"><span class="chem">${n}</span><div class="tr"><div class="fl ${v>1500?'hi':''}" style="width:0" data-w="${v/3422*100}"></div></div><span class="v">${v.toLocaleString('en')} <small>°س</small></span></div>`).join('');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>$$('#mbars .fl').forEach(f=>f.style.width=f.dataset.w+'%')));
+}
+function barsRender(k){
+  $$('#bar-mode .chip').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.k===k)));
+  const {u,d}=BARD[k],mx=Math.max(...d.map(r=>r[1]));
+  $('#bars').innerHTML=d.map(([n,v])=>`<div class="bar"><span class="chem">${n}</span><div class="tr"><div class="fl ${v>2000?'hi':''}" style="width:0" data-w="${v/mx*100}"></div></div><span class="v">${v.toLocaleString('en')} <small>${u}</small></span></div>`).join('');
+  requestAnimationFrame(()=>requestAnimationFrame(()=>$$('#bars .fl').forEach(f=>f.style.width=f.dataset.w+'%')));
+}
+$('#bar-mode').addEventListener('click',e=>{const b=e.target.closest('[data-k]');if(b)barsRender(b.dataset.k)});
+
+/* ---------- 5a) metal canvas ---------- */
+const met={w:0,es:[],shift:0,target:0,volt:false};
+function metMsg(){
+  $('#m-msg').innerHTML=met.target?'<p>انزلقت الطبقة العليا لكن بحر الإلكترونات ما زال يحيط بالأيونات ويربطها، فلم ينكسر الفلز بل تغيّر شكله: <b>قابل للطرق</b>.</p>'
+   :(met.volt?'<p>تتحرك الإلكترونات الحرة نحو القطب الموجب فينتقل التيار: <b>الفلز موصل جيد</b>.</p>':'<p>الأيونات الموجبة ثابتة في مواقعها، والإلكترونات الحرة تتحرك عشوائيًا بينها.</p>');
+}
+function metTick(){
+  const c=fitCanvas($('#met-cv'));if(!c)return;const{x,w,h}=c;
+  const cols=7,rows=4,sp=Math.min(48,(w-70)/(cols+1)),x0=(w-cols*sp)/2+sp/2,y0=(h-(rows-1)*sp)/2,R=sp*.3;
+  const xmin=x0-sp*.6,xmax0=x0+(cols-1)*sp+sp*.6,ymin=y0-sp*.6,ymax=y0+(rows-1)*sp+sp*.6;
+  if(met.w!==w||!met.es.length){met.w=w;met.es=Array.from({length:44},()=>({x:xmin+Math.random()*(xmax0-xmin),y:ymin+Math.random()*(ymax-ymin),vx:(Math.random()-.5)*2,vy:(Math.random()-.5)*2}))}
+  met.shift+=(met.target-met.shift)*.07;if(Math.abs(met.target-met.shift)<.002)met.shift=met.target;
+  const pos=cs('--metal'),neg=cs('--neg');
+  x.clearRect(0,0,w,h);
+  if(met.volt){x.fillStyle=neg;x.font='700 22px sans-serif';x.textAlign='center';x.fillText('−',14,h/2+7);x.fillStyle=cs('--pos');x.fillText('+',w-14,h/2+7)}
+  const ks=[];
+  for(let r=0;r<rows;r++)for(let q=0;q<cols;q++){
+    const px=x0+q*sp+(r<2?met.shift*sp:0),py=y0+r*sp;ks.push({x:px,y:py});
+    x.beginPath();x.arc(px,py,R,0,7);x.fillStyle=pos;x.fill();
+    x.fillStyle='#fff';x.font=`700 ${sp*.32}px sans-serif`;x.textAlign='center';x.fillText('+',px,py+sp*.11);
+  }
+  const k=reduce?.4:1;
+  for(const e of met.es){
+    e.vx+=(Math.random()-.5)*.5;e.vy+=(Math.random()-.5)*.5;if(met.volt)e.vx+=.14;
+    e.vx*=.92;e.vy*=.92;e.x+=e.vx*2*k;e.y+=e.vy*2*k;
+    const xm=xmax0+(e.y<y0+1.5*sp?met.shift*sp:0);
+    if(e.x>xm)e.x=xmin;if(e.x<xmin)e.x=xm;
+    if(e.y<ymin){e.y=ymin;e.vy=Math.abs(e.vy)}if(e.y>ymax){e.y=ymax;e.vy=-Math.abs(e.vy)}
+    for(const kk of ks){const dx=e.x-kk.x,dy=e.y-kk.y,d=Math.hypot(dx,dy),m=R+5;
+      if(d<m){const nx=dx/(d||1),ny=dy/(d||1);e.x=kk.x+nx*m;e.y=kk.y+ny*m;const dot=e.vx*nx+e.vy*ny;if(dot<0){e.vx-=1.6*dot*nx;e.vy-=1.6*dot*ny}}}
+    x.beginPath();x.arc(e.x,e.y,3.6,0,7);x.fillStyle=neg;x.fill();
+  }
+}
+$('#m-volt').addEventListener('click',()=>{met.volt=!met.volt;$('#m-volt').setAttribute('aria-checked',String(met.volt));$('#m-volt').textContent=met.volt?'الجهد مطبّق':'طبّق جهدًا كهربائيًا';metMsg()});
+$('#m-hit').addEventListener('click',()=>{met.target=1;metMsg()});
+$('#m-reset').addEventListener('click',()=>{met.target=0;metMsg()});
+/* the volt switch reuses the .sw style */
+
+/* ---------- 5b) alloys ---------- */
+const AS={t:'pure'};
+const ATXT={pure:['فلز نقي: ذرات متماثلة في طبقات منتظمة، فتنزلق الطبقات بسهولة.',30],
+ alloy:['سبيكة: تختلط ذرات عنصر آخر مختلفة الحجم بذرات الفلز، فيصعب انزلاق الطبقات وتزداد الصلادة والقوة.',80]};
+const SUBS=[[1,1],[4,0],[5,2],[2,3],[6,1],[0,2]];
+function alloyBuild(){
+  const X=30,Y=26,S=36;let top='',bot='';
+  const isSub=(c,r)=>AS.t==='alloy'&&SUBS.some(p=>p[0]===c&&p[1]===r);
+  for(let r=0;r<4;r++)for(let c=0;c<8;c++){
+    const x=X+c*S,y=Y+r*S,sub=isSub(c,r);
+    const s=`<circle cx="${x}" cy="${y}" r="${sub?18.5:15}" fill="${sub?'var(--accent)':'var(--metal)'}" stroke="var(--surface)" stroke-width="1.5"/>`;
+    if(r<2)top+=s;else bot+=s;
+  }
+  $('#alloy').innerHTML=`<g class="mv" id="al-bot">${bot}</g><g class="mv" id="al-top">${top}</g>`;
+  $$('#al-mode .chip').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.t===AS.t)));
+  $('#al-msg').textContent=ATXT[AS.t][0];$('#al-meter').style.width=ATXT[AS.t][1]+'%';
+}
+$('#al-mode').addEventListener('click',e=>{const b=e.target.closest('[data-t]');if(b){AS.t=b.dataset.t;alloyBuild()}});
+$('#al-hit').addEventListener('click',()=>{
+  const g=$('#al-top');g.classList.remove('slip','block');void g.getBoundingClientRect();
+  if(AS.t==='pure'){g.classList.add('slip');$('#al-msg').textContent='الطبقات انزلقت بسهولة: الفلز النقي يتشوه بالطرق.';setTimeout(()=>g.classList.remove('slip'),1600)}
+  else{g.classList.add('block');$('#al-msg').textContent='الذرات المختلفة الحجم منعت الانزلاق: السبيكة تقاوم التشوه.'}
+});
+const ALLOYS=[['الفولاذ (الصلب)','سبيكة من الحديد والكربون','يُستخدم في هياكل المباني ودعاماتها'],['سبيكة التيتانيوم','سبيكة خفيفة وقوية','تُصنع منها أحيانًا أجزاء الدراجات الهوائية']];
+$('#alloys').innerHTML=ALLOYS.map(a=>`<div><b>${a[0]}</b><p>${a[1]}</p><p>${a[2]}</p></div>`).join('');
+
+/* ---------- 6) quiz ---------- */
+const Q=[
+{q:`عدد إلكترونات التكافؤ في ذرة الصوديوم ${ch('Na')} (توزيعها 2 ، 8 ، 1) هو:`,o:['1','2','7','8'],a:0,e:`الإلكترون الوحيد في المستوى الأخير هو إلكترون التكافؤ، فتفقده الذرة بسهولة وتصبح ${ch('Na⁺')}.`},
+{q:'عند فقد ذرة المغنيسيوم إلكترونين تتحول إلى:',o:[`${ch('Mg²⁺')} كاتيون`,`${ch('Mg²⁻')} أنيون`,`${ch('Mg⁺')} كاتيون`,'ذرة متعادلة'],a:0,e:'يبقى 12 بروتونًا مقابل 10 إلكترونات، فالشحنة +2.'},
+{q:'أي الأيونات الآتية له تركيب النيون (2 ، 8)؟',o:[ch('Cl⁻'),ch('K⁺'),ch('Na⁺'),ch('S²⁻')],a:2,e:`${ch('Na⁺')} تركيبه (2 ، 8)، أما الباقي فتركيبه (2 ، 8 ، 8) كالأرجون.`},
+{q:'تنشأ الرابطة الأيونية نتيجة:',o:['تشارك زوج من الإلكترونات','انتقال إلكترونات وتجاذب كهروستاتيكي بين أيونين مختلفين في الشحنة','حركة بحر من الإلكترونات بين أيونات موجبة','تداخل المستويات الفرعية'],a:1,e:'يفقد الفلز إلكترونات ويكتسبها اللافلز، ثم تتجاذب الأيونات الناتجة.'},
+{q:'صيغة أكسيد الألومنيوم:',o:[ch('AlO'),ch('Al₂O₃'),ch('Al₃O₂'),ch('Al₂O')],a:1,e:`${ch('Al³⁺')} و${ch('O²⁻')}: تقاطع الشحنات يعطي ${ch('Al₂O₃')}، ومجموع الشحنات (+6) + (−6) = 0.`},
+{q:'صيغة كبريتات الصوديوم:',o:[ch('NaSO₄'),ch('Na₂SO₄'),ch('Na(SO₄)₂'),ch('Na₂S')],a:1,e:'الكبريتات SO₄²⁻ تحتاج أيونين من Na⁺. لا قوسين لأن الكبريتات لم تتكرر.'},
+{q:`اسم المركب ${ch('Ca(OH)₂')}:`,o:['أكسيد الكالسيوم','هيدروكسيد الكالسيوم','هيدريد الكالسيوم','كربونات الكالسيوم'],a:1,e:'OH⁻ هو أيون الهيدروكسيد.'},
+{q:`اسم المركب ${ch('FeCl₃')}:`,o:['كلوريد الحديد (II)','كلوريد الحديد (III)','كلوريد الحديد','ثلاثي كلوريد الحديد'],a:1,e:'ثلاثة أيونات Cl⁻ تعادلها شحنة +3، فالحديد Fe³⁺ أي حديد (III).'},
+{q:'سبب هشاشة البلورة الأيونية عند الطرق عليها:',o:['ضعف الروابط الأيونية جدًا','انزلاق الطبقات يقرّب أيونات متماثلة الشحنة فتتنافر','وجود إلكترونات حرة','ذوبانها في الماء'],a:1,e:'التنافر بين الأيونات المتماثلة يشق البلورة.'},
+{q:'يوصل المركب الأيوني التيار الكهربائي عندما يكون:',o:['صلبًا','مصهورًا أو ذائبًا في الماء','مسحوقًا جافًا','بلورة نقية'],a:1,e:'التوصيل يحتاج جسيمات مشحونة حرة الحركة، والأيونات في الصلب مثبتة.'},
+{q:'أي المركبات الآتية له أعلى درجة انصهار؟',o:[ch('NaCl'),ch('KCl'),ch('LiF'),ch('MgO')],a:3,e:`أيونات ${ch('MgO')} شحنتها ±2 فطاقة الشبكة أكبر كثيرًا (درجة الانصهار نحو 2852 °س).`},
+{q:'تفسَّر الرابطة الفلزية بأنها:',o:['انتقال إلكترونات من فلز إلى لافلز','تشارك زوج من الإلكترونات بين ذرتين','تجاذب بين أيونات موجبة وبحر من الإلكترونات المتحركة','تجاذب بين جزيئات قطبية'],a:2,e:'الإلكترونات الحرة هي الرابط بين الأيونات الموجبة.'},
+{q:'قابلية الفلزات للطرق والسحب سببها:',o:['انزلاق طبقات الأيونات الموجبة مع بقاء بحر الإلكترونات رابطًا لها','تنافر الأيونات المتشابهة','ضعف التجاذب بين الذرات','انتقال الإلكترونات إلى اللافلز'],a:0,e:'الرابطة الفلزية لا تنكسر عند الانزلاق لأن الإلكترونات الحرة تتحرك مع الأيونات.'},
+{q:'السبيكة هي:',o:['مركب أيوني من فلز ولافلز','خليط من عنصرين أو أكثر أحدهما على الأقل فلز','عنصر فلزي نقي','محلول مائي لملح'],a:1,e:'مثل الفولاذ (حديد وكربون).'},
+{q:'الفولاذ (الصلب) سبيكة من:',o:['حديد وكربون','نحاس وقصدير','نحاس وخارصين','ألومنيوم ومغنيسيوم'],a:0,e:'يُستخدم الفولاذ في هياكل المباني ودعاماتها لقوته.'},
+{q:'مجموع الشحنات الموجبة والسالبة في المركب الأيوني يساوي:',o:['موجبًا','سالبًا','صفرًا','يختلف حسب الأيونات'],a:2,e:'المركب الأيوني متعادل كهربائيًا.'},
+{q:'طاقة الشبكة البلورية هي الطاقة اللازمة:',o:['لتكوين مول واحد من الأيونات من ذراتها','لفصل أيونات مول واحد من المركب الأيوني بعضها عن بعض','لانتقال إلكترون واحد من الفلز','لإذابة المركب في الماء'],a:1,e:'كلما زادت شحنة الأيونات وقل حجمها زادت طاقة الشبكة.'},
+{q:'الإلكتروليت مركب:',o:['يوصل التيار وهو صلب','أيوني يوصل محلوله المائي أو مصهوره التيار الكهربائي','لا يتأين في الماء','فلزي ينقل الإلكترونات الحرة'],a:1,e:'لأن الأيونات تصبح حرة الحركة في المحلول أو المصهور.'},
+{q:`التمثيل النقطي لأيون ${ch('Cl⁻')} هو:`,o:['رمز Cl وسبع نقاط بلا أقواس','رمز Cl وثماني نقاط بين قوسين مع شحنة 1−','رمز Cl بلا نقاط','رمز Cl ونقطة واحدة وشحنة 1+'],a:1,e:'اكتسبت ذرة الكلور (7 إلكترونات تكافؤ) إلكترونًا فاكتملت الثمانية.'},
+{q:`التوزيع الإلكتروني لأيون ${ch('Mg²⁺')} هو:`,o:[ch('1s² 2s² 2p⁶ 3s²'),ch('1s² 2s² 2p⁶'),ch('1s² 2s² 2p⁶ 3s² 3p²'),ch('1s² 2s² 2p⁴')],a:1,e:`فقدت ذرة ${ch('Mg')} إلكتروني 3s فأصبح تركيبها كتركيب النيون ${ch('[Ne]')}.`},
+{q:'أي الفلزات الآتية له أعلى درجة انصهار؟',o:['الصوديوم Na','المغنيسيوم Mg','الألومنيوم Al','الكروم Cr'],a:3,e:'الفلزات الانتقالية تشارك بإلكترونات تكافؤ أكثر في الرابطة الفلزية فتقوى الرابطة.'}];
+const QS={i:0,s:0,done:false,order:[]};
+function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function quizRender(){
+  const box=$('#quiz');
+  if(QS.i>=Q.length){const p=Math.round(QS.s/Q.length*100);
+    box.innerHTML=`<div class="name">نتيجتك: ${QS.s} من ${Q.length}</div><p>${p>=90?'ممتاز! أتقنت الدرس.':p>=70?'جيد جدًا. راجع الأسئلة التي أخطأت فيها.':'حاول مرة أخرى بعد مراجعة الدروس في الأعلى.'}</p><button class="btn" id="q-again">أعد التحدي</button>`;
+    $('#q-again').onclick=()=>{QS.i=0;QS.s=0;quizRender()};return}
+  const q=Q[QS.i];QS.order=shuffle(q.o.map((t,k)=>({t,k})));QS.done=false;
+  box.innerHTML=`<div class="qmeta"><span>السؤال ${QS.i+1} من ${Q.length}</span><span>الدرجة: ${QS.s}</span></div><div class="prog"><i style="width:${QS.i/Q.length*100}%"></i></div>
+  <div class="q">${q.q}</div>${QS.order.map((o,n)=>`<button class="opt" data-n="${n}">${o.t}</button>`).join('')}<div id="q-ex"></div>`;
+}
+$('#quiz').addEventListener('click',e=>{
+  const b=e.target.closest('.opt');if(!b||QS.done)return;QS.done=true;
+  const q=Q[QS.i],n=+b.dataset.n,ok=QS.order[n].k===q.a;
+  if(ok)QS.s++;
+  $$('#quiz .opt').forEach((x,m)=>{if(QS.order[m].k===q.a)x.classList.add('right')});
+  if(!ok)b.classList.add('wrong');
+  $('#q-ex').innerHTML=`<div class="expl"><b>${ok?'إجابة صحيحة':'إجابة خاطئة'}</b><p style="margin:4px 0 0">${q.e}</p></div><div class="row"><button class="btn" id="q-next">${QS.i===Q.length-1?'عرض النتيجة':'السؤال التالي'}</button></div>`;
+  $('#q-next').onclick=()=>{QS.i++;quizRender()};
+});
+
+/* drill */
+const D={c:null,a:null,nc:1,na:1,streak:0,fb:''};
+function drillNew(){
+  const cs_=['Na','K','Mg','Ca','Al','Fe3','Zn','NH4'].map(id=>CAT.find(x=>x.id===id)),as=['Cl','O','S','SO4','OH','NO3','PO4','CO3'].map(id=>AN.find(x=>x.id===id));
+  D.c=cs_[Math.floor(Math.random()*cs_.length)];D.a=as[Math.floor(Math.random()*as.length)];D.nc=1;D.na=1;D.fb='';drillRender();
+}
+function drillRender(){
+  $('#drill').innerHTML=`<p style="margin:0">كوّن مركبًا من ${ch(ionH(D.c))} و${ch(ionH(D.a))} بضبط عدد كل أيون:</p>
+  <div class="step"><span>عدد الكاتيون</span><button data-d="nc-">−</button><output>${D.nc}</output><button data-d="nc+">+</button></div>
+  <div class="step"><span>عدد الأنيون</span><button data-d="na-">−</button><output>${D.na}</output><button data-d="na+">+</button></div>
+  <div class="chem big">${part(D.c,D.nc)}${part(D.a,D.na)}</div>
+  <div class="row"><button class="btn" id="d-check">تحقق</button><button class="btn ghost" id="d-new">مركب آخر</button><span class="hint">المتتالية الصحيحة: ${D.streak}</span></div>
+  <div class="fb" id="d-fb">${D.fb}</div>`;
+}
+$('#drill').addEventListener('click',e=>{
+  const s=e.target.closest('[data-d]');
+  if(s){const k=s.dataset.d;if(k==='nc+')D.nc=Math.min(6,D.nc+1);if(k==='nc-')D.nc=Math.max(1,D.nc-1);if(k==='na+')D.na=Math.min(6,D.na+1);if(k==='na-')D.na=Math.max(1,D.na-1);D.fb='';drillRender();return}
+  if(e.target.id==='d-new'){drillNew();return}
+  if(e.target.id==='d-check'){
+    const tot=D.c.ch*D.nc+D.a.ch*D.na,g=gcd(D.c.ch,-D.a.ch),okc=-D.a.ch/g,oka=D.c.ch/g;
+    if(D.nc===okc&&D.na===oka){D.streak++;D.fb=`<span style="color:var(--ok)">صحيح! ${D.c.n&&''}المجموع = 0 وهي أبسط نسبة.</span>`}
+    else{D.streak=0;D.fb=tot===0?`<span style="color:var(--bad)">الشحنات متعادلة لكن النسبة ليست الأبسط. اختصرها.</span>`:`<span style="color:var(--bad)">مجموع الشحنات الآن ${tot>0?'+':'−'}${Math.abs(tot)}، يجب أن يصبح صفرًا.</span>`}
+    drillRender();
+  }
+});
+
+/* ---------- loop & init ---------- */
+function loop(t){if(cur==='bond')condTick(t);if(cur==='metal')metTick();requestAnimationFrame(loop)}
+ionRender();ionDraw();bondRender();formulaRender();latBuild();condUI();barsRender('mp');mbars();metMsg();alloyBuild();quizRender();drillNew();
+const h=(location.hash||'').slice(1);showTab(TABS.some(t=>t[0]===h)?h:'ions',false);
+requestAnimationFrame(loop);
+</script>
+
+</body></html>

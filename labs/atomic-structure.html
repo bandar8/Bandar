@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مكونات الذرة — درس تفاعلي</title>
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#f4f2ee; --grid:#e6e1d8; --surface:#ffffff; --soft:#eeebe3; --ink:#231b12; --muted:#6b6152; --line:#dcd5c7;
+  --btn:#231b12; --btn-ink:#ffffff; --amber:#c17a2e; --amber-soft:#f6e5cf;
+  --sig:#1f6f6b; --pi:#5a4a8f; --a1:#2c6e8f;
+  --ok:#1f7a4d; --ok-soft:#e1f2e7; --no:#b3392b; --no-soft:#fbe6e2;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#181410; --grid:#241f18; --surface:#221d16; --soft:#2a2419; --ink:#efe8db; --muted:#b4a891; --line:#3a3225;
+    --btn:#efe8db; --btn-ink:#181410; --amber-soft:#3c2c14;
+    --sig:#4fbcb5; --pi:#a394e0; --a1:#6fb3d8;
+    --ok:#5fce8f; --ok-soft:#173324; --no:#e87c6d; --no-soft:#3a1e18;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#181410; --grid:#241f18; --surface:#221d16; --soft:#2a2419; --ink:#efe8db; --muted:#b4a891; --line:#3a3225;
+  --btn:#efe8db; --btn-ink:#181410; --amber-soft:#3c2c14;
+  --sig:#4fbcb5; --pi:#a394e0; --a1:#6fb3d8;
+  --ok:#5fce8f; --ok-soft:#173324; --no:#e87c6d; --no-soft:#3a1e18;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);-webkit-text-size-adjust:100%}
+body{
+  margin:0;background-color:var(--bg);color:var(--ink);
+  background-image:radial-gradient(var(--grid) 1.1px,transparent 1.1px);
+  background-size:22px 22px;
+  font-family:'IBM Plex Sans Arabic',system-ui,'Segoe UI',Tahoma,Arial,sans-serif;
+  font-size:16.5px;line-height:1.85;
+}
+h1,h2,h3{font-family:'IBM Plex Sans Arabic',system-ui,Tahoma,sans-serif;line-height:1.4;margin:0}
+p{margin:.4em 0}
+.app{max-width:820px;margin:0 auto;padding:0 14px 110px}
+
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px 0 10px}
+.top h1{font-size:1.3rem;font-weight:700}
+.top small{color:var(--muted);font-size:.85rem}
+.pts{background:var(--amber);color:#241200;border-radius:999px;padding:4px 14px;font-weight:700;white-space:nowrap}
+.pts.pop{animation:pop .35s}
+@keyframes pop{50%{transform:scale(1.18)}}
+
+.stepper{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;gap:6px;overflow-x:auto;padding:8px 0 9px;border-bottom:2px solid var(--ink);scrollbar-width:none}
+.stepper::-webkit-scrollbar{display:none}
+.stp{flex:0 0 auto;font:inherit;font-size:.86rem;border:1.5px solid var(--line);background:var(--surface);color:var(--muted);border-radius:10px;padding:3px 11px;cursor:pointer}
+.stp b{font-family:'IBM Plex Sans Arabic',sans-serif;margin-inline-end:5px}
+.stp.done{color:var(--ink);border-color:var(--ink)}
+.stp.on{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}
+.bar{height:4px;background:var(--line);border-radius:4px;margin:0 0 6px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--amber);transition:width .4s}
+
+.step{display:none}
+.step.on{display:block}
+.step>h2{font-size:1.45rem;margin:18px 0 4px}
+.lead{color:var(--muted);margin:0 0 8px}
+.card{background:var(--surface);border:1.5px solid var(--ink);border-radius:14px;padding:15px 16px;margin:14px 0}
+.note{border-inline-start:5px solid var(--amber);background:var(--amber-soft);padding:10px 14px;border-radius:6px 12px 12px 6px;margin:12px 0}
+.def{border-inline-start:5px solid var(--ink);background:var(--surface);padding:10px 14px;margin:12px 0;border-radius:6px 12px 12px 6px}
+.def strong{font-family:'IBM Plex Sans Arabic',sans-serif}
+.btn{font:inherit;font-weight:600;border:1.5px solid var(--ink);background:var(--surface);color:var(--ink);padding:7px 15px;border-radius:11px;cursor:pointer}
+.btn:hover{background:var(--soft)}
+.btn.pri{background:var(--btn);color:var(--btn-ink)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn:focus-visible,.stp:focus-visible,.opt:focus-visible,.ionBtn:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.hide{display:none!important}
+ul.goals{margin:8px 0 0;padding-inline-start:22px}
+ul.goals li{margin:3px 0}
+
+.fb{margin-top:8px;padding:8px 12px;border-radius:10px}
+.fb.ok{background:var(--ok-soft);border:1.5px solid var(--ok)}
+.fb.no{background:var(--no-soft);border:1.5px solid var(--no)}
+.opts{display:grid;gap:8px;margin-top:10px}
+.opt{font:inherit;text-align:start;border:1.5px solid var(--ink);background:var(--surface);color:var(--ink);border-radius:11px;padding:9px 13px;cursor:pointer}
+.opt:hover{background:var(--soft)}
+.opt.right{background:var(--ok-soft);border-color:var(--ok)}
+.opt.wrong{background:var(--no-soft);border-color:var(--no)}
+.opt:disabled{cursor:default}
+.qn{font-size:.85rem;color:var(--muted)}
+.ionBtn{font:inherit;font-size:.95rem;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:10px;padding:6px 12px;cursor:pointer}
+.ionBtn.on{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}
+
+table.cmp{width:100%;border-collapse:collapse;font-size:.88rem}
+table.cmp td,table.cmp th{border-bottom:1px solid var(--line);padding:5px 6px;text-align:start}
+.wrapx{overflow-x:auto}
+table.cmp td.hl,table.cmp th.hl{background:var(--soft)}
+table.cmp tr.hlrow td{background:var(--amber-soft)}
+
+.score{font-family:'IBM Plex Sans Arabic',sans-serif;font-size:2.6rem;text-align:center;margin:0}
+.pager{position:fixed;left:0;right:0;bottom:0;z-index:6;background:var(--bg);border-top:2px solid var(--ink);padding:9px 14px calc(9px + env(safe-area-inset-bottom,0px))}
+.pager div{max-width:820px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.pager .btn[disabled]{opacity:.35;cursor:default}
+#pageLbl{color:var(--muted);font-size:.9rem}
+
+/* ---- ancient ideas: Greek philosophers ---- */
+.philRow{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.philCard{flex:1 1 220px;max-width:260px;background:var(--surface);border:1.5px solid var(--ink);border-radius:14px;padding:12px;text-align:center}
+.philVis{height:92px;border-radius:10px;margin:8px 0;display:flex;align-items:center;justify-content:center;gap:4px;flex-wrap:wrap;padding:8px;background:var(--soft)}
+.atomDot{width:11px;height:11px;border-radius:50%;background:var(--a1);border:1.5px solid var(--ink)}
+.continuumBlock{width:100%;height:100%;border-radius:8px;background:repeating-linear-gradient(135deg,#8a8f98,#8a8f98 8px,#767c86 8px,#767c86 16px)}
+.philVsLbl{font-weight:800;color:var(--muted);text-align:center;margin:6px 0}
+
+/* ---- flip cards (reused for particle properties & Dalton's postulates) ---- */
+.flipRow{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:10px 0}
+.flipCard{width:142px;height:152px;perspective:700px;cursor:pointer}
+.flipInner{position:relative;width:100%;height:100%;transition:transform .5s;transform-style:preserve-3d}
+.flipCard.on .flipInner{transform:rotateY(180deg)}
+.flipFace{position:absolute;inset:0;backface-visibility:hidden;border:1.5px solid var(--ink);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px;text-align:center;gap:4px}
+.flipFront{background:var(--surface)}
+.flipFront .sym{font-size:1.8rem;font-weight:800}
+.flipBack{background:var(--soft);transform:rotateY(180deg);font-size:.78rem;line-height:1.5}
+
+/* ---- CRT (cathode ray tube) ---- */
+.crtStage{position:relative;height:190px;border-radius:16px;direction:ltr;overflow:hidden;background:#0c0c0c;border:1.5px solid var(--ink)}
+.crtTube{position:absolute;inset:12px;border:2px solid #555;border-radius:34px;background:radial-gradient(circle at 30% 30%,#1c1c1c,#060606 75%)}
+.crtCathode{position:absolute;left:1%;top:50%;transform:translateY(-50%);width:16px;height:52px;background:#666;border:2px solid #ddd;border-radius:3px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:.75rem}
+.crtPlateTop{position:absolute;left:36%;top:17%;width:28%;height:6px;background:#8a8a8a;border-radius:3px}
+.crtPlateBot{position:absolute;left:36%;top:78%;width:28%;height:6px;background:#8a8a8a;border-radius:3px}
+.crtPlateLbl{position:absolute;color:#cfcfcf;font-size:.72rem;font-weight:800}
+.crtRay1{position:absolute;left:9%;top:50%;height:3px;width:0;background:#7af25a;box-shadow:0 0 9px #7af25a;transition:width .5s}
+.crtRay2{position:absolute;left:50%;top:50%;height:3px;width:0;background:#7af25a;box-shadow:0 0 9px #7af25a;transform-origin:0% 50%;transform:rotate(0deg);transition:width .5s,transform .7s}
+.crtScreen{position:absolute;right:2%;top:10%;bottom:10%;width:8px;background:#1c1c1c;border:2px solid #555;border-radius:3px}
+.crtGlow{position:absolute;right:3.6%;top:48%;width:15px;height:15px;border-radius:50%;background:#7af25a;box-shadow:0 0 18px 7px #7af25a;opacity:0;transform:translateY(-50%);transition:opacity .3s,top .7s}
+
+/* ---- Millikan oil drop ---- */
+.oilStage{position:relative;height:170px;background:var(--soft);border-radius:16px;overflow:hidden}
+.oilPlateTop{position:absolute;left:12%;right:12%;top:12%;height:6px;background:var(--ink);border-radius:3px}
+.oilPlateBot{position:absolute;left:12%;right:12%;bottom:12%;height:6px;background:var(--ink);border-radius:3px}
+.oilPlateLbl{position:absolute;font-weight:800;color:var(--ink)}
+.oilDrop{position:absolute;left:50%;top:80%;width:15px;height:15px;border-radius:50%;background:#c17a2e;transform:translate(-50%,-50%);transition:top 1.5s cubic-bezier(.3,.7,.3,1);box-shadow:0 0 6px rgba(0,0,0,.35)}
+.oilDrop.falling{animation:oilFall 2.6s linear infinite}
+@keyframes oilFall{0%{top:15%}100%{top:83%}}
+.fArrow{position:absolute;left:50%;width:3px;transform:translateX(-50%);opacity:0;transition:opacity .4s}
+.fArrow.on{opacity:1}
+.fArrow.grav{top:50%;height:30px;background:var(--no)}
+.fArrow.grav::after{content:'';position:absolute;bottom:-7px;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:var(--no)}
+.fArrow.elec{top:20%;height:30px;background:var(--a1)}
+.fArrow.elec::after{content:'';position:absolute;top:-7px;left:50%;transform:translateX(-50%);border:6px solid transparent;border-bottom-color:var(--a1)}
+
+/* ---- Thomson model (positive sphere with embedded electrons) ---- */
+.puddingStage{display:flex;justify-content:center;padding:12px 0}
+.puddingBall{position:relative;width:176px;height:176px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#f3c08f,#d98b4a 72%);border:2px solid var(--ink);overflow:hidden}
+.pplus{position:absolute;transform:translate(-50%,-50%);color:#6b2e0a;font-weight:800;font-size:1rem;line-height:1;text-shadow:0 1px 0 rgba(255,255,255,.35);user-select:none}
+.pelec{position:absolute;width:13px;height:13px;border-radius:50%;background:var(--a1);border:1.5px solid var(--ink);transform:translate(-50%,-50%);animation:jiggle 2.6s ease-in-out infinite;z-index:2}
+@keyframes jiggle{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(calc(-50% + 3px),calc(-50% - 3px))}}
+
+/* ---- Rutherford: real scintillation detector screen ---- */
+.rfKey{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin:6px 0;font-size:.82rem}
+.rfKeyDot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-inline-end:4px;vertical-align:middle}
+.rfScreen{position:relative;width:270px;height:270px;max-width:100%;margin:10px auto;border-radius:50%;border:2px solid var(--ink);background:radial-gradient(circle,var(--surface) 55%,var(--soft) 100%);direction:ltr}
+.rfScreenFoil{position:absolute;left:50%;top:8%;bottom:8%;width:5px;background:linear-gradient(180deg,#e2c15c,#b8872a);transform:translateX(-50%);border-radius:2px;z-index:2;box-shadow:0 0 6px rgba(184,135,42,.6)}
+.rfScreenBeam{position:absolute;left:4%;top:50%;width:46%;height:0;border-top:2px dashed var(--muted);transform:translateY(-50%);z-index:1}
+.rfScreenBeamLbl{position:absolute;left:5%;top:38%;width:40%;font-size:.66rem;color:var(--muted);font-weight:700}
+.rfScreenSrc{position:absolute;left:1%;top:50%;width:11px;height:11px;border-radius:50%;background:var(--ink);transform:translate(-50%,-50%);z-index:2}
+.rfAngleLbl{position:absolute;font-size:.7rem;color:var(--muted);font-weight:800;transform:translate(-50%,-50%);text-align:center;line-height:1.3}
+.rfFlash{position:absolute;width:10px;height:10px;border-radius:50%;background:#7af25a;box-shadow:0 0 11px 5px rgba(122,242,90,.85);transform:translate(-50%,-50%);animation:rfFlashPop .9s ease-out forwards;z-index:3}
+@keyframes rfFlashPop{0%{opacity:0;transform:translate(-50%,-50%) scale(.3)}18%{opacity:1;transform:translate(-50%,-50%) scale(1.3)}100%{opacity:0;transform:translate(-50%,-50%) scale(1)}}
+.rfSteps{margin:10px 0;padding-inline-start:22px;font-size:.88rem;color:var(--muted)}
+.rfSteps li{margin:3px 0}
+.rfCounters{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:8px;font-size:.82rem}
+.rfCounters b{display:block;font-size:1.15rem}
+.rfCBox{background:var(--surface);border:1.5px solid var(--line);border-radius:10px;padding:6px 12px;text-align:center;min-width:92px}
+
+/* ---- nuclear atom mini diagram ---- */
+.miniAtom{position:relative;width:170px;height:170px;margin:10px auto}
+.miniNuc{position:absolute;left:50%;top:50%;width:18px;height:18px;border-radius:50%;background:#a8451f;border:2px solid #5c230d;transform:translate(-50%,-50%)}
+.miniOrbit{position:absolute;left:50%;top:50%;border:1.5px dashed var(--line);border-radius:50%;transform:translate(-50%,-50%)}
+.miniE{position:absolute;width:10px;height:10px;border-radius:50%;background:var(--a1);border:1.5px solid var(--ink);transform:translate(-50%,-50%)}
+
+/* ---- atom builder ---- */
+.buildStage{position:relative;height:260px;background:var(--soft);border-radius:16px;overflow:hidden}
+.nucleusWrap{position:absolute;left:50%;top:50%;width:0;height:0}
+.nucPart{position:absolute;width:15px;height:15px;border-radius:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:800;color:#fff;border:1.5px solid rgba(0,0,0,.35)}
+.nucPart.p{background:#d8453a}
+.nucPart.n{background:#8d8d8d}
+.electronLayer{position:absolute;left:50%;top:50%;width:0;height:0;animation:orbitspin 16s linear infinite}
+.elecDot{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--a1);border:2px solid var(--ink);transform:translate(-50%,-50%)}
+@keyframes orbitspin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.counterBox{text-align:center;background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:8px 14px}
+.counterBox .lbl{font-size:.82rem;color:var(--muted);margin-bottom:3px}
+.counterBox b{font-size:1.3rem;min-width:26px;display:inline-block}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="top">
+    <div>
+      <h1>مكونات الذرة</h1>
+      <small>كيمياء 1 – أول ثانوي – من الفلاسفة الإغريق إلى نموذج الذرة الحديث</small>
+    </div>
+    <div class="pts" id="ptsBox">⭐ <span id="pts">0</span></div>
+  </header>
+
+  <nav class="stepper" id="stepper" aria-label="مراحل الدرس"></nav>
+  <div class="bar"><i id="barFill"></i></div>
+
+  <main>
+    <!-- 0: hook -->
+    <section class="step on" id="s0">
+      <div class="miniAtom" id="heroAtom"></div>
+      <div class="card">
+        <h3>كيف عرف العلماء ما بداخل الذرة؟</h3>
+        <p>الذرة أصغر من أن تُرى بأي مجهر عادي. صحيح أن العلماء اليوم يستطيعون تصوير الذرات مباشرة بمجاهر متطورة جدًّا، لكن هذا لم يكن ممكنًا على مدى معظم التاريخ. فكيف توصّل العلماء إلى فكرة الذرة ومكوناتها قبل أن يتمكنوا من رؤيتها؟</p>
+        <div class="note">في هذا الدرس ستعيش هذه الرحلة بالترتيب التاريخي: من جدل الفلاسفة الإغريق القدماء، إلى نظرية دالتون، إلى اكتشاف الإلكترون، فنموذج طومسون، فتجربة رذرفورد الشهيرة، وصولًا إلى البروتون والنيوترون — وستبني ذرتك الخاصة في النهاية!</div>
+      </div>
+      <div class="card">
+        <h3>بعد هذا الدرس ستكون قادرًا على أن:</h3>
+        <ul class="goals">
+          <li>تقارن بين نظرة الفلاسفة الإغريق لتركيب المادة.</li>
+          <li>تذكر بنود نظرية دالتون الذرية.</li>
+          <li>تَصِف تجربة أشعة المهبط ودورها في اكتشاف الإلكترون.</li>
+          <li>تُفسّر نموذج طومسون للذرة.</li>
+          <li>تَصِف تجربة رذرفورد واستنتاجاتها حول نواة الذرة.</li>
+          <li>تُقارن بين خواص الإلكترون والبروتون والنيوترون.</li>
+          <li>تَبني نموذجًا للذرة محدِّدًا عدد كل من جسيماتها.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 1: Greek philosophers -->
+    <section class="step" id="s1">
+      <h2>الأفكار القديمة للمادة: الفلاسفة الإغريق</h2>
+      <p>قبل آلاف السنين، تساءل الفلاسفة الإغريق: هل يمكن تقسيم المادة إلى أجزاء أصغر فأصغر إلى ما لا نهاية، أم أن لها حدًّا أدنى لا يمكن تجاوزه؟ اختلف اثنان من أبرز فلاسفتهم في الإجابة.</p>
+
+      <div class="philRow">
+        <div class="philCard">
+          <h3>ديموقريطس</h3>
+          <div class="philVis" id="demoVis"></div>
+          <p style="font-size:.9rem">اقترح أن المادة <b>ليست قابلة للانقسام إلى ما لا نهاية</b>، بل تتكون من جسيمات صغيرة جدًّا وصلبة أسماها <b>"ذرات"</b> (أي غير قابلة للتجزئة)، لا يمكن استحداثها أو تحطيمها، ولها بينها فراغ.</p>
+        </div>
+        <div class="philCard">
+          <h3>أرسطو</h3>
+          <div class="philVis"><div class="continuumBlock"></div></div>
+          <p style="font-size:.9rem">رفض فكرة الذرات لأنه لم يؤمن بوجود الفراغ، واقترح أن المادة <b>متصلة</b> ومكوّنة من أربعة عناصر فقط: <b>التراب والماء والهواء والنار</b>.</p>
+        </div>
+      </div>
+      <p class="philVsLbl">هل المادة قابلة للتجزئة إلى ما لا نهاية، أم لها حدّ أدنى؟</p>
+
+      <div class="note">لآلاف السنين ساد رأي أرسطو (بسبب مكانته العلمية)، إلى أن أثبتت التجارب العلمية الحديثة لاحقًا (كما سترى في بقية هذا الدرس) أن فكرة ديموقريطس عن وجود "ذرات" كانت الأقرب للصواب — وإن تبيّن لاحقًا أن الذرة نفسها تتكون من جسيمات أدق منها.</div>
+
+      <div class="card">
+        <h3>🎯 اختبر نفسك</h3>
+        <div id="s1Q"></div>
+      </div>
+    </section>
+
+    <!-- 2: Dalton's atomic theory -->
+    <section class="step" id="s2">
+      <h2>نظرية دالتون الذرية</h2>
+      <p>في عام 1803م، طرح العالم <b>جون دالتون</b> أول نظرية علمية منظمة عن الذرة، استنادًا إلى نتائج تجارب دقيقة حول التفاعلات الكيميائية والنسب الكتلية للعناصر. فسّرت نظريته قانون حفظ الكتلة، وكانت أساسًا مهمًّا للكيمياء الحديثة.</p>
+
+      <div class="card">
+        <h3>🃏 اضغط كل بطاقة لتعرف بند النظرية</h3>
+        <div class="flipRow" id="daltonRow"></div>
+      </div>
+
+      <div class="note">لاحظ البند الثاني: "الذرات لا تتجزأ". ستكتشف في الخطوات التالية من هذا الدرس أن هذا البند تحديدًا لم يَعُد دقيقًا تمامًا — فالذرة نفسها تتكون من جسيمات أصغر منها!</div>
+
+      <div class="card">
+        <h3>🎯 اختبر نفسك</h3>
+        <div id="s2Q"></div>
+      </div>
+    </section>
+
+    <!-- 3: electron discovery -->
+    <section class="step" id="s3">
+      <h2>اكتشاف الإلكترون</h2>
+      <div class="def"><strong>أنبوب أشعة المهبط:</strong> أنبوب زجاجي مفرغ من الهواء تقريبًا يحوي قطبين كهربائيين؛ عند توصيل فرق جهد عالٍ بينهما ينطلق شعاع من القطب السالب (المهبط) نحو القطب الموجب (المصعد)، ويُحدث توهجًا على شاشة فلورية في نهاية الأنبوب.</div>
+
+      <div class="card">
+        <h3>🔦 جرّب أنبوب أشعة المهبط</h3>
+        <div class="crtStage" id="crtStage">
+          <div class="crtTube">
+            <div class="crtCathode">−</div>
+            <div class="crtPlateTop"></div>
+            <div class="crtPlateBot"></div>
+            <div class="crtPlateLbl" style="left:67%;top:8%">+</div>
+            <div class="crtPlateLbl" style="left:67%;top:84%">−</div>
+            <div class="crtRay1" id="crtRay1"></div>
+            <div class="crtRay2" id="crtRay2"></div>
+            <div class="crtScreen"></div>
+            <div class="crtGlow" id="crtGlow"></div>
+          </div>
+        </div>
+        <div class="row" style="justify-content:center;margin-top:8px">
+          <button class="btn pri" id="crtFireBtn">شغّل الأنبوب 🔦</button>
+          <button class="btn" id="crtFieldBtn" disabled>فعّل المجال الكهربائي ⚡</button>
+        </div>
+        <div class="note" id="crtInfo">اضغط "شغّل الأنبوب" لتشاهد الشعاع ينطلق من المهبط نحو الشاشة.</div>
+      </div>
+
+      <p>بقياس مقدار انحراف الشعاع في مجالين كهربائي ومغناطيسي، استنتج العالم طومسون <b>نسبة شحنة هذا الجسيم إلى كتلته</b>، ووجد أنها ثابتة مهما تغيّرت المادة المصنوع منها المهبط — مما دلّ على أن هذا الجسيم (الإلكترون) موجود داخل ذرات كل العناصر.</p>
+
+      <div class="card">
+        <h3>🧪 تجربة قطرة الزيت (ميليكان)</h3>
+        <p class="lead">استخدم ميليكان قطرات زيت متناهية الصغر مشحونة كهربائيًّا بين لوحين، وضبط فرق الجهد بينهما حتى توازنت قوة الجاذبية مع قوة المجال الكهربائي، فعلّقت القطرة في مكانها.</p>
+        <div class="oilStage" id="oilStage">
+          <div class="oilPlateTop"></div>
+          <div class="oilPlateBot"></div>
+          <div class="oilPlateLbl" style="left:8%;top:5%">+</div>
+          <div class="oilPlateLbl" style="left:8%;top:84%">−</div>
+          <div class="fArrow grav" id="fGrav"></div>
+          <div class="fArrow elec" id="fElec"></div>
+          <div class="oilDrop falling" id="oilDrop"></div>
+        </div>
+        <div class="row" style="justify-content:center;margin-top:8px">
+          <button class="btn pri" id="oilBtn">فعّل المجال الكهربائي ⚡</button>
+        </div>
+        <div class="note" id="oilInfo">القطرة تسقط الآن بتأثير الجاذبية فقط. اضغط الزر لموازنتها بمجال كهربائي.</div>
+      </div>
+
+      <div class="card">
+        <h3>🎯 اختبر نفسك</h3>
+        <div id="s3Q"></div>
+      </div>
+    </section>
+
+    <!-- 4: Thomson model -->
+    <section class="step" id="s4">
+      <h2>نموذج طومسون للذرة</h2>
+      <p>بعد اكتشاف الإلكترون، اقترح طومسون نموذجًا للذرة وصفها بأنها <b>كرة موجبة الشحنة تحتوي على إلكترونات</b>: ذرة كروية الشكل مكوّنة من شحنة موجبة موزعة بانتظام في كامل حجمها، مغروس فيها إلكترونات منفردة سالبة الشحنة، بحيث تتعادل الذرة كهربائيًّا ككل.</p>
+
+      <div class="card">
+        <h3>⚛ نموذج طومسون للذرة</h3>
+        <div class="puddingStage">
+          <div class="puddingBall" id="puddingBall"></div>
+        </div>
+        <p class="qn" style="text-align:center">الكرة بأكملها شحنة موجبة منتشرة، والنقاط الزرقاء إلكترونات مغروسة فيها.</p>
+      </div>
+
+      <div class="note">كان هذا النموذج تحسينًا على نموذج دالتون للذرة الصلبة غير القابلة للتجزئة، لكنه لم يصمد طويلًا أمام تجربة رذرفورد التالية.</div>
+
+      <div class="card">
+        <h3>🎯 اختبر نفسك</h3>
+        <div id="s4Q"></div>
+      </div>
+    </section>
+
+    <!-- 5: Rutherford -->
+    <section class="step" id="s5">
+      <h2>تجربة رذرفورد ونموذج النواة</h2>
+      <p>لاختبار نموذج طومسون، وجّه رذرفورد وفريقه شعاعًا من جسيمات ألفا (موجبة الشحنة) نحو صفيحة رقيقة جدًّا من الذهب، وراقبوا مسار الجسيمات بعد اختراقها للصفيحة.</p>
+
+      <div class="card">
+        <h3>🔬 الشاشة الكاشفة الدائرية — هكذا رصد رذرفورد النتائج فعليًّا</h3>
+        <p class="lead">لم تكن أعين العلماء ترى الجسيمات مباشرة؛ بل أحاطوا صفيحة الذهب بشاشة دائرية مطلية بمادة فلورية (كبريتيد الزنك)، وراقبوا بمجهر دوّار أماكن حدوث "ومضات" ضوئية (Scintillations) حول الصفيحة، فحسبوا عددها عند كل زاوية لتحديد كيف تتشتت الجسيمات بدقة.</p>
+
+        <div class="rfKey">
+          <span><i class="rfKeyDot" style="background:var(--ink)"></i> مصدر جسيمات ألفا</span>
+          <span><i class="rfKeyDot" style="background:#b8872a"></i> صفيحة الذهب (في المركز)</span>
+          <span><i class="rfKeyDot" style="background:#7af25a"></i> ومضة على الشاشة</span>
+        </div>
+
+        <div class="rfScreen" id="rfScreen">
+          <div class="rfScreenBeam"></div>
+          <div class="rfScreenBeamLbl">مسار الجسيمات القادمة من المصدر</div>
+          <div class="rfScreenSrc"></div>
+          <div class="rfScreenFoil"></div>
+          <div class="rfAngleLbl" style="left:95%;top:50%">0°<br><span style="font-weight:400">استمرار المسار</span></div>
+          <div class="rfAngleLbl" style="left:50%;top:4%">90°</div>
+          <div class="rfAngleLbl" style="left:50%;top:96%">90°</div>
+          <div class="rfAngleLbl" style="left:6%;top:50%">180°<br><span style="font-weight:400">ارتداد كامل</span></div>
+        </div>
+
+        <ol class="rfSteps">
+          <li>اضغط زر الإطلاق لترى 60 جسيمة ألفا وهي "تضرب" الشاشة الدائرية واحدة تلو الأخرى.</li>
+          <li>راقب أين تظهر أغلب الومضات الخضراء، وأين تندر.</li>
+          <li>تابع العدّادات أسفل الشاشة لترى الأعداد الفعلية في كل نطاق زاوية.</li>
+        </ol>
+
+        <div class="row" style="justify-content:center;margin-top:6px">
+          <button class="btn pri" id="rfScreenBtn">أطلق 60 جسيمة على الشاشة 🔬</button>
+          <button class="btn" id="rfScreenResetBtn">تصفير العدّاد ↺</button>
+        </div>
+        <div class="rfCounters">
+          <div class="rfCBox">أقل من 15° (مباشرة تقريبًا)<b id="cFwd">0</b></div>
+          <div class="rfCBox">15°–90° (انحراف واضح)<b id="cMid">0</b></div>
+          <div class="rfCBox">أكبر من 90° (شبه ارتداد)<b id="cBack">0</b></div>
+          <div class="rfCBox">الإجمالي<b id="cAll">0</b></div>
+        </div>
+        <div class="note" id="rfScreenInfo">اضغط زر الإطلاق لتبدأ الرصد.</div>
+        <div class="def"><strong>ماذا تعني هذه الزوايا؟</strong> زاوية 0° تعني أن الجسيمة واصلت مسارها شبه مستقيم (لم تصطدم بشيء)، وزاوية 180° تعني أنها ارتدت بالكامل نحو المصدر (اصطدام مباشر بنواة). كلما زادت الزاوية، زاد مقدار الانحراف عن المسار الأصلي.</div>
+      </div>
+
+      <div class="card">
+        <h3>نموذج رذرفورد النووي للذرة</h3>
+        <div class="miniAtom" id="rfMiniAtom"></div>
+        <p>استنتج رذرفورد أن <b>معظم حجم الذرة فراغ</b>، وأن الشحنة الموجبة وكتلة الذرة تتركزان في منطقة صغيرة جدًّا وكثيفة في مركزها أطلق عليها اسم <b>النواة</b>، بينما تدور الإلكترونات في الفراغ المحيط بها.</p>
+      </div>
+
+      <div class="card">
+        <h3>🎯 اختبر نفسك</h3>
+        <div id="s5Q"></div>
+      </div>
+    </section>
+
+    <!-- 6: proton & neutron -->
+    <section class="step" id="s6">
+      <h2>البروتون والنيوترون وخواص جسيمات الذرة</h2>
+      <p>بعد تحديد وجود النواة، تابع العلماء دراسة مكوّناتها: حدّد رذرفورد لاحقًا وجود جسيم موجب الشحنة داخل النواة أطلق عليه اسم <b>البروتون</b>. وبعد سنوات، اكتشف العالم تشادويك جسيمًا متعادل الشحنة داخل النواة أيضًا يقارب البروتون في كتلته، أطلق عليه اسم <b>النيوترون</b>.</p>
+
+      <div class="card">
+        <h3>🃏 اضغط كل بطاقة لتعرف خواصها</h3>
+        <div class="flipRow" id="flipRow"></div>
+      </div>
+
+      <div class="wrapx"><table class="cmp" id="cmpTable">
+        <tr><th>الجسيم</th><th>الشحنة</th><th class="hl">الكتلة النسبية</th><th>الموقع</th></tr>
+        <tr><td>الإلكترون (e⁻)</td><td>سالبة (1−)</td><td class="hl">صغيرة جدًّا (تُهمل تقريبًا)</td><td>تدور خارج النواة</td></tr>
+        <tr><td>البروتون (p⁺)</td><td>موجبة (1+)</td><td class="hl">1</td><td>داخل النواة</td></tr>
+        <tr><td>النيوترون (n⁰)</td><td>متعادلة (بلا شحنة)</td><td class="hl">1 تقريبًا</td><td>داخل النواة</td></tr>
+      </table></div>
+
+      <div class="card">
+        <h3>🎯 اختبر نفسك</h3>
+        <div id="s6Q"></div>
+      </div>
+    </section>
+
+    <!-- 7: atom builder -->
+    <section class="step" id="s7">
+      <h2>ابنِ ذرتك الخاصة</h2>
+      <p class="lead">استعمل الأزرار لتحديد عدد البروتونات والنيوترونات والإلكترونات، وشاهد الذرة تتشكل أمامك فورًا.</p>
+
+      <div class="card">
+        <div class="buildStage" id="buildStage">
+          <div class="nucleusWrap" id="nucleusWrap"></div>
+          <div class="electronLayer" id="electronLayer"></div>
+        </div>
+        <div class="row" style="justify-content:center;gap:16px;margin-top:10px">
+          <div class="counterBox">
+            <div class="lbl">بروتونات ⊕</div>
+            <div class="row" style="justify-content:center">
+              <button class="btn" id="pMinus">−</button><b id="pVal">6</b><button class="btn" id="pPlus">+</button>
+            </div>
+          </div>
+          <div class="counterBox">
+            <div class="lbl">نيوترونات</div>
+            <div class="row" style="justify-content:center">
+              <button class="btn" id="nMinus">−</button><b id="nVal">6</b><button class="btn" id="nPlus">+</button>
+            </div>
+          </div>
+          <div class="counterBox">
+            <div class="lbl">إلكترونات ⊖</div>
+            <div class="row" style="justify-content:center">
+              <button class="btn" id="eMinus">−</button><b id="eVal">6</b><button class="btn" id="ePlus">+</button>
+            </div>
+          </div>
+        </div>
+        <div class="note" id="buildInfo"></div>
+      </div>
+
+      <div class="card">
+        <h3>🎯 تحدٍ: اجعل الذرة متعادلة الشحنة</h3>
+        <p>عدّل عدد الإلكترونات حتى يساوي عدد البروتونات، ثم اضغط "تحقق".</p>
+        <div class="row">
+          <button class="btn pri" id="checkBtn">تحقق ✅</button>
+        </div>
+        <div class="note hide" id="checkInfo"></div>
+      </div>
+
+      <div class="card">
+        <h3>🎯 اختبر نفسك</h3>
+        <div id="s7Q"></div>
+      </div>
+    </section>
+
+    <!-- 8: final quiz -->
+    <section class="step" id="s8">
+      <h2>اختبر نفسك</h2>
+      <div id="quiz"></div>
+    </section>
+  </main>
+</div>
+
+<div class="pager"><div>
+  <button class="btn" id="prev">← السابق</button>
+  <span id="pageLbl"></span>
+  <button class="btn pri" id="next">التالي →</button>
+</div></div>
+
+<script>
+(function(){
+'use strict';
+var $=function(s){return document.querySelector(s)}, $$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+var points=0;
+function addPts(n){
+  points+=n; $('#pts').textContent=points;
+  var b=$('#ptsBox'); b.classList.remove('pop'); void b.offsetWidth; b.classList.add('pop');
+}
+var awarded={};
+function addPtsOnce(k){ if(!awarded[k]){awarded[k]=true; addPts(5)} }
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+
+/* ---------- navigation ---------- */
+var TITLES=['تمهيد','الفلاسفة الإغريق','نظرية دالتون','اكتشاف الإلكترون','نموذج طومسون','تجربة رذرفورد والنواة','البروتون والنيوترون','ابنِ الذرة','اختبار'];
+var cur=0, visited={0:true};
+function renderNav(){
+  var nav=$('#stepper');
+  nav.innerHTML=TITLES.map(function(t,i){
+    return '<button class="stp'+(i===cur?' on':(visited[i]?' done':''))+'" data-i="'+i+'"><b>'+(i+1)+'</b>'+t+'</button>';
+  }).join('');
+  var on=nav.querySelector('.on'); if(on&&on.scrollIntoView){on.scrollIntoView({inline:'center',block:'nearest'})}
+  $$('.stp').forEach(function(b){b.onclick=function(){go(+b.getAttribute('data-i'))}});
+  var n=Object.keys(visited).length;
+  $('#barFill').style.width=(n/TITLES.length*100)+'%';
+  $('#prev').disabled=cur===0; $('#next').disabled=cur===TITLES.length-1;
+  $('#pageLbl').textContent=(cur+1)+' / '+TITLES.length;
+}
+function go(i){
+  cur=Math.max(0,Math.min(TITLES.length-1,i)); visited[cur]=true;
+  $$('.step').forEach(function(s,k){s.classList.toggle('on',k===cur)});
+  renderNav(); window.scrollTo(0,0);
+}
+$('#prev').onclick=function(){go(cur-1)};
+$('#next').onclick=function(){go(cur+1)};
+
+/* ---------- generic mini quiz helper ---------- */
+function miniQuiz(containerSel, bank, key){
+  var last=-1, done=false;
+  function render(){
+    var i; do{i=Math.floor(Math.random()*bank.length)}while(bank.length>1 && i===last); last=i; var Q=bank[i]; done=false;
+    var opts=shuffle(Q.o.map(function(t,idx){return {t:t,c:idx===Q.a};}));
+    $(containerSel).innerHTML='<p>'+Q.q+'</p><div class="opts">'+opts.map(function(o,idx){return '<button class="opt" data-i="'+idx+'">'+o.t+'</button>';}).join('')+'</div><div class="qfb"></div>';
+    $$(containerSel+' .opt').forEach(function(b){b.onclick=function(){
+      if(done)return; done=true; var o=opts[+b.getAttribute('data-i')];
+      $$(containerSel+' .opt').forEach(function(x,idx){x.disabled=true; if(opts[idx].c)x.classList.add('right');});
+      if(!o.c)b.classList.add('wrong'); else addPts(10);
+      addPtsOnce(key);
+      $(containerSel+' .qfb').innerHTML='<div class="fb '+(o.c?'ok':'no')+'">'+(o.c?'صحيح! ':'')+Q.e+'</div><div class="row" style="margin-top:8px"><button class="btn" id="'+key+'Next">سؤال آخر</button></div>';
+      $('#'+key+'Next').onclick=render;
+    };});
+  }
+  render();
+}
+
+/* ---------- mini nuclear atom diagram ---------- */
+function renderMiniAtom(sel, nE){
+  var r1=55, r2=75;
+  var html='<div class="miniNuc"></div>';
+  html+='<div class="miniOrbit" style="width:'+(r1*2)+'px;height:'+(r1*2)+'px"></div>';
+  html+='<div class="miniOrbit" style="width:'+(r2*2)+'px;height:'+(r2*2)+'px"></div>';
+  var angs=[20,100,190,260,330,160];
+  for(var i=0;i<nE;i++){
+    var a=(angs[i%angs.length] + i*37)*Math.PI/180;
+    var r=(i%2===0)?r1:r2;
+    var x=85+r*Math.cos(a), y=85+r*Math.sin(a);
+    html+='<div class="miniE" style="left:'+x+'px;top:'+y+'px"></div>';
+  }
+  $(sel).innerHTML=html;
+}
+renderMiniAtom('#heroAtom',6);
+renderMiniAtom('#rfMiniAtom',4);
+
+/* ---------- 1: Greek philosophers ---------- */
+(function(){
+  var dots='';
+  for(var i=0;i<9;i++){ dots+='<i class="atomDot"></i>'; }
+  $('#demoVis').innerHTML=dots;
+})();
+miniQuiz('#s1Q',[
+ {q:'من الفيلسوف الإغريقي الذي اقترح أن المادة تتكون من "ذرات" غير قابلة للتجزئة؟',o:['ديموقريطس','أرسطو','دالتون'],a:0,e:'ديموقريطس هو من اقترح أن المادة تتكون من جسيمات صغيرة جدًّا وصلبة غير قابلة للتجزئة، أسماها "ذرات".'},
+ {q:'لماذا رفض أرسطو فكرة الذرات؟',o:['لأنه لم يؤمن بوجود الفراغ بين الجسيمات','لأنه أثبت ذلك تجريبيًّا','لأنه اتفق مع ديموقريطس في كل شيء إلا التسمية'],a:0,e:'رفض أرسطو فكرة الذرات لأنها تستلزم وجود فراغ تتحرك فيه، ولم يكن يؤمن بوجود الفراغ، فاقترح بدلًا من ذلك أن المادة مكونة من أربعة عناصر متصلة.'},
+ {q:'ما العناصر الأربعة التي اقترح أرسطو أن المادة تتكون منها؟',o:['التراب والماء والهواء والنار','الذهب والفضة والحديد والنحاس','الإلكترون والبروتون والنيوترون والنواة'],a:0,e:'اقترح أرسطو أن كل المواد مكونة من مزيج من أربعة عناصر: التراب والماء والهواء والنار.'}
+],'s1q');
+
+/* ---------- 2: Dalton's postulates ---------- */
+var DALTON=[
+ {n:1,title:'الذرات لبنات المادة',text:'تتكون المادة من أجزاء صغيرة جدًّا تسمى الذرات.'},
+ {n:2,title:'لا تتجزأ ولا تفنى',text:'الذرات لا تتجزأ ولا تفنى.'},
+ {n:3,title:'تشابه ذرات العنصر',text:'تتشابه الذرات المكوّنة للعنصر الواحد في الحجم والكتلة والخواص الكيميائية.'},
+ {n:4,title:'اختلاف العناصر',text:'تختلف ذرات أي عنصر عن ذرات العناصر الأخرى.'},
+ {n:5,title:'نسب بسيطة',text:'تتحد الذرات المختلفة بنسبة عددية بسيطة لتكوين المركبات.'},
+ {n:6,title:'في التفاعلات',text:'في التفاعلات الكيميائية تنفصل الذرات أو تتحد أو يُعاد ترتيبها، دون أن تُستحدث أو تفنى.'}
+];
+$('#daltonRow').innerHTML=DALTON.map(function(d,i){
+  return '<div class="flipCard" id="dalton'+i+'"><div class="flipInner">'+
+    '<div class="flipFace flipFront"><div class="sym">'+d.n+'</div><div>'+d.title+'</div></div>'+
+    '<div class="flipFace flipBack">'+d.text+'</div>'+
+  '</div></div>';
+}).join('');
+DALTON.forEach(function(d,i){
+  $('#dalton'+i).onclick=function(){ $('#dalton'+i).classList.toggle('on'); addPtsOnce('dalton'+i); };
+});
+miniQuiz('#s2Q',[
+ {q:'من صاحب نظرية الذرة العلمية المنظمة الأولى، وفي أي عام طرحها؟',o:['جون دالتون، عام 1803م','ديموقريطس، عام 400 ق.م','طومسون، عام 1897م'],a:0,e:'طرح جون دالتون نظريته الذرية عام 1803م استنادًا إلى نتائج تجارب دقيقة حول التفاعلات الكيميائية.'},
+ {q:'وفق نظرية دالتون، كيف تتحد الذرات المختلفة لتكوين المركبات؟',o:['بنسبة عددية بسيطة','بأي نسبة عشوائية','لا تتحد الذرات المختلفة إطلاقًا'],a:0,e:'نصّت نظرية دالتون على أن الذرات المختلفة تتحد بنسبة عددية بسيطة لتكوين المركبات.'},
+ {q:'أي بند من نظرية دالتون تبيّن لاحقًا أنه غير دقيق تمامًا؟',o:['أن الذرات لا تتجزأ','أن المادة تتكون من ذرات','أن ذرات العنصر الواحد متشابهة'],a:0,e:'تبيّن لاحقًا (عبر اكتشاف الإلكترون والبروتون والنيوترون) أن الذرة نفسها تتكون من جسيمات أصغر منها، فبند "لا تتجزأ" لم يعد دقيقًا تمامًا.'}
+],'s2q');
+
+/* ---------- 3a: CRT tube ---------- */
+var crtFired=false, crtField=false;
+$('#crtFireBtn').onclick=function(){
+  if(crtFired)return; crtFired=true;
+  $('#crtRay1').style.width='41%';
+  setTimeout(function(){
+    $('#crtRay2').style.width='43%';
+    $('#crtGlow').style.opacity='1';
+  },520);
+  $('#crtFieldBtn').disabled=false;
+  $('#crtFireBtn').disabled=true;
+  $('#crtInfo').innerHTML='انطلق الشعاع من المهبط (−) نحو المصعد (+) وأحدث توهجًا أخضر على الشاشة. الآن فعّل المجال الكهربائي لترى إلى أي جهة ينحرف الشعاع.';
+  addPtsOnce('crtFire');
+};
+$('#crtFieldBtn').onclick=function(){
+  crtField=!crtField;
+  $('#crtRay2').style.transform = crtField? 'rotate(-27deg)':'rotate(0deg)';
+  $('#crtGlow').style.top = crtField? '17%':'48%';
+  $('#crtFieldBtn').textContent = crtField? 'أطفئ المجال ⚡':'فعّل المجال الكهربائي ⚡';
+  $('#crtInfo').innerHTML = crtField?
+    'انحرف الشعاع نحو اللوح <b>الموجب</b> العلوي، أي أنه ينجذب للشحنة الموجبة — إذن جسيمات هذا الشعاع (الإلكترونات) <b>سالبة الشحنة</b>.' :
+    'أُطفئ المجال، فعاد الشعاع إلى مساره المستقيم نحو الشاشة.';
+  addPtsOnce('crtField');
+};
+
+/* ---------- 3b: Millikan oil drop ---------- */
+var oilOn=false;
+$('#oilBtn').onclick=function(){
+  oilOn=!oilOn;
+  var drop=$('#oilDrop');
+  if(oilOn){
+    drop.classList.remove('falling');
+    drop.style.top='50%';
+    $('#fGrav').classList.add('on'); $('#fElec').classList.add('on');
+    $('#oilBtn').textContent='أطفئ المجال ⚡';
+    $('#oilInfo').innerHTML='توازنت قوة المجال الكهربائي (للأعلى) مع قوة الجاذبية (للأسفل) فعلّقت القطرة في مكانها. بتكرار هذا مع آلاف القطرات، وجد ميليكان أن شحنة كل قطرة دائمًا <b>مضاعف صحيح لأصغر شحنة ممكنة</b> — فاستنتج أنها شحنة إلكترون واحد. وبدمجها مع نسبة الشحنة إلى الكتلة التي قاسها طومسون، حُسبت <b>كتلة الإلكترون</b> فتبيّن أنها صغيرة جدًّا مقارنة بالذرة ككل.';
+    addPtsOnce('oilBalance');
+  } else {
+    $('#fGrav').classList.remove('on'); $('#fElec').classList.remove('on');
+    drop.style.top='15%';
+    void drop.offsetWidth;
+    drop.classList.add('falling');
+    $('#oilBtn').textContent='فعّل المجال الكهربائي ⚡';
+    $('#oilInfo').textContent='القطرة تسقط الآن بتأثير الجاذبية فقط. اضغط الزر لموازنتها بمجال كهربائي.';
+  }
+};
+
+miniQuiz('#s3Q',[
+ {q:'في أنبوب أشعة المهبط، من أي قطب ينطلق الشعاع؟',o:['من القطب السالب (المهبط)','من القطب الموجب (المصعد)','من منتصف الأنبوب'],a:0,e:'ينطلق الشعاع من المهبط (القطب السالب) متجهًا نحو المصعد (القطب الموجب)، ولهذا سُمّي "أشعة المهبط".'},
+ {q:'عند تعريض شعاع المهبط لمجال كهربائي، ينحرف نحو اللوح الموجب. ماذا يدل ذلك؟',o:['أن الشعاع متعادل الشحنة','أن الشعاع سالب الشحنة','أن الشعاع موجب الشحنة'],a:1,e:'انحراف الشعاع نحو اللوح الموجب يعني أنه ينجذب إليه، أي أن جسيمات الشعاع (الإلكترونات) سالبة الشحنة.'},
+ {q:'ماذا استنتج ميليكان من تجربة قطرة الزيت؟',o:['كتلة النواة','أن شحنة القطرات دائمًا مضاعف صحيح لأصغر شحنة، وهي شحنة الإلكترون','أن الذرة كرة مصمتة لا تحوي جسيمات أصغر'],a:1,e:'وجد ميليكان أن شحنة أي قطرة زيت تساوي دائمًا عددًا صحيحًا من أصغر شحنة ممكنة، فاستنتج أنها شحنة الإلكترون الواحد، ومنها حُسبت كتلته.'}
+],'s3q');
+
+/* ---------- 4: Thomson model ---------- */
+(function(){
+  var plusHtml='';
+  var rings=[{r:0,n:1,off:0},{r:15,n:5,off:10},{r:29,n:8,off:28},{r:43,n:11,off:5}];
+  rings.forEach(function(ring){
+    for(var i=0;i<ring.n;i++){
+      var ang=(360/ring.n)*i+ring.off;
+      var rad=ang*Math.PI/180;
+      var x=50+ring.r*Math.cos(rad), y=50+ring.r*Math.sin(rad);
+      plusHtml+='<span class="pplus" style="left:'+x+'%;top:'+y+'%">+</span>';
+    }
+  });
+  var elecHtml='';
+  var eRings=[{r:8,n:2,off:40},{r:22,n:5,off:0},{r:36,n:7,off:20},{r:47,n:8,off:12}];
+  var ei=0;
+  eRings.forEach(function(ring){
+    for(var i=0;i<ring.n;i++){
+      var ang=(360/ring.n)*i+ring.off;
+      var rad=ang*Math.PI/180;
+      var x=50+ring.r*Math.cos(rad), y=50+ring.r*Math.sin(rad);
+      elecHtml+='<i class="pelec" style="left:'+x+'%;top:'+y+'%;animation-delay:'+((ei++%6)*0.3)+'s"></i>';
+    }
+  });
+  $('#puddingBall').innerHTML=plusHtml+elecHtml;
+})();
+miniQuiz('#s4Q',[
+ {q:'كيف وصف طومسون توزيع الشحنة الموجبة في ذرته؟',o:['متركزة في نقطة صغيرة في المركز','منتشرة بانتظام في كامل حجم الذرة','غير موجودة في النموذج'],a:1,e:'وصف طومسون الذرة بأنها كرة موجبة الشحنة موزعة بانتظام في كامل حجمها، مغروس فيها إلكترونات سالبة.'},
+ {q:'أين تقع الإلكترونات في نموذج طومسون؟',o:['تدور بعيدًا خارج الذرة','مغروسة داخل كتلة الشحنة الموجبة','غير موجودة في هذا النموذج'],a:1,e:'تخيّل طومسون الإلكترونات مغروسة داخل كتلة الشحنة الموجبة المنتشرة، كحبات الزبيب في الكعكة.'}
+],'s4q');
+
+/* ---------- 5: Rutherford — real scintillation detector screen ---------- */
+var scrCounts={fwd:0,mid:0,back:0,all:0};
+function updateScreenCounters(){
+  $('#cFwd').textContent=scrCounts.fwd;
+  $('#cMid').textContent=scrCounts.mid;
+  $('#cBack').textContent=scrCounts.back;
+  $('#cAll').textContent=scrCounts.all;
+}
+function sampleAngleDeg(){
+  var r=Math.random(), mag;
+  if(r<0.80) mag=Math.random()*14;
+  else if(r<0.97) mag=14+Math.random()*76;
+  else mag=150+Math.random()*30;
+  var sign=Math.random()<0.5?1:-1;
+  return mag*sign;
+}
+function fireScreenBatch(n){
+  $('#rfScreenInfo').textContent='جارٍ الإطلاق... راقب الومضات على الشاشة.';
+  for(var k=0;k<n;k++){
+    (function(k){
+      setTimeout(function(){
+        var deg=sampleAngleDeg();
+        var rad=deg*Math.PI/180;
+        var R=41;
+        var x=50+R*Math.cos(rad), y=50-R*Math.sin(rad);
+        var id='rfflash'+k+'_'+Math.floor(Math.random()*100000);
+        var scr=$('#rfScreen');
+        if(scr && typeof scr.insertAdjacentHTML==='function'){
+          scr.insertAdjacentHTML('beforeend','<div class="rfFlash" id="'+id+'" style="left:'+x+'%;top:'+y+'%"></div>');
+        }
+        setTimeout(function(){
+          var f=$('#'+id);
+          if(f && typeof f.remove==='function') f.remove();
+        },950);
+        var absDeg=Math.abs(deg);
+        if(absDeg<15) scrCounts.fwd++; else if(absDeg<90) scrCounts.mid++; else scrCounts.back++;
+        scrCounts.all++;
+        updateScreenCounters();
+      },k*35);
+    })(k);
+  }
+  setTimeout(function(){
+    $('#rfScreenInfo').innerHTML='النتيجة: <b>'+scrCounts.fwd+'</b> ومضة اخترقت الصفيحة قريبًا من مسارها الأصلي (أقل من 15°) — إذن معظم حجم الذرة فراغ. <b>'+scrCounts.mid+'</b> ومضة انحرفت بزاوية واضحة لأنها مرّت قريبًا من نواة ذرة ذهب. و<b>'+scrCounts.back+'</b> ومضة فقط (نادرة جدًّا) سجّلت ارتدادًا شبه كامل، لأنها اصطدمت مباشرة بنواة صغيرة وكثيفة موجبة الشحنة. هذا التوزيع بالذات هو ما قاد رذرفورد لاستنتاج وجود النواة.';
+    addPtsOnce('rfScreen');
+  }, n*35+200);
+}
+$('#rfScreenBtn').onclick=function(){ fireScreenBatch(60); };
+$('#rfScreenResetBtn').onclick=function(){
+  scrCounts={fwd:0,mid:0,back:0,all:0};
+  updateScreenCounters();
+  var scr=$('#rfScreen');
+  var flashes=$$('.rfFlash');
+  flashes.forEach(function(f){ if(f && typeof f.remove==='function') f.remove(); });
+  $('#rfScreenInfo').textContent='لاحظ كيف تتجمّع أغلب الومضات الخضراء قرب اتجاه 0° (استمرار المسار)، بينما تندر جدًّا قرب 180° — هذه هي البيانات الحقيقية التي بنى عليها رذرفورد استنتاجه عن وجود نواة صغيرة وكثيفة.';
+};
+
+miniQuiz('#s5Q',[
+ {q:'ماذا حدث لمعظم جسيمات ألفا عند اصطدامها بصفيحة الذهب؟',o:['ارتدت كلها للخلف','اخترقت الصفيحة دون انحراف يُذكر','التصقت بالصفيحة'],a:1,e:'اخترقت معظم الجسيمات الصفيحة دون انحراف تقريبًا، مما يدل على أن معظم حجم الذرة فراغ.'},
+ {q:'ما الفرق بين الجسيمات "المنحرفة" والجسيمات "المرتدة" في تجربة رذرفورد؟',o:['المنحرفة غيّرت مسارها بزاوية بسبب مرورها قريبًا من نواة، والمرتدة ارتدت بالكامل للخلف باصطدام مباشر بنواة','لا فرق بينهما، وهما نفس الشيء','المنحرفة ارتدت للخلف، والمرتدة تابعت مسارها مباشرة'],a:0,e:'الجسيمات المنحرفة غيّرت اتجاهها بزاوية بسبب مرورها على مقربة من نواة ذرة (دون اصطدام مباشر)، أما الجسيمات القليلة جدًّا التي ارتدّت بالكامل للخلف فقد اصطدمت مباشرة بنواة صغيرة وكثيفة موجبة الشحنة.'},
+ {q:'وفق نموذج رذرفورد، أين تتركز كتلة الذرة وشحنتها الموجبة؟',o:['منتشرة في كل الذرة','في النواة الصغيرة الكثيفة بمركز الذرة','في الإلكترونات الخارجية'],a:1,e:'استنتج رذرفورد أن كتلة الذرة وشحنتها الموجبة تتركزان في نواة صغيرة جدًّا وكثيفة في المركز.'},
+ {q:'كيف كان رذرفورد وفريقه يرصدون زوايا تشتت جسيمات ألفا فعليًّا؟',o:['بمراقبة ومضات ضوئية على شاشة فلورية دائرية حول الصفيحة بمجهر دوّار','بتصويرها مباشرة بكاميرا رقمية','بوزن الصفيحة قبل التجربة وبعدها'],a:0,e:'أحاط الفريق الصفيحة بشاشة فلورية (كبريتيد الزنك)، وراقبوا بمجهر دوّار أماكن حدوث الومضات حولها لتحديد زوايا التشتت بدقة.'}
+],'s5q');
+
+/* ---------- 6: particle flip cards ---------- */
+var PARTICLES=[
+ {name:'الإلكترون',sym:'e⁻',charge:'سالبة (1−)',mass:'صغيرة جدًّا (تُهمل تقريبًا)',loc:'تدور خارج النواة'},
+ {name:'البروتون',sym:'p⁺',charge:'موجبة (1+)',mass:'1 تقريبًا',loc:'داخل النواة'},
+ {name:'النيوترون',sym:'n⁰',charge:'متعادلة (بلا شحنة)',mass:'1 تقريبًا',loc:'داخل النواة'}
+];
+$('#flipRow').innerHTML=PARTICLES.map(function(p,i){
+  return '<div class="flipCard" id="flip'+i+'"><div class="flipInner">'+
+    '<div class="flipFace flipFront"><div class="sym">'+p.sym+'</div><div>'+p.name+'</div></div>'+
+    '<div class="flipFace flipBack"><div><b>الشحنة:</b> '+p.charge+'</div><div><b>الكتلة النسبية:</b> '+p.mass+'</div><div><b>الموقع:</b> '+p.loc+'</div></div>'+
+  '</div></div>';
+}).join('');
+PARTICLES.forEach(function(p,i){
+  $('#flip'+i).onclick=function(){ $('#flip'+i).classList.toggle('on'); addPtsOnce('flip'+i); };
+});
+
+miniQuiz('#s6Q',[
+ {q:'ما شحنة النيوترون؟',o:['موجبة','سالبة','متعادلة (بلا شحنة)'],a:2,e:'النيوترون جسيم متعادل الشحنة، لا يحمل شحنة كهربائية موجبة ولا سالبة.'},
+ {q:'أين يقع كلٌّ من البروتون والنيوترون في الذرة؟',o:['داخل النواة','يدوران حول النواة','خارج الذرة تمامًا'],a:0,e:'يقع كل من البروتون والنيوترون داخل نواة الذرة، بينما تدور الإلكترونات في الفراغ المحيط بها.'},
+ {q:'أي الجسيمات الثلاثة كتلته أصغر بكثير مقارنة بالآخرين؟',o:['البروتون','النيوترون','الإلكترون'],a:2,e:'كتلة الإلكترون صغيرة جدًّا مقارنة بكتلتي البروتون والنيوترون المتقاربتين، لذا تُهمل أحيانًا عند حساب كتلة الذرة.'}
+],'s6q');
+
+/* ---------- 7: atom builder ---------- */
+var protons=6, neutrons=6, electrons=6;
+function nucleusPositions(n){
+  var pts=[], range=7;
+  for(var row=-range; row<=range; row++){
+    for(var col=-range; col<=range; col++){
+      var x=col*13 + ((((row%2)+2)%2)?6.5:0);
+      var y=row*11.5;
+      pts.push({x:x,y:y,d:x*x+y*y});
+    }
+  }
+  pts.sort(function(a,b){return a.d-b.d;});
+  return pts.slice(0,n);
+}
+function renderBuild(){
+  $('#pVal').textContent=protons; $('#nVal').textContent=neutrons; $('#eVal').textContent=electrons;
+  var n=protons+neutrons;
+  var pts=nucleusPositions(n);
+  var labels=shuffle(new Array(protons).fill('p').concat(new Array(neutrons).fill('n')));
+  $('#nucleusWrap').innerHTML=pts.map(function(pt,i){
+    return '<div class="nucPart '+labels[i]+'" style="left:'+pt.x+'px;top:'+pt.y+'px">'+(labels[i]==='p'?'+':'')+'</div>';
+  }).join('');
+  var eHtml='';
+  for(var i=0;i<electrons;i++){
+    var ang=(360/Math.max(electrons,1))*i*Math.PI/180;
+    var r=Math.min(100, 70 + Math.max(0,n-10)*1.3);
+    eHtml+='<div class="elecDot" style="left:'+(r*Math.cos(ang))+'px;top:'+(r*Math.sin(ang))+'px"></div>';
+  }
+  $('#electronLayer').innerHTML=eHtml;
+  var net=protons-electrons;
+  $('#buildInfo').innerHTML='بروتونات: <b>'+protons+'</b> · نيوترونات: <b>'+neutrons+'</b> · إلكترونات: <b>'+electrons+'</b> · الشحنة الكلية للذرة: <b>'+(net>0?('+'+net):(net<0?net:'صفر (متعادلة)'))+'</b>'+(net===0?' ✅':'');
+  $('#checkInfo').classList.add('hide');
+  addPtsOnce('build');
+}
+function clamp(v,lo,hi){return Math.max(lo,Math.min(hi,v));}
+$('#pPlus').onclick=function(){protons=clamp(protons+1,1,12);renderBuild();};
+$('#pMinus').onclick=function(){protons=clamp(protons-1,1,12);renderBuild();};
+$('#nPlus').onclick=function(){neutrons=clamp(neutrons+1,0,12);renderBuild();};
+$('#nMinus').onclick=function(){neutrons=clamp(neutrons-1,0,12);renderBuild();};
+$('#ePlus').onclick=function(){electrons=clamp(electrons+1,0,12);renderBuild();};
+$('#eMinus').onclick=function(){electrons=clamp(electrons-1,0,12);renderBuild();};
+$('#checkBtn').onclick=function(){
+  var box=$('#checkInfo'); box.classList.remove('hide');
+  if(protons===electrons){
+    box.className='note'; box.innerHTML='✅ أحسنت! الذرة متعادلة الشحنة — عدد الإلكترونات (<b>'+electrons+'</b>) يساوي عدد البروتونات (<b>'+protons+'</b>) تمامًا.';
+    addPts(10);
+  } else {
+    box.className='note'; box.innerHTML='غير متعادلة بعد. الشحنة الحالية: <b>'+(protons-electrons>0?'+':'')+(protons-electrons)+'</b>. عدّل عدد الإلكترونات ليساوي عدد البروتونات ('+protons+').';
+  }
+};
+renderBuild();
+
+miniQuiz('#s7Q',[
+ {q:'متى تكون الذرة متعادلة الشحنة؟',o:['عندما يتساوى عدد البروتونات مع عدد النيوترونات','عندما يتساوى عدد البروتونات مع عدد الإلكترونات','عندما لا يوجد نيوترونات في نواتها'],a:1,e:'الذرة متعادلة كهربائيًّا عندما يتساوى عدد بروتوناتها الموجبة مع عدد إلكتروناتها السالبة، فتتلاشى الشحنة الكلية.'},
+ {q:'إذا زاد عدد البروتونات في ذرة عن عدد إلكتروناتها، فما شحنتها الكلية؟',o:['موجبة','سالبة','متعادلة'],a:0,e:'زيادة عدد البروتونات (الموجبة) عن عدد الإلكترونات (السالبة) تجعل الشحنة الكلية للذرة موجبة.'},
+ {q:'إضافة نيوترونات فقط إلى نواة الذرة (دون تغيير البروتونات والإلكترونات) تغيّر...',o:['شحنة الذرة الكلية','كتلة نواة الذرة فقط','عدد الإلكترونات تلقائيًّا'],a:1,e:'النيوترونات متعادلة الشحنة، فإضافتها تزيد كتلة نواة الذرة دون أن تغيّر شحنتها الكلية.'}
+],'s7q');
+
+/* ---------- 8: final quiz ---------- */
+var QZ=[
+ {q:'من الفيلسوف الإغريقي الذي اقترح فكرة "الذرات" غير القابلة للتجزئة؟',o:['ديموقريطس','أرسطو','دالتون'],a:0,e:'ديموقريطس هو من اقترح أن المادة تتكون من ذرات صغيرة صلبة غير قابلة للتجزئة.'},
+ {q:'وفق نظرية دالتون الذرية، كيف تتحد الذرات المختلفة لتكوين المركبات؟',o:['بنسبة عددية بسيطة','بأي نسبة عشوائية','لا تتحد إطلاقًا'],a:0,e:'نصّت نظرية دالتون على أن الذرات المختلفة تتحد بنسبة عددية بسيطة لتكوين المركبات.'},
+ {q:'من العالم الذي اكتشف الإلكترون باستخدام أنبوب أشعة المهبط؟',o:['طومسون','رذرفورد','تشادويك'],a:0,e:'اكتشف طومسون الإلكترون من دراسته لأشعة المهبط وانحرافها في المجالين الكهربائي والمغناطيسي.'},
+ {q:'ماذا قاس ميليكان في تجربة قطرة الزيت؟',o:['شحنة الإلكترون','كتلة النواة','نصف قطر الذرة'],a:0,e:'بموازنة قوة الجاذبية بقوة المجال الكهربائي على قطرات زيت مشحونة، قاس ميليكان شحنة الإلكترون.'},
+ {q:'كيف وصف نموذج طومسون الذرة؟',o:['كرة من شحنة موجبة منتشرة ومغروسة فيها إلكترونات سالبة','نواة صغيرة كثيفة تدور حولها إلكترونات','كرة مصمتة لا تحوي جسيمات أصغر'],a:0,e:'يصف نموذج طومسون الذرة ككرة موجبة الشحنة موزعة بانتظام، مغروس فيها إلكترونات منفردة سالبة الشحنة.'},
+ {q:'في تجربة رذرفورد، ما الفرق بين الجسيمات المنحرفة والجسيمات المرتدة؟',o:['المنحرفة غيّرت مسارها بزاوية بسبب مرورها قرب نواة، والمرتدة اصطدمت مباشرة بنواة فارتدت بالكامل','لا فرق، فكلاهما ارتد للخلف بنفس الطريقة','المنحرفة هي الأغلبية والمرتدة نادرة لكنهما يسلكان نفس المسار'],a:0,e:'الانحراف بزاوية ناتج عن المرور قرب نواة دون اصطدام مباشر، أما الارتداد الكامل فناتج عن اصطدام مباشر بنواة صغيرة كثيفة موجبة الشحنة، وهو أندر بكثير.'},
+ {q:'أين تتركز الشحنة الموجبة وكتلة الذرة وفق نموذج رذرفورد؟',o:['في النواة الصغيرة الكثيفة','منتشرة بانتظام في كل الذرة','في الإلكترونات الخارجية'],a:0,e:'استنتج رذرفورد أن الشحنة الموجبة وكتلة الذرة تتركزان في نواة صغيرة كثيفة في المركز.'},
+ {q:'ما العلاقة بين عدد البروتونات وعدد الإلكترونات في الذرة المتعادلة؟',o:['متساويان','عدد البروتونات ضعف عدد الإلكترونات','لا توجد علاقة بينهما'],a:0,e:'في الذرة المتعادلة كهربائيًّا، يتساوى عدد البروتونات الموجبة مع عدد الإلكترونات السالبة.'},
+ {q:'ما شحنة النيوترون وموقعه في الذرة؟',o:['متعادل، داخل النواة','سالب، خارج النواة','موجب، خارج النواة'],a:0,e:'النيوترون جسيم متعادل الشحنة يقع داخل نواة الذرة مع البروتونات.'},
+ {q:'ما البند في نظرية دالتون الذرية الذي تبيّن لاحقًا أنه غير دقيق تمامًا؟',o:['أن الذرات لا تتجزأ','أن المادة تتكون من ذرات','أن الذرات المختلفة تتحد بنسب بسيطة'],a:0,e:'اكتشاف الإلكترون والبروتون والنيوترون أثبت أن الذرة نفسها تتكون من جسيمات أصغر، فبند "لا تتجزأ" لم يعد دقيقًا تمامًا.'}
+];
+var qi=0, qs=0, qAns=false, qGiven={};
+function renderQuiz(){
+  var box=$('#quiz');
+  if(qi>=QZ.length){
+    var msg=qs>=8?'ممتاز! أتقنت الدرس.':qs>=5?'جيد جدًّا! راجع ما أخطأت فيه.':'عُد إلى المراحل السابقة وجرّب مرة أخرى.';
+    box.innerHTML='<div class="card"><p class="score">'+qs+' / '+QZ.length+'</p><p style="text-align:center">'+msg+'</p><p style="text-align:center;color:var(--muted)">نقاطك في الدرس: '+points+'</p><div class="row" style="justify-content:center"><button class="btn pri" id="qRe">أعد الاختبار</button></div></div>';
+    $('#qRe').onclick=function(){qi=0;qs=0;renderQuiz();};
+    return;
+  }
+  var Q=QZ[qi], opts=shuffle(Q.o.map(function(t,i){return {t:t,c:i===Q.a};})); qAns=false;
+  box.innerHTML='<div class="card"><div class="qn">السؤال '+(qi+1)+' من '+QZ.length+'</div><h3 style="margin:4px 0 0;font-size:1.15rem">'+Q.q+'</h3><div class="opts">'+opts.map(function(o,i){return '<button class="opt" data-i="'+i+'">'+o.t+'</button>';}).join('')+'</div><div id="qFb"></div></div>';
+  $$('#quiz .opt').forEach(function(b){b.onclick=function(){
+    if(qAns)return; qAns=true; var o=opts[+b.getAttribute('data-i')];
+    $$('#quiz .opt').forEach(function(x,i){x.disabled=true; if(opts[i].c)x.classList.add('right');});
+    if(o.c){qs++; if(!qGiven[qi]){addPts(10);}} else b.classList.add('wrong');
+    qGiven[qi]=true;
+    $('#qFb').innerHTML='<div class="fb '+(o.c?'ok':'no')+'">'+(o.c?'إجابة صحيحة. ':'إجابة غير صحيحة. ')+Q.e+'</div><div class="row" style="margin-top:8px"><button class="btn pri" id="qNext">'+(qi===QZ.length-1?'النتيجة':'السؤال التالي')+'</button></div>';
+    $('#qNext').onclick=function(){qi++;renderQuiz();};
+  };});
+}
+renderQuiz();
+
+renderNav();
+})();
+</script>
+</body>
+</html>
+
+</body></html>
