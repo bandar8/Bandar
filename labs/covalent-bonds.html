@@ -128,11 +128,14 @@ td button{border:0;background:none;color:var(--accent);cursor:pointer;padding:0;
   .bar-row{grid-template-columns:78px 1fr 78px}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+
+:root{color-scheme:light;--bg:#f5faf9;--surface:#fff;--surface2:#e5f4f0;--ink:#123d47;--muted:#58717a;--line:#d4e6e4;--accent:#0d7b70;--accent-ink:#fff;--accent-soft:#d8eeea}
+.site-nav{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px}.site-nav a{display:inline-flex;align-items:center;min-height:40px;padding:7px 13px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--accent);font:inherit;font-size:.9rem;font-weight:700;text-decoration:none;transition:background .2s ease,color .2s ease,border-color .2s ease}.site-nav a:hover{background:var(--surface2);border-color:var(--accent)}.site-nav a.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink,#fff)}@media(max-width:520px){.site-nav a{font-size:.82rem;padding-inline:11px}}
 </style>
 
 <div class="app" dir="rtl" lang="ar">
 <aside class="side">
-  <div class="brand"><span class="brand-en">COVALENT 360°</span><span class="brand-ar">المختبر الجزيئي</span></div>
+  <div class="brand"><span class="brand-en">COVALENT 360°</span><span class="brand-ar">المختبر الجزيئي</span><nav class="site-nav" aria-label="تنقل الموقع"><a href="../index.html">← الصفحة الرئيسية</a><a class="primary" href="../labs.html">مختبرات الكيمياء</a></nav></div>
   <nav id="nav" aria-label="أقسام المختبر"></nav>
 </aside>
 <main>
