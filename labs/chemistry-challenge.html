@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>تحدي الكيمياء ١</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* Classroom projector board: deep lab-navy surface, molecule-ball accents (cyan, gold, orange), one committed dark world */
+  --bg:#0B1B33; --panel:#122A4C; --panel-2:#183660; --line:#2A4D7E;
+  --ink:#F3F7FF; --muted:#9FB4D4;
+  --cyan:#3FC7EE; --gold:#FFC23D; --orange:#FF8A4C; --lime:#9BE15D;
+  --ok:#2FD07A; --bad:#FF5A5F;
+  --display:"IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  --body:"IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  color-scheme:dark;
+  /* layout: scoreboard strip on top, 4×3 question board below; a question opens as a full-stage card */
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:radial-gradient(1200px 700px at 85% -10%,#1C3F73 0%,transparent 60%),var(--bg);color:var(--ink);font-family:var(--body);display:flex;flex-direction:column}
+button{font-family:inherit;cursor:pointer;border:0;color:inherit}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+sub{font-size:.62em;vertical-align:-.25em;line-height:0}
+.wrap{width:min(1400px,100% - 32px);margin:0 auto;display:flex;flex-direction:column;gap:12px;padding:12px 0 14px;flex:1;min-height:0}
+header{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+h1{margin:0;font-family:var(--display);font-weight:900;font-size:clamp(26px,3.2vw,44px);letter-spacing:0;text-wrap:balance}
+h1 span{color:var(--gold)}
+.tag{font-size:15px;font-weight:700;color:var(--muted);background:var(--panel);border:1px solid var(--line);padding:4px 14px;border-radius:999px}
+.spacer{flex:1}
+.tool{background:var(--panel);border:1px solid var(--line);padding:8px 16px;border-radius:12px;font-weight:700;font-size:15px}
+.tool:hover{background:var(--panel-2)}
+/* scoreboard */
+.teams{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.team{background:var(--panel);border:2px solid var(--line);border-radius:18px;padding:10px 16px;display:flex;align-items:center;gap:12px;position:relative}
+.team .dot{width:16px;height:16px;border-radius:50%;flex:0 0 auto}
+.team input{background:transparent;border:0;color:var(--ink);font:700 20px var(--body);width:100%;min-width:0;padding:2px 0;border-bottom:1px dashed transparent}
+.team input:hover,.team input:focus{border-bottom-color:var(--muted);outline:none}
+.score{font:900 34px var(--display);font-variant-numeric:tabular-nums;min-width:70px;text-align:left}
+.team.lead{border-color:var(--gold);box-shadow:0 0 0 3px rgba(255,194,61,.18)}
+.team .adj{display:flex;flex-direction:column;gap:2px}
+.team .adj button{background:var(--panel-2);width:26px;height:22px;border-radius:6px;font-weight:800;font-size:14px;line-height:1}
+/* board */
+.board{flex:1;min-height:0;display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:auto repeat(6,1fr);gap:8px}
+.cat{background:var(--panel-2);border-radius:16px;padding:12px 10px;text-align:center;font:800 clamp(16px,1.7vw,24px)/1.25 var(--display);display:flex;align-items:center;justify-content:center;gap:10px;border-bottom:4px solid var(--c)}
+.cat svg{flex:0 0 auto}
+.tile{background:linear-gradient(160deg,var(--panel-2),var(--panel));border:2px solid var(--line);border-radius:18px;font:900 clamp(22px,2.8vw,40px) var(--display);color:var(--c);font-variant-numeric:tabular-nums;transition:transform .15s,border-color .15s;min-height:46px;border-radius:14px}
+.tile:hover{transform:translateY(-3px);border-color:var(--c)}
+.tile.used{color:transparent;background:rgba(18,42,76,.45);border-style:dashed;transform:none;cursor:default;position:relative}
+.tile.used::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--line);font-size:26px}
+/* question stage */
+.stage{position:fixed;inset:0;background:rgba(5,14,28,.92);display:none;align-items:center;justify-content:center;padding:16px;z-index:10}
+.stage.open{display:flex}
+.card{width:min(1200px,100%);max-height:100%;overflow:auto;background:var(--panel);border:2px solid var(--line);border-radius:28px;padding:clamp(18px,3vw,36px);display:flex;flex-direction:column;gap:22px;border-top:8px solid var(--c)}
+.qhead{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.qcat{font:800 20px var(--display);color:var(--c)}
+.qval{font:900 20px var(--display);background:var(--c);color:var(--bg);padding:2px 16px;border-radius:999px}
+.timer{margin-inline-start:auto;display:flex;align-items:center;gap:10px}
+.ring{--p:100;width:74px;height:74px;border-radius:50%;background:conic-gradient(var(--gold) calc(var(--p)*1%),var(--panel-2) 0);display:grid;place-items:center}
+.ring b{width:58px;height:58px;border-radius:50%;background:var(--panel);display:grid;place-items:center;font:900 26px var(--display);font-variant-numeric:tabular-nums}
+.ring.low{background:conic-gradient(var(--bad) calc(var(--p)*1%),var(--panel-2) 0)}
+.qtext{font:800 clamp(26px,3.4vw,48px)/1.45 var(--display);text-wrap:balance;margin:0}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.opt{background:var(--panel-2);border:3px solid var(--line);border-radius:18px;padding:18px 20px;font:700 clamp(20px,2.2vw,30px)/1.4 var(--body);text-align:right;display:flex;align-items:center;gap:14px}
+.opt:hover{border-color:var(--muted)}
+.opt .k{flex:0 0 46px;height:46px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-weight:900}
+.opt.right{border-color:var(--ok);background:rgba(47,208,122,.18)}
+.opt.right .k{background:var(--ok);color:var(--bg)}
+.opt.wrong{border-color:var(--bad);background:rgba(255,90,95,.14);animation:shake .4s}
+.opt.wrong .k{background:var(--bad);color:var(--bg)}
+@keyframes shake{25%{transform:translateX(8px)}50%{transform:translateX(-8px)}75%{transform:translateX(4px)}}
+.why{display:none;background:rgba(47,208,122,.12);border:2px solid var(--ok);border-radius:16px;padding:14px 20px;font:700 clamp(18px,1.9vw,26px)/1.5 var(--body)}
+.why.show{display:block}
+.why b{color:var(--ok)}
+.ctrl{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn{background:var(--panel-2);border:2px solid var(--line);padding:12px 22px;border-radius:14px;font:800 18px var(--body)}
+.btn:hover{border-color:var(--muted)}
+.btn.primary{background:var(--gold);border-color:var(--gold);color:var(--bg)}
+.award{display:none;gap:10px;flex-wrap:wrap;align-items:center}
+.award.show{display:flex}
+.award .lbl{font-weight:800;color:var(--muted)}
+.award button{padding:10px 18px;border-radius:14px;font:800 18px var(--body);background:var(--panel-2);border:2px solid var(--tc)}
+.award button:hover{background:var(--tc);color:var(--bg)}
+.hint{font-size:14px;color:var(--muted);text-align:center}
+/* winner */
+.win{position:fixed;inset:0;background:rgba(5,14,28,.95);display:none;flex-direction:column;align-items:center;justify-content:center;gap:18px;z-index:20;text-align:center;padding:16px}
+.win.open{display:flex}
+.win h2{margin:0;font:900 clamp(40px,6vw,84px) var(--display);color:var(--gold)}
+.win .podium{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.win .p{background:var(--panel);border:2px solid var(--line);border-radius:18px;padding:14px 24px;min-width:180px}
+.win .p b{display:block;font:900 40px var(--display);font-variant-numeric:tabular-nums}
+#fx{position:fixed;inset:0;pointer-events:none;z-index:30}
+@media (max-width:760px){.board{grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}.cat{font-size:13px;padding:8px 4px;flex-direction:column;gap:4px}.tile{font-size:24px;min-height:64px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.site-nav{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:2px}.site-nav a{display:inline-flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);color:var(--ink);padding:8px 13px;border-radius:12px;text-decoration:none;font-size:14px;font-weight:700}.site-nav a:hover{background:var(--panel-2);border-color:var(--muted)}
+@media (max-width:760px){.site-nav{width:100%}.site-nav a{flex:1;justify-content:center}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <nav class="site-nav" aria-label="التنقل في الموقع"><a href="../index.html#top">← الصفحة الرئيسية</a><a href="../labs.html">المختبرات والألعاب</a></nav>
+    <h1>تحدي <span>الكيمياء ١</span></h1>
+    <span class="tag">الأول الثانوي • كيمياء ١</span><span class="tag" id="qcount"></span>
+    <span class="spacer"></span>
+    <button class="tool" id="teamCount" title="عدد الفرق">عدد الفرق: 2</button>
+    <button class="tool" id="finish">إعلان الفائز</button>
+    <button class="tool" id="reset">لعبة جديدة</button>
+  </header>
+  <section class="teams" id="teams" aria-label="لوحة النقاط"></section>
+  <section class="board" id="board" aria-label="لوحة الأسئلة"></section>
+  <p class="hint">اختر سؤالًا ← يجيب الفريق ← اضغط على الخيار الذي اختاره الطلاب أو «إظهار الإجابة» ← امنح النقاط. يمكنك تعديل أسماء الفرق بالضغط عليها.</p>
+</div>
+
+<div class="stage" id="stage" role="dialog" aria-modal="true" aria-labelledby="qtext">
+  <div class="card" id="card">
+    <div class="qhead">
+      <span class="qcat" id="qcat"></span><span class="qval" id="qval"></span>
+      <div class="timer"><button class="btn" id="tbtn">ابدأ المؤقت</button><div class="ring" id="ring"><b id="tnum">30</b></div></div>
+    </div>
+    <h2 class="qtext" id="qtext"></h2>
+    <div class="opts" id="opts"></div>
+    <div class="why" id="why"></div>
+    <div class="ctrl">
+      <button class="btn primary" id="reveal">إظهار الإجابة</button>
+      <button class="btn" id="swap">سؤال إضافي ↻</button>
+      <div class="award" id="award"><span class="lbl">امنح النقاط:</span></div>
+      <span class="spacer"></span>
+      <button class="btn" id="back">العودة للوحة</button>
+    </div>
+  </div>
+</div>
+
+<div class="win" id="win"><h2 id="wtitle"></h2><div class="podium" id="podium"></div><button class="btn" id="wclose">العودة للوحة</button></div>
+<canvas id="fx"></canvas>
+
+<script>
+
+// ---------- data: كيمياء 1 (من ملف حلول أوراق العمل) ----------
+const M=(d,q,...o)=>({k:'m',d,q,o}),T=(d,q,b)=>({k:'t',d,q,b}),B=(d,e,c)=>({k:'b',d,e,c});
+const P=[
+// ١ مقدمة في علم الكيمياء
+[M(0,'العلم الذي يدرس المادة والتغيرات التي تطرأ عليها هو:','الكيمياء','الفيزياء','الأحياء','علم الأرض'),
+ M(0,'المادة الكيميائية هي مادة لها تركيب:','محدد وثابت','متغير','عشوائي','يتغير بتغير المكان'),
+ M(0,'يتكوّن غاز الأوزون من ذرات:','الأكسجين','الهيدروجين','النيتروجين','الزرنيخ'),
+ T(0,'الكتلة مقياس لكمية المادة.',1),T(0,'الضوء مادة.',0),T(0,'الهواء مادة.',1),
+ M(1,'تقع طبقة الأوزون في:','الستراتوسفير','التروبوسفير','الميزوسفير','الثيرموسفير'),
+ M(1,'أي مما يلي لا يُعد مثالًا على البيانات النوعية؟','الضغط','الرائحة','الطعم','الشكل'),
+ M(1,'أي مما يلي لا يُعد من البيانات الكمية؟','اللون','السرعة','الطول','الحجم'),
+ M(1,'مقياس لكمية المادة ولقوة الجاذبية الأرضية الواقعة عليها:','الوزن','الكتلة','الحجم','الطول'),
+ T(1,'درجة الحرارة من أمثلة البيانات النوعية.',0),
+ T(1,'كتلة جسم على سطح الأرض لا تختلف عن كتلته على سطح القمر.',1),
+ T(1,'يوجد 90% من غاز الأوزون في طبقة التروبوسفير.',0),
+ M(2,'تفسير مؤقت قابل للاختبار لما تمت ملاحظته:','الفرضية','النظرية','التجربة','الاستنتاج'),
+ M(2,'علاقة موجودة في الطبيعة تدعمها عدة تجارب:','القانون العلمي','الفرضية','الاستنتاج','النموذج'),
+ M(2,'الهدف من البحث التطبيقي:','حل مشكلة معينة','كسب المعرفة','مجرد التعلم','وضع القوانين'),
+ M(2,'معادلة تكوّن غاز الأوزون O₃:','{O₂ + O → O₃}','{O + O → O₃}','{O₂ + O₂ → O₃}','{O₃ → O₂ + O}'),
+ M(2,'خطوات الطريقة العلمية بالترتيب:','ملاحظة – فرضية – تجارب – استنتاج','فرضية – ملاحظة – تجارب – استنتاج','تجارب – فرضية – ملاحظة – استنتاج','استنتاج – ملاحظة – فرضية – تجارب'),
+ T(2,'البحث النظري بحث يجرى لحل مشكلة محددة.',0),
+ T(2,'مركبات الكلوروفلوروكربون توجد في ماء البحر.',0),
+ T(2,'النموذج تفسير مرئي أو لفظي أو رياضي للبيانات التجريبية.',1),
+ T(2,'يتكوّن غاز الأوزون من ذرتي أكسجين.',0)],
+// ٢ المادة: الخواص والتغيرات
+[M(0,'حالة المادة التي لها شكل وحجم محددان:','الصلبة','السائلة','الغازية','البلازما'),
+ M(0,'حالة المادة الموجودة في النجوم:','البلازما','الصلبة','السائلة','الغازية'),
+ M(0,'طريقة تستعمل حاجزًا مساميًا لفصل المادة الصلبة عن السائل:','الترشيح','التقطير','التبلور','التسامي'),
+ T(0,'الصفوف الأفقية في الجدول الدوري تسمى دورات.',1),
+ T(0,'الأعمدة الرأسية في الجدول الدوري تسمى مجموعات أو عائلات.',1),
+ T(0,'الحالة الصلبة لها شكل وحجم عشوائي.',0),
+ M(1,'أي مما يلي مثال على التغير الفيزيائي؟','التجمد','التعفن','احتراق ورقة','صدأ الحديد'),
+ M(1,'أي مما يلي مثال على التغير الكيميائي؟','احتراق ورقة','كسر لوح زجاجي','تقطيع ورقة','تجمد الماء'),
+ M(1,'أي مما يلي مثال على المركب؟','الأسبرين {C₉H₈O₄}','الذهب {Au}','الفضة {Ag}','النحاس {Cu}'),
+ M(1,'أي مما يلي مثال على العنصر؟','الأكسجين','الماء','الهواء','السكر'),
+ M(1,'طريقة لفصل المواد اعتمادًا على الاختلاف في درجات غليانها:','التقطير','الترشيح','التبلور','التسامي'),
+ T(1,'البخار هو الحالة الغازية لمادة توجد صلبة أو سائلة في الظروف العادية.',1),
+ T(1,'جسيمات المواد الصلبة قابلة للانضغاط.',0),
+ T(1,'الشاي يعتبر من المخاليط المتجانسة.',1),
+ T(1,'عدد حالات المادة 8 حالات فقط.',0),
+ M(2,'أي المخاليط التالية متجانس؟','ملح الطعام مذاب في الماء','مخلوط المكسرات','مجموعة من الفواكه','البيتزا'),
+ M(2,'التسامي هو:','تحول المادة الصلبة إلى غاز دون أن تنصهر','تحول الغاز إلى سائل','تحول السائل إلى صلب','تحول الصلب إلى سائل'),
+ M(2,'عينة مركب كتلتها 78 g تحتوي 12.4 g هيدروجين. النسبة المئوية للهيدروجين:','15.89%','1.58%','89.15%','6.29%'),
+ M(2,'المركبات مقارنةً بالعناصر:','أكثر استقرارًا ويمكن تجزئتها بطرائق كيميائية','أقل استقرارًا ولا تُجزَّأ','أكثر استقرارًا ولا تُجزَّأ','أقل استقرارًا وتُجزَّأ بطرائق فيزيائية'),
+ T(2,'يطبق قانون حفظ الكتلة على كتلة المواد المتفاعلة فقط.',0),
+ T(2,'يمكن تجزئة المركبات إلى مواد أبسط منها بطرائق كيميائية.',1),
+ T(2,'نسب توافر العناصر الكيميائية في الكون متساوية.',0)],
+// ٣ تركيب الذرة
+[M(0,'أول من اقترح أن المادة ليست قابلة للانقسام إلى ما لا نهاية:','ديمقريطس','رذرفورد','دالتون','طومسون'),
+ M(0,'تتكون المادة من أجزاء صغيرة جدًا تسمى:','ذرات','عناصر','مركبات','مخاليط'),
+ M(0,'العالم الذي اكتشف الإلكترون:','طومسون','رذرفورد','شادويك','دالتون'),
+ T(0,'النيوترونات جسيمات متعادلة الشحنة.',1),
+ T(0,'البروتونات والنيوترونات توجد في نواة الذرة.',1),
+ T(0,'جسيمات ألفا تحمل شحنة سالبة.',0),
+ M(1,'العالم الذي ساهم في اكتشاف البروتونات:','رذرفورد','شادويك','طومسون','مليكان'),
+ M(1,'العالم الذي ساهم في اكتشاف النيوترونات:','شادويك','مليكان','دالتون','طومسون'),
+ M(1,'العالم الذي تمكن من تحديد شحنة الإلكترون:','مليكان','طومسون','رذرفورد','شادويك'),
+ M(1,'المسؤول عن معظم حجم الذرة:','الفراغ','البروتونات','النيوترونات','الإلكترونات'),
+ M(1,'الذرة الوحيدة التي لا تحتوي على نيوترونات:','الهيدروجين','الهيليوم','الأكسجين','النيتروجين'),
+ T(1,'العدد الذري يساوي عدد البروتونات في الذرة.',1),
+ T(1,'رفض أرسطو فكرة أن المادة تتكون من الذرات.',1),
+ T(1,'الجدول الدوري مرتب من اليمين إلى اليسار تصاعديًا بحسب الأعداد الذرية.',0),
+ M(2,'في الرمز {¹⁹₉F} عدد الكتلة يساوي:','19','9','10','28'),
+ M(2,'في الرمز {²³₁₁Na} عدد النيوترونات يساوي:','12','11','23','34'),
+ M(2,'عدد النيوترونات لعنصر عدده الذري 10 وعدده الكتلي 22:','12','10','22','32'),
+ M(2,'الذرات التي لها عدد البروتونات نفسه وتختلف في عدد النيوترونات:','النظائر','النواة','الكتلة الذرية','عدد الكتلة'),
+ M(2,'يتحدد استقرار نواة الذرة بنسبة:','النيوترونات إلى البروتونات','الإلكترونات إلى النيوترونات','الإلكترونات إلى البروتونات','البروتونات إلى الإلكترونات'),
+ M(2,'التفاعل الذي يتضمن تغيرًا في نواة الذرة:','التفاعل النووي','التفاعل الكيميائي','التفاعل الفيزيائي','التفاعل الحيوي'),
+ M(2,'أشعة عالية الطاقة غير مشحونة وليس لها كتلة:','أشعة جاما','أشعة ألفا','أشعة بيتا','أشعة المهبط'),
+ T(2,'وحدة الكتل الذرية (amu) هي 1/12 من كتلة ذرة الهيدروجين.',0),
+ T(2,'النظائر تتفق في عدد البروتونات وتختلف في عدد الإلكترونات.',0),
+ T(2,'هناك أربعة أنواع من الإشعاعات هي ألفا وبيتا وجاما وفيتو.',0),
+ T(2,'جسيم ألفا يحتوي على بروتونين ونيوترونين.',1)],
+// ٤ التفاعلات الكيميائية والموازنة
+[M(0,'المواد الموجودة عند بداية التفاعل (يسار السهم) تسمى:','المتفاعلات','النواتج','المعاملات','المذيبات'),
+ M(0,'رمز مستوى الطاقة الرئيس:','{n}','{e}','{b}','{v}'),
+ M(0,'الرمز {(s)} المكتوب أسفل المادة في المعادلة يشير إلى الحالة:','الصلبة','السائلة','الغازية','المحلول المائي'),
+ T(0,'النواتج هي المواد المتكونة خلال التفاعل.',1),
+ T(0,'انصهار الثلج من أدلة حدوث التفاعل الكيميائي.',0),
+ T(0,'الصيغة الكيميائية لكلوريد المغنيسيوم هي NaCl.',0),
+ B(0,'N2+H2>NH3',[1,3,2]),B(0,'Na+Cl2>NaCl',[2,1,2]),B(0,'Mg+O2>MgO',[2,1,2]),B(0,'CaCO3>CaO+CO2',[1,1,1]),
+ M(1,'أقصى عدد من الإلكترونات في مستوى الطاقة الرئيس الثاني:','8','2','4','18'),
+ M(1,'أقصى سعة من الإلكترونات للمستوى الثانوي (d):','10','6','8','2'),
+ M(1,'التوزيع الإلكتروني الصحيح للفلور ₉F:','{1s² 2s² 2p⁵}','{1s² 2s² 3p⁵}','{1s² 2s² 2p³ 3s²}','{1s² 2s⁵ 2p²}'),
+ M(1,'الصيغة الكيميائية لكلوريد المغنيسيوم:','{MgCl₂}','{MgCl}','{Cl₂Mg}','{ClMg}'),
+ M(1,'الصيغة الكيميائية لهيدروكسيد الألمنيوم:','{Al(OH)₃}','{AlOH₃}','{Al₃OH}','{Al(OH)₂}'),
+ M(1,'التفاعل {2Na + Cl₂ → 2NaCl} يصنف تفاعل:','تكوين','تفكك','احتراق','إحلال بسيط'),
+ T(1,'الراسب مادة صلبة تنتج خلال تفاعل كيميائي في محلول.',1),
+ T(1,'المذيب هو الماء دائمًا في المحاليل المائية.',1),
+ T(1,'أنواع التفاعلات الكيميائية نوعان فقط هما التكوين والتفكك.',0),
+ T(1,'الإلكترونات ضمن مستوى الطاقة الرئيس الواحد لها الطاقة نفسها.',0),
+ B(1,'H2+O2>H2O',[2,1,2]),B(1,'H2O2>H2O+O2',[2,2,1]),B(1,'Zn+HCl>ZnCl2+H2',[1,2,1,1]),B(1,'Na+H2O>NaOH+H2',[2,2,2,1]),B(1,'Fe+CuSO4>FeSO4+Cu',[1,1,1,1]),
+ M(2,'التفاعل {2NaN₃ → 2Na + 3N₂} يصنف تفاعل:','تفكك','تكوين','إحلال بسيط','إحلال مزدوج'),
+ M(2,'التفاعل {2NaOH + CuCl₂ → 2NaCl + Cu(OH)₂} يصنف تفاعل:','إحلال مزدوج','إحلال بسيط','تكوين','احتراق'),
+ M(2,'التفاعل {F₂ + 2NaBr → 2NaF + Br₂} يصنف تفاعل:','إحلال بسيط','إحلال مزدوج','تفكك','تكوين'),
+ M(2,'التفاعل {CH₄ + 2O₂ → CO₂ + 2H₂O} يصنف تفاعل:','احتراق','تفكك','إحلال مزدوج','تكوين فقط'),
+ M(2,'الأيونات المتفرجة في التفاعل {HBr + KCN → KBr + HCN}:','{K⁺ , Br⁻}','{K⁺ , CN⁻}','{H⁺ , CN⁻}','{Br⁻ , CN⁻}'),
+ M(2,'المعادلة الأيونية النهائية للتفاعل {HCl + LiOH → H₂O + LiCl}:','{H⁺ + OH⁻ → H₂O}','{Li⁺ + Cl⁻ → LiCl}','{HCl → H⁺ + Cl⁻}','{Li⁺ + OH⁻ → LiOH}'),
+ M(2,'الرمز {NR} في نواتج المعادلة الكيميائية يدل على:','عدم حدوث تفاعل كيميائي','تكوّن راسب','تكوّن غاز','حدوث تفاعل كيميائي'),
+ T(2,'التفكك هو عكس الاحتراق.',0),
+ B(2,'Fe+O2>Fe2O3',[4,3,2]),B(2,'Al+O2>Al2O3',[4,3,2]),B(2,'CH4+O2>CO2+H2O',[1,2,1,2]),B(2,'C3H8+O2>CO2+H2O',[1,5,3,4]),B(2,'KClO3>KCl+O2',[2,2,3]),B(2,'Al+HCl>AlCl3+H2',[2,6,2,3]),B(2,'NaOH+CuCl2>NaCl+Cu(OH)2',[2,1,2,1])],
+// ٥ المول
+[M(0,'وحدة النظام الدولي الأساسية لقياس كمية المادة:','المول','الجرام','الجول','الطول'),
+ M(0,'العدد {6.02 × 10²³} يسمى:','عدد أفوجادرو','عدد دوبسون','عدد الكتلة','عدد التأكسد'),
+ M(0,'وحدة قياس الكتلة المولية:','{g/mol}','{mol/g}','{mol/L}','{g/L}'),
+ M(0,'الكتلة بالجرامات لمول واحد من أي مادة نقية تسمى:','الكتلة المولية','الكتلة الحجمية','الكثافة','الضغط'),
+ T(0,'عدد أفوجادرو = 6.02 × 10²³',1),T(0,'المول هو وحدة النظام الدولي الفرعية لقياس المادة.',0),T(0,'تقاس الكتلة المولية بوحدة mol فقط.',0),
+ M(1,'عدد المولات × عدد أفوجادرو =','عدد الجسيمات','الكتلة','عدد التأكسد','عدد دوبسون'),
+ M(1,'الكتلة المولية لـ {CaCl₂} (Ca=40, Cl=35.5):','{111 g/mol}','{75.5 g/mol}','{211 g/mol}','{311 g/mol}'),
+ M(1,'الكتلة المولية لـ {C₁₂H₂₂O₁₁} (C=12, H=1, O=16):','{342 g/mol}','{45 g/mol}','{29 g/mol}','{12 g/mol}'),
+ M(1,'الكتلة المولية لـ {NaOH} (Na=23, O=16, H=1):','{40 g/mol}','{39 g/mol}','{56 g/mol}','{23 g/mol}'),
+ T(1,'مول واحد من الحديد يحتوي على عدد الذرات نفسه في مول واحد من الكالسيوم.',1),
+ T(1,'مول واحد من الليثيوم له الكتلة المولية نفسها لمول واحد من الصوديوم.',0),
+ T(1,'يستعمل الكيميائيون المول لعدّ الجسيمات.',1),
+ T(1,'عدد المولات = عدد الجسيمات + عدد أفوجادرو.',0),
+ T(1,'يمكن حساب الكتلة المولية للمركب من خلال صيغته الكيميائية.',1),
+ M(2,'كتلة {0.045 mol} من الكروم (Cr = 52 g/mol):','{2.34 g}','{0.34 g}','{1.34 g}','{3.34 g}'),
+ M(2,'عدد ذرات {2.5 mol} من الخارصين Zn:','{1.505 × 10²⁴}','{2.505 × 10²⁴}','{4.505 × 10²⁴}','{5.505 × 10²⁴}'),
+ M(2,'عدد جزيئات {3.5 mol} من السكروز:','{2.11 × 10²⁴}','{1.11 × 10²⁴}','{3.11 × 10²⁴}','{4.11 × 10²⁴}'),
+ M(2,'عدد مولات {525 g} من الكالسيوم (Ca = 40 g/mol):','{13.1 mol}','{113.1 mol}','{213.1 mol}','{21000 mol}'),
+ M(2,'عدد مولات النحاس التي تحتوي على {4.5 × 10²⁴} ذرة:','{7.475 mol}','{2.475 mol}','{4.475 mol}','{9.475 mol}'),
+ M(2,'عدد مولات الألومنيوم في {5.75 × 10²⁴} ذرة:','{9.551 mol}','{0.551 mol}','{4.551 mol}','{6.551 mol}'),
+ M(2,'عدد مولات الفضة في {25.5 g} (Ag = 107.86 g/mol):','{0.236 mol}','{2.36 mol}','{0.0236 mol}','{4.23 mol}'),
+ M(2,'كتلة {3.57 mol} من الألومنيوم (Al = 26.98 g/mol):','{96.3 g}','{9.63 g}','{7.56 g}','{963 g}'),
+ T(2,'تمكّن أميديو أفوجادرو من تحديد حجم المول من الغاز.',1)]
+];
+const TOTAL=P.reduce((a,x)=>a+x.length,0);
+const CATS=[
+ {name:'مقدمة في الكيمياء',c:'var(--cyan)',icon:'flask'},
+ {name:'المادة: الخواص والتغيرات',c:'var(--lime)',icon:'magnet'},
+ {name:'تركيب الذرة',c:'#C792FF',icon:'atom'},
+ {name:'التفاعلات والموازنة',c:'var(--orange)',icon:'link'},
+ {name:'المول',c:'var(--gold)',icon:'bolt'}];
+const seen=new Set();
+const rnd=a=>a[Math.random()*a.length|0];
+function shuf(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a}
+const fm=s=>String(s).replace(/\{([^}]+)\}/g,'<span dir="ltr">$1</span>');
+const sub=f=>f.replace(/([A-Za-z\)])(\d+)/g,(m,a,d)=>a+[...d].map(x=>'₀₁₂₃₄₅₆₇₈₉'[x]).join(''));
+function eqS(e,c){let i=0;return e.split('>').map(s=>s.split('+').map(f=>{const n=c?c[i++]:1;return(n>1?n:'')+sub(f)}).join(' + ')).join(' → ')}
+function dis(c){const s=new Set([c.join(',')]),out=[];const t=c.flatMap((_,i)=>[1,-1,2].map(k=>c.map((x,j)=>j===i?x+k:x))).concat([c.map(()=>1)]).filter(x=>x.every(v=>v>0));
+  shuf(t).forEach(x=>{const k=x.join(',');if(!s.has(k)&&out.length<3){s.add(k);out.push(x)}});return out}
+const EX=[
+['العلم الذي يدرس المادة','الكيمياء علم المادة: تركيبها وخواصها وتغيراتها، أما الفيزياء فتدرس الطاقة والحركة.'],
+['المادة الكيميائية هي مادة','المادة الكيميائية النقية تركيبها ثابت لا يتغير، مثل الماء {H₂O} دائمًا هيدروجين وأكسجين بنسبة ثابتة.'],
+['من ذرات:','جزيء الأوزون {O₃} يتكون من ثلاث ذرات أكسجين.'],
+['الكتلة مقياس لكمية','الكتلة تقيس كمية المادة، والوزن يقيس قوة جذب الأرض لها.'],
+['الضوء مادة','المادة لها كتلة وتشغل حيزًا، والضوء طاقة وليس مادة.'],
+['الهواء مادة','الهواء له كتلة ويشغل حيزًا، فهو مادة.'],
+['تقع طبقة الأوزون','تقع طبقة الأوزون في الستراتوسفير وتحمينا من الأشعة فوق البنفسجية.'],
+['البيانات النوعية؟','البيانات النوعية نصفها بالحواس (الرائحة والطعم والشكل)، أما الضغط فيُقاس بالأرقام فهو كمي.'],
+['من البيانات الكمية','البيانات الكمية تُقاس بالأرقام (السرعة والطول والحجم)، أما اللون فنصفه بالعين فهو نوعي.'],
+['ولقوة','الوزن = الكتلة × تسارع الجاذبية، لذلك يتغير بتغير المكان، بينما الكتلة ثابتة.'],
+['درجة الحرارة من أمثلة','درجة الحرارة تُقاس بالأرقام، فهي بيانات كمية.'],
+['كتلة جسم على سطح الأرض','الكتلة ثابتة في أي مكان، أما الوزن فيتغير.'],
+['يوجد 90%','نحو 90% من الأوزون يوجد في الستراتوسفير وليس التروبوسفير.'],
+['تفسير مؤقت','الفرضية تفسير مؤقت يمكن اختباره بالتجارب.'],
+['علاقة موجودة في الطبيعة','القانون العلمي يصف علاقة في الطبيعة تدعمها تجارب كثيرة.'],
+['من البحث التطبيقي','البحث التطبيقي يُجرى لحل مشكلة محددة، أما النظري فلكسب المعرفة.'],
+['معادلة تكوّن غاز الأوزون','ذرة أكسجين واحدة تتحد مع جزيء {O₂} فينتج {O₃}، وعدد الذرات متساوٍ في الطرفين (3 ذرات).'],
+['خطوات الطريقة العلمية','نبدأ بالملاحظة ثم نضع فرضية ونختبرها بالتجارب، ثم نصل إلى الاستنتاج.'],
+['البحث النظري بحث','الذي يُجرى لحل مشكلة محددة هو البحث التطبيقي، أما النظري فهدفه المعرفة.'],
+['الكلوروفلوروكربون','هذه مركبات صناعية توجد في الغلاف الجوي وتدمر الأوزون، وليست في ماء البحر.'],
+['النموذج تفسير','النموذج تفسير مرئي أو لفظي أو رياضي للبيانات التجريبية.'],
+['من ذرتي','الأوزون من ثلاث ذرات أكسجين، أما ذرتان فهي الأكسجين العادي {O₂}.'],
+['شكل وحجم محددان','في المادة الصلبة الجسيمات متقاربة ومرتبة، فللصلب شكل وحجم ثابتان.'],
+['الموجودة في النجوم','حرارة النجوم العالية جدًا تُنتج حالة البلازما.'],
+['حاجزًا مساميًا','الترشيح يستعمل ورقة ثقوبها صغيرة تحجز الصلب وتمرر السائل.'],
+['الصفوف الأفقية','الصفوف الأفقية دورات، والأعمدة الرأسية مجموعات.'],
+['الأعمدة الرأسية','الأعمدة الرأسية تسمى مجموعات أو عائلات.'],
+['شكل وحجم عشوائي','الصلبة لها شكل وحجم محددان وليسا عشوائيين.'],
+['التغير الفيزيائي','التجمد يغيّر الحالة فقط دون تكوّن مادة جديدة.'],
+['التغير الكيميائي','الاحتراق ينتج مواد جديدة (رماد وغازات)، فهو تغير كيميائي.'],
+['مثال على المركب','الأسبرين من كربون وهيدروجين وأكسجين متحدة كيميائيًا فهو مركب، والبقية عناصر.'],
+['مثال على العنصر','الأكسجين مادة نقية لا تتجزأ، أما الماء والسكر فمركبان والهواء مخلوط.'],
+['درجات غليانها','التقطير يفصل السوائل بحسب اختلاف درجات غليانها.'],
+['البخار هو','البخار هو الحالة الغازية لمادة تكون عادة صلبة أو سائلة، أما الغاز فهو غاز في الظروف العادية.'],
+['قابلة للانضغاط','جسيمات الصلب متلاصقة فلا تنضغط، أما الغازات فتنضغط بسهولة.'],
+['الشاي','مكونات الشاي تمتزج بانتظام فهو مخلوط متجانس.'],
+['عدد حالات المادة','حالات المادة أربع: صلبة وسائلة وغازية وبلازما.'],
+['أي المخاليط التالية متجانس','المخلوط المتجانس تمتزج مكوناته بانتظام فلا نميّزها، مثل ملح الطعام في الماء.'],
+['التسامي هو','في التسامي ينتقل الصلب مباشرة إلى غاز، مثل النفثالين.'],
+['النسبة المئوية للهيدروجين','النسبة = (12.4 ÷ 78) × 100 ≈ 15.89%.'],
+['المركبات مقارنةً','المركبات أكثر استقرارًا من عناصرها، ولا تتجزأ إلا بطرائق كيميائية.'],
+['قانون حفظ الكتلة','القانون يطبق على كتلة المتفاعلات والنواتج معًا، وكتلتهما متساوية.'],
+['تجزئة المركبات','يمكن تجزئة المركب بطرائق كيميائية كالتحليل الكهربائي.'],
+['نسب توافر العناصر','العناصر تختلف في وفرتها، فالهيدروجين والهيليوم أكثرها وفرة في الكون.'],
+['ليست قابلة للانقسام','ديمقريطس اقترح أن المادة تتكون من أجزاء صغيرة لا تنقسم.'],
+['أجزاء صغيرة جدًا','الذرة أصغر جزء من العنصر يحتفظ بخواصه.'],
+['اكتشف الإلكترون','اكتشف طومسون الإلكترون من تجارب أنبوب أشعة المهبط.'],
+['النيوترونات جسيمات','النيوترون جسيم لا يحمل شحنة.'],
+['توجد في نواة','النواة تضم البروتونات والنيوترونات، والإلكترونات خارجها.'],
+['جسيمات ألفا تحمل','جسيمات ألفا موجبة الشحنة (2+).'],
+['اكتشاف البروتونات','رذرفورد هو من ساهم في اكتشاف البروتون.'],
+['اكتشاف النيوترونات','شادويك هو من ساهم في اكتشاف النيوترون.'],
+['شحنة الإلكترون','مليكان حدد شحنة الإلكترون بتجربة قطرة الزيت.'],
+['معظم حجم الذرة','معظم حجم الذرة فراغ، فالنواة صغيرة جدًا.'],
+['لا تحتوي على نيوترونات','نواة الهيدروجين بروتون واحد فقط بلا نيوترونات.'],
+['العدد الذري يساوي','العدد الذري هو عدد البروتونات في النواة.'],
+['رفض أرسطو','رفض أرسطو فكرة الذرات لأنها لا تتوافق مع أفكاره.'],
+['من اليمين إلى اليسار','الجدول الدوري يرتب تصاعديًا من اليسار إلى اليمين.'],
+['عدد الكتلة يساوي','عدد الكتلة هو الرقم العلوي في الرمز، وهو 19.'],
+['عدد النيوترونات يساوي','النيوترونات = عدد الكتلة − العدد الذري = 23 − 11 = 12.'],
+['عدده الذري 10','النيوترونات = 22 − 10 = 12.'],
+['نفسه وتختلف','النظائر لها عدد البروتونات نفسه لكن عدد النيوترونات مختلف.'],
+['استقرار نواة','تحدد استقرار النواة نسبة النيوترونات إلى البروتونات فيها.'],
+['تغيرًا في نواة','التفاعل النووي هو الذي يغيّر نواة الذرة.'],
+['غير مشحونة وليس لها كتلة','أشعة جاما طاقة عالية بلا شحنة ولا كتلة.'],
+['(amu)','وحدة الكتل الذرية هي 1/12 من كتلة ذرة الكربون-12 وليس الهيدروجين.'],
+['النظائر تتفق','النظائر تتفق في عدد البروتونات وتختلف في عدد النيوترونات.'],
+['أربعة أنواع','الإشعاعات ثلاثة أنواع: ألفا وبيتا وجاما.'],
+['يحتوي على بروتونين','جسيم ألفا هو نواة هيليوم: بروتونان ونيوترونان.'],
+['عند بداية التفاعل','المتفاعلات تُكتب يسار السهم والنواتج يمينه.'],
+['مستوى الطاقة الرئيس:','رمز مستوى الطاقة الرئيس هو n.'],
+['(s)','الرمز s من solid أي صلب، و l سائل و g غاز و aq محلول مائي.'],
+['النواتج هي','النواتج مواد جديدة تتكون خلال التفاعل.'],
+['انصهار الثلج','انصهار الثلج تغير فيزيائي لا تتكون فيه مواد جديدة.'],
+['هي NaCl','كلوريد المغنيسيوم {MgCl₂}، أما {NaCl} فكلوريد الصوديوم.'],
+['الرئيس الثاني','مستوى الطاقة الرئيس الثاني يتسع لـ 8 إلكترونات (2n²).'],
+['الثانوي (d)','المستوى الثانوي d يتسع لـ 10 إلكترونات.'],
+['للفلور','للفلور 9 إلكترونات: 2 + 2 + 5 = 9.'],
+['الصيغة الكيميائية لكلوريد','شحنة Mg هي 2+ وشحنة Cl هي 1−، فنحتاج ذرتي كلور: {MgCl₂}.'],
+['لهيدروكسيد','شحنة Al هي 3+ وشحنة OH هي 1−، فنحتاج ثلاث مجموعات: {Al(OH)₃}.'],
+['2Na + Cl₂','اتحدت مادتان لتكوين مادة واحدة، فهو تفاعل تكوين.'],
+['الراسب','الراسب مادة صلبة تنتج في محلول من تفاعل كيميائي.'],
+['المذيب هو الماء','في المحاليل المائية الماء هو المذيب دائمًا.'],
+['نوعان فقط','للتفاعلات أنواع منها التكوين والتفكك والاحتراق والإحلال البسيط والمزدوج.'],
+['الطاقة نفسها','طاقة الإلكترونات في المستوى الرئيس الواحد تختلف بحسب المستوى الثانوي.'],
+['2NaN₃','مركب واحد يتفكك إلى مواد أبسط، فهو تفكك.'],
+['2NaOH + CuCl₂','تبادلت المركبات الأيونات وتكوّن راسب، فهو إحلال مزدوج.'],
+['F₂ + 2NaBr','الفلور حلّ محل البروم في المركب، فهو إحلال بسيط.'],
+['CH₄ + 2O₂','اتحد الوقود مع الأكسجين وأنتج طاقة، فهو احتراق.'],
+['الأيونات المتفرجة','المتفرجة هي الأيونات التي لا تتغير ولا تشارك في التفاعل: {K⁺} و{Br⁻}.'],
+['المعادلة الأيونية النهائية','نحذف الأيونات المتفرجة ({Li⁺} و{Cl⁻}) فيبقى {H⁺ + OH⁻ → H₂O}.'],
+['{NR}','NR اختصار No Reaction أي لا يحدث تفاعل.'],
+['التفكك هو عكس','التفكك عكس التكوين وليس عكس الاحتراق.'],
+['الأساسية لقياس كمية','المول هو وحدة قياس كمية المادة في النظام الدولي.'],
+['يسمى:','عدد أفوجادرو = {6.02 × 10²³} جسيم في المول الواحد.'],
+['وحدة قياس الكتلة المولية','الكتلة المولية = جرام لكل مول ({g/mol}).'],
+['لمول واحد من أي مادة','الكتلة المولية هي كتلة مول واحد بالجرام.'],
+['عدد أفوجادرو = 6.02','هذا هو عدد أفوجادرو: {6.02 × 10²³}.'],
+['النظام الدولي الفرعية','المول وحدة أساسية في النظام الدولي وليس فرعية.'],
+['بوحدة mol فقط','الكتلة المولية تُقاس بوحدة {g/mol}.'],
+['عدد المولات × عدد','عدد الجسيمات = عدد المولات × عدد أفوجادرو.'],
+['CaCl₂','الكتلة المولية = 40 + (2 × 35.5) = 111 g/mol.'],
+['C₁₂H₂₂O₁₁','(12×12) + (22×1) + (11×16) = 144 + 22 + 176 = 342 g/mol.'],
+['{NaOH}','23 + 16 + 1 = 40 g/mol.'],
+['مول واحد من الحديد','المول من أي مادة يحتوي العدد نفسه من الذرات: {6.02 × 10²³}.'],
+['الليثيوم','الكتلة المولية تختلف من عنصر لآخر: الليثيوم 7 g/mol والصوديوم 23 g/mol.'],
+['لعدّ الجسيمات','المول وحدة لعدّ الجسيمات الصغيرة كالذرات والجزيئات.'],
+['عدد الجسيمات +','عدد المولات = عدد الجسيمات ÷ عدد أفوجادرو.'],
+['من خلال صيغته','نجمع كتل ذرات الصيغة فنحصل على الكتلة المولية.'],
+['0.045','الكتلة = عدد المولات × الكتلة المولية = 0.045 × 52 = 2.34 g.'],
+['الخارصين','عدد الذرات = 2.5 × {6.02 × 10²³} = {1.505 × 10²⁴}.'],
+['السكروز','عدد الجزيئات = 3.5 × {6.02 × 10²³} = {2.11 × 10²⁴}.'],
+['525','عدد المولات = 525 ÷ 40 = 13.1 mol.'],
+['4.5 × 10²⁴','عدد المولات = {4.5 × 10²⁴} ÷ {6.02 × 10²³} = 7.475 mol.'],
+['5.75','عدد المولات = {5.75 × 10²⁴} ÷ {6.02 × 10²³} = 9.551 mol.'],
+['25.5','عدد المولات = 25.5 ÷ 107.86 = 0.236 mol.'],
+['3.57','الكتلة = 3.57 × 26.98 = 96.3 g.'],
+['تمكّن أميديو','فرضية أفوجادرو ربطت حجم الغاز بعدد جزيئاته فمكّنت من تحديد حجم المول.']
+];
+const exp=q=>{const e=EX.find(x=>q.includes(x[0]));return e?'<br>'+fm(e[1]):''};
+function build(it){
+  if(it.k==='t')return{q:'<b>صح أم خطأ؟</b> '+fm(it.q),o:['صح','خطأ'],a:it.b?0:1,w:'العبارة <b>'+(it.b?'صحيحة':'خاطئة')+'</b>.'+exp(it.q)};
+  if(it.k==='b'){const all=[it.c,...dis(it.c)].map(x=>x.join(' , ')),o=shuf(all).map(x=>'{'+x+'}');
+    return{q:'ما أبسط معاملات صحيحة لموازنة المعادلة التالية (بالترتيب)؟<br><span dir="ltr">'+eqS(it.e)+'</span>',o:o.map(fm),a:o.indexOf('{'+it.c.join(' , ')+'}'),w:'المعادلة الموزونة: <span dir="ltr"><b>'+eqS(it.e,it.c)+'</b></span><br>نعدّ ذرات كل عنصر في الطرفين ونغيّر المعاملات فقط (لا الأرقام السفلية) حتى تتساوى.'}}
+  const o=shuf(it.o);return{q:fm(it.q),o:o.map(x=>'<span dir="auto">'+fm(x)+'</span>'),a:o.indexOf(it.o[0]),w:'الإجابة: <b>'+fm(it.o[0])+'</b>'+exp(it.q)}}
+function makeQ(ci,r){const d=r>>1,pool=P[ci].map((x,i)=>[x,i]),un=x=>!seen.has(ci+'-'+x[1]);
+  let c=pool.filter(x=>un(x)&&x[0].d===d);if(!c.length)c=pool.filter(un);
+  if(!c.length){pool.forEach(x=>seen.delete(ci+'-'+x[1]));c=pool.filter(x=>x[0].d===d)}
+  const [it,i]=rnd(c);seen.add(ci+'-'+i);return build(it)}
+const VALS=[100,200,300,400,500,600];
+const TCOL=['var(--cyan)','var(--gold)','var(--orange)','var(--lime)'];
+const TNAMES=['الفريق الأول','الفريق الثاني','الفريق الثالث','الفريق الرابع'];
+const ICONS={
+ atom:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="2.2" fill="currentColor"/><ellipse cx="12" cy="12" rx="10" ry="4"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/><ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/></svg>',
+ magnet:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 3v8a7 7 0 0 0 14 0V3"/><path d="M5 7h4M15 7h4"/></svg>',
+ flask:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M9 3h6M10 3v6L4.5 19a1.5 1.5 0 0 0 1.3 2h12.4a1.5 1.5 0 0 0 1.3-2L14 9V3"/><path d="M7 15h10"/></svg>',
+ link:'<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg>',
+ bolt:'<svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>'
+};
+const KEYS=['أ','ب','ج','د'];
+let S=load()||fresh(2);
+function fresh(n){return{teams:Array.from({length:n},(_,i)=>({name:TNAMES[i],score:0})),used:{}}}
+function save(){try{localStorage.setItem('chem1Clash1',JSON.stringify(S))}catch(e){}}
+function load(){try{return JSON.parse(localStorage.getItem('chem1Clash1'))}catch(e){return null}}
+const $=id=>document.getElementById(id);
+
+function renderTeams(){
+  const max=Math.max(...S.teams.map(t=>t.score));
+  $('teams').innerHTML=S.teams.map((t,i)=>`<div class="team ${t.score>0&&t.score===max?'lead':''}" style="--tc:${TCOL[i]}">
+    <span class="dot" style="background:${TCOL[i]}"></span>
+    <label class="sr" for="tn${i}" hidden>اسم ${TNAMES[i]}</label>
+    <input id="tn${i}" value="${t.name.replace(/"/g,'&quot;')}" aria-label="اسم الفريق">
+    <span class="score" style="color:${TCOL[i]}">${t.score}</span>
+    <span class="adj"><button data-t="${i}" data-d="100" aria-label="زيادة 100">+</button><button data-t="${i}" data-d="-100" aria-label="إنقاص 100">−</button></span></div>`).join('');
+  S.teams.forEach((t,i)=>{$('tn'+i).oninput=e=>{t.name=e.target.value;save()}});
+  $('teams').querySelectorAll('.adj button').forEach(b=>b.onclick=()=>{S.teams[+b.dataset.t].score+=+b.dataset.d;save();renderTeams()});
+  $('teamCount').textContent='عدد الفرق: '+S.teams.length;
+}
+function renderBoard(){
+  let h=CATS.map(c=>`<div class="cat" style="--c:${c.c};color:${c.c}">${ICONS[c.icon]}<span style="color:var(--ink)">${c.name}</span></div>`).join('');
+  VALS.forEach((v,r)=>CATS.forEach((c,ci)=>{const id=ci+'-'+r,u=S.used[id];
+    h+=`<button class="tile ${u?'used':''}" style="--c:${c.c}" data-id="${id}" ${u?'aria-disabled="true"':''} aria-label="${c.name} ${v} نقطة">${v}</button>`}));
+  $('board').innerHTML=h;
+  $('board').querySelectorAll('.tile').forEach(b=>b.onclick=()=>{if(!S.used[b.dataset.id])openQ(b.dataset.id)});
+}
+// sound
+let AC;function beep(f,d,type='sine',v=.15){try{AC=AC||new (window.AudioContext||window.webkitAudioContext)();const o=AC.createOscillator(),g=AC.createGain();o.type=type;o.frequency.value=f;g.gain.value=v;o.connect(g);g.connect(AC.destination);const t=AC.currentTime;g.gain.exponentialRampToValueAtTime(.0001,t+d);o.start(t);o.stop(t+d)}catch(e){}}
+const good=()=>{beep(660,.15);setTimeout(()=>beep(880,.25),120)}, bad=()=>beep(180,.35,'sawtooth',.08);
+// question flow
+let cur=null,timer=null,left=30,revealed=false;
+function openQ(id){
+  const [ci,r]=id.split('-').map(Number),c=CATS[ci],q=makeQ(ci,r);cur={id,ci,r,q,val:VALS[r]};
+  $('card').style.setProperty('--c',c.c);$('qcat').textContent=c.name;$('qval').textContent=VALS[r]+' نقطة';
+  fillQ(q);
+  $('award').innerHTML='<span class="lbl">امنح '+VALS[r]+' نقطة لـ:</span>'+S.teams.map((t,i)=>`<button style="--tc:${TCOL[i]}" data-t="${i}">${t.name}</button>`).join('')+'<button style="--tc:var(--muted)" data-t="-1">لا أحد</button>';
+  $('award').querySelectorAll('button').forEach(b=>b.onclick=()=>award(+b.dataset.t));
+  $('award').classList.remove('show');
+  stopTimer();left=30;drawTimer();$('tbtn').textContent='ابدأ المؤقت';
+  $('stage').classList.add('open');$('tbtn').focus();
+}
+const U=t=>String(t).replace(/(\d+)\s*cm³/g,'<span dir="ltr">$1 cm³</span>');
+function fillQ(q){q={...q,q:U(q.q),w:U(q.w),o:q.o.map(U)};cur.q=q;revealed=false;
+  const c=CATS[cur.ci];$('qcat').textContent=c.name;
+  $('qtext').innerHTML=q.q;$('why').innerHTML=q.w;$('why').classList.remove('show');
+  $('opts').innerHTML=q.o.map((o,i)=>`<button class="opt" data-i="${i}"><span class="k">${KEYS[i]}</span><span>${o}</span></button>`).join('');
+  $('opts').querySelectorAll('.opt').forEach(b=>b.onclick=()=>pick(+b.dataset.i,b));
+  $('award').classList.remove('show');}
+function pick(i,b){
+  if(i===cur.q.a){b.classList.add('right');showAnswer(true)}
+  else{b.classList.remove('wrong');void b.offsetWidth;b.classList.add('wrong');bad()}
+}
+function showAnswer(fromPick){
+  if(revealed)return;revealed=true;stopTimer();
+  $('opts').children[cur.q.a].classList.add('right');$('why').classList.add('show');$('award').classList.add('show');
+  if(fromPick){good();burst(40)}
+}
+function award(t){
+  if(t>=0){S.teams[t].score+=cur.val;good();burst(60)}
+  S.used[cur.id]=true;save();renderTeams();renderBoard();closeQ();
+}
+function closeQ(){stopTimer();$('stage').classList.remove('open');cur=null}
+function drawTimer(){$('tnum').textContent=left;$('ring').style.setProperty('--p',left/30*100);$('ring').classList.toggle('low',left<=10)}
+function stopTimer(){clearInterval(timer);timer=null}
+$('tbtn').onclick=()=>{
+  if(timer){stopTimer();$('tbtn').textContent='استئناف';return}
+  if(left<=0){left=30;drawTimer()}
+  $('tbtn').textContent='إيقاف مؤقت';
+  timer=setInterval(()=>{left--;drawTimer();if(left<=5&&left>0)beep(520,.08);if(left<=0){stopTimer();bad();$('tbtn').textContent='إعادة المؤقت'}},1000);
+};
+$('reveal').onclick=()=>showAnswer(false);
+$('swap').onclick=()=>{if(!cur)return;fillQ(makeQ(cur.ci,cur.r));stopTimer();left=30;drawTimer();$('tbtn').textContent='ابدأ المؤقت'};
+$('back').onclick=closeQ;
+document.addEventListener('keydown',e=>{if(!cur)return;if(e.key==='Escape')closeQ();if(e.key===' '&&document.activeElement.tagName!=='INPUT'){e.preventDefault();$('tbtn').click()}});
+$('teamCount').onclick=()=>{const n=S.teams.length%4+1<2?2:S.teams.length%4+1;const next=n===1?2:n;
+  while(S.teams.length<next)S.teams.push({name:TNAMES[S.teams.length],score:0});S.teams.length=next;save();renderTeams()};
+$('reset').onclick=()=>{seen.clear();S=fresh(S.teams.length);S.teams.forEach((t,i)=>t.name=($('tn'+i)||{}).value||t.name);save();renderTeams();renderBoard()};
+$('finish').onclick=()=>{
+  const sorted=S.teams.map((t,i)=>({...t,i})).sort((a,b)=>b.score-a.score);
+  const top=sorted[0],tie=sorted.filter(t=>t.score===top.score).length>1;
+  $('wtitle').textContent=tie?'تعادل! أحسنتم جميعًا':'الفائز: '+top.name;
+  $('podium').innerHTML=sorted.map(t=>`<div class="p" style="border-color:${TCOL[t.i]}">${t.name}<b style="color:${TCOL[t.i]}">${t.score}</b></div>`).join('');
+  $('win').classList.add('open');good();burst(160);
+};
+$('wclose').onclick=()=>$('win').classList.remove('open');
+// confetti
+const cv=$('fx'),cx=cv.getContext('2d');let parts=[];
+function size(){cv.width=innerWidth;cv.height=innerHeight}addEventListener('resize',size);size();
+function burst(n){if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;const cols=['#3FC7EE','#FFC23D','#FF8A4C','#9BE15D','#F3F7FF'];
+  for(let k=0;k<n;k++)parts.push({x:innerWidth/2,y:innerHeight*.4,vx:(Math.random()-.5)*16,vy:-Math.random()*14-4,s:6+Math.random()*7,c:cols[k%5],r:Math.random()*6,life:90+Math.random()*40});
+  if(parts.length===n)requestAnimationFrame(tick)}
+function tick(){cx.clearRect(0,0,cv.width,cv.height);parts.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.45;p.r+=.2;p.life--;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/3,p.s,p.s*.66);cx.restore()});
+  parts=parts.filter(p=>p.life>0&&p.y<innerHeight+40);if(parts.length)requestAnimationFrame(tick);else cx.clearRect(0,0,cv.width,cv.height)}
+$('qcount').textContent=TOTAL+' سؤالًا';
+renderTeams();renderBoard();
+</script>
+</body>
+</html>
