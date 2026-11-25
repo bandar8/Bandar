@@ -6,7 +6,7 @@
 <title>صراع المركبات</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   /* Classroom projector board: deep lab-navy surface, molecule-ball accents (cyan, gold, orange), one committed dark world */
@@ -14,8 +14,8 @@
   --ink:#F3F7FF; --muted:#9FB4D4;
   --cyan:#3FC7EE; --gold:#FFC23D; --orange:#FF8A4C; --lime:#9BE15D;
   --ok:#2FD07A; --bad:#FF5A5F;
-  --display:"Cairo", "Segoe UI", Tahoma, sans-serif;
-  --body:"Cairo", "Segoe UI", Tahoma, sans-serif;
+  --display:"IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  --body:"IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
   color-scheme:dark;
   /* layout: scoreboard strip on top, 4×3 question board below; a question opens as a full-stage card */
 }
@@ -98,8 +98,14 @@ h1 span{color:var(--gold)}
 @media (max-width:760px){.site-nav{width:100%}.site-nav a{flex:1;justify-content:center}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+<style id="rtl-font-normalization">
+html[lang="ar"] { direction: rtl; }
+body { direction: rtl; font-family: "IBM Plex Sans Arabic", Tahoma, Arial, sans-serif; }
+button, input, select, textarea { font-family: inherit; }
+[dir="ltr"], .ltr, .formula, .equation, .chem-formula { unicode-bidi: isolate; }
+</style>
 </head>
-<body>
+<body dir="rtl">
 <div class="wrap">
   <header>
     <nav class="site-nav" aria-label="التنقل في الموقع"><a href="../index.html#top">← الصفحة الرئيسية</a><a href="../labs.html">معرض المختبرات</a></nav>

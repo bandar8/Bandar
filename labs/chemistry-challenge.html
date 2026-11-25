@@ -6,7 +6,7 @@
 <title>تحدي الكيمياء ١</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{
   /* Classroom projector board: deep lab-navy surface, molecule-ball accents (cyan, gold, orange), one committed dark world */
@@ -98,8 +98,14 @@ h1 span{color:var(--gold)}
 .site-nav{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:2px}.site-nav a{display:inline-flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);color:var(--ink);padding:8px 13px;border-radius:12px;text-decoration:none;font-size:14px;font-weight:700}.site-nav a:hover{background:var(--panel-2);border-color:var(--muted)}
 @media (max-width:760px){.site-nav{width:100%}.site-nav a{flex:1;justify-content:center}}
 </style>
+<style id="rtl-font-normalization">
+html[lang="ar"] { direction: rtl; }
+body { direction: rtl; font-family: "IBM Plex Sans Arabic", Tahoma, Arial, sans-serif; }
+button, input, select, textarea { font-family: inherit; }
+[dir="ltr"], .ltr, .formula, .equation, .chem-formula { unicode-bidi: isolate; }
+</style>
 </head>
-<body>
+<body dir="rtl">
 <div class="wrap">
   <header>
     <nav class="site-nav" aria-label="التنقل في الموقع"><a href="../index.html#top">← الصفحة الرئيسية</a><a href="../labs.html">المختبرات والألعاب</a></nav>
